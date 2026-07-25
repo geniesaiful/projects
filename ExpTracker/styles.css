@@ -1,0 +1,14 @@
+.contLeft{
+    display: flex;
+    flex-direction: column;
+    color:burlywood;
+}
+.titleDiv{
+    display: flex;
+    flex-direction: row;
+    color:blue;
+}
+.navDiv{
+    display: flex;
+    flex-direction: column;
+}
