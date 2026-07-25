@@ -1,0 +1,194 @@
+:root{
+    --genBgColor: #00ffff;
+    --genTextColor: #000000;    
+    --sectionBgColor: #f0ffff;
+    --taskBgColor: #00eeee;
+    --headerTextBg: #d0f2f2; 
+    --headerText:#181616;
+    
+}
+
+*{
+    box-sizing: border-box;
+}
+body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--genBgColor);
+}
+body.darkMode{
+    --genBgColor: #0e1c1c;
+    --genTextColor: #82d6f7;    
+    --sectionBgColor: #213f3f;
+    --taskBgColor: #27443f;
+    --headerTextBg: #333838; 
+    --headerText:#cebfbf;
+}
+/* .bodyClass{
+    background-color: #ffffff;
+} */
+.environment{
+    display: flex;
+    flex-direction: row-reverse;
+    width: 800px;
+    color: var(--genTextColor)
+}
+h2.header2{
+    display: flex;
+    width: 800px;
+    gap: 12px;
+    color: var(--genTextColor);
+    text-shadow: 0 0 2px var(--genTextColor);
+}
+.headerImg {
+    width: 32px;               
+    height: 32px;
+    /*object-fit: contain;       /* Keeps the image from stretching or distorting */
+}
+/* .titleSpan{
+
+    text-shadow: 0 0 2px gray;
+} */
+
+#inputDiv{
+    display: flex;
+    margin: 10px;
+    width: 800px;
+    border: 1px hidden #00ffff;
+    border-radius: 6px;
+    padding: 15px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    background-color: var(--sectionBgColor)
+}
+#inpfield{
+    flex-grow: 1; /* text field grows to next item*/
+}
+#statusDiv{
+    display: flex;
+    margin-bottom: 10px;
+    justify-content: space-between ;
+    text-align: center;
+    width: 800px;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.18), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding:2px;
+    gap: 8px; /*gap between elements */
+    background-color: var(--sectionBgColor);
+}
+.statusElementDiv{
+    display: flex;
+    flex: 1; /* forces all boxes has same width*/
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    border-style: hidden;
+    border-color:azure;
+    border-width: 1px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.16), 0 6px 20px 0 rgba(0, 0, 0, 0.18);
+    background-color: var(--sectionBgColor);
+    color: var(--genTextColor);
+    padding: 0px 12px 0 12px;
+}
+.statusIcon{
+    display: flex;
+    width: 28px;          
+    height: 28px; 
+}
+.statusColumn{
+    display: flex;
+    flex-direction: column;
+    padding: 4px;
+}
+.prcntSpan{
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+}
+
+#task_body{
+    width: 800px;
+    border: 0px solid aqua;
+    /*box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);*/
+}
+
+#noTask{
+    font-size: 16px;
+    font-weight: bold;
+    color:gray;
+    text-align: center;
+}
+
+.taskBodyHead{
+    display: flex;
+    flex-direction: row;
+    background-color:transparent;
+    padding: 4px;
+}
+.headerText{
+    border-color:azure;
+    border-width: 1px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.16);
+    background-color:var(--headerTextBg);
+    color: var(--headerText);
+    padding: 0px 12px 0 12px;
+    gap: 8px;
+    cursor: default;
+}
+/* .headerText:hover{
+    background-color: rgba(255, 0, 0, 0.65);
+    color: white;
+} */
+.taskBodyBottom{
+    /* display: none;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: start; */
+    background-color:transparent;
+    padding: 4px;
+    margin: 8px;
+    width: 800px; /* the "body" section makes this div centerized. 
+    so i make them same width as other elements, thus the alinging the text can start from left.*/
+}
+
+.taskDiv{
+    display: flex;
+    align-items: center;
+    width: 800px;       
+    margin-top: 4px;
+    padding: 10px;
+    box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.15), 0 6px 20px 0 rgba(0, 0, 0, 0.15);
+    background-color: var(--taskBgColor);
+    color: var(--genTextColor);
+}
+.todotextspan{
+    margin-left: 8px;    
+    flex-grow: 1;
+    word-break: break-word; /* prevents the extremely long word problem */
+             
+}
+.editBtn{
+    width: 20px;
+    height: 20px;
+    margin-right: 4px;
+}
+.editInput{
+    flex-grow: 1; 
+    margin-left: 8px;
+    margin-right: 8px;
+}
+.deleteBtn {
+    width: 20px;          
+    height: 20px;         
+}
+.doneButton{
+    width: 20px;
+    height: 20px;
+}
+.cancelButton{
+    width: 20px;
+    height: 20px;
+}

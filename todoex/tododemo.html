@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<link rel="stylesheet" href="todostyle.css">
+</head>
+
+<body onload="loadTasks()">
+    <div class="environment">
+        Dark Theme. <input type="checkbox" onchange="nightMode()">
+    </div>
+    <h2 class="header2">
+        <img src="images/icons8-to-do-48.png" class="headerImg">
+        <span>To do list</span>
+    </h2>
+    
+    <div id="inputDiv">
+        <!--: onkeydown attribute to check for the Enter key -->
+        <input type="text" id="inpfield" placeholder="Add a task" onkeydown="if(event.key === 'Enter') addTask()">
+        <button onclick="addTask()">Add</button>
+    </div>
+
+    <div id="statusDiv">
+        <div class="statusElementDiv">
+            <img class="statusIcon" src="images/icons8-tasks-48.png">
+            <div class="statusColumn">
+                <span>Total</span>
+                <span class="statusNums" id="totalTask">0</span>
+            </div>
+        </div>
+        
+        <div class="statusElementDiv">
+            <img class="statusIcon" src="images/icons8-task-completed-48.png">
+            <div class="statusColumn">    
+                <span>Done</span>
+                <span class="statusNums" id="doneTask">0</span>
+            </div>
+        </div>
+        
+        <div class="statusElementDiv">
+            <img class="statusIcon" src="images/icons8-remind-50.png">
+            <div class="statusColumn">
+                <span>Remaining</span>
+                <span class="statusNums" id="remTask">0</span>
+            </div>
+        </div>
+        
+        <div class="statusElementDiv">
+            <img class="statusIcon" src="images/chart-proportion-svgrepo-com.svg">
+            <div class="statusColumn">
+                <span>Rate</span>
+                <div class="ratioRow">
+                    <span class="statusNums" id="taskRatio">0</span><span>%</span>
+                </div>
+            </div>
+        </div>
+        <!-- Total:<span class="statusNums" id="totalTask">0</span> 
+        Done:<span class="statusNums" id="doneTask">0</span>
+        Remaining:<span class="statusNums" id="remTask">0</span> -->
+    </div>
+    
+    <div id="task_body">
+        <div class="taskBodyHead">
+            <span class="headerText" onclick="filterTasks('all')">All</span>
+            <span class="headerText" onclick="filterTasks('completed')">Completed</span>
+            <span class="headerText" onclick="filterTasks('remaining')">Remaining</span>
+        </div>
+        <p id="noTask">Empty</p>
+    </div>
+    <div class="taskBodyBottom">
+            <span class="headerText" onclick="clearChecked()">Clear Completed Task</span>
+    </div>
+    
+    
+    <script src="scripts.js"></script>
+
+</body>   
+</html>
+
+<!--0. body background to black.
+    1. h2 class="header2"
+    2. span class="titleSpan" h2 text
+    3. taskDiv background
+    4. taskDiv text -->
