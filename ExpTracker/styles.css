@@ -1,14 +1,60 @@
+*{
+    box-sizing: border-box;
+}
+body{
+    display: flex;
+    flex-direction: row;
+}
+
 .contLeft{
     display: flex;
     flex-direction: column;
     color:burlywood;
+    width: 400px; /*It has to be max widht + padding of the menu text*/
+    background-color: burlywood;
+    min-height: 100vh;
 }
 .titleDiv{
     display: flex;
     flex-direction: row;
     color:blue;
+    align-items: center;
+    margin-bottom: 48px;
+    background-color: aqua;
+}
+.titleName{
+    display: flex;
+    flex-direction: column;
+    background-color: antiquewhite;
 }
 .navDiv{
     display: flex;
     flex-direction: column;
+    background-color: aliceblue;
+    flex-grow: 3;
+}
+.statusAreaDiv{
+    display: flex;
+    flex-direction: column;
+    background-color: beige;
+    flex-grow: 1;
+}
+.contRight{
+    background-color: rgb(133, 144, 154);
+    width:100vh;
+}
+.greetingDiv{
+    display: flex;
+    background-color: rgb(2, 174, 174);
+
+}
+.statusCardContainer{
+    display: flex;
+    background-color: rgb(168, 168, 150);
+    justify-content: space-evenly;
+}
+.statusCard{
+    display: flex;
+    margin-left: 10px;
+    background-color: rgb(19, 162, 184);
 }
