@@ -1,3 +1,9 @@
+:root{
+    --genBg: #00fafa;
+    --genText: #191919;    
+    --leftContainerBg: #00dddd;
+    --leftContainerText: #191919;
+}
 *{
     box-sizing: border-box;
 }
@@ -5,14 +11,16 @@ body{
     display: flex;
     flex-direction: row;
     font-family: Arial, sans-serif;
+    background-color: var(--genBg);
+    color: var(--genText);
 }
 
 .contLeft{
     display: flex;
     flex-direction: column;
-    color:burlywood;
+    color:var(--leftContainerText);
     width: 400px; /*It has to be max widht + padding of the menu text*/
-    background-color: burlywood;
+    background-color: var(--leftContainerBg);
     min-height: 100vh;
 }
 .titleDiv{
@@ -34,10 +42,19 @@ body{
     background-color: aliceblue;
     flex-grow: 3;
 }
-
-.navMenuButton{
-    background-color: rgb(158, 156, 156);
+.navDiv a {
+    display: block; /* Stacks links vertically */
+    padding: 10px;
+    margin-bottom: 10px;
+    color: #000000;
+    text-decoration: none; /* Removes default link underline */
+    border-radius: 4px;
+    cursor: pointer;
 }
+.navDiv a:hover {
+      background-color: rgb(168, 165, 165);
+}
+
 .statusAreaDiv{
     display: flex;
     flex-direction: column;
@@ -62,4 +79,10 @@ body{
     display: flex;
     margin-left: 10px;
     background-color: rgb(19, 162, 184);
+}
+.contentDiv{
+    display: none;
+}
+.contentDiv.activeDiv{
+    display: block;
 }

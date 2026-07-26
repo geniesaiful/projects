@@ -17,11 +17,11 @@
     </div>
     
     <div class="navDiv">
-        <a href="#" onclick="showRigtContent('overview')">Overview</a>
-        <a href="#" onclick="showRigtContent('transactions')">Transactions</a>
-        <a href="#" onclick="showRigtContent('catagories')">Add Catagories</a>
-        <a href="#" onclick="showRigtContent('reports')">Reports</a>
-        <a href="#" onclick="showRigtContent('settings')">Settigs</a>
+        <a href="#" onclick="showRigtContent('overviewDiv')">Overview</a>
+        <a href="#" onclick="showRigtContent('transactionsDiv')">Transactions</a>
+        <a href="#" onclick="showRigtContent('catagoriesDiv')">Catagories</a>
+        <a href="#" onclick="showRigtContent('reportsDiv')">Reports</a>
+        <a href="#" onclick="showRigtContent('settingsDiv')">Settigs</a>
     </div>
     <div class="statusAreaDiv">
         <span>Monthly overview</span>
@@ -53,7 +53,7 @@
     
     </div>
 
-    <div class="contentDiv overviewDiv activeDiv">
+    <div class="contentDiv activeDiv" id="overviewDiv">
         <div>
             Bar1
         </div>
@@ -65,16 +65,16 @@
         </div>
     </div>
 
-    <div class="contentDiv transactionsDiv">
+    <div class="contentDiv" id="transactionsDiv">
         Transaction overview, add transactions
     </div>
-    <div class="contentDiv catagoriesDiv">
+    <div class="contentDiv" id="catagoriesDiv">
         Show and add Catagories
     </div>
-    <div class="contentDiv reportsDiv">
+    <div class="contentDiv" id="reportsDiv">
         Show Reports
     </div>
-    <div class="contentDiv settingsDiv">
+    <div class="contentDiv" id="settingsDiv">
         Dark Mode
     </div>
 </div>
