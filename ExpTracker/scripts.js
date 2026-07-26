@@ -1,3 +1,9 @@
+// Get today's date in YYYY-MM-DD format
+const today = new Date().toISOString().split('T')[0];
+
+// Set the default value of the date input
+document.getElementById('date').value = today;
+
 function showRigtContent(sectionName){
     const allSections = document.querySelectorAll('.contentDiv');
         for (let i = 0; i < allSections.length; i++) {

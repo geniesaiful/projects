@@ -53,7 +53,7 @@
     
     </div>
 
-    <div class="contentDiv activeDiv" id="overviewDiv">
+    <div class="contentDiv" id="overviewDiv">
         <div>
             Bar1
         </div>
@@ -66,10 +66,67 @@
     </div>
 
     <div class="contentDiv" id="transactionsDiv">
-        Transaction overview, add transactions
+        <div>
+            Transaction Overview
+        </div> 
+        <div id="addTransactionDiv">
+            <form id="transactionForm">
+                <label for="type">Type:</label>
+                <select id="type" name="type" required>
+                    <option value="expense">Expense</option>
+                    <option value="income">Income</option>
+                </select>
+            </form>
+            <br><br>
+
+            <label for="title">Title:</label>
+            <input type="text" id="title" name="title" placeholder="e.g., Grocery Shopping" required>
+
+            <br><br>
+
+            <label for="amount">Amount:</label>
+            <input type="number" id="amount" name="amount" step="0.01" min="0" placeholder="0.00" required>
+
+            <br><br>
+
+            <label for="category">Category:</label>
+            <select id="category" name="category" required>
+                <option value="" disabled selected>Select a category</option>
+                <option value="food">Food & Dining</option>
+                <option value="rent">Rent & Bills</option>
+                <option value="shopping">Shopping</option>
+                <option value="salary">Salary</option>
+                <option value="entertainment">Entertainment</option>
+                <option value="other">Other</option>
+            </select>
+
+            <br><br>
+
+            <label for="date">Date:</label>
+            <input type="date" id="date" name="date" required>
+
+            <br><br>
+
+            <button type="submit">Add Transaction</button>
+            </form>    
+        </div>
+
     </div>
-    <div class="contentDiv" id="catagoriesDiv">
-        Show and add Catagories
+    <div class="contentDiv activeDiv" id="catagoriesDiv">
+        <div>
+        <input type="text" id="categoryName" placeholder="Category Name (e.g. Salary, Groceries)">
+
+        <select id="categoryType">
+            <option value="expense">Expense</option>
+            <option value="income">Income</option>
+        </select>
+
+        <button id="addCategoryBtn">Add</button>
+        </div>
+        
+        <br><br><br>
+        
+        Show Catagories
     </div>
     <div class="contentDiv" id="reportsDiv">
         Show Reports
