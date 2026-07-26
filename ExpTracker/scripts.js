@@ -52,7 +52,7 @@ function loadCategories(){
         optionTag.value = savedCat[i].catName;
         optionTag.text = savedCat[i].catName;
         catDropdownEl.add(optionTag);
-        console.log(optionTag.text,optionTag.value);
+        //console.log(optionTag.text,optionTag.value);
     
         let row = "<tr><td>" + savedCat[i].catName + "</td><td>" + savedCat[i].catType + "</td></tr>";
         catTableBody.innerHTML += row;

@@ -64,7 +64,7 @@ body{
     width:100%;
     border: 1px solid #efefef;
     border-radius: 4px;
-    
+    background-color: #d4d4d4 ;
 }
 .greetingDiv{
     display: flex;
