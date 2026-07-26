@@ -17,7 +17,11 @@
     </div>
     
     <div class="navDiv">
-        <span>Item 1</span><span>Item 2</span><span>Item 3</span>
+        <a href="#" onclick="showRigtContent('overview')">Overview</a>
+        <a href="#" onclick="showRigtContent('transactions')">Transactions</a>
+        <a href="#" onclick="showRigtContent('catagories')">Add Catagories</a>
+        <a href="#" onclick="showRigtContent('reports')">Reports</a>
+        <a href="#" onclick="showRigtContent('settings')">Settigs</a>
     </div>
     <div class="statusAreaDiv">
         <span>Monthly overview</span>
@@ -49,7 +53,7 @@
     
     </div>
 
-    <div class="operationDiv">
+    <div class="contentDiv overviewDiv activeDiv">
         <div>
             Bar1
         </div>
@@ -60,6 +64,20 @@
             Table area
         </div>
     </div>
+
+    <div class="contentDiv transactionsDiv">
+        Transaction overview, add transactions
+    </div>
+    <div class="contentDiv catagoriesDiv">
+        Show and add Catagories
+    </div>
+    <div class="contentDiv reportsDiv">
+        Show Reports
+    </div>
+    <div class="contentDiv settingsDiv">
+        Dark Mode
+    </div>
 </div>
+<script src="scripts.js"></script>
 </body>
 </html>

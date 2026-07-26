@@ -4,6 +4,7 @@
 body{
     display: flex;
     flex-direction: row;
+    font-family: Arial, sans-serif;
 }
 
 .contLeft{
@@ -33,6 +34,10 @@ body{
     background-color: aliceblue;
     flex-grow: 3;
 }
+
+.navMenuButton{
+    background-color: rgb(158, 156, 156);
+}
 .statusAreaDiv{
     display: flex;
     flex-direction: column;
@@ -41,7 +46,7 @@ body{
 }
 .contRight{
     background-color: rgb(133, 144, 154);
-    width:100vh;
+    width:100%;
 }
 .greetingDiv{
     display: flex;
