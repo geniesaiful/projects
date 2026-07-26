@@ -113,20 +113,34 @@
 
     </div>
     <div class="contentDiv activeDiv" id="catagoriesDiv">
-        <div>
-        <input type="text" id="categoryName" placeholder="Category Name (e.g. Salary, Groceries)">
+        <div id="catInpDiv">
+            <input type="text" id="catName" placeholder="Category Name (e.g. Salary, Groceries)">
 
-        <select id="categoryType">
-            <option value="expense">Expense</option>
-            <option value="income">Income</option>
-        </select>
+            <select id="catType">
+                <option value="expense">Expense</option>
+                <option value="income">Income</option>
+            </select>
 
-        <button id="addCategoryBtn">Add</button>
+            <button id="addCatBtn" onclick="addCategory()">Add</button>
         </div>
         
         <br><br><br>
         
-        Show Catagories
+        <div>
+            <h3>All Categories</h3>
+            <table>
+                <thead>
+                <tr>
+                    <th>Category</th>
+                    <th>Type</th>
+                </tr>
+                </thead>
+                <tbody id="catTableBody">
+                <!-- Saved categories will appear here -->
+                </tbody>
+            </table>
+
+        </div>
     </div>
     <div class="contentDiv" id="reportsDiv">
         Show Reports
