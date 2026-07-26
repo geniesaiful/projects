@@ -64,10 +64,11 @@
         </div>
     </div>
 
-    <div class="contentDiv" id="transactionsDiv">
+    <div class="contentDiv activeDiv" id="transactionsDiv">
         <div>
             Transaction Overview
-        </div> 
+        </div>
+        <br><br><br> 
         <div id="addTransactionDiv">
             <form id="transactionForm">
                 <label for="type">Type:</label>
@@ -88,15 +89,15 @@
 
             <br><br>
 
-            <label for="category">Category:</label>
-            <select id="category" name="category" required>
+            <label for="catDropdown">Category:</label>
+            <select id="catDropdown" name="category" required>
                 <option value="" disabled selected>Select a category</option>
-                <option value="food">Food & Dining</option>
+                <!-- <option value="food">Food & Dining</option>
                 <option value="rent">Rent & Bills</option>
                 <option value="shopping">Shopping</option>
                 <option value="salary">Salary</option>
                 <option value="entertainment">Entertainment</option>
-                <option value="other">Other</option>
+                <option value="other">Other</option> -->
             </select>
 
             <br><br>
@@ -111,7 +112,7 @@
         </div>
 
     </div>
-    <div class="contentDiv activeDiv" id="catagoriesDiv">
+    <div class="contentDiv" id="catagoriesDiv">
         <div id="catInpDiv">
             <input type="text" id="catName" placeholder="Category Name (e.g. Salary, Groceries)">
 

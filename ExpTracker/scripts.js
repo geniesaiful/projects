@@ -38,13 +38,22 @@ function addCategory(){
 }
 function loadCategories(){
 
-    const catTableBodyEl = document.getElementById("catTableBody");
+    const catDropdownEl = document.getElementById("catDropdown"); //catDropdown
+    const catTableBodyEl = document.getElementById("catTableBody");  
     //console.log(catTableBody.value);
-
+    
     let savedCat = JSON.parse(localStorage.getItem("expAppCategories")) || [];
     catTableBodyEl.innerHTML = "";
 
+   
     for (let i = 0; i < savedCat.length; i++) {
+        
+        let optionTag = document.createElement("option"); // creates <option></option>
+        optionTag.value = savedCat[i].catName;
+        optionTag.text = savedCat[i].catName;
+        catDropdownEl.add(optionTag);
+        console.log(optionTag.text,optionTag.value);
+    
         let row = "<tr><td>" + savedCat[i].catName + "</td><td>" + savedCat[i].catType + "</td></tr>";
         catTableBody.innerHTML += row;
     }
