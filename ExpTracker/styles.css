@@ -26,27 +26,25 @@ body{
 .titleDiv{
     display: flex;
     flex-direction: row;
-    color:blue;
     align-items: center;
     margin-bottom: 48px;
-    background-color: aqua;
+
 }
 .titleName{
     display: flex;
     flex-direction: column;
-    background-color: antiquewhite;
 }
 .navDiv{
     display: flex;
     flex-direction: column;
-    background-color: aliceblue;
+    background-color: var(--leftContainerBg);
+    color: var(--leftContainerText);
     flex-grow: 3;
 }
 .navDiv a {
     display: block; /* Stacks links vertically */
     padding: 10px;
     margin-bottom: 10px;
-    color: #000000;
     text-decoration: none; /* Removes default link underline */
     border-radius: 4px;
     cursor: pointer;
@@ -58,27 +56,21 @@ body{
 .statusAreaDiv{
     display: flex;
     flex-direction: column;
-    background-color: beige;
     flex-grow: 1;
 }
 .contRight{
-    background-color: rgb(133, 144, 154);
     width:100%;
 }
 .greetingDiv{
     display: flex;
-    background-color: rgb(2, 174, 174);
-
 }
 .statusCardContainer{
     display: flex;
-    background-color: rgb(168, 168, 150);
     justify-content: space-evenly;
 }
 .statusCard{
     display: flex;
     margin-left: 10px;
-    background-color: rgb(19, 162, 184);
 }
 .contentDiv{
     display: none;
