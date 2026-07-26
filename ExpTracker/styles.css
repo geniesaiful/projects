@@ -22,6 +22,8 @@ body{
     width: 400px; /*It has to be max widht + padding of the menu text*/
     background-color: var(--leftContainerBg);
     min-height: 100vh;
+    border: 1px solid #efefef;
+    border-radius: 4px;
 }
 .titleDiv{
     display: flex;
@@ -60,6 +62,9 @@ body{
 }
 .contRight{
     width:100%;
+    border: 1px solid #efefef;
+    border-radius: 4px;
+    
 }
 .greetingDiv{
     display: flex;
