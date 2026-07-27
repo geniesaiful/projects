@@ -2,8 +2,8 @@
 
 ### Core Features
 
-- [] Dashboard Summary
-    - [] Total Balance, Total Income, Total Expenses, Saving Rate ((Total Balance/ Total Income)x100)
+- [x] Dashboard Summary
+    - [x] Total Balance, Total Income, Total Expenses, Saving Rate ((Total Balance/ Total Income)x100)
 - [] Add Transaction
     - [x] Fields: Type (Income/Expense), Title, Amount, Category, Date, Note (optional)
     - [x] Validate all fields (no empty title, amount must be > 0, required fields)
@@ -20,14 +20,14 @@
     - [] Filter by: All, Income, Expense.
     - [] Search by title, category or note.
     - [] Optional: Filter by category and date range.
-- [] Data Persistance
-    - [] Save all transactions in Local Storage.
-    - [] Data should persist after page refresh.
-- [] Calculations
-    - [] Total Income = Sum of all income amounts
-    - [] Total Expenses = Sum of all expense amounts
-    - [] Total Balance = Total Income - Total Expenses
-    - [] Savings Rate = (Total Balance / Total Income) × 100
+- [x] Data Persistance
+    - [x] Save all transactions in Local Storage.
+    - [x] Data should persist after page refresh.
+- [x] Calculations
+    - [x] Total Income = Sum of all income amounts
+    - [x] Total Expenses = Sum of all expense amounts
+    - [x] Total Balance = Total Income - Total Expenses
+    - [x] Savings Rate = (Total Balance / Total Income) × 100
 
 ### Extra Features
 
