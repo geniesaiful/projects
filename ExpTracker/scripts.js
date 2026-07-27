@@ -1,9 +1,8 @@
 // Get today's date in YYYY-MM-DD format to set the default value.
-const today = new Date().toISOString().split('T')[0];
-document.getElementById('date').value = today;
+const dateToday = new Date().toISOString().split('T')[0];
+document.getElementById('date').value = dateToday;
 
 loadCategories(); // Load categories as soon as page loads
-
 
 function showRigtContent(sectionName){
     const allSections = document.querySelectorAll('.contentDiv');
@@ -12,6 +11,43 @@ function showRigtContent(sectionName){
         }
     const selectedSection = document.getElementById(sectionName);
     selectedSection.classList.add('activeDiv');
+}
+
+function addRecord(event){
+    // the parameter event contains the triggering action, in this case form submission. by default
+    // the action is to refresh the page, that is why the record was not showing in the console.
+    // preventDefault() will stop that refresh. 
+    event.preventDefault();
+
+    const recType = document.getElementById("type").value.trim();
+    const recTitle = document.getElementById("title").value.trim();
+    const recAmount = document.getElementById("amount").value.trim();
+    const recCategory = document.getElementById("catDropdown").value.trim();
+    const recDate = document.getElementById("date").value.trim();
+    const recNote = document.getElementById("note").value.trim();
+    //console.log(recType+"\n"+recTitle+"\n"+recAmount+"\n"+recCategory+"\n"+recDate+"\n"+recNote);
+    const record = {
+        type: recType,
+        title: recTitle,
+        amount: recAmount,
+        category: recCategory,
+        date: recDate,
+        note: recNote
+    }
+    console.log(record);
+    // we can use event parameter to select the triggering element by event.target. 
+    // Here we want to clear the form, event.target.reset() eventually means form.reset().
+    event.target.reset();
+    localStorage.setItem('transactionRecords',JSON.stringify(record));
+    showLocalStorage();
+}
+
+function showLocalStorage(){
+    const lclstrg = localStorage.getItem('transactionRecords');
+    const parsedData = JSON.parse(lclstrg);
+    console.log("Wait a minute!!!"+parsedData.date);
+    console.table(JSON.parse(localStorage.getItem('transactionRecords')));
+    //console.table(localStorage);
 }
 
 function addCategory(){
