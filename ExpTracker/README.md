@@ -5,9 +5,9 @@
 - [] Dashboard Summary
     - [] Total Balance, Total Income, Total Expenses, Saving Rate ((Total Balance/ Total Income)x100)
 - [] Add Transaction
-    - [] Fields: Type (Income/Expense), Title, Amount, Category, Date, Note (optional)
-    - [] Validate all fields (no empty title, amount must be > 0, required fields)
-    - [] Categories: Food, Transport, Shopping, Bills, Entertainment, Health, Education, Salary, Freelance, Other
+    - [x] Fields: Type (Income/Expense), Title, Amount, Category, Date, Note (optional)
+    - [x] Validate all fields (no empty title, amount must be > 0, required fields)
+    - [x] Categories: Food, Transport, Shopping, Bills, Entertainment, Health, Education, Salary, Freelance, Other
 - [] Transaction List
     - [] Show all transactions with title, category, date and amount.
     - [] Income amounts in green with + sign.

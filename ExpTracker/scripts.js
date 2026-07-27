@@ -34,22 +34,38 @@ function addRecord(event){
         date: recDate,
         note: recNote
     }
-    console.log(record);
+    // console.log(record);
     // we can use event parameter to select the triggering element by event.target. 
     // Here we want to clear the form, event.target.reset() eventually means form.reset().
     event.target.reset();
-    localStorage.setItem('transactionRecords',JSON.stringify(record));
+    
+    // localStorage only saves data once, meaning we can not directly 'append' or 'delete' 
+    // any records. we have to bring the data from there in an array, then update that 
+    // array, and set them back.
+
+    const localTransactionArray = JSON.parse(localStorage.getItem('transactionRecords')) || [];
+    localTransactionArray.push(record);
+    calculate(localTransactionArray);     
+    localStorage.setItem('transactionRecords',JSON.stringify(localTransactionArray));
+    
+    
     showLocalStorage();
 }
 
 function showLocalStorage(){
-    const lclstrg = localStorage.getItem('transactionRecords');
-    const parsedData = JSON.parse(lclstrg);
-    console.log("Wait a minute!!!"+parsedData.date);
     console.table(JSON.parse(localStorage.getItem('transactionRecords')));
     //console.table(localStorage);
 }
+function calculate(localArray){
+    let totalBalance = 0;
+    let totalIncome = 0;
+    let totalExpense = 0;
 
+    for(let i=0; i<localArray.length; i++){
+        totalBalance = totalBalance + Number(localArray[i].amount);
+    }
+    console.log(totalBalance);
+}
 function addCategory(){
     const catNameEl = document.getElementById("catName");
     const catTypeEl = document.getElementById("catType");
