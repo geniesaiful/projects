@@ -45,10 +45,10 @@ function addRecord(event){
 
     const localTransactionArray = JSON.parse(localStorage.getItem('transactionRecords')) || [];
     localTransactionArray.push(record);
+    
     calculate(localTransactionArray);     
     localStorage.setItem('transactionRecords',JSON.stringify(localTransactionArray));
-    
-    
+
     showLocalStorage();
 }
 
@@ -62,9 +62,17 @@ function calculate(localArray){
     let totalExpense = 0;
 
     for(let i=0; i<localArray.length; i++){
-        totalBalance = totalBalance + Number(localArray[i].amount);
+        if(localArray[i].type === "income"){
+            totalIncome = totalIncome + Number(localArray[i].amount);            
+            totalBalance = totalBalance + Number(localArray[i].amount);
+        }
+        else{
+            totalBalance = totalBalance - Number(localArray[i].amount);
+            totalExpense = totalExpense + Number(localArray[i].amount);
+        }
+        
     }
-    console.log(totalBalance);
+    console.log(totalBalance.toFixed(2),totalIncome.toFixed(2),totalExpense.toFixed(2));
 }
 function addCategory(){
     const catNameEl = document.getElementById("catName");
