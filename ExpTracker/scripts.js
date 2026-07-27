@@ -48,12 +48,12 @@ function loadCategories(){
    
     for (let i = 0; i < savedCat.length; i++) {
         
+        // Update the dropdown
         let optionTag = document.createElement("option"); // creates <option></option>
         optionTag.value = savedCat[i].catName;
         optionTag.text = savedCat[i].catName;
         catDropdownEl.add(optionTag);
-        //console.log(optionTag.text,optionTag.value);
-    
+        // Update the table.
         let row = "<tr><td>" + savedCat[i].catName + "</td><td>" + savedCat[i].catType + "</td></tr>";
         catTableBody.innerHTML += row;
     }

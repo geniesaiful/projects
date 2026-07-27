@@ -1,0 +1,44 @@
+<form id="mixedDataForm">
+  <!-- Hidden field to remember if we are editing an entry -->
+  <input type="text" id="editIndex" style="display:none;" />
+
+  <!-- Form Inputs -->
+  <select id="category" required>
+    <option value="">-- Choose Category --</option>
+    <option value="Electronics">Electronics</option>
+    <option value="Clothing">Clothing</option>
+  </select>
+
+  <select id="status" required>
+    <option value="">-- Choose Status --</option>
+    <option value="Pending">Pending</option>
+    <option value="Completed">Completed</option>
+  </select>
+
+  <input type="text" id="notes" placeholder="Enter notes..." required />
+  <input type="number" id="amount" placeholder="Enter amount" required />
+  <input type="datetime-local" id="eventTime" required />
+
+  <button type="submit" id="submitBtn">Save Item</button>
+  <button type="button" id="cancelBtn" onclick="clearForm()" style="display:none;">Cancel Edit</button>
+</form>
+
+<hr style="margin: 20px 0;" />
+
+<!-- NEW: Search and Filter Controls Section -->
+<div style="background: #f4f4f4; padding: 15px; margin-bottom: 20px;">
+  <h4>Search & Filter Controls</h4>
+  
+  <!-- Search text box -->
+  <input type="text" id="searchBox" placeholder="Search notes text..." oninput="showSavedItems()" style="width: 250px; margin-right: 10px;" />
+  
+  <!-- Category filter dropdown -->
+  <select id="filterCategory" onchange="showSavedItems()">
+    <option value="ALL">-- Filter by Category: All --</option>
+    <option value="Electronics">Electronics</option>
+    <option value="Clothing">Clothing</option>
+  </select>
+</div>
+
+<h3>Saved Submissions</h3>
+<div id="outputList"></div>
