@@ -1,3 +1,4 @@
+
 // Get today's date in YYYY-MM-DD format to set the default value.
 const dateToday = new Date().toISOString().split('T')[0];
 document.getElementById('date').value = dateToday;
@@ -60,6 +61,7 @@ function calculate(localArray){
     let totalBalance = 0;
     let totalIncome = 0;
     let totalExpense = 0;
+    let savingRate = 0;
 
     for(let i=0; i<localArray.length; i++){
         if(localArray[i].type === "income"){
@@ -70,9 +72,55 @@ function calculate(localArray){
             totalBalance = totalBalance - Number(localArray[i].amount);
             totalExpense = totalExpense + Number(localArray[i].amount);
         }
-        
     }
-    console.log(totalBalance.toFixed(2),totalIncome.toFixed(2),totalExpense.toFixed(2));
+    totalBalance = totalBalance.toFixed(2);
+    totalIncome = totalIncome.toFixed(2);
+    totalExpense = totalExpense.toFixed(2);
+    savingRate = ((totalBalance/totalIncome)*100).toFixed(2);
+
+    console.log(totalBalance,totalIncome,totalExpense,savingRate);
+    
+    const stDivBalance = document.getElementById("stDivBalance");
+    const labelBalance = document.createElement("span");
+    labelBalance.className = "statusLabel";
+    labelBalance.textContent = "Total Balance: ";
+    const balanceDigit = document.createElement("span");
+    balanceDigit.id = 'balanceDigit';
+    balanceDigit.textContent = totalBalance;
+    stDivBalance.appendChild(labelBalance);
+    stDivBalance.appendChild(balanceDigit);
+
+    const stDivIncome = document.getElementById("stDivIncome");
+    const labelIncome = document.createElement("span");
+    labelIncome.className = "statusLabel";
+    labelIncome.textContent = "Total Income: ";
+    const incomeDigit = document.createElement("span");
+    incomeDigit.id = 'incomeDigit';
+    incomeDigit.textContent = totalIncome;
+    stDivIncome.appendChild(labelIncome);
+    stDivIncome.appendChild(incomeDigit);
+
+    const stDivExpense = document.getElementById("stDivExpense");
+    const labelExpense = document.createElement("span");
+    labelExpense.className = "statusLabel";
+    labelExpense.textContent = "Total Expense: ";
+    const expenseDigit = document.createElement("span");
+    expenseDigit.id = 'expenseDigit';
+    expenseDigit.textContent = totalExpense;
+    stDivExpense.appendChild(labelExpense);
+    stDivExpense.appendChild(expenseDigit);
+
+    const stDivSavingRate = document.getElementById("stDivSavingRate");
+    const labelSavingRate = document.createElement("span");
+    labelSavingRate.className = "statusLabel";
+    labelSavingRate.textContent = "Savings Rate: ";
+    const SavingRateDigit = document.createElement("span");
+    SavingRateDigit.id = 'SavingRateDigit';
+    SavingRateDigit.textContent = savingRate;
+    stDivSavingRate.appendChild(labelSavingRate);
+    stDivSavingRate.appendChild(SavingRateDigit);
+
+
 }
 function addCategory(){
     const catNameEl = document.getElementById("catName");
