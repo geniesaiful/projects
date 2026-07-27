@@ -137,3 +137,166 @@ function clearForm() {
   document.getElementById("submitBtn").innerText = "Save Item";
   document.getElementById("cancelBtn").style.display = "none";
 }
+
+
+
+
+////////////////////////////////////////////////////////////////////////////
+
+// Step 1: Load records from LocalStorage (or use default data if empty)
+let savedData = localStorage.getItem("myRecords");
+let records = [];
+
+if (savedData) {
+  records = JSON.parse(savedData);
+} else {
+  // Setup sample data for first-time visitors
+  records = [
+    { type: "Expense", category: "Food", title: "Lunch", amount: 15, date: "2026-07-28", note: "Pizza" },
+    { type: "Income", category: "Salary", title: "Bonus", amount: 200, date: "2026-07-27", note: "" }
+  ];
+  localStorage.setItem("myRecords", JSON.stringify(records));
+}
+
+// Get container element
+const container = document.getElementById("records-container");
+
+// Step 2: Function to draw normal record strip
+function showRecords() {
+  container.innerHTML = ""; // Clear the container first
+
+  for (let i = 0; i < records.length; i++) {
+    let item = records[i];
+
+    // Create strip container
+    let strip = document.createElement("div");
+    strip.className = "record-strip";
+
+    // Add plain text using textContent (very simple and safe)
+    let infoText = document.createElement("span");
+    infoText.textContent = item.type + " | " + 
+                           item.category + " | " + 
+                           item.title + " | $" + 
+                           item.amount + " | " + 
+                           item.date + " | Note: " + 
+                           (item.note || "None");
+
+    // Create action buttons container
+    let actionsDiv = document.createElement("div");
+    actionsDiv.className = "actions";
+
+    // Edit button
+    let editBtn = document.createElement("button");
+    editBtn.textContent = "Edit";
+    editBtn.onclick = function() {
+      showEditForm(i, strip);
+    };
+
+    // Delete button
+    let deleteBtn = document.createElement("button");
+    deleteBtn.textContent = "Delete";
+    deleteBtn.onclick = function() {
+      deleteRecord(i);
+    };
+
+    // Put buttons into actions container
+    actionsDiv.appendChild(editBtn);
+    actionsDiv.appendChild(deleteBtn);
+
+    // Put text and actions inside strip
+    strip.appendChild(infoText);
+    strip.appendChild(actionsDiv);
+
+    // Put strip into main container
+    container.appendChild(strip);
+  }
+}
+
+// Step 3: Function to switch strip to edit mode
+function showEditForm(index, stripElement) {
+  let item = records[index];
+
+  // Clear current text inside this specific strip
+  stripElement.innerHTML = "";
+
+  // Create input fields individually
+  let typeInput = document.createElement("input");
+  typeInput.value = item.type;
+
+  let categoryInput = document.createElement("input");
+  categoryInput.value = item.category;
+
+  let titleInput = document.createElement("input");
+  titleInput.value = item.title;
+
+  let amountInput = document.createElement("input");
+  amountInput.type = "number";
+  amountInput.value = item.amount;
+
+  let dateInput = document.createElement("input");
+  dateInput.type = "date";
+  dateInput.value = item.date;
+
+  let noteInput = document.createElement("input");
+  noteInput.value = item.note;
+  noteInput.placeholder = "Note (Optional)";
+
+  // Create Accept button
+  let acceptBtn = document.createElement("button");
+  acceptBtn.textContent = "Accept";
+  acceptBtn.onclick = function() {
+    // Check mandatory fields
+    if (!typeInput.value || !categoryInput.value || !titleInput.value || !amountInput.value || !dateInput.value) {
+      alert("Please fill in all mandatory fields!");
+      return;
+    }
+
+    // Save updated values to array
+    records[index].type = typeInput.value;
+    records[index].category = categoryInput.value;
+    records[index].title = titleInput.value;
+    records[index].amount = amountInput.value;
+    records[index].date = dateInput.value;
+    records[index].note = noteInput.value;
+
+    // Save to LocalStorage and redraw page
+    saveAndRedraw();
+  };
+
+  // Create Cancel button
+  let cancelBtn = document.createElement("button");
+  cancelBtn.textContent = "Cancel";
+  cancelBtn.onclick = function() {
+    showRecords(); // Reset without saving changes
+  };
+
+  // Create actions wrapper for edit buttons
+  let actionsDiv = document.createElement("div");
+  actionsDiv.className = "actions";
+  actionsDiv.appendChild(acceptBtn);
+  actionsDiv.appendChild(cancelBtn);
+
+  // Add all created input elements to the strip
+  stripElement.appendChild(typeInput);
+  stripElement.appendChild(categoryInput);
+  stripElement.appendChild(titleInput);
+  stripElement.appendChild(amountInput);
+  stripElement.appendChild(dateInput);
+  stripElement.appendChild(noteInput);
+  stripElement.appendChild(actionsDiv);
+}
+
+// Step 4: Function to delete record
+function deleteRecord(index) {
+  records.splice(index, 1);
+  saveAndRedraw();
+}
+
+// Helper function to update LocalStorage and refresh view
+function saveAndRedraw() {
+  localStorage.setItem("myRecords", JSON.stringify(records));
+  showRecords();
+}
+
+// Initial display load
+showRecords();

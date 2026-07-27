@@ -42,3 +42,27 @@
 
 <h3>Saved Submissions</h3>
 <div id="outputList"></div>
+
+
+
+<*-- 
+
+
+
+-- *>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Record List</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <h2>My Records</h2>
+  <div id="records-container"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>

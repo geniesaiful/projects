@@ -35,19 +35,19 @@
     <div class="statusCardContainer">
     
         <div class="statusCard" id="stDivBalance">
-                [IMG]
+                [IMG]<span class="statusLabel">Total Balance: </span><span id="balanceDigit">0</span>
         </div>
     
         <div class="statusCard" id="stDivIncome">
-                [IMG]
+                [IMG]<span class="statusLabel">Total Income: </span><span id="incomeDigit">0</span>
         </div>
     
         <div class="statusCard" id="stDivExpense">
-                [IMG]
+                [IMG]<span class="statusLabel">Total Expense: </span><span id="expenseDigit">0</span>
         </div>
     
         <div class="statusCard" id="stDivSavingRate">
-                [IMG]
+                [IMG]<span class="statusLabel">Savings Rate:  </span><span id="SavingRateDigit">0</span>
         </div>
     
     </div>
@@ -84,7 +84,7 @@
                 <br><br>
 
                 <label for="amount">Amount:</label>
-                <input type="number" id="amount" name="amount" step="0.01" min="0" placeholder="0" required>
+                <input type="number" id="amount" name="amount" step="0.1" min="0" placeholder="amount" required>
 
                 <br><br>
 

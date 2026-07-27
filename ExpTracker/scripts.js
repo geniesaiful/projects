@@ -44,20 +44,21 @@ function addRecord(event){
     // any records. we have to bring the data from there in an array, then update that 
     // array, and set them back.
 
-    const localTransactionArray = JSON.parse(localStorage.getItem('transactionRecords')) || [];
-    localTransactionArray.push(record);
+    const recordArray = JSON.parse(localStorage.getItem('transactionRecords')) || [];
+    recordArray.push(record);
     
-    calculate(localTransactionArray);     
-    localStorage.setItem('transactionRecords',JSON.stringify(localTransactionArray));
-
+    //calculate(localTransactionArray);     
+    saveArray(recordArray);
+    updateStatus(recordArray);
     showLocalStorage();
 }
 
-function showLocalStorage(){
-    console.table(JSON.parse(localStorage.getItem('transactionRecords')));
-    //console.table(localStorage);
-}
-function calculate(localArray){
+function updateStatus(array){
+
+    const localArray = array;
+    // PROBLEM: What if the localStorage is also empty?
+    // POSSIBLE SOLUTION: two different functions, one for calculate and update, another for just update.
+    
     let totalBalance = 0;
     let totalIncome = 0;
     let totalExpense = 0;
@@ -79,49 +80,39 @@ function calculate(localArray){
     savingRate = ((totalBalance/totalIncome)*100).toFixed(2);
 
     console.log(totalBalance,totalIncome,totalExpense,savingRate);
-    
-    const stDivBalance = document.getElementById("stDivBalance");
-    const labelBalance = document.createElement("span");
-    labelBalance.className = "statusLabel";
-    labelBalance.textContent = "Total Balance: ";
-    const balanceDigit = document.createElement("span");
-    balanceDigit.id = 'balanceDigit';
+
+    const balanceDigit = document.getElementById("balanceDigit");
     balanceDigit.textContent = totalBalance;
-    stDivBalance.appendChild(labelBalance);
-    stDivBalance.appendChild(balanceDigit);
 
-    const stDivIncome = document.getElementById("stDivIncome");
-    const labelIncome = document.createElement("span");
-    labelIncome.className = "statusLabel";
-    labelIncome.textContent = "Total Income: ";
-    const incomeDigit = document.createElement("span");
-    incomeDigit.id = 'incomeDigit';
+    const incomeDigit = document.getElementById("incomeDigit");
     incomeDigit.textContent = totalIncome;
-    stDivIncome.appendChild(labelIncome);
-    stDivIncome.appendChild(incomeDigit);
-
-    const stDivExpense = document.getElementById("stDivExpense");
-    const labelExpense = document.createElement("span");
-    labelExpense.className = "statusLabel";
-    labelExpense.textContent = "Total Expense: ";
-    const expenseDigit = document.createElement("span");
-    expenseDigit.id = 'expenseDigit';
+    
+    const expenseDigit = document.getElementById("expenseDigit");
     expenseDigit.textContent = totalExpense;
-    stDivExpense.appendChild(labelExpense);
-    stDivExpense.appendChild(expenseDigit);
-
-    const stDivSavingRate = document.getElementById("stDivSavingRate");
-    const labelSavingRate = document.createElement("span");
-    labelSavingRate.className = "statusLabel";
-    labelSavingRate.textContent = "Savings Rate: ";
-    const SavingRateDigit = document.createElement("span");
-    SavingRateDigit.id = 'SavingRateDigit';
+    
+    const SavingRateDigit = document.getElementById("SavingRateDigit");
     SavingRateDigit.textContent = savingRate;
-    stDivSavingRate.appendChild(labelSavingRate);
-    stDivSavingRate.appendChild(SavingRateDigit);
+}
 
+function saveArray(array){
+    localStorage.setItem('transactionRecords',JSON.stringify(array));
+}
+
+function showLocalStorage(){
+    console.table(JSON.parse(localStorage.getItem('transactionRecords')));
+    //console.table(localStorage);
+}
+
+function updateTable(){
 
 }
+
+
+
+
+
+
+
 function addCategory(){
     const catNameEl = document.getElementById("catName");
     const catTypeEl = document.getElementById("catType");
