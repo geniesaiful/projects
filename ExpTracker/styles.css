@@ -94,3 +94,17 @@ body{
     display: flex;
     flex: 1;
 }
+.income{
+    background-color: green;
+    color: white;
+}
+.expense{
+    background-color: red;
+    color: white;
+}
+.recButton{
+    display: flex;
+    width: 20px;          
+    height: 20px;
+    gap: 4px; 
+}

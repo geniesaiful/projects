@@ -121,7 +121,7 @@ function updateTableArea(array){
    tranViewDiv.innerHTML="";//clear previous table
 
     //console.log(localArray[0].title);
-    for(i=0;i<localArray.length;i++){
+    for(let i=0;i<localArray.length;i++){
     
         const recordDiv = document.createElement("div");
         recordDiv.className = "recordDiv";
@@ -160,6 +160,12 @@ function updateTableArea(array){
         const typeText = document.createElement("span");
         typeText.className="recTypeText";
         typeText.textContent=localArray[i].type;
+        if(typeText.textContent==="income"){
+            typeText.classList.add("income");
+        }
+        else{
+            typeText.classList.add("expense");
+        }
         recTypeDiv.appendChild(typeText);
 
         const recDateDiv = document.createElement("div");
@@ -167,7 +173,7 @@ function updateTableArea(array){
         recDateDiv.classList.add("recordElementDiv");
         const dateText = document.createElement("span");
         dateText.className = "recDateText";
-        dateText.textContent = localArray[i].type;
+        dateText.textContent = localArray[i].date;
         recDateDiv.appendChild(dateText);
 
         const recAmountDiv = document.createElement("div");
@@ -175,20 +181,43 @@ function updateTableArea(array){
         recAmountDiv.classList.add("recordElementDiv");
         const amountSign = document.createElement("span");
         amountSign.id="recAmountSign";
-        amountSign.textContent="+"; // conditional
-        recAmountDiv.appendChild(amountSign);
         const amountNumber = document.createElement("span");
         amountNumber.id="recAmountNumber";
         amountNumber.textContent = localArray[i].amount;
+
+        if(typeText.textContent==="income"){
+            amountSign.textContent="+";
+            amountNumber.classList.add("income");
+        }
+        else{
+            amountSign.textContent="-";
+            amountNumber.classList.add("expense");
+        }
+        recAmountDiv.appendChild(amountSign);
         recAmountDiv.appendChild(amountNumber);
+
 
         const recActionDiv = document.createElement("div");
         recActionDiv.className = "recActionDiv";
         recActionDiv.classList.add("recordElementDiv");
         const recEditButton = document.createElement("img");
+        recEditButton.classList.add("recButton");
+        recEditButton.src="resources/edit-pencil-write-mode-svgrepo-com.svg";
         const recDeleteButton = document.createElement("img");
+        recDeleteButton.classList.add("recButton");
+        recDeleteButton.src = "resources/cancel-svgrepo-com.svg"
         recActionDiv.appendChild(recEditButton);
         recActionDiv.appendChild(recDeleteButton);
+        recDeleteButton.onclick = function(){
+            //recordDiv.remove();
+            const confirmDelete = confirm("Are you sure you want to delete this transaction?");
+            console.log(confirmDelete);
+            if (confirmDelete) {
+                localArray.splice(i, 1);
+                saveArray(localArray);
+                updateStatus(localArray);
+            }
+        }
 
 
         recordDiv.appendChild(imgDiv);
