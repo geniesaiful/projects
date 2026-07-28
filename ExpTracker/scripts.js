@@ -50,14 +50,20 @@ function addRecord(event){
     //calculate(localTransactionArray);     
     saveArray(recordArray);
     updateStatus(recordArray);
-    showLocalStorage();
+    updateTableArea(recordArray);
+    //showLocalStorage();
 }
 
 function updateStatus(array){
 
-    const localArray = array;
+    let localArray = array;
     // PROBLEM: What if the localStorage is also empty?
     // POSSIBLE SOLUTION: two different functions, one for calculate and update, another for just update.
+    
+    updateTableArea(localArray);
+    if(localArray.length === 0){
+        localArray = JSON.parse(localStorage.getItem('transactionRecords'));
+    }
     
     let totalBalance = 0;
     let totalIncome = 0;
@@ -79,7 +85,7 @@ function updateStatus(array){
     totalExpense = totalExpense.toFixed(2);
     savingRate = ((totalBalance/totalIncome)*100).toFixed(2);
 
-    console.log(totalBalance,totalIncome,totalExpense,savingRate);
+    //console.log(totalBalance,totalIncome,totalExpense,savingRate);
 
     const balanceDigit = document.getElementById("balanceDigit");
     balanceDigit.textContent = totalBalance;
@@ -92,6 +98,8 @@ function updateStatus(array){
     
     const SavingRateDigit = document.getElementById("SavingRateDigit");
     SavingRateDigit.textContent = savingRate;
+
+    
 }
 
 function saveArray(array){
@@ -103,7 +111,99 @@ function showLocalStorage(){
     //console.table(localStorage);
 }
 
-function updateTable(){
+function updateTableArea(array){
+    let localArray = array;
+    if(localArray.length === 0){
+        localArray = JSON.parse(localStorage.getItem('transactionRecords'));
+    }
+    const tranViewDiv = document.getElementById("transactionsTableDiv");
+   //const overviewTableDiv = document.getElementById("overviewTableDiv");
+   tranViewDiv.innerHTML="";//clear previous table
+
+    //console.log(localArray[0].title);
+    for(i=0;i<localArray.length;i++){
+    
+        const recordDiv = document.createElement("div");
+        recordDiv.className = "recordDiv";
+
+        const imgDiv = document.createElement("div");
+        imgDiv.className="recImgDiv";
+        imgDiv.classList.add("recordElementDiv");
+        const imgElement = document.createElement("img");
+        imgElement.className="recImage";
+        imgElement.classList.add("default");
+        imgDiv.appendChild(imgElement);
+
+        const recTitleTextDiv = document.createElement("div");
+        recTitleTextDiv.className = "recTitleTextDiv";
+        recTitleTextDiv.classList.add("recordElementDiv");
+        const upperText = document.createElement("span");
+        upperText.className = "recUpperText";
+        upperText.textContent = localArray[i].title;
+        const lowerText = document.createElement("span");
+        lowerText.className = "recLowerText";
+        lowerText.textContent = "55";
+        recTitleTextDiv.appendChild(upperText);
+        recTitleTextDiv.appendChild(lowerText);
+
+        const recCategoryDiv = document.createElement("div");
+        recCategoryDiv.className = "recTitleTextDiv";
+        recCategoryDiv.classList.add("recordElementDiv");
+        const catText = document.createElement("span");
+        catText.className = "recCatText";
+        catText.textContent = localArray[i].category;
+        recCategoryDiv.appendChild(catText);
+
+        const recTypeDiv = document.createElement("div");
+        recTypeDiv.className = "recTypeDiv";
+        recTypeDiv.classList.add("recordElementDiv");
+        const typeText = document.createElement("span");
+        typeText.className="recTypeText";
+        typeText.textContent=localArray[i].type;
+        recTypeDiv.appendChild(typeText);
+
+        const recDateDiv = document.createElement("div");
+        recDateDiv.className="recDateDiv";
+        recDateDiv.classList.add("recordElementDiv");
+        const dateText = document.createElement("span");
+        dateText.className = "recDateText";
+        dateText.textContent = localArray[i].type;
+        recDateDiv.appendChild(dateText);
+
+        const recAmountDiv = document.createElement("div");
+        recAmountDiv.className="recAmountDiv";
+        recAmountDiv.classList.add("recordElementDiv");
+        const amountSign = document.createElement("span");
+        amountSign.id="recAmountSign";
+        amountSign.textContent="+"; // conditional
+        recAmountDiv.appendChild(amountSign);
+        const amountNumber = document.createElement("span");
+        amountNumber.id="recAmountNumber";
+        amountNumber.textContent = localArray[i].amount;
+        recAmountDiv.appendChild(amountNumber);
+
+        const recActionDiv = document.createElement("div");
+        recActionDiv.className = "recActionDiv";
+        recActionDiv.classList.add("recordElementDiv");
+        const recEditButton = document.createElement("img");
+        const recDeleteButton = document.createElement("img");
+        recActionDiv.appendChild(recEditButton);
+        recActionDiv.appendChild(recDeleteButton);
+
+
+        recordDiv.appendChild(imgDiv);
+        recordDiv.appendChild(recTitleTextDiv);
+        recordDiv.appendChild(recCategoryDiv);
+        recordDiv.appendChild(recTypeDiv);
+        recordDiv.appendChild(recDateDiv);
+        recordDiv.appendChild(recAmountDiv);
+        recordDiv.appendChild(recActionDiv);
+
+        tranViewDiv.appendChild(recordDiv);
+    }
+    //overviewTableDiv.appendChild(recordDiv); 
+    // Not possible to add the record to both data table atm. because js will move that to the second div
+
 
 }
 

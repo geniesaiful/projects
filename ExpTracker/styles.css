@@ -83,3 +83,14 @@ body{
 .contentDiv.activeDiv{
     display: block;
 }
+.recordDiv{
+    display: flex;
+    gap: 5px;
+    width: 80%;
+    background-color: azure;
+    flex: 1;
+}
+.recordElementDiv{
+    display: flex;
+    flex: 1;
+}

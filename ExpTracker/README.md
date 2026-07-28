@@ -8,8 +8,8 @@
     - [x] Fields: Type (Income/Expense), Title, Amount, Category, Date, Note (optional)
     - [x] Validate all fields (no empty title, amount must be > 0, required fields)
     - [x] Categories: Food, Transport, Shopping, Bills, Entertainment, Health, Education, Salary, Freelance, Other
-- [] Transaction List
-    - [] Show all transactions with title, category, date and amount.
+- [-] Transaction List
+    - [x] Show all transactions with title, category, date and amount.
     - [] Income amounts in green with + sign.
     - [] Expense amounts in red with - sign.
     - [] Each item has Edit and Delete actions.
