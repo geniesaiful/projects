@@ -13,7 +13,7 @@
     - [x] Income amounts in green with + sign.
     - [x] Expense amounts in red with - sign.
     - [x] Each item has Edit and Delete actions.
-- [] Edit Transaction
+- [x] Edit Transaction
 - [x] Delete Transaction
     - [x] Show confirmation dialog before deleting.
 - [] Filter and Search

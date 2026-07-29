@@ -5,6 +5,7 @@ document.getElementById('date').value = dateToday;
 
 loadCategories(); // Load categories as soon as page loads
 
+let editIndex = -1;
 function showRigtContent(sectionName){
     const allSections = document.querySelectorAll('.contentDiv');
         for (let i = 0; i < allSections.length; i++) {
@@ -45,11 +46,20 @@ function addRecord(event){
     // array, and set them back.
 
     const recordArray = JSON.parse(localStorage.getItem('transactionRecords')) || [];
-    recordArray.push(record);
+    if (editIndex >= 0) {
+        // If editing, overwrite the existing record at editIndex
+        recordArray[editIndex] = record;
+    } else {
+        // Otherwise, add a new record
+        recordArray.push(record);
+    }
     
-    //calculate(localTransactionArray);     
     saveArray(recordArray);
     updateStatus(recordArray);
+
+    // Reset UI state back to normal
+    cancelEdit();
+
     updateTableArea(recordArray);
     //showLocalStorage();
 }
@@ -142,7 +152,7 @@ function updateTableArea(array){
         upperText.textContent = localArray[i].title;
         const lowerText = document.createElement("span");
         lowerText.className = "recLowerText";
-        lowerText.textContent = "55";
+        lowerText.textContent = "";
         recTitleTextDiv.appendChild(upperText);
         recTitleTextDiv.appendChild(lowerText);
 
@@ -208,10 +218,17 @@ function updateTableArea(array){
         recDeleteButton.src = "resources/cancel-svgrepo-com.svg"
         recActionDiv.appendChild(recEditButton);
         recActionDiv.appendChild(recDeleteButton);
+        
+        recEditButton.onclick = function() {   //we cannot directly call editRecord(i), because if so it will execute as soon as the loop starts
+         
+            editRecord(i);
+        }
+        
+        
         recDeleteButton.onclick = function(){
             //recordDiv.remove();
             const confirmDelete = confirm("Are you sure you want to delete this transaction?");
-            console.log(confirmDelete);
+            //console.log(confirmDelete);
             if (confirmDelete) {
                 localArray.splice(i, 1);
                 saveArray(localArray);
@@ -235,6 +252,52 @@ function updateTableArea(array){
 
 
 }
+
+function editRecord(index){
+
+    const localArray = JSON.parse(localStorage.getItem('transactionRecords')) || [];
+    const editItem = localArray[index];
+    console.table(localArray);
+
+
+    // Populate the form with current values
+
+    document.getElementById("type").value = editItem.type;
+    document.getElementById("title").value = editItem.title;
+    document.getElementById("amount").value = editItem.amount;
+    document.getElementById("catDropdown").value = editItem.category;
+    document.getElementById("date").value = editItem.date;
+    document.getElementById("note").value = editItem.note;
+
+    // This is used because we are re using the form add Transaction, and 
+    // by default it was just pushing a record at the end of the array.
+    // But I have updated there, when there is a positive value, it will
+    // know that it has to delete the record with the index and replace it with a new record.
+    // and if it sees the -1, it will push the new record.
+    editIndex = index; 
+
+    // Adjust Form UI elements
+    document.getElementById("transactionsTableDiv").style.display = "none"; // Hide table
+    document.getElementById("formTitle").textContent = "Edit Transaction";  // Change title
+    document.getElementById("submitBtn").textContent = "Update";            // Change submit button text
+    document.getElementById("cancelBtn").style.display = "inline-block";     // Show cancel button
+
+}
+
+function cancelEdit() {
+    // Reset edit state
+    editIndex = -1;
+
+    // Clear form fields
+    document.getElementById("transactionForm").reset();
+
+    // Restore UI elements
+    document.getElementById("transactionsTableDiv").style.display = "block"; // Show table
+    document.getElementById("formTitle").textContent = "Add Transaction";   // Reset title
+    document.getElementById("submitBtn").textContent = "Add Transaction";   // Reset button text
+    document.getElementById("cancelBtn").style.display = "none";            // Hide cancel button
+}
+
 
 
 
