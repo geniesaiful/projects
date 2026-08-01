@@ -83,13 +83,25 @@ body{
 .contentDiv.activeDiv{
     display: block;
 }
+
+
+.topBar{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
 .recordDiv{
     display: flex;
     gap: 5px;
-    width: 80%;
+    width: 100%;
     background-color: azure;
     flex: 1;
 }
+
+/* .filterRecordDiv{
+    display: flex;
+    
+} */
 .recordElementDiv{
     display: flex;
     flex: 1;

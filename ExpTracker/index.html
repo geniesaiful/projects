@@ -65,8 +65,31 @@
     </div>
 
     <div class="contentDiv activeDiv" id="transactionsDiv">
+        <h3>Transactions</h3>
+        <div class="topBar" id="transactionTableTopBar"> 
+            <div class="searchRecordDiv">
+                <input type="text" id="searchInput" placeholder="Search Title or Category">
+                <button class="buttonGen" id="buttonSearch" onclick="searchRecord()">Search</button>
+            </div>
+            <div class="filterRecordDiv">
+                <span>Filter:</span>
+                <button class="buttonGen" onclick="filterRecord('all')">All</button>
+                <button class="buttonGen" onclick="filterRecord('income')">Income</button>
+                <button class="buttonGen" onclick="filterRecord('expense')">Expense</button>
+            </div>
+        </div>
+        <div class="recordDiv" id="tableTitleDiv">
+            <div class="recordElementDiv"></div>
+            <div class="recordElementDiv">TITLE</div>
+            <div class="recordElementDiv">CATEGORY</div>
+            <div class="recordElementDiv">TYPE</div>
+            <div class="recordElementDiv">DATE</div>
+            <div class="recordElementDiv">AMOUNT</div>
+            <div class="recordElementDiv"></div>
+        </div>
+        <br>
         <div class="tableDiv" id="transactionsTableDiv">
-            Transaction Overview
+            
         </div>
         <br><br><br> 
         <div id="addTransactionDiv">

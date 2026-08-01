@@ -299,7 +299,76 @@ function cancelEdit() {
 }
 
 
+function searchRecord(){
+    const localArray = JSON.parse(localStorage.getItem('transactionRecords')) || [];
+    const searchInput = document.getElementById("searchInput").value.toLowerCase().trim();
+    console.log("Search");
+    if(searchInput === ""){
+        updateTableArea(localArray);
+        return;
+    }
+    
+    // document.getElementById("buttonSearch").textContent = "Clear";
+    let searchResult =[];
 
+    for(let i=0; i<localArray.length; i++){
+        let titleText = localArray[i].title.toLowerCase();
+        let categoryText = localArray[i].category.toLowerCase();
+
+        if(titleText.includes(searchInput) || categoryText.includes(searchInput)){
+            searchResult.push(localArray[i]);
+        }
+
+    }
+    updateTableArea(searchResult);
+    
+    const searchButton = document.getElementById("buttonSearch");
+    searchButton.textContent = "back";
+    if(searchResult.length === 0){
+            document.getElementById("transactionsTableDiv").textContent = "NO RECORD";
+            console.log("No Match!");
+        }
+    else{
+            console.log("Match Found!");
+    }
+    
+    searchButton.onclick = function(){
+        document.getElementById("searchInput").value="";
+        searchButton.textContent = "Search";
+        if(searchResult.length === 0) {
+            document.getElementById("transactionsTableDiv").textContent = ""; 
+        }
+        updateTableArea(localArray); 
+        searchButton.onclick = searchRecord; // the search button is now started listening again.
+    }
+    
+    
+}
+
+function filterRecord(filter){
+    const localArray = JSON.parse(localStorage.getItem('transactionRecords')) || [];
+    let filteredArray =[];
+
+    if(filter === "all"){
+        updateTableArea(localArray);
+    }
+    else if(filter === "income"){
+        for(let i=0; i<localArray.length;i++){
+            if(localArray[i].type === "income"){
+                filteredArray.push(localArray[i]);
+            }
+        }
+        updateTableArea(filteredArray);
+    }
+    else if(filter === "expense"){
+        for(let i=0; i<localArray.length;i++){
+            if(localArray[i].type==="expense"){
+                filteredArray.push(localArray[i]);
+            }
+        }
+        updateTableArea(filteredArray);   
+    }
+}
 
 
 
