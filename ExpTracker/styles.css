@@ -82,16 +82,27 @@ body{
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
+    align-content: center;
     margin-left: 10px;
     width: 200px;
     height: 100px;
     padding: 10px;
     border: 1px solid #825151;
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 .statusLabel{
     font-family:'Courier New', Courier, monospace;
     font-size: 14px;
 
+}
+.statusImg{
+    width: 20px;          
+    height: 20px;
+    display: flex;
+    align-content: center;
+    justify-content: center;
 }
 
 .contentDiv{
