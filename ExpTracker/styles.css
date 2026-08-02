@@ -19,7 +19,7 @@ body{
     display: flex;
     flex-direction: column;
     color:var(--leftContainerText);
-    width: 300; /*It has to be max widht + padding of the menu text*/
+    width: 240px; /*It has to be max widht + padding of the menu text*/
     background-color: var(--leftContainerBg);
     min-height: 100vh;
     border: 1px solid #efefef;
@@ -131,5 +131,43 @@ body{
     width: 20px;          
     height: 20px;
     gap: 4px; 
+}
+
+/* Button style */
+.buttonGen {
+  align-items: center;
+  background-color: #0A66C2;
+  border: 0;
+  border-radius: 100px;
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-flex;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  justify-content: center;
+  max-width: 500px;
+  max-height: 36px;
+  min-height: 20px;
+  min-width: 10px;
+  padding: 0px;
+  padding-left: 10px;
+  padding-right: 10px;
+  text-align: center;
+}
+
+.buttonGen:hover,
+.buttonGen:focus { 
+  background-color: #16437E;
+  color: #ffffff;
+}
+
+.buttonGen:active {
+  background: #09223b;
+  color: rgb(255, 255, 255, .7);
+}
+
+.buttonGen:disabled { 
+  cursor: not-allowed;
+  background: rgba(0, 0, 0, .08);
+  color: rgba(0, 0, 0, .3);
 }
 

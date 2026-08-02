@@ -34,7 +34,7 @@
     </div>
     
 
-    <div class="contentDiv" id="overviewDiv">
+    <div class="contentDiv activeDiv" id="overviewDiv">
         <div class="statusCardContainer">
     
         <div class="statusCard" id="stDivBalance">
@@ -61,12 +61,28 @@
         <div>
             Bar2
         </div>
-        <div class="tableDiv" id="overviewTableDiv">
-            Table area
+        <div class = "topBar"> 
+            <h3>Recent Transacions</h3>
+            <button class="buttonGen">Add Transaction</button>
         </div>
+        
+        <div class="recordDiv" id="overviewTableTitleDiv">
+            
+            <div class="recordElementDiv">TITLE</div>
+            <div class="recordElementDiv">CATEGORY</div>
+            <div class="recordElementDiv">TYPE</div>
+            <div class="recordElementDiv">DATE</div>
+            <div class="recordElementDiv">AMOUNT</div>
+            
+        </div>
+        <br>
+        <div class="tableDiv" id="overviewTableDiv">
+            <!-- Records will be added here -->
+        </div>
+
     </div>
 
-    <div class="contentDiv activeDiv" id="transactionsDiv">
+    <div class="contentDiv" id="transactionsDiv">
         <h3>Transactions</h3>
         <div class="topBar" id="transactionTableTopBar"> 
             <div class="searchRecordDiv">

@@ -378,6 +378,83 @@ function filterRecord(filter){
 
 function updateOverviewTable(array){
     console.table(array);
+    let localArray = array;
+    const overviewTableDiv = document.getElementById("overviewTableDiv");
+
+    for(let i=0;i<localArray.length;i++){
+        const recordDiv = document.createElement("div");
+        recordDiv.className = "recordDiv";
+
+        const recTitleTextDiv = document.createElement("div");
+        recTitleTextDiv.className = "recTitleTextDiv";
+        recTitleTextDiv.classList.add("recordElementDiv");
+        const upperText = document.createElement("span");
+        upperText.className = "recUpperText";
+        upperText.textContent = localArray[i].title;
+        const lowerText = document.createElement("span");
+        lowerText.className = "recLowerText";
+        lowerText.textContent = "";
+        recTitleTextDiv.appendChild(upperText);
+        recTitleTextDiv.appendChild(lowerText);
+
+        const recCategoryDiv = document.createElement("div");
+        recCategoryDiv.className = "recTitleTextDiv";
+        recCategoryDiv.classList.add("recordElementDiv");
+        const catText = document.createElement("span");
+        catText.className = "recCatText";
+        catText.textContent = localArray[i].category;
+        recCategoryDiv.appendChild(catText);
+
+        const recTypeDiv = document.createElement("div");
+        recTypeDiv.className = "recTypeDiv";
+        recTypeDiv.classList.add("recordElementDiv");
+        const typeText = document.createElement("span");
+        typeText.className="recTypeText";
+        typeText.textContent=localArray[i].type;
+        if(typeText.textContent==="income"){
+            typeText.classList.add("income");
+        }
+        else{
+            typeText.classList.add("expense");
+        }
+        recTypeDiv.appendChild(typeText);
+
+        const recDateDiv = document.createElement("div");
+        recDateDiv.className="recDateDiv";
+        recDateDiv.classList.add("recordElementDiv");
+        const dateText = document.createElement("span");
+        dateText.className = "recDateText";
+        dateText.textContent = localArray[i].date;
+        recDateDiv.appendChild(dateText);
+
+        const recAmountDiv = document.createElement("div");
+        recAmountDiv.className="recAmountDiv";
+        recAmountDiv.classList.add("recordElementDiv");
+        const amountSign = document.createElement("span");
+        amountSign.id="recAmountSign";
+        const amountNumber = document.createElement("span");
+        amountNumber.id="recAmountNumber";
+        amountNumber.textContent = localArray[i].amount;
+
+        if(typeText.textContent==="income"){
+            amountSign.textContent="+";
+            amountNumber.classList.add("income");
+        }
+        else{
+            amountSign.textContent="-";
+            amountNumber.classList.add("expense");
+        }
+        recAmountDiv.appendChild(amountSign);
+        recAmountDiv.appendChild(amountNumber);
+
+        recordDiv.appendChild(recTitleTextDiv);
+        recordDiv.appendChild(recCategoryDiv);
+        recordDiv.appendChild(recTypeDiv);
+        recordDiv.appendChild(recDateDiv);
+        recordDiv.appendChild(recAmountDiv);
+
+        overviewTableDiv.appendChild(recordDiv);        
+    }
 }
 
 
