@@ -12,7 +12,7 @@
 body{
     display: flex;
     flex-direction: row;
-    font-family: Arial, sans-serif;
+    font-family: Roboto, Helvetica, Arial, sans-serif;
     background-color: var(--genBg);
     color: var(--genText);
     margin: 0;
@@ -118,41 +118,42 @@ body{
 .contentDiv.activeDiv{
     display: block;
 }
-
-form {
-  border-radius: 5px;
-  background-color: #f2f2f2;
-  padding: 20px;
+.contentDiv table {
+    width: 100%;
+    max-width: 500px;             
+    border-collapse: collapse;     
+    background-color: #ffffff;
+    border-radius: 6px;
+    /* overflow: hidden;              */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
 }
-
-label {display: block;}
-
-input[type=text], input[type=number], input[type=date], textarea, select {
-  width: 100%;
-  padding: 12px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
+.contentDiv th {
+    background-color: #0A66C2;
+    color: #ffffff;
+    text-align: left;
+    padding: 10px 14px;
 }
-
-input[type=submit] {
-  width: 100%;
-  background-color: #4CAF50;
-  color: white;
-  padding: 14px;
-  margin: 8px 0;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
+.contentDiv td {
+    padding: 10px 14px;
+    border-bottom: 1px solid #eeeeee;
 }
-
-input[type=submit]:hover {
-  background-color: #45a049;
+.contentDiv tbody tr:hover {
+    background-color: #f9f9f9;
 }
-
-
+.formRow {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    width: 100%;
+}
+#tableTitleDiv, 
+#overviewTableTitleDiv {
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    color: #666666;
+    text-transform: uppercase;
+}
 .topBar{
     display: flex;
     justify-content: space-between;
@@ -169,6 +170,10 @@ input[type=submit]:hover {
     display: flex;
     flex: 1;
 }
+.recordDiv {
+    font-size: 14px;
+    font-weight: 400;
+}
 .income{
     background-color: green;
     color: white;
@@ -184,41 +189,93 @@ input[type=submit]:hover {
     gap: 4px; 
 }
 
+#catInpDiv{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+/* General elements look */
+form {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+}
+
+label {display: block;}
+
+input[type=text], input[type=number], input[type=date], textarea {
+    width: 300px;
+    padding: 12px;
+    margin: 4px 0;
+    /* display: inline-block; */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+#transactionForm textarea {
+    width: 94%;
+}
+select{
+    width: 132px;        
+    padding: 2px;
+    margin: 2px 0;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+input[type=submit] {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+input[type=submit]:hover {
+      background-color: #45a049;
+}
+
+
 /* Button style */
 .buttonGen {
-  align-items: center;
-  background-color: #0A66C2;
-  border: 0;
-  border-radius: 100px;
-  color: #ffffff;
-  cursor: pointer;
-  display: inline-flex;
-  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  justify-content: center;
-  max-width: 500px;
-  max-height: 36px;
-  min-height: 20px;
-  min-width: 10px;
-  padding: 0px;
-  padding-left: 10px;
-  padding-right: 10px;
-  text-align: center;
+    align-items: center;
+    background-color: #0A66C2;
+    border: 0;
+    border-radius: 100px;
+    color: #ffffff;
+    cursor: pointer;
+    display: inline-flex;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    justify-content: center;
+    max-width: 500px;
+    max-height: 36px;
+    min-height: 30px;
+    min-width: 60px;
+    padding: 0px;
+    padding-left: 10px;
+    padding-right: 10px;
+    text-align: center;
 }
 
 .buttonGen:hover,
 .buttonGen:focus { 
-  background-color: #16437E;
-  color: #ffffff;
+    background-color: #16437E;
+    color: #ffffff;
 }
 
 .buttonGen:active {
-  background: #09223b;
-  color: rgb(255, 255, 255, .7);
+    background: #09223b;
+    color: rgb(255, 255, 255, .7);
 }
 
 .buttonGen:disabled { 
-  cursor: not-allowed;
-  background: rgba(0, 0, 0, .08);
-  color: rgba(0, 0, 0, .3);
+    cursor: not-allowed;
+    background: rgba(0, 0, 0, .08);
+    color: rgba(0, 0, 0, .3);
 }
 

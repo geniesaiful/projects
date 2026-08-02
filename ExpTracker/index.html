@@ -75,7 +75,7 @@
             <div class="recordElementDiv">AMOUNT</div>
             
         </div>
-        <br>
+    
         <div class="tableDiv" id="overviewTableDiv">
             <!-- Records will be added here -->
         </div>
@@ -105,7 +105,7 @@
             <div class="recordElementDiv">AMOUNT</div>
             <div class="recordElementDiv"></div>
         </div>
-        <br>
+        
         <div class="tableDiv" id="transactionsTableDiv">
             
         </div>
@@ -114,34 +114,31 @@
             <h3 id="formTitle">Add Transaction</h3>
             
             <form id="transactionForm" onsubmit="addRecord(event)">
-               
-                <label for="type">Type:</label>
-                <select id="type" name="type" required>
-                    <option value="expense">Expense</option>
-                    <option value="income">Income</option>
-                </select>
-                
-                <label for="catDropdown">Category:</label>
-                <select id="catDropdown" name="category" required>
-                    <option value="" disabled selected>Select a category</option>
-                    
-                </select>
-                 <br>
-                <label for="title">Title:</label>
-                <input type="text" id="title" name="title" placeholder="e.g., Grocery Shopping" required>
-                <br>
-                <label for="amount">Amount:</label>
-                <input type="number" id="amount" name="amount" step="0.1" min="0" placeholder="amount" required>
-                
-                
-                <label for="date">Date:</label>
-                <input type="date" id="date" name="date" required>
-                <br>
-                <label for="note">Note:</label>
-                <textarea id="note" name="note" rows="6" cols="50" maxlength="200" placeholder="maximum 200 characters")></textarea>
-                <br>
-                <button type="submit" id="submitBtn">Add Transaction</button>
-                <button type="button" id="cancelBtn" style="display: none;" onclick="cancelEdit()">Cancel</button>
+                <!-- Row 1: Type, Category, Title -->
+                <div class="formRow">
+                    <select id="type" name="type" required>
+                        <option value="" disabled selected>Select Type</option>
+                        <option value="expense">Expense</option>
+                        <option value="income">Income</option>
+                    </select>
+
+                    <select id="catDropdown" name="category" required>
+                        <option value="" disabled selected>Select a category</option>
+                    </select>
+
+                    <input type="text" id="title" name="title" placeholder="e.g., Grocery Shopping" required>
+                    <input type="number" id="amount" name="amount" step="0.1" min="0" placeholder="Amount" required>
+                    <input type="date" id="date" name="date" required>
+                </div>
+
+                <div class="formRow">
+                    <textarea id="note" name="note" rows="2" maxlength="200" placeholder="Note (maximum 200 characters)"></textarea>
+                </div>
+
+                <div class="formRow">
+                    <button type="submit" id="submitBtn" class="buttonGen">Add Transaction</button>
+                    <button type="button" id="cancelBtn" class="buttonGen" style="display: none;" onclick="cancelEdit()">Cancel</button>
+                </div>
             </form>
 
             <br><br><br><br><br><br>
@@ -160,7 +157,7 @@
                 <option value="income">Income</option>
             </select>
 
-            <button id="addCatBtn" onclick="addCategory()">Add</button>
+            <button class="buttonGen" id="addCatBtn" onclick="addCategory()">Add</button>
         </div>
         
         <br><br><br>

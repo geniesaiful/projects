@@ -13,7 +13,7 @@ function showRigtContent(sectionName){
         }
     const selectedSection = document.getElementById(sectionName);
     selectedSection.classList.add('activeDiv');
-    
+
 }
 
 function addRecord(event){
@@ -275,7 +275,7 @@ function editRecord(index){
     document.getElementById("date").value = editItem.date;
     document.getElementById("note").value = editItem.note;
 
-    // This is used because we are re using the form add Transaction, and 
+    // This editIndex is used because we are re using the form add Transaction, and 
     // by default it was just pushing a record at the end of the array.
     // But I have updated there, when there is a positive value, it will
     // know that it has to delete the record with the index and replace it with a new record.
@@ -381,6 +381,7 @@ function updateOverviewTable(array){
     console.table(array);
     let localArray = array;
     const overviewTableDiv = document.getElementById("overviewTableDiv");
+    overviewTableDiv.innerHTML = "";
 
     for(let i=0;i<localArray.length;i++){
         const recordDiv = document.createElement("div");
@@ -490,6 +491,8 @@ function loadCategories(){
     //console.log(catTableBody.value);
     
     let savedCat = JSON.parse(localStorage.getItem("expAppCategories")) || [];
+    
+    catDropdownEl.innerHTML = '<option value="" disabled selected>Select a category</option>';
     catTableBodyEl.innerHTML = "";
 
    
