@@ -13,6 +13,7 @@ function showRigtContent(sectionName){
         }
     const selectedSection = document.getElementById(sectionName);
     selectedSection.classList.add('activeDiv');
+    
 }
 
 function addRecord(event){
