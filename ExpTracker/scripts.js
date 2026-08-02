@@ -127,6 +127,7 @@ function updateTableArea(array){
         localArray = JSON.parse(localStorage.getItem('transactionRecords'));
     }
     const tranViewDiv = document.getElementById("transactionsTableDiv");
+    
    //const overviewTableDiv = document.getElementById("overviewTableDiv");
    tranViewDiv.innerHTML="";//clear previous table
 
@@ -236,7 +237,6 @@ function updateTableArea(array){
             }
         }
 
-
         recordDiv.appendChild(imgDiv);
         recordDiv.appendChild(recTitleTextDiv);
         recordDiv.appendChild(recCategoryDiv);
@@ -246,9 +246,14 @@ function updateTableArea(array){
         recordDiv.appendChild(recActionDiv);
 
         tranViewDiv.appendChild(recordDiv);
+        //overviewTableDiv.appendChild(recordDiv); 
+        //Not possible to add the record to both data table atm. because only one DOM at a time, so 
+        // js will move that to the second div
     }
-    //overviewTableDiv.appendChild(recordDiv); 
-    // Not possible to add the record to both data table atm. because js will move that to the second div
+    const miniArray = localArray.slice(0,7);
+    updateOverviewTable(miniArray);
+
+    
 
 
 }
@@ -314,8 +319,9 @@ function searchRecord(){
     for(let i=0; i<localArray.length; i++){
         let titleText = localArray[i].title.toLowerCase();
         let categoryText = localArray[i].category.toLowerCase();
+        let noteText = localArray[i].note.toLowerCase();
 
-        if(titleText.includes(searchInput) || categoryText.includes(searchInput)){
+        if(titleText.includes(searchInput) || categoryText.includes(searchInput) || noteText.includes(searchInput)){
             searchResult.push(localArray[i]);
         }
 
@@ -370,6 +376,9 @@ function filterRecord(filter){
     }
 }
 
+function updateOverviewTable(array){
+    console.table(array);
+}
 
 
 

@@ -32,27 +32,29 @@
     <div class="greetingDiv">
         <span>Good Morning!!</span><span>Name</span><span style= "color: blue; flex-grow: 1;">IMG</span><span>Dark Mode</span>
     </div>
-    <div class="statusCardContainer">
+    
+
+    <div class="contentDiv" id="overviewDiv">
+        <div class="statusCardContainer">
     
         <div class="statusCard" id="stDivBalance">
-                [IMG]<span class="statusLabel">Total Balance: </span><span id="balanceDigit">0</span>
+                <img><span class="statusLabel">Total Balance: </span><span id="balanceDigit">0</span>
         </div>
     
         <div class="statusCard" id="stDivIncome">
-                [IMG]<span class="statusLabel">Total Income: </span><span id="incomeDigit">0</span>
+                <img><span class="statusLabel">Total Income: </span><span id="incomeDigit">0</span>
         </div>
     
         <div class="statusCard" id="stDivExpense">
-                [IMG]<span class="statusLabel">Total Expense: </span><span id="expenseDigit">0</span>
+                <img><span class="statusLabel">Total Expense: </span><span id="expenseDigit">0</span>
         </div>
     
         <div class="statusCard" id="stDivSavingRate">
-                [IMG]<span class="statusLabel">Savings Rate:  </span><span id="SavingRateDigit">0</span>
+                <img><span class="statusLabel">Savings Rate:  </span><span id="SavingRateDigit">0</span>
         </div>
     
     </div>
-
-    <div class="contentDiv" id="overviewDiv">
+    
         <div>
             Bar1
         </div>
@@ -68,7 +70,7 @@
         <h3>Transactions</h3>
         <div class="topBar" id="transactionTableTopBar"> 
             <div class="searchRecordDiv">
-                <input type="text" id="searchInput" placeholder="Search Title or Category">
+                <input type="text" id="searchInput" placeholder="Search in Title, Category, Note...">
                 <button class="buttonGen" id="buttonSearch" onclick="searchRecord()">Search</button>
             </div>
             <div class="filterRecordDiv">

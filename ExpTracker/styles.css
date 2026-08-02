@@ -19,7 +19,7 @@ body{
     display: flex;
     flex-direction: column;
     color:var(--leftContainerText);
-    width: 400px; /*It has to be max widht + padding of the menu text*/
+    width: 300; /*It has to be max widht + padding of the menu text*/
     background-color: var(--leftContainerBg);
     min-height: 100vh;
     border: 1px solid #efefef;
@@ -55,11 +55,14 @@ body{
       background-color: rgb(168, 165, 165);
 }
 
+
 .statusAreaDiv{
     display: flex;
     flex-direction: column;
     flex-grow: 1;
 }
+
+
 .contRight{
     width:100%;
     border: 1px solid #efefef;
@@ -69,14 +72,28 @@ body{
 .greetingDiv{
     display: flex;
 }
+
+
 .statusCardContainer{
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
 }
 .statusCard{
     display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
     margin-left: 10px;
+    width: 200px;
+    height: 100px;
+    padding: 10px;
+    border: 1px solid #825151;
 }
+.statusLabel{
+    font-family:'Courier New', Courier, monospace;
+    font-size: 14px;
+
+}
+
 .contentDiv{
     display: none;
 }
@@ -97,11 +114,6 @@ body{
     background-color: azure;
     flex: 1;
 }
-
-/* .filterRecordDiv{
-    display: flex;
-    
-} */
 .recordElementDiv{
     display: flex;
     flex: 1;
@@ -120,3 +132,4 @@ body{
     height: 20px;
     gap: 4px; 
 }
+

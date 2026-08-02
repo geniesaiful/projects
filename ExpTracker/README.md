@@ -16,9 +16,9 @@
 - [x] Edit Transaction
 - [x] Delete Transaction
     - [x] Show confirmation dialog before deleting.
-- [] Filter and Search
-    - [] Filter by: All, Income, Expense.
-    - [] Search by title, category or note.
+- [x] Filter and Search
+    - [x] Filter by: All, Income, Expense.
+    - [x] Search by title, category or note.
     - [] Optional: Filter by category and date range.
 - [x] Data Persistance
     - [x] Save all transactions in Local Storage.
