@@ -163,24 +163,26 @@ body{
     display: flex;
     gap: 5px;
     width: 100%;
-    background-color: azure;
+    background-color: #C1D0B5; /* #A9A9A9 */
+    border: 1px solid #825151;
     flex: 1;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 400;
+    padding: 2px;
 }
 .recordElementDiv{
     display: flex;
     flex: 1;
 }
-.recordDiv {
-    font-size: 14px;
-    font-weight: 400;
-}
+
 .income{
-    background-color: green;
-    color: white;
+    background-color: rgba(0, 194, 0, 0.25);
+    color: green;
 }
 .expense{
-    background-color: red;
-    color: white;
+    background-color: rgba(255, 0, 0, 0.15);
+    color: red;
 }
 .recButton{
     display: flex;

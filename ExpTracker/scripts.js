@@ -8,7 +8,7 @@ loadCategories(); // Load categories as soon as page loads
 let editIndex = -1; // add or edit
 let currentPage = 1; // the page position must be global to use it in different functions.
 
-const rowsPerPage = 10;
+const rowsPerPage = 6;
 let currentDisplayedArray = []; // Stores the full active list (filtered, searched, or all)
 
 
@@ -212,11 +212,16 @@ function updateTableArea(array){
 
         if(typeText.textContent==="income"){
             amountSign.textContent="+";
-            amountNumber.classList.add("income");
+            amountSign.style.color= "green";
+            //amountNumber.classList.add("income");
+            amountNumber.style.color = "green";
         }
         else{
             amountSign.textContent="-";
-            amountNumber.classList.add("expense");
+            amountSign.style.color="red";
+            amountNumber.style.color="red";
+            //amountNumber.classList.add("expense");
+
         }
         recAmountDiv.appendChild(amountSign);
         recAmountDiv.appendChild(amountNumber);
@@ -464,11 +469,16 @@ function updateOverviewTable(array){
 
         if(typeText.textContent==="income"){
             amountSign.textContent="+";
-            amountNumber.classList.add("income");
+            amountSign.style.color= "green";
+            amountNumber.style.color = "green";
+            //amountNumber.classList.add("income");
         }
         else{
             amountSign.textContent="-";
-            amountNumber.classList.add("expense");
+            amountSign.style.color="red";
+            amountNumber.style.color="red";
+            //amountNumber.classList.add("expense");
+
         }
         recAmountDiv.appendChild(amountSign);
         recAmountDiv.appendChild(amountNumber);
