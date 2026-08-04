@@ -107,9 +107,15 @@
         </div>
         
         <div class="tableDiv" id="transactionsTableDiv">
-            
+            <!-- Records will be added here -->
         </div>
-        <br><br><br> 
+
+        <div id="paginationDiv" class="paginationDiv">
+            <button class="navButton" id="prevButton" onclick="changePage(-1)">Previous</button>
+            <span id="spanPageNumber">Page 1 0f 1</span>
+            <button class="navButton" id="nxtButton" onclick="changePage(1)">Next</button>
+        </div>
+        <br><br>
         <div id="addTransactionDiv">
             <h3 id="formTitle">Add Transaction</h3>
             

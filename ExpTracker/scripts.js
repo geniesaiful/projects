@@ -5,7 +5,13 @@ document.getElementById('date').value = dateToday;
 
 loadCategories(); // Load categories as soon as page loads
 
-let editIndex = -1;
+let editIndex = -1; // add or edit
+let currentPage = 1; // the page position must be global to use it in different functions.
+
+const rowsPerPage = 10;
+let currentDisplayedArray = []; // Stores the full active list (filtered, searched, or all)
+
+
 function showRigtContent(sectionName){
     const allSections = document.querySelectorAll('.contentDiv');
         for (let i = 0; i < allSections.length; i++) {
@@ -127,14 +133,21 @@ function updateTableArea(array){
     if(localArray.length === 0){
         localArray = JSON.parse(localStorage.getItem('transactionRecords'));
     }
-    const tranViewDiv = document.getElementById("transactionsTableDiv");
-    
-   //const overviewTableDiv = document.getElementById("overviewTableDiv");
-   tranViewDiv.innerHTML="";//clear previous table
+    currentDisplayedArray = localArray;
 
-    //console.log(localArray[0].title);
-    for(let i=0;i<localArray.length;i++){
-    
+    const tranViewDiv = document.getElementById("transactionsTableDiv");
+    tranViewDiv.innerHTML="";
+
+    const startIndex = (currentPage-1)*rowsPerPage;
+    const endIndex = startIndex+rowsPerPage;
+
+    const slicedArray = localArray.slice(startIndex,endIndex);
+    console.table(slicedArray);
+
+    for(let i=0;i<slicedArray.length;i++){
+        
+        const actualIndex = startIndex + i;
+
         const recordDiv = document.createElement("div");
         recordDiv.className = "recordDiv";
 
@@ -151,7 +164,7 @@ function updateTableArea(array){
         recTitleTextDiv.classList.add("recordElementDiv");
         const upperText = document.createElement("span");
         upperText.className = "recUpperText";
-        upperText.textContent = localArray[i].title;
+        upperText.textContent = slicedArray[i].title;
         const lowerText = document.createElement("span");
         lowerText.className = "recLowerText";
         lowerText.textContent = "";
@@ -163,7 +176,7 @@ function updateTableArea(array){
         recCategoryDiv.classList.add("recordElementDiv");
         const catText = document.createElement("span");
         catText.className = "recCatText";
-        catText.textContent = localArray[i].category;
+        catText.textContent = slicedArray[i].category;
         recCategoryDiv.appendChild(catText);
 
         const recTypeDiv = document.createElement("div");
@@ -171,7 +184,7 @@ function updateTableArea(array){
         recTypeDiv.classList.add("recordElementDiv");
         const typeText = document.createElement("span");
         typeText.className="recTypeText";
-        typeText.textContent=localArray[i].type;
+        typeText.textContent=slicedArray[i].type;
         if(typeText.textContent==="income"){
             typeText.classList.add("income");
         }
@@ -185,7 +198,7 @@ function updateTableArea(array){
         recDateDiv.classList.add("recordElementDiv");
         const dateText = document.createElement("span");
         dateText.className = "recDateText";
-        dateText.textContent = localArray[i].date;
+        dateText.textContent = slicedArray[i].date;
         recDateDiv.appendChild(dateText);
 
         const recAmountDiv = document.createElement("div");
@@ -195,7 +208,7 @@ function updateTableArea(array){
         amountSign.id="recAmountSign";
         const amountNumber = document.createElement("span");
         amountNumber.id="recAmountNumber";
-        amountNumber.textContent = localArray[i].amount;
+        amountNumber.textContent = slicedArray[i].amount;
 
         if(typeText.textContent==="income"){
             amountSign.textContent="+";
@@ -221,18 +234,17 @@ function updateTableArea(array){
         recActionDiv.appendChild(recEditButton);
         recActionDiv.appendChild(recDeleteButton);
         
-        recEditButton.onclick = function() {   //we cannot directly call editRecord(i), because if so it will execute as soon as the loop starts
-         
-            editRecord(i);
+        recEditButton.onclick = function() { 
+           //we cannot directly call editRecord(i), because if so it will execute as soon as the loop starts
+           //this way, the button listener wait for the signal then execute.
+            editRecord(actualIndex);
         }
         
         
         recDeleteButton.onclick = function(){
-            //recordDiv.remove();
             const confirmDelete = confirm("Are you sure you want to delete this transaction?");
-            //console.log(confirmDelete);
             if (confirmDelete) {
-                localArray.splice(i, 1);
+                localArray.splice(actualIndex, 1);
                 saveArray(localArray);
                 updateStatus(localArray);
             }
@@ -251,12 +263,24 @@ function updateTableArea(array){
         //Not possible to add the record to both data table atm. because only one DOM at a time, so 
         // js will move that to the second div
     }
-    const miniArray = localArray.slice(0,7);
+    const miniArray = localArray.slice(-7);
     updateOverviewTable(miniArray);
-
     
+    const totalPage = Math.ceil(localArray.length/rowsPerPage);
 
+    if (currentPage > totalPage) { // dont let to go beyond ininfinitly
+        currentPage = totalPage;
+    }
 
+    document.getElementById("spanPageNumber").textContent = "Page"+currentPage+"of"+totalPage;
+    
+    document.getElementById("prevButton").disabled = (currentPage === 1);
+    document.getElementById("nxtButton").disabled = (currentPage === totalPage || localArray.length === 0);
+}
+
+function changePage(pos){
+    currentPage = currentPage+pos;
+    updateTableArea(currentDisplayedArray);
 }
 
 function editRecord(index){
@@ -458,8 +482,6 @@ function updateOverviewTable(array){
         overviewTableDiv.appendChild(recordDiv);        
     }
 }
-
-
 
 
 function addCategory(){
