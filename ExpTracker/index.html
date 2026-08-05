@@ -11,8 +11,8 @@
 
 <div class="contLeft">
     <div class="titleDiv">
-        <div> Image</div>
-        <div class="titleName"> <span style="font-family: 'Playfair Display', serif; font-size: x-large; font-weight: 700; Color: #111827">Expense</span><span style="font-family: 'Playfair Display', serif; font-size: larger; font-weight: 500; Color: #111827">Tracker</span></div>
+        <img src="resources/calc_round.jpg" style="width: 60px; height: 60px; margin-bottom: 8px;"></img>
+        <div class="titleName"> <span style="font-family: 'Playfair Display', serif; font-size: x-large; font-weight: 800; letter-spacing: 2px; Color: #1e293b">Expense</span><span style="font-family: 'Playfair Display', serif; font-size: larger; font-weight: 400; letter-spacing: 2px;Color: #64748b">Tracker</span></div>
     </div>
     
     <div class="navDiv">
@@ -23,39 +23,38 @@
         <a href="#" onclick="showRigtContent('settingsDiv')">Settigs</a>
     </div>
     <div class="statusAreaDiv">
-        <span>Monthly overview</span>
+        <span>Monthly overview</span> 
         <span>Date</span>
     </div>
 </div>
 
 <div class="contRight">
     <div class="greetingDiv">
-        <span>Good Morning!!</span><span>Name</span><span style= "color: blue; flex-grow: 1;">IMG</span><span>Dark Mode</span>
+        <span>Hey There!!</span><span style="margin-left: 8px;">👋</span>
     </div>
+        <div class="statusCardContainer">
+
+            <div class="statusCard" id="stDivBalance">
+                    <img src="resources/balance.svg" class="statusImg"><span class="statusLabel">Total Balance: </span><span class="digitLabel" id="balanceDigit">0</span>
+            </div>
+        
+            <div class="statusCard" id="stDivIncome">
+                    <img src="resources/money-in.svg" class="statusImg"><span class="statusLabel">Total Income: </span><span class="digitLabel" id="incomeDigit">0</span>
+            </div>
+        
+            <div class="statusCard" id="stDivExpense">
+                    <img src="resources/money-out.svg" class="statusImg"><span class="statusLabel">Total Expense: </span><span class="digitLabel" id="expenseDigit">0</span>
+            </div>
+        
+            <div class="statusCard" id="stDivSavingRate">
+                    <img src="resources/saving-rate.svg" class="statusImg"><span class="statusLabel">Savings Rate:  </span><span class="digitLabel" id="SavingRateDigit">0</span>
+            </div>
+
+        </div>
     
 
     <div class="contentDiv activeDiv" id="overviewDiv">
-        <div class="statusCardContainer">
-    
-        <div class="statusCard" id="stDivBalance">
-                <img src="resources/balance.svg" class="statusImg"><span class="statusLabel">Total Balance: </span><span class="digitLabel" id="balanceDigit">0</span>
-        </div>
-    
-        <div class="statusCard" id="stDivIncome">
-                <img src="resources/money-in.svg" class="statusImg"><span class="statusLabel">Total Income: </span><span class="digitLabel" id="incomeDigit">0</span>
-        </div>
-    
-        <div class="statusCard" id="stDivExpense">
-                <img src="resources/money-out.svg" class="statusImg"><span class="statusLabel">Total Expense: </span><span class="digitLabel" id="expenseDigit">0</span>
-        </div>
-    
-        <div class="statusCard" id="stDivSavingRate">
-                <img src="resources/saving-rate.svg" class="statusImg"><span class="statusLabel">Savings Rate:  </span><span class="digitLabel" id="SavingRateDigit">0</span>
-        </div>
-    
-    </div>
-    
-        
+
         <div class = "topBar"> 
             <h3>Recent Transactions</h3>
             <button class="buttonGen" onclick="document.getElementById('transactionsDiv').classList.add('activeDiv'); document.getElementById('overviewDiv').classList.remove('activeDiv')">Add Transaction</button>
@@ -78,7 +77,7 @@
     </div>
 
     <div class="contentDiv" id="transactionsDiv">
-        <h3>Transactions</h3>
+        <h3 style="margin-top: 6px;">Transactions</h3>
         <div class="topBar" id="transactionTableTopBar"> 
             <div class="searchRecordDiv">
                 <input type="text" id="searchInput" placeholder="Search in Title, Category, Note...">
@@ -92,13 +91,13 @@
             </div>
         </div>
         <div class="recordDiv" id="tableTitleDiv">
-            <div class="recordElementDiv"></div>
+            <div class="recordElementDiv recImgDiv"></div>
             <div class="recordElementDiv">TITLE</div>
             <div class="recordElementDiv">CATEGORY</div>
             <div class="recordElementDiv">TYPE</div>
             <div class="recordElementDiv">DATE</div>
             <div class="recordElementDiv">AMOUNT</div>
-            <div class="recordElementDiv">ACTION</div>
+            <div class="recordElementDiv recActionDiv">ACTION</div>
         </div>
         
         <div class="tableDiv" id="transactionsTableDiv">
@@ -164,7 +163,7 @@
         <br><br><br>
         
         <div>
-            <h3>All Categories</h3>
+            <h3 style="margin-bottom: 10px;">All Categories</h3>
             <table>
                 <thead>
                 <tr>

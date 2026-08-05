@@ -65,7 +65,7 @@ body{
     font-weight: bold;
 }
 
-.statusAreaDiv{
+.statusAreaDiv{ /*bottom left */
     display: flex;
     flex-direction: column;
     flex-grow: 1;
@@ -78,18 +78,23 @@ body{
     border: 1px solid #cac6d4;
     border-radius: 4px;
     background-color: var(--genBg) ;
+    padding: 4px 4px 0px 4px;
 }
 .greetingDiv{
     display: flex;
     color: var(--genText);
+    font-size: 20px;
+    font-weight: 800;    /* Thick, bold, friendly font weight */
+    color: #1e293b;      /* Soft dark slate color */
+    margin-bottom: 14px;
 }
 
 .statusCardContainer{
     display: flex;
     justify-content: space-evenly;
-    padding: 20px;
+    padding: 14px;
     border-bottom: 1px solid #cac6d4;
-    box-shadow: 0 4px 8px rgba(0, 0.2, 0, 0.2);
+    box-shadow: 0 4px 8px rgba(0, 0.1, 0, 0.1);
     border-radius: 8px;
     /* padding-bottom: 20px; */
 }
@@ -99,8 +104,8 @@ body{
     justify-content: center;
     align-content: center;
     margin-left: 10px;
-    width: 300px;
-    height: 100px;
+    width: 280px;
+    height: 80px;
     padding: 8px;
     border: 1px solid #ffc2c2;
     background: var(--genBg);
@@ -132,23 +137,21 @@ body{
     width: 100%;
     max-width: 500px;             
     border-collapse: collapse;     
-    background-color: #ffffff;
     border-radius: 6px;
     /* overflow: hidden;              */
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 5px rgba(0,0.05,0,0.05);
 }
 .contentDiv th {
-    background-color: #0A66C2;
-    color: #ffffff;
     text-align: left;
     padding: 10px 14px;
+    border-bottom: 1px solid #d0c0c0;
 }
 .contentDiv td {
     padding: 10px 14px;
-    border-bottom: 1px solid #eeeeee;
+    border-bottom: 1px solid #c6c4c4;
 }
 .contentDiv tbody tr:hover {
-    background-color: #f9f9f9;
+    background-color: #e0dddd;
 }
 .formRow {
     display: flex;
@@ -159,35 +162,50 @@ body{
 #tableTitleDiv, 
 #overviewTableTitleDiv {
     font-size: 16px;
-    font-weight: 400;
+    font-weight: 700;
     letter-spacing: 0.5px;
     color: #7e7e7e;
+    background-color: #ebebeb;
     text-transform: uppercase;
     border: 2px solid gray;
     border-radius: 4px;
+
 }
 .topBar{
     display: flex;
     justify-content: space-between;
-    margin: 15px 10px;
+    align-content: center;
+    margin: 0px;
+}
+.topBar input[type="text"] {
+  width: 200px;   
+  height: 32px;   
+  padding: 4px 8px; 
 }
 .recordDiv{
     display: flex;
     gap: 5px;
     width: 100%;
-    background-color: #C1D0B5; /* #A9A9A9 */
+    background-color: #e0e0e0; /* #A9A9A9 #C1D0B5*/
     border-bottom: 1px solid #fdfdfd;
     flex: 1;
     /*border-radius: 8px;*/
     font-size: 14px;
     font-weight: 400;
     padding: 2px;
+    align-items: center;
+
 }
 .recordElementDiv{
     display: flex;
     flex: 1;
+    margin-left: 4px;
 }
-
+.recImgDiv{
+    display: flex;
+    flex-grow: 0.4;
+    justify-content: space-evenly;
+}
 .income{
     background-color: rgba(0, 128, 0, 0.11);
     color: green;
@@ -200,11 +218,15 @@ body{
     border-radius: 12px;
     padding: 4px;
 }
+.recActionDiv{
+    display: flex;
+    flex-grow: 0.4;
+    justify-content: space-evenly;
+}
 .recButton{
     display: flex;
     width: 20px;          
-    height: 20px;
-    gap: 4px; 
+    height: 20px; 
 }
 
 #catInpDiv{
