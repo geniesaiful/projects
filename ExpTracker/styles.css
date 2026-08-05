@@ -2,8 +2,8 @@
     
     /* --genBg: rgb(224, 126, 126);     
     --genText: rgb(255, 255, 137);   */
-    --genBg: #FAF8F5;
-    --genText: #0F172A; 
+    --genBg: #FAF8F5; /*#4CAF50 #FAF8F5;*/
+    --genText: #0F172A; /*#2f54e7 #0F172A; */
     --leftContainerBg: #FAF8F5;
     --leftContainerText: #191919;
 }
@@ -16,7 +16,7 @@ body{
     display: flex;
     flex-direction: row;
     font-family: Roboto, Helvetica, Arial, sans-serif;
-    background-color: var(--genBg);
+    background-color: var(--genBg); /*#4CAF50 var(--genBg)*/
     color: var(--genText);
     margin: 0;
 }
@@ -231,7 +231,7 @@ body{
     flex-direction: row;
     align-items: center;
     gap: 10px;
-    margin-bottom: 20px;
+    margin: 10px 0px;
 }
 #catInpDiv input[type="text"]{ /* descendant selector can also be for id */
     width: 200px;   
