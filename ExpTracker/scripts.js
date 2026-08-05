@@ -8,7 +8,7 @@ loadCategories(); // Load categories as soon as page loads
 let editIndex = -1; // add or edit
 let currentPage = 1; // the page position must be global to use it in different functions.
 
-const rowsPerPage = 6;
+const rowsPerPage = 10;
 let currentDisplayedArray = []; // Stores the full active list (filtered, searched, or all)
 
 
@@ -142,7 +142,6 @@ function updateTableArea(array){
     const endIndex = startIndex+rowsPerPage;
 
     const slicedArray = localArray.slice(startIndex,endIndex);
-    console.table(slicedArray);
 
     for(let i=0;i<slicedArray.length;i++){
         
@@ -292,8 +291,6 @@ function editRecord(index){
 
     const localArray = JSON.parse(localStorage.getItem('transactionRecords')) || [];
     const editItem = localArray[index];
-    console.table(localArray);
-
 
     // Populate the form with current values
 
@@ -407,7 +404,7 @@ function filterRecord(filter){
 }
 
 function updateOverviewTable(array){
-    console.table(array);
+    
     let localArray = array;
     const overviewTableDiv = document.getElementById("overviewTableDiv");
     overviewTableDiv.innerHTML = "";

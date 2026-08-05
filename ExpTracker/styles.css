@@ -37,7 +37,12 @@ body{
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin-bottom: 48px;
+    margin-bottom: 4px;
+
+    background-color: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;       
+    padding: 8px 8px;  
 
 }
 .titleName{
@@ -47,7 +52,8 @@ body{
 .navDiv{
     display: flex;
     flex-direction: column;
-    flex-grow: 3;
+    flex-grow: 1.5;
+    
 }
 .navDiv a {
     display: block; /* Stacks links vertically */
@@ -65,10 +71,14 @@ body{
     font-weight: bold;
 }
 
-.statusAreaDiv{ /*bottom left */
+.monthlyStatusDiv{ /*bottom left */
     display: flex;
     flex-direction: column;
     flex-grow: 1;
+    padding: 10px;
+}
+.leftBottomText p{
+    margin: 6px 0px;
 }
 
 /* ===== RIGHT SIDE ===== */
@@ -120,6 +130,7 @@ body{
 .digitLabel{
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 24px;
+    font-weight: 600;
 }
 .statusImg{
     width: 24px;          
@@ -129,30 +140,12 @@ body{
 
 .contentDiv{
     display: none;
+
 }
 .contentDiv.activeDiv{
     display: block;
 }
-.contentDiv table {
-    width: 100%;
-    max-width: 500px;             
-    border-collapse: collapse;     
-    border-radius: 6px;
-    /* overflow: hidden;              */
-    box-shadow: 0 2px 5px rgba(0,0.05,0,0.05);
-}
-.contentDiv th {
-    text-align: left;
-    padding: 10px 14px;
-    border-bottom: 1px solid #d0c0c0;
-}
-.contentDiv td {
-    padding: 10px 14px;
-    border-bottom: 1px solid #c6c4c4;
-}
-.contentDiv tbody tr:hover {
-    background-color: #e0dddd;
-}
+
 .formRow {
     display: flex;
     flex-direction: row;
@@ -169,19 +162,23 @@ body{
     text-transform: uppercase;
     border: 2px solid gray;
     border-radius: 4px;
-
 }
 .topBar{
     display: flex;
     justify-content: space-between;
     align-content: center;
-    margin: 0px;
+    margin: 24px 0px 2px 0px;
 }
-.topBar input[type="text"] {
+.topBar input[type="text"] { /* descendant selector */
   width: 200px;   
   height: 32px;   
   padding: 4px 8px; 
 }
+.filterRecordDiv{
+    margin: 0px;
+    align-content:center;
+}
+
 .recordDiv{
     display: flex;
     gap: 5px;
@@ -236,8 +233,35 @@ body{
     gap: 10px;
     margin-bottom: 20px;
 }
+#catInpDiv input[type="text"]{ /* descendant selector can also be for id */
+    width: 200px;   
+    height: 32px;   
+    padding: 4px 8px;
+}
 
-/* General elements look */
+
+/* General elements Style */
+.contentDiv table {
+    width: 100%;
+    max-width: 500px;             
+    border-collapse: collapse;     
+    border-radius: 6px;
+    /* overflow: hidden;              */
+    box-shadow: 0 2px 5px rgba(0,0.05,0,0.05);
+}
+.contentDiv th {
+    text-align: left;
+    padding: 10px 14px;
+    border-bottom: 1px solid #d0c0c0;
+}
+.contentDiv td {
+    padding: 6px 10px;
+    border-bottom: 1px solid #c6c4c4;
+}
+.contentDiv tbody tr:hover {
+    background-color: #e0dddd;
+}
+
 form {
     border-radius: 5px;
     background-color: #f2f2f2;
@@ -245,9 +269,16 @@ form {
 }
 
 label {display: block;}
-
-input[type=text], input[type=number], input[type=date], textarea {
-    width: 300px;
+input[type=text]{
+    width: 682px;
+    padding: 12px;
+    margin: 4px 0;
+    /* display: inline-block; */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+input[type=number], input[type=date], textarea {
+    width: 100px;
     padding: 12px;
     margin: 4px 0;
     /* display: inline-block; */

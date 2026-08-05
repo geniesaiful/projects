@@ -11,20 +11,26 @@
 
 <div class="contLeft">
     <div class="titleDiv">
-        <img src="resources/calc_round.jpg" style="width: 60px; height: 60px; margin-bottom: 8px;"></img>
+        <img src="resources/icons8-e-96.png" style="width: 60px; height: 60px; margin-bottom: 8px;"></img>
         <div class="titleName"> <span style="font-family: 'Playfair Display', serif; font-size: x-large; font-weight: 800; letter-spacing: 2px; Color: #1e293b">Expense</span><span style="font-family: 'Playfair Display', serif; font-size: larger; font-weight: 400; letter-spacing: 2px;Color: #64748b">Tracker</span></div>
     </div>
     
     <div class="navDiv">
         <a href="#" onclick="showRigtContent('overviewDiv')">Overview</a>
         <a href="#" onclick="showRigtContent('transactionsDiv')">Transactions</a>
+        <a href="#" onclick="showRigtContent('addTransactionDiv')">Add Transactions</a>
         <a href="#" onclick="showRigtContent('catagoriesDiv')">Catagories</a>
-        <a href="#" onclick="showRigtContent('reportsDiv')">Reports</a>
         <a href="#" onclick="showRigtContent('settingsDiv')">Settigs</a>
     </div>
-    <div class="statusAreaDiv">
-        <span>Monthly overview</span> 
-        <span>Date</span>
+    <div class="monthlyStatusDiv">
+        <h3 style="margin: 8px 0px">Monthly overview</h3> 
+        <div class="leftBottomText">
+            <h4 id="monthlyStatusMonth" style="margin: 6px 0px">Month</h4>
+            <p>Income: </p>
+            <p>Expense: </p>
+            <p>Balance: </p>
+        </div>
+        
     </div>
 </div>
 
@@ -109,45 +115,40 @@
             <span id="spanPageNumber">Page 1 0f 1</span>
             <button class="navButton" id="nxtButton" onclick="changePage(1)">Next</button>
         </div>
-        <br><br>
-        <div id="addTransactionDiv">
-            <h3 id="formTitle">Add Transaction</h3>
-            
-            <form id="transactionForm" onsubmit="addRecord(event)">
-                <!-- Row 1: Type, Category, Title -->
-                <div class="formRow">
-                    <select id="type" name="type" required>
-                        <option value="" disabled selected>Select Type</option>
-                        <option value="expense">Expense</option>
-                        <option value="income">Income</option>
-                    </select>
-
-                    <select id="catDropdown" name="category" required>
-                        <option value="" disabled selected>Select a category</option>
-                    </select>
-
-                    <input type="text" id="title" name="title" placeholder="e.g., Grocery Shopping" required>
-                    <input type="number" id="amount" name="amount" step="0.1" min="0" placeholder="Amount" required>
-                    <input type="date" id="date" name="date" required>
-                </div>
-
-                <div class="formRow">
-                    <textarea id="note" name="note" rows="2" maxlength="200" placeholder="Note (maximum 200 characters)"></textarea>
-                </div>
-
-                <div class="formRow">
-                    <button type="submit" id="submitBtn" class="buttonGen">Add Transaction</button>
-                    <button type="button" id="cancelBtn" class="buttonGen" style="display: none;" onclick="cancelEdit()">Cancel</button>
-                </div>
-            </form>
-
-            <br><br><br><br><br><br>
-            <div>Other sections 
-                <button id="showLS" onclick="showLocalStorage()">ShowLocalStorage</button>
-            </div>    
-        </div>
-
     </div>
+
+    <div class="contentDiv" id="addTransactionDiv">
+        <h3 style="margin-top: 14px;" id="formTitle">Add Transaction</h3>
+        
+        <form id="transactionForm" onsubmit="addRecord(event)">
+            <!-- Row 1: Type, Category, Title -->
+            <div class="formRow">
+                <select id="type" name="type" required>
+                    <option value="" disabled selected>Select Type</option>
+                    <option value="expense">Expense</option>
+                    <option value="income">Income</option>
+                </select>
+
+                <select id="catDropdown" name="category" required>
+                    <option value="" disabled selected>Select a category</option>
+                </select>
+
+                <input type="text" id="title" name="title" placeholder="e.g., Grocery Shopping" required>
+                <input type="number" id="amount" name="amount" step="0.1" min="0" placeholder="Amount" required>
+                <input type="date" id="date" name="date" required>
+            </div>
+
+            <div class="formRow">
+                <textarea id="note" name="note" rows="2" maxlength="200" placeholder="Note (maximum 200 characters)"></textarea>
+            </div>
+
+            <div class="formRow">
+                <button type="submit" id="submitBtn" class="buttonGen">Add Transaction</button>
+                <button type="button" id="cancelBtn" class="buttonGen" style="display: none;" onclick="cancelEdit()">Cancel</button>
+            </div>
+        </form>
+    </div>
+
     <div class="contentDiv" id="catagoriesDiv">
         <div id="catInpDiv">
             <input type="text" id="catName" placeholder="Category Name (e.g. Salary, Groceries)">
@@ -159,8 +160,6 @@
 
             <button class="buttonGen" id="addCatBtn" onclick="addCategory()">Add</button>
         </div>
-        
-        <br><br><br>
         
         <div>
             <h3 style="margin-bottom: 10px;">All Categories</h3>
@@ -178,9 +177,7 @@
 
         </div>
     </div>
-    <div class="contentDiv" id="reportsDiv">
-        Show Reports
-    </div>
+
     <div class="contentDiv" id="settingsDiv">
         Dark Mode
     </div>
