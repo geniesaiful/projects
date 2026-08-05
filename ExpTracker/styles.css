@@ -1,7 +1,10 @@
 :root{
-    --genBg: #00fafa;
-    --genText: #191919;    
-    --leftContainerBg: #00dddd;
+    
+    /* --genBg: rgb(224, 126, 126);     
+    --genText: rgb(255, 255, 137);   */
+    --genBg: #FAF8F5;
+    --genText: #0F172A; 
+    --leftContainerBg: #FAF8F5;
     --leftContainerText: #191919;
 }
 *{
@@ -21,13 +24,13 @@ body{
 .contLeft{
     display: flex;
     flex-direction: column;
-    color:var(--leftContainerText);
     width: 240px; /* It has to be max widht + padding of the menu text*/
-    background-color: var(--leftContainerBg);
+    background-color: var(--genBg);
+    color:var(--genText);
     position: sticky; /* Allows to stay on top while scrolling. */
     top: 0;
     height: 100vh;
-    border: 1px solid #efefef;
+    border: 1px solid #cac6d4;
     border-radius: 4px;
 }
 .titleDiv{
@@ -44,8 +47,6 @@ body{
 .navDiv{
     display: flex;
     flex-direction: column;
-    background-color: var(--leftContainerBg);
-    color: var(--leftContainerText);
     flex-grow: 3;
 }
 .navDiv a {
@@ -55,10 +56,11 @@ body{
     text-decoration: none; /* Removes default link underline */
     border-radius: 4px;
     cursor: pointer;
+    color: var(--genText);
 }
 .navDiv a:hover,
 .navDiv a:focus {
-    background-color: #a8a5a5;
+    background-color: #9790a4;
     color: #ffffff;
     font-weight: bold;
 }
@@ -69,47 +71,55 @@ body{
     flex-grow: 1;
 }
 
+/* ===== RIGHT SIDE ===== */
 
 .contRight{
     width:100%;
-    border: 1px solid #efefef;
+    border: 1px solid #cac6d4;
     border-radius: 4px;
-    background-color: #d4d4d4 ;
+    background-color: var(--genBg) ;
 }
 .greetingDiv{
     display: flex;
+    color: var(--genText);
 }
-
 
 .statusCardContainer{
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
+    padding: 20px;
+    border-bottom: 1px solid #cac6d4;
+    box-shadow: 0 4px 8px rgba(0, 0.2, 0, 0.2);
+    border-radius: 8px;
+    /* padding-bottom: 20px; */
 }
 .statusCard{
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: center;
     align-content: center;
     margin-left: 10px;
-    width: 200px;
+    width: 300px;
     height: 100px;
-    padding: 10px;
-    border: 1px solid #825151;
-    background: #ffffff;
+    padding: 8px;
+    border: 1px solid #ffc2c2;
+    background: var(--genBg);
+    color: var(--genText);
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0.2, 0, 0.2);
 }
 .statusLabel{
     font-family:'Courier New', Courier, monospace;
-    font-size: 14px;
-
+    font-size: 12px;
+}
+.digitLabel{
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 24px;
 }
 .statusImg{
-    width: 20px;          
-    height: 20px;
-    display: flex;
-    align-content: center;
-    justify-content: center;
+    width: 24px;          
+    height: 24px;
+    margin-bottom: 8px;
 }
 
 .contentDiv{
@@ -148,25 +158,27 @@ body{
 }
 #tableTitleDiv, 
 #overviewTableTitleDiv {
-    font-size: 14px;
-    font-weight: 600;
+    font-size: 16px;
+    font-weight: 400;
     letter-spacing: 0.5px;
-    color: #666666;
+    color: #7e7e7e;
     text-transform: uppercase;
+    border: 2px solid gray;
+    border-radius: 4px;
 }
 .topBar{
     display: flex;
     justify-content: space-between;
-    margin-bottom: 15px;
+    margin: 15px 10px;
 }
 .recordDiv{
     display: flex;
     gap: 5px;
     width: 100%;
     background-color: #C1D0B5; /* #A9A9A9 */
-    border: 1px solid #825151;
+    border-bottom: 1px solid #fdfdfd;
     flex: 1;
-    border-radius: 8px;
+    /*border-radius: 8px;*/
     font-size: 14px;
     font-weight: 400;
     padding: 2px;
@@ -177,12 +189,16 @@ body{
 }
 
 .income{
-    background-color: rgba(0, 194, 0, 0.25);
+    background-color: rgba(0, 128, 0, 0.11);
     color: green;
+    border-radius: 12px;
+    padding: 4px;
 }
 .expense{
-    background-color: rgba(255, 0, 0, 0.15);
+    background-color: rgba(255, 0, 0, 0.09);
     color: red;
+    border-radius: 12px;
+    padding: 4px;
 }
 .recButton{
     display: flex;

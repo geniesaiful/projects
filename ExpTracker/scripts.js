@@ -105,16 +105,16 @@ function updateStatus(array){
     //console.log(totalBalance,totalIncome,totalExpense,savingRate);
 
     const balanceDigit = document.getElementById("balanceDigit");
-    balanceDigit.textContent = totalBalance;
+    balanceDigit.textContent = "$ "+totalBalance;
 
     const incomeDigit = document.getElementById("incomeDigit");
-    incomeDigit.textContent = totalIncome;
+    incomeDigit.textContent = "$ "+totalIncome;
     
     const expenseDigit = document.getElementById("expenseDigit");
-    expenseDigit.textContent = totalExpense;
+    expenseDigit.textContent = "$ "+totalExpense;
     
     const SavingRateDigit = document.getElementById("SavingRateDigit");
-    SavingRateDigit.textContent = savingRate;
+    SavingRateDigit.textContent = savingRate+"%";
 
     
 }
