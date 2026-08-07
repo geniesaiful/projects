@@ -1,11 +1,12 @@
 // Backup data
 //const backupData = JSON.parse("[{"type":"income","title":"Property sell","amount":"20000","category":"Other Income","date":"2026-08-01","note":"Sold everything form my grandpa."},{"type":"expense","title":"Grocery Shopping","amount":"10.60","category":"Food","date":"2026-08-01","note":"Food and wine."},{"type":"expense","title":"Tuition Fee","amount":"700","category":"Education","date":"2026-08-02","note":"Half yearly fee."},{"type":"income","title":"Salary from Genie Logistics","amount":"2000","category":"Salary","date":"2026-08-03","note":"All I wanna say that, they don't really care about us. -MJ"},{"type":"expense","title":"Metrorail","amount":"72.5","category":"Transport","date":"2026-08-25","note":"Motijheel to Pallabi"},{"type":"expense","title":"Dentist fee","amount":"120.90","category":"Health","date":"2026-08-22","note":"Root canal and scaling."},{"type":"expense","title":"Electricity Bill","amount":"150","category":"Bills","date":"2026-07-29","note":"For June 2026"},{"type":"expense","title":"Restaurant bill","amount":"1000","category":"Food","date":"2026-07-31","note":"Monthly Restaurant bill."},{"type":"income","title":"Fiver","amount":"500","category":"Freelance","date":"2026-08-11","note":"Front end bill."},{"type":"expense","title":"Date night","amount":"215.50","category":"Food","date":"2026-08-12","note":"She ate like a monster! I will never date her again!!"},{"type":"expense","title":"Medicine","amount":"15.20","category":"Health","date":"2026-08-13","note":"The killer headache from date night. Needed medicine!!"},{"type":"expense","title":"House Rent August","amount":"3500","category":"Bills","date":"2026-08-04","note":"August 2026 in advance house rent."},{"type":"income","title":"Fiver","amount":"200","category":"Freelance","date":"2026-07-04","note":"Web ui"},{"type":"expense","title":"Test","amount":"15","category":"Salary","date":"2026-08-05","note":"okoko"}]");
 
-
-
 // Get today's date in YYYY-MM-DD format to set the default value.
 const dateToday = new Date().toISOString().split('T')[0];
 document.getElementById('date').value = dateToday;
+const tempDate = new Date(dateToday); 
+const monthName = tempDate.toLocaleString('en-US', { month: 'long' }).toUpperCase();
+document.getElementById('currentMonth').textContent = monthName; //show month on the monthly status(left bottom)
 
 loadCategories(); // Load categories as soon as page loads
 
@@ -72,6 +73,7 @@ function addRecord(event){
     cancelEdit();
 
     updateTableArea(recordArray);
+    //console.log("from add transaction");
     //showLocalStorage();
 }
 
@@ -82,10 +84,12 @@ function updateStatus(array){
     // POSSIBLE SOLUTION: two different functions, one for calculate and update, another for just update.
     
     updateTableArea(localArray);
+    //console.log("called updateTable Area Inside UpdateStatus");
     if(localArray.length === 0){
         localArray = JSON.parse(localStorage.getItem('transactionRecords'));
     }
     
+    // Total status. Right top bar.
     let totalBalance = 0;
     let totalIncome = 0;
     let totalExpense = 0;
@@ -105,20 +109,43 @@ function updateStatus(array){
     totalIncome = totalIncome.toFixed(2);
     totalExpense = totalExpense.toFixed(2);
     savingRate = ((totalBalance/totalIncome)*100).toFixed(2);
-
     //console.log(totalBalance,totalIncome,totalExpense,savingRate);
-
     const balanceDigit = document.getElementById("balanceDigit");
     balanceDigit.textContent = "$ "+totalBalance;
-
     const incomeDigit = document.getElementById("incomeDigit");
     incomeDigit.textContent = "$ "+totalIncome;
-    
     const expenseDigit = document.getElementById("expenseDigit");
     expenseDigit.textContent = "$ "+totalExpense;
-    
     const SavingRateDigit = document.getElementById("SavingRateDigit");
     SavingRateDigit.textContent = savingRate+"%";
+
+    // Monthly calculation
+
+    let monthlyBanlance, monthlyIncome, monthlyExpense;
+    monthlyBanlance=monthlyIncome=monthlyExpense=0;
+    showLocalStorage();
+    let recordYearMonth;
+    const currentYearMonth = dateToday.slice(0,7);
+
+    for(let i=0;i<localArray.length;i++){
+        recordYearMonth = localArray[i].date.slice(0,7);
+        //console.log(localArray[i].date.slice(0,7));
+        if(recordYearMonth===currentYearMonth && localArray[i].type==="income"){
+            
+            monthlyBanlance = monthlyBanlance + Number(localArray[i].amount);
+            monthlyIncome = monthlyIncome + Number(localArray[i].amount);
+            console.log(monthlyIncome,monthlyBanlance);
+        }
+        else if(recordYearMonth===currentYearMonth && localArray[i].type==="expense"){
+            monthlyBanlance = monthlyBanlance - Number(localArray[i].amount);
+            monthlyExpense = monthlyExpense + Number(localArray[i].amount);
+            console.log(monthlyExpense,monthlyBanlance);
+        }
+    }
+
+    document.getElementById("monthlyIncome").textContent = "$ "+monthlyIncome;
+    document.getElementById("monthlyExpense").textContent = "$ "+Math.abs(monthlyExpense);
+    document.getElementById("monthlyBalance").textContent = "$ "+Math.abs(monthlyBanlance);
 
     
 }
@@ -133,6 +160,7 @@ function showLocalStorage(){
 }
 
 function updateTableArea(array){
+    //console.log("Called Update table area itself.")
     let localArray = array;
     if(localArray.length === 0){
         localArray = JSON.parse(localStorage.getItem('transactionRecords'));
@@ -289,6 +317,7 @@ function updateTableArea(array){
 function changePage(pos){
     currentPage = currentPage+pos;
     updateTableArea(currentDisplayedArray);
+    //console.log("from changePage");
 }
 
 function editRecord(index){
@@ -317,7 +346,7 @@ function editRecord(index){
     document.getElementById("formTitle").textContent = "Edit Transaction";  // Change title
     document.getElementById("submitBtn").textContent = "Update";            // Change submit button text
     document.getElementById("cancelBtn").style.display = "inline-block";     // Show cancel button
-
+    document.getElementById('date').value = dateToday;
 }
 
 function cancelEdit() {
@@ -332,15 +361,17 @@ function cancelEdit() {
     document.getElementById("formTitle").textContent = "Add Transaction";   // Reset title
     document.getElementById("submitBtn").textContent = "Add Transaction";   // Reset button text
     document.getElementById("cancelBtn").style.display = "none";            // Hide cancel button
+    document.getElementById('date').value = dateToday;
 }
 
 
 function searchRecord(){
     const localArray = JSON.parse(localStorage.getItem('transactionRecords')) || [];
     const searchInput = document.getElementById("searchInput").value.toLowerCase().trim();
-    console.log("Search");
+    //console.log("Search");
     if(searchInput === ""){
         updateTableArea(localArray);
+        //console.log("from searchRecord");
         return;
     }
     
@@ -358,7 +389,7 @@ function searchRecord(){
 
     }
     updateTableArea(searchResult);
-    
+    //console.log("from searchRecord 2");
     const searchButton = document.getElementById("buttonSearch");
     searchButton.textContent = "back";
     if(searchResult.length === 0){
@@ -376,6 +407,7 @@ function searchRecord(){
             document.getElementById("transactionsTableDiv").textContent = ""; 
         }
         updateTableArea(localArray); 
+        //console.log("from searchRecord 3");
         searchButton.onclick = searchRecord; // the search button is now started listening again.
     }
     
@@ -388,6 +420,7 @@ function filterRecord(filter){
 
     if(filter === "all"){
         updateTableArea(localArray);
+        //console.log("from filterRecord");
     }
     else if(filter === "income"){
         for(let i=0; i<localArray.length;i++){
@@ -396,6 +429,7 @@ function filterRecord(filter){
             }
         }
         updateTableArea(filteredArray);
+        //console.log("from filterRecord 2");
     }
     else if(filter === "expense"){
         for(let i=0; i<localArray.length;i++){
@@ -403,7 +437,8 @@ function filterRecord(filter){
                 filteredArray.push(localArray[i]);
             }
         }
-        updateTableArea(filteredArray);   
+        updateTableArea(filteredArray);
+        //console.log("from filterRecord 3");
     }
 }
 
@@ -540,4 +575,10 @@ function loadCategories(){
         let row = "<tr><td>" + savedCat[i].catName + "</td><td>" + savedCat[i].catType + "</td></tr>";
         catTableBody.innerHTML += row;
     }
+}
+
+function darkMode(){
+
+    document.body.classList.toggle("darkMode");
+    console.log("clicked");
 }

@@ -4,8 +4,6 @@
     --genText: rgb(255, 255, 137);   */
     --genBg: #FAF8F5; /*#4CAF50 #FAF8F5;*/
     --genText: #0F172A; /*#2f54e7 #0F172A; */
-    --leftContainerBg: #FAF8F5;
-    --leftContainerText: #191919;
 }
 *{
     box-sizing: border-box;
@@ -20,17 +18,20 @@ body{
     color: var(--genText);
     margin: 0;
 }
-
+body.darkMode{
+    --genBg: #1E2022; /*#0F172A #0A1912;*/
+    --genText: #add7c9; /*#F8FAFC #E2F1EC; */
+}
 .contLeft{
     display: flex;
     flex-direction: column;
-    width: 240px; /* It has to be max widht + padding of the menu text*/
-    background-color: var(--genBg);
-    color:var(--genText);
+    width: 300px;
+    /* background-color: var(--genBg);
+    color:var(--genText); */
     position: sticky; /* Allows to stay on top while scrolling. */
     top: 0;
     height: 100vh;
-    border: 1px solid #cac6d4;
+    border: 1px none #cac6d4;
     border-radius: 4px;
 }
 .titleDiv{
@@ -39,9 +40,9 @@ body{
     align-items: center;
     margin-bottom: 4px;
 
-    background-color: #f8fafc;
-    border: 1px solid #e2e8f0;
-    border-radius: 12px;       
+    background-color: #34D399;
+    border: 1px none #DCFCE7;
+    border-radius: 8px;       
     padding: 8px 8px;  
 
 }
@@ -75,19 +76,27 @@ body{
     display: flex;
     flex-direction: column;
     flex-grow: 1;
-    padding: 10px;
+    padding: 8px;
 }
-.leftBottomText p{
-    margin: 6px 0px;
+
+.leftBottomText{
+   display: flex;
+   flex-direction: column;
+}
+.monthlyStatusLabel{
+    display: inline-block; /* allows to use a custom width for a span */
+    width: 80px; 
+    font-family: Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 14px;
 }
 
 /* ===== RIGHT SIDE ===== */
 
 .contRight{
     width:100%;
-    border: 1px solid #cac6d4;
+    border: 1px none #cac6d4;
     border-radius: 4px;
-    background-color: var(--genBg) ;
+    /* background-color: var(--genBg) ; */
     padding: 4px 4px 0px 4px;
 }
 .greetingDiv{
@@ -95,7 +104,6 @@ body{
     color: var(--genText);
     font-size: 20px;
     font-weight: 800;    /* Thick, bold, friendly font weight */
-    color: #1e293b;      /* Soft dark slate color */
     margin-bottom: 14px;
 }
 
@@ -103,7 +111,7 @@ body{
     display: flex;
     justify-content: space-evenly;
     padding: 14px;
-    border-bottom: 1px solid #cac6d4;
+    border-bottom: 1px none #cac6d4;
     box-shadow: 0 4px 8px rgba(0, 0.1, 0, 0.1);
     border-radius: 8px;
     /* padding-bottom: 20px; */
@@ -117,9 +125,9 @@ body{
     width: 280px;
     height: 80px;
     padding: 8px;
-    border: 1px solid #ffc2c2;
-    background: var(--genBg);
-    color: var(--genText);
+    border: 1px none #ffc2c2;
+    /* background: var(--genBg);
+    color: var(--genText); */
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0.2, 0, 0.2);
 }
@@ -140,6 +148,7 @@ body{
 
 .contentDiv{
     display: none;
+    padding: 10px;
 
 }
 .contentDiv.activeDiv{
@@ -158,9 +167,9 @@ body{
     font-weight: 700;
     letter-spacing: 0.5px;
     color: #7e7e7e;
-    background-color: #ebebeb;
+    background-color: #dbdada;
     text-transform: uppercase;
-    border: 2px solid gray;
+    border: 2px solid rgb(190, 190, 190);
     border-radius: 4px;
 }
 .topBar{
@@ -183,7 +192,8 @@ body{
     display: flex;
     gap: 5px;
     width: 100%;
-    background-color: #e0e0e0; /* #A9A9A9 #C1D0B5*/
+    background-color: #f5efef; /* #A9A9A9 #C1D0B5*/
+    color: rgb(58, 71, 45);
     border-bottom: 1px solid #fdfdfd;
     flex: 1;
     /*border-radius: 8px;*/
@@ -270,7 +280,7 @@ form {
 
 label {display: block;}
 input[type=text]{
-    width: 682px;
+    width: 500px;
     padding: 12px;
     margin: 4px 0;
     /* display: inline-block; */
@@ -278,7 +288,7 @@ input[type=text]{
     border-radius: 4px;
 }
 input[type=number], input[type=date], textarea {
-    width: 100px;
+    width: 130px;
     padding: 12px;
     margin: 4px 0;
     /* display: inline-block; */
@@ -286,7 +296,7 @@ input[type=number], input[type=date], textarea {
     border-radius: 4px;
 }
 #transactionForm textarea {
-    width: 94%;
+    width: 90%;
 }
 select{
     width: 132px;        

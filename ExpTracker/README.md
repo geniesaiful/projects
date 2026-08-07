@@ -31,7 +31,7 @@
 
 ### Extra Features
 
-- [] Monthly Summary
+- [x] Monthly Summary
 - [] Category wise spending Chart
 - [] Export data as JSON/CSV
-- [] Dark Mode
+- [x] Dark Mode

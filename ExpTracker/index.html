@@ -11,7 +11,7 @@
 
 <div class="contLeft">
     <div class="titleDiv">
-        <img src="resources/icons8-e-96.png" style="width: 60px; height: 60px; margin-bottom: 8px;"></img>
+        <img src="resources/icons8-e-96.png" style="width: 60px; height: 60px; margin-bottom: 2px;"></img>
         <div class="titleName"> <span style="font-family: 'Playfair Display', serif; font-size: x-large; font-weight: 800; letter-spacing: 2px; Color: #1e293b">Expense</span><span style="font-family: 'Playfair Display', serif; font-size: larger; font-weight: 400; letter-spacing: 2px;Color: #64748b">Tracker</span></div>
     </div>
     
@@ -24,11 +24,11 @@
     </div>
     <div class="monthlyStatusDiv">
         <h3 style="margin: 8px 0px">Monthly overview</h3> 
+        <p id="currentMonth" style="margin: 6px 0px"></p>
         <div class="leftBottomText">
-            <h4 id="monthlyStatusMonth" style="margin: 6px 0px">Month</h4>
-            <p>Income: </p>
-            <p>Expense: </p>
-            <p>Balance: </p>
+            <div> <span class="monthlyStatusLabel">Income:  </span> <span class="statusDigit" id="monthlyIncome" style="color:#81C784"></span> </div>
+            <div> <span class="monthlyStatusLabel">Expense: </span> <span class="statusDigit" id="monthlyExpense" style="color: #E57373;"></span> </div> 
+            <div> <span class="monthlyStatusLabel">Balance: </span> <span class="statusDigit" id="monthlyBalance"></span> </div> 
         </div>
         
     </div>
@@ -63,7 +63,7 @@
 
         <div class = "topBar"> 
             <h3>Recent Transactions</h3>
-            <button class="buttonGen" onclick="document.getElementById('transactionsDiv').classList.add('activeDiv'); document.getElementById('overviewDiv').classList.remove('activeDiv')">Add Transaction</button>
+            <button class="buttonGen" onclick="document.getElementById('addTransactionDiv').classList.add('activeDiv'); document.getElementById('overviewDiv').classList.remove('activeDiv')">Add Transaction</button>
         </div>
         
         <div class="recordDiv" id="overviewTableTitleDiv">
@@ -179,7 +179,7 @@
     </div>
 
     <div class="contentDiv" id="settingsDiv">
-        Dark Mode
+        Dark Mode <input type="checkbox" onchange="darkMode()">
     </div>
 </div>
 <script src="scripts.js"></script>
