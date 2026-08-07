@@ -134,12 +134,12 @@ function updateStatus(array){
             
             monthlyBanlance = monthlyBanlance + Number(localArray[i].amount);
             monthlyIncome = monthlyIncome + Number(localArray[i].amount);
-            console.log(monthlyIncome,monthlyBanlance);
+            //console.log(monthlyIncome,monthlyBanlance);
         }
         else if(recordYearMonth===currentYearMonth && localArray[i].type==="expense"){
             monthlyBanlance = monthlyBanlance - Number(localArray[i].amount);
             monthlyExpense = monthlyExpense + Number(localArray[i].amount);
-            console.log(monthlyExpense,monthlyBanlance);
+            //console.log(monthlyExpense,monthlyBanlance);
         }
     }
 
@@ -580,5 +580,5 @@ function loadCategories(){
 function darkMode(){
 
     document.body.classList.toggle("darkMode");
-    console.log("clicked");
+    //console.log("clicked");
 }
