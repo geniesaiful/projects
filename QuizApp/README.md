@@ -3,7 +3,6 @@ A quiz application where users can answer multiple-choice questions, track their
 
 ## REQUIREMENTS
 
-
 1. Quiz Flow
 
 []  Start screen with instructions and Start Quiz button.
