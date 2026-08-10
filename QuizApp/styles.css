@@ -39,19 +39,16 @@ body{
     width: 30%;
 }
 .btnGen{
-    width: 100px;
-    height: 20px;
+    width: 100px; height: 20px;
 }
 
 
 .leftBar{
-    width: 30%;
-    height: 100vh;
+    width: 30%; height: 100vh;
     background-color: rgb(15, 109, 191);
 }
 .leftBar img{
-    width: 100%;
-    height: 100%;
+    width: 100%; height: 100%;
     object-fit: cover;
     display: block;
 }
@@ -59,83 +56,71 @@ body{
 .rightContent{
     flex: 1; 
     height: 100vh;
-    background-color: #2abcc2; 
-    color: #06373d;
+    background-color: #2abcc2; color: #06373d;
     flex-direction: column;
     padding: 120px;
-    align-content: center;
-    justify-content: center; 
+    align-content: center; justify-content: center; 
 }
 
 .hpDiv{
-    display: flex;
-    flex-direction: row;
+    display: flex; flex-direction: row;
     background-color: brown;
     display: none;
 }
 .hpContentDiv{
     margin-bottom: 12px;
-    display: flex; 
-    flex-direction: row;
+    display: flex; flex-direction: row;
 }
 .hpTextContainer{
     display: flex; flex-direction: column; margin-left: 12px; padding: 8px; margin-top: 12px;
 }
 .hpImgContainer{
     display: flex;
-    align-items: center;
-    justify-content: center;
+    align-items: center; justify-content: center;
 }
 .hpButton{
     margin: 20px;
-    height: 40px;
-    width: 400px;
-    background-color: #06373d;
-    color: #e0f2fe;
+    height: 40px; width: 400px;
+    background-color: #06373d; color: #e0f2fe;
 }
 
 
 .quizDiv{
-    display: flex; flex-direction: column;
-    height: 100vh;
-    width: 100vw;
+    display: none; flex-direction: column;
+    height: 100vh; width: 100vw;
     background-color: #38bdf8;
     display: none;
 }
 .quizTop{
     display: flex; flex-direction: row; 
     justify-content: space-between;
-    background-color: #06373d;
-    color: #e9e9e9;
+    background-color: #06373d; color: #e9e9e9;
     padding: 4px;
 }
 .quizBody{
     display: flex; flex-direction: column;
     flex-grow: 1;
-    padding: 40px;
-    margin: 14px;
+    padding: 40px; margin: 14px;
     border-radius: 8px;
     box-shadow: 0 4px 4px rgba(0, 0.2, 0, 0.2);
 }
 
 .reviewDiv{
     display: none; flex-direction: column; /* flex none*/
-    height: 100vh;
-    width: 100vw;
+    height: 100vh; width: 100vw;
     background-color: #38bdf8;
 }
 .revTop{
     display: flex; flex-direction: row; 
     justify-content: space-between;
-    background-color: #06373d;
-    color: #e9e9e9;
+    background-color: #06373d; color: #e9e9e9;
     padding: 4px;
 }
 .statusIcon{
     width: 18px; height: 18px;
 }
 .revStatus{
-    display: flex;justify-content: center; align-items: center;
+    display: flex; justify-content: center; align-items: center;
     gap: 10px;
 }
 .revStatus p{
@@ -148,40 +133,32 @@ body{
 }
 
 .resultDiv{
-    background-color: #2abcc2;
     display: flex;
-    width: 100vw;
-    height: 100vh;
+    width: 100vw; height: 100vh;
     background-image: url('resources/congrats.jpg'); 
     background-size: cover;        /* Scales image to completely cover the div without stretching */
     /* background-position: center; 
     /* background-repeat: no-repeat; */
 }
 .leftdiv{
-    width: 30%;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    width: 30%; height: 100vh;
+    display: flex; flex-direction: column;
+    justify-content: center; align-items: center;
 }
 .leftdiv img{
-    width: 250px;
-    height: 400px;
+    width: 250px; height: 400px;
 }
 .rightdiv{
-    display: flex;
-    flex-direction: column;
+    display: flex; flex-direction: column; flex: 1; 
     justify-content: center;
     padding: 80px;
-    flex: 1; 
     height: 100vh;
-    background-color: #2abcc2;
 }
 
 .scoreCell,.statusCell{
     background-color: #517273;
     padding: 40px;
+    box-shadow: 0 4px 4px rgba(0, 0.2, 0, 0.2);
 }
 .dgLabel{
     font-size: 48px;
@@ -191,13 +168,10 @@ body{
     font-size: 32px;
 }
 .statusCell{
-    margin: 12px;
+    margin-right: 16px;
     border-radius: 12px;
 }
 .rightdiv button{
-    
-    height: 40px;
-    width: 400px;
-    background-color: #06373d;
-    color: #e0f2fe;
+    height: 40px; width: 400px;
+    background-color: #06373d; color: #e0f2fe;
 }
