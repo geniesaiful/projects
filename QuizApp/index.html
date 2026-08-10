@@ -8,7 +8,7 @@
 </head>
 
 <body>
-    <div class="hpDiv active" id="homePage">
+    <div class="hpDiv activated" id="homePage">
         <div class="leftBar">
             <img src="resources/banner1.jpg">
         </div>
@@ -20,47 +20,48 @@
             <div class="rContentDiv">
                 <div class="hpContentDiv">
                     <div class="hpImgContainer">
-                        <img src="resources/alien-svgrepo-com.svg" style="height: 48px; width: 48px;">
+                        <img src="resources/alien-svgrepo-com.svg" style="height: 32px; width: 32px;">
                     </div>
                     <div class="hpTextContainer">
-                        <p class="hpText">Multiple choice question</p>
-                        <p class="hpSubText">Choose the correct answer</p>
+                        <p class="text">Multiple choice question</p>
+                        <p class="sub-text">Choose the correct answer</p>
                     </div>
                 </div>
                 <div class="hpContentDiv">
                     <div class="hpImgContainer">
-                        <img src="resources/alien-svgrepo-com.svg" style="height: 48px; width: 48px;">
+                        <img src="resources/alien-svgrepo-com.svg" style="height: 32px; width: 32px;">
                     </div>
                     <div class="hpTextContainer">
-                        <p class="hpText">Multiple choice question</p>
-                        <p class="hpSubText">Choose the correct answer</p>
+                        <p class="text">Multiple choice question</p>
+                        <p class="sub-text">Choose the correct answer</p>
                     </div>
                 </div>
                 <div class="hpContentDiv">
                     <div class="hpImgContainer">
-                        <img src="resources/alien-svgrepo-com.svg" style="height: 48px; width: 48px;">
+                        <img src="resources/alien-svgrepo-com.svg" style="height: 32px; width: 32px;">
                     </div>
                     <div class="hpTextContainer">
-                        <p class="hpText">Multiple choice question</p>
-                        <p class="hpSubText">Choose the correct answer</p>
+                        <p class="text">Multiple choice question</p>
+                        <p class="sub-text">Choose the correct answer</p>
                     </div>
                 </div>
             </div>
             <div class="rContentDiv" style="display:flex; align-items: center; justify-content: center;">
-                <button class="hpButton">Start Quiz</button>
+                <button class="btn btn1" onclick="beginQuiz()">Start Quiz</button>
             </div>
         </div>
     </div>
 
-    <div class="quizDiv" id="quizPage">
+    <div class="quizDiv activated" id="quizPage">
         <div class="quizTop">
             <p class="text">question 1 of 5</p>
             <div style="display: flex; flex-direction: row;">
-                <img src="resources/timer-error-svgrepo-com.svg" style="height: 26px; width: 26px; margin: 10px 4px;"><p class="text">time</p>
+                <img src="resources/timer-error-svgrepo-com.svg" style="height: 26px; width: 26px; margin: 10px 4px;">
+                <p class="text">time</p>
             </div>
             <p class="text">score</p>
         </div>
-        <div class="quizBody" style="background-color: rgb(177, 173, 168);">
+        <div class="quizBody">
             
             <div>
                 <p class="question-text">Who is the father of Thor?</p>
@@ -73,8 +74,8 @@
 
             </div>
             <div style="display: flex;flex-direction: row; justify-content: space-between;">
-                <button class="btnGen" id="previous">Previous</button>
-                <button class="btnGen" id="next">Next</button>
+                <button class="btn btn2" id="previous">Previous</button>
+                <button class="btn btn2" id="next">Next</button>
             </div>
         </div>
     </div>
@@ -134,8 +135,8 @@
                 </div>
             </div>
             <div class="resultFooter" style="margin-top: 70px;">
-                <button>Back to home</button>
-                <button>Restart Quiz</button>
+                <button class="btn btn3">Back to home</button>
+                <button class="btn btn4">Restart Quiz</button>
             </div>
             <div>
 
