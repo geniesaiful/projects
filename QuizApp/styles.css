@@ -54,18 +54,14 @@ body{
 }
 
 .rightContent{
-    flex: 1; 
     height: 100vh;
     background-color: #2abcc2; color: #06373d;
     flex-direction: column;
     padding: 120px;
-    align-content: center; justify-content: center; 
+    flex: 1; align-content: center; justify-content: center; 
 }
-
 .hpDiv{
     display: flex; flex-direction: row;
-    background-color: brown;
-    display: none;
 }
 .hpContentDiv{
     margin-bottom: 12px;
@@ -133,7 +129,7 @@ body{
 }
 
 .resultDiv{
-    display: flex;
+    display: none;
     width: 100vw; height: 100vh;
     background-image: url('resources/congrats.jpg'); 
     background-size: cover;        /* Scales image to completely cover the div without stretching */
@@ -154,7 +150,6 @@ body{
     padding: 80px;
     height: 100vh;
 }
-
 .scoreCell,.statusCell{
     background-color: #517273;
     padding: 40px;
@@ -163,7 +158,6 @@ body{
 .dgLabel{
     font-size: 48px;
 }
-
 .stLabel{
     font-size: 32px;
 }
