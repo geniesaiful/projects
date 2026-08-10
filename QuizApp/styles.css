@@ -148,5 +148,56 @@ body{
 }
 
 .resultDiv{
+    background-color: #2abcc2;
     display: flex;
+    width: 100vw;
+    height: 100vh;
+    background-image: url('resources/congrats.jpg'); 
+    background-size: cover;        /* Scales image to completely cover the div without stretching */
+    /* background-position: center; 
+    /* background-repeat: no-repeat; */
+}
+.leftdiv{
+    width: 30%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.leftdiv img{
+    width: 250px;
+    height: 400px;
+}
+.rightdiv{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px;
+    flex: 1; 
+    height: 100vh;
+    background-color: #2abcc2;
+}
+
+.scoreCell,.statusCell{
+    background-color: #517273;
+    padding: 40px;
+}
+.dgLabel{
+    font-size: 48px;
+}
+
+.stLabel{
+    font-size: 32px;
+}
+.statusCell{
+    margin: 12px;
+    border-radius: 12px;
+}
+.rightdiv button{
+    
+    height: 40px;
+    width: 400px;
+    background-color: #06373d;
+    color: #e0f2fe;
 }
