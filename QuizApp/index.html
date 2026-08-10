@@ -8,7 +8,7 @@
 </head>
 
 <body>
-    <div class="homePage active" id="homePage">
+    <div class="hpDiv active" id="homePage">
         <div class="leftBar">
             <img src="resources/banner1.jpg">
         </div>
@@ -65,21 +65,52 @@
             <div>
                 <p class="question-text">Who is the father of Thor?</p>
             </div>
-            <div>
-                <button class="option-btn" id="opt0" onclick="selectOption(0)">Option 1</button>
+            <div style="display: flex; flex-direction: column;">
+                <label class="option answer-text"><input type="radio" name="quiz-choice" value="0"> Loki</label>
+                <label class="option answer-text"><input type="radio" name="quiz-choice" value="1"> Medusa</label>
+                <label class="option answer-text"><input type="radio" name="quiz-choice" value="2"> Zeus</label>
+                <label class="option answer-text"><input type="radio" name="quiz-choice" value="3"> Asgard</label>
+
             </div>
-            <div>
-                Buttons
+            <div style="display: flex;flex-direction: row; justify-content: space-between;">
+                <button class="btnGen" id="previous">Previous</button>
+                <button class="btnGen" id="next">Next</button>
             </div>
         </div>
     </div>
 
     <div class="reviewDiv" id="reviewPage">
-
+        <div class="revTop">
+            <p class="text">Review Answers</p>
+            <div class="revStatus">
+                <div style="display: flex; background-color: cadetblue;">
+                    <img class="statusIcon" src="resources/alien-svgrepo-com.svg"><p>7 Correct</p>
+                </div>
+                <div style="display: flex; background-color: cadetblue;">
+                    <img class="statusIcon" src="resources/alien-svgrepo-com.svg"><p>7 Correct</p>
+                </div>
+                <div style="display: flex; background-color: cadetblue;">
+                    <img class="statusIcon" src="resources/alien-svgrepo-com.svg"><p>7 Correct</p>
+                </div>
+            </div>
+        </div>
+        <div class="revBody" id="revBody">
+            <div style="background-color: azure; display: flex;">
+                <p>number</p>
+                <div style="background-color: aqua;">
+                    <p>Question?</p>
+                    <p>Your answer:</p>
+                    <p>Correct Answer: </p>
+                </div>
+            </div>
+            <div style="background-color: blue;">
+                <p>Correct || Incorrect || Unattempted</p>
+            </div>
+        </div>
     </div>
 
-    <div class="scoreDiv" id="scorePage">
-
+    <div class="resultDiv" id="resultPage">
+        
     </div>
 
 
