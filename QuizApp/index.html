@@ -53,13 +53,24 @@
     </div>
 
     <div class="quizDiv" id="quizPage">
-        <div class="quizTop" style="display: flex;flex-direction: row;">
-            <p>question 1 of 5</p>
-            <p>time</p>
-            <p>score</p>
+        <div class="quizTop">
+            <p class="text">question 1 of 5</p>
+            <div style="display: flex; flex-direction: row;">
+                <img src="resources/timer-error-svgrepo-com.svg" style="height: 26px; width: 26px; margin: 10px 4px;"><p class="text">time</p>
+            </div>
+            <p class="text">score</p>
         </div>
-        <div>
-
+        <div class="quizBody" style="background-color: rgb(177, 173, 168);">
+            
+            <div>
+                <p class="question-text">Who is the father of Thor?</p>
+            </div>
+            <div>
+                <button class="option-btn" id="opt0" onclick="selectOption(0)">Option 1</button>
+            </div>
+            <div>
+                Buttons
+            </div>
         </div>
     </div>
 
