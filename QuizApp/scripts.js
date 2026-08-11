@@ -1,7 +1,9 @@
 let quizPageNo,quizId,quizQuestion,quizChoice,quizAnswer;
-let userChoice,timer;
+let userChoice,timer,countdown;
 let answerArray = Array(quizData.length);
 let correct,incorrect,incomplete;
+const allowedTime = 10;
+countdown=allowedTime;
 
 function beginQuiz(){
     quizId = 1;
@@ -80,8 +82,8 @@ function nextPage(){
         }
     }
     else{
-        displayContainer('reviewPage');
-        calResult();
+        clearInterval(timer);
+        quizFinished();
     }
 }
 function prevPage(){
@@ -95,6 +97,10 @@ function prevPage(){
         loadQuiz(quizId);
     }
     loadQuiz(quizId);
+}
+function quizFinished(){
+    displayContainer('reviewPage');
+    calResult();
 }
 function calResult(){
     console.log("calResult");
@@ -113,7 +119,7 @@ function calResult(){
     console.log(userChoice+"\t"+answerArray);
     document.getElementById('scoreTotal').textContent=correct+"/"+answerArray.length;
     document.getElementById('percentage').textContent=(correct/answerArray.length)*100+"%";
-    // document.getElementById('timeSpent').textContent=;
+    document.getElementById('timeSpent').textContent= allowedTime-countdown+" s";
 
     document.getElementById('statCorrect').textContent=correct;
     document.getElementById('statIncorrect').textContent=incorrect;
@@ -124,15 +130,16 @@ function displayTimer(timer){
 }
 function startTimer(){
     clearInterval(timer);
-    let countdown = 10;
+    countdown = 10;
     document.getElementById('timer').textContent=countdown;
 
     timer=setInterval(function(){
         countdown--;
         document.getElementById('timer').textContent=countdown;
             if(countdown==0){
-              clearInterval(timer);
-              document.getElementById('timer').textContent="Time is up"  
+                clearInterval(timer);
+                document.getElementById('timer').textContent="Time is up";
+                quizFinished();
             }
         }
         ,1000);
