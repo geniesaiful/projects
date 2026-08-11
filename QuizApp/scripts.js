@@ -6,6 +6,9 @@ function beginQuiz(){
     /*reset timer*/
     displayContainer('quizPage');
     /*start timer*/
+    if(document.getElementById('next').textContent==="Finish Quiz"){
+        document.getElementById('next').textContent="Next";
+    }
 }
 function initQuiz(){
     quizId = 1;
@@ -14,15 +17,23 @@ function initQuiz(){
     quizAnswer = quizData[0].correctAnswer;
 }
 function loadQuiz(id){
+    /* clear radio buttons each time. will change later*/
+    const allRadioBtn = document.querySelectorAll('input[name="quiz-choice"]');
+    for(let i=0;i<allRadioBtn.length;i++){
+        console.log(allRadioBtn[i].checked);
+        allRadioBtn[i].checked=false;
+    }
+
+
     quizId = id;
     quizQuestion = quizData[quizId-1].question;
     quizCoice = quizData[quizId-1].choices;
     quizAnswer = quizData[quizId-1].correctAnswer;
-    console.log(quizQuestion+"\n"+quizCoice+"\n"+quizAnswer);
+    // console.log(quizQuestion+"\n"+quizCoice+"\n"+quizAnswer);
 
     document.getElementById("questionText").textContent = quizQuestion;
     for(let i=0;i<quizCoice.length;i++){
-        /*console.log(document.querySelectorAll('.choice-text')[i].textContent);*/
+        //console.log(document.querySelectorAll('.choice-text')[i].textContent);
         document.querySelectorAll('.choice-text')[i].textContent = quizCoice[i];
     }
 }
@@ -34,17 +45,32 @@ function displayContainer(container){
     }
     document.getElementById(container).classList.add('activated');
 }
-function changePage(){
+function nextPage(){
+    if(document.getElementById('previous').disabled=true){
+        document.getElementById('previous').disabled=false;
+    }
     if(quizId<quizData.length){
-        console.log(quizId+"\n"+quizData.length);
+        //console.log(quizId+"\n"+quizData.length);
         quizId++;
         loadQuiz(quizId);
         if((quizId)==quizData.length){
-            document.getElementById('previous').disabled=true;
+            //console.log("HIT == "+quizId);
+            document.getElementById('next').textContent="Finish Quiz";
         }
     }
     else{
         displayContainer('reviewPage');
     }
-    
+}
+function prevPage(){
+    if(document.getElementById('next').textContent==="Finish Quiz"){
+        document.getElementById('next').textContent="Next";
+    }
+    //console.log(quizId+"\n"+quizData.length);
+        quizId--;
+    if(quizId==1){
+        document.getElementById('previous').disabled=true;
+        loadQuiz(quizId);
+    }
+    loadQuiz(quizId);
 }
