@@ -44,6 +44,8 @@ function loadQuiz(id){
     quizCoice = quizData[quizId-1].choices;
     quizAnswer = quizData[quizId-1].correctAnswer;
     //console.log(quizQuestion+"\n"+quizCoice+"\n"+quizAnswer);
+    
+    document.getElementById('quizPosText').textContent = "Question "+quizId+" of "+quizData.length;
 
     document.getElementById("questionText").textContent = quizQuestion;
     for(let i=0;i<quizCoice.length;i++){
@@ -124,9 +126,6 @@ function calResult(){
     document.getElementById('statCorrect').textContent=correct;
     document.getElementById('statIncorrect').textContent=incorrect;
     document.getElementById('statIncomplete').textContent=incomplete;
-}
-function displayTimer(timer){
-    document.getElementById('timer').textContent=timer;
 }
 function startTimer(){
     clearInterval(timer);

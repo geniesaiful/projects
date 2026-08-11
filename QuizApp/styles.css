@@ -177,7 +177,7 @@ body{
 .resultDiv{
     display: none;
     width: 100vw; height: 100vh;
-    background-image: url('resources/congrats.jpg'); 
+    background-image: url('resources/GrayBg.jpg'); 
     background-size: cover;        /* Scales image to completely cover the div without stretching */
     /* background-position: center; 
     /* background-repeat: no-repeat; */

@@ -52,9 +52,9 @@
         </div>
     </div>
 
-    <div class="quizDiv" id="quizPage">
+    <div class="quizDiv activated" id="quizPage">
         <div class="quizTop">
-            <p class="topText">question 1 of 5</p>
+            <p class="topText" id="quizPosText">question 1 of 5</p>
             <div style="display: flex; flex-direction: row; justify-content: center; align-items: center;">
                 <img src="resources/timer-error-svgrepo-com.svg" style="height: 26px; width: 26px;">
                 <p class="topText" id="timer">time</p>
@@ -130,11 +130,14 @@
         <div class="rightdiv">
             <h1 class="title">Your Result</h1>
             <div style="display: flex; margin: 12px 0;">
-                <div class="scoreCell" style="border-radius: 12px 0 0 12px;"><p class="stLabel">Score:</p><p class="dgLabel" id="scoreTotal">7/ 10</p>
+                <div class="scoreCell" style="border-radius: 12px 0 0 12px;">
+                    <p class="stLabel">Score:</p><p class="dgLabel" id="scoreTotal">7/ 10</p>
                 </div> 
-                <div class="scoreCell" style="border-left: 1px solid black;"><p class="stLabel">Percentage:</p><p class="dgLabel" id="percentage">80%</p>
+                <div class="scoreCell" style="border-left: 1px solid black;">
+                    <p class="stLabel">Percentage:</p><p class="dgLabel" id="percentage">80%</p>
                 </div> 
-                <div class="scoreCell" style="border-left: 1px solid black; border-radius: 0 12px 12px 0;"><p class="stLabel">Time taken:</p><p class="dgLabel" id="timeSpent">08:36</p>
+                <div class="scoreCell" style="border-left: 1px solid black; border-radius: 0 12px 12px 0;">
+                    <p class="stLabel">Time taken:</p><p class="dgLabel" id="timeSpent">08:36</p>
                 </div>
             </div>
             <div style="display: flex;">
