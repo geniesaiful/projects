@@ -75,7 +75,7 @@
             </div>
             <div style="display: flex;flex-direction: row; justify-content: space-between;">
                 <button class="btn btn2" id="previous">Previous</button>
-                <button class="btn btn2" id="next">Next</button>
+                <button class="btn btn2" id="next" onclick="changePage()">Next</button>
             </div>
         </div>
     </div>
@@ -108,6 +108,9 @@
                 <p>Correct || Incorrect || Unattempted</p>
             </div>
         </div>
+        <div class="revBot">
+            <button class="btn btn3" onclick="displayContainer('resultPage')">Show result</button>
+        </div>
     </div>
 
     <div class="resultDiv" id="resultPage">
@@ -135,8 +138,8 @@
                 </div>
             </div>
             <div class="resultFooter" style="margin-top: 70px;">
-                <button class="btn btn3">Back to home</button>
-                <button class="btn btn4">Restart Quiz</button>
+                <button class="btn btn3" onclick="displayContainer('homePage')">Back to home</button>
+                <button class="btn btn4" onclick="beginQuiz()">Restart Quiz</button>
             </div>
             <div>
 

@@ -161,6 +161,12 @@ body{
     justify-content: space-between;
     padding: 80px;
 }
+.revBot{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
 
 .resultDiv{
     display: none;
