@@ -64,13 +64,21 @@
         <div class="quizBody">
             
             <div>
-                <p class="question-text">Who is the father of Thor?</p>
+                <p class="question-text" id="questionText">Who is the father of Thor?</p>
             </div>
             <div style="display: flex; flex-direction: column;">
-                <label class="option answer-text"><input type="radio" name="quiz-choice" value="0"> Loki</label>
-                <label class="option answer-text"><input type="radio" name="quiz-choice" value="1"> Medusa</label>
-                <label class="option answer-text"><input type="radio" name="quiz-choice" value="2"> Zeus</label>
-                <label class="option answer-text"><input type="radio" name="quiz-choice" value="3"> Asgard</label>
+                <label class="option answer-text">
+                    <input type="radio" name="quiz-choice" value="0"> <span class="choice-text">Loki</span>
+                </label>
+                <label class="option answer-text">
+                    <input type="radio" name="quiz-choice" value="1"> <span class="choice-text">Medusa</span>
+                </label>
+                <label class="option answer-text">
+                    <input type="radio" name="quiz-choice" value="2"> <span class="choice-text">Zeus</span>
+                </label>
+                <label class="option answer-text">
+                    <input type="radio" name="quiz-choice" value="3"> <span class="choice-text">Asgard</span>
+                </label>
 
             </div>
             <div style="display: flex;flex-direction: row; justify-content: space-between;">
@@ -148,7 +156,7 @@
     </div>
 
 
-
+<script src="resources/quizData.js"></script>
 <script src="scripts.js"></script>
 </body>
 </html>
