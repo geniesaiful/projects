@@ -35,15 +35,12 @@ function displayContainer(container){
     document.getElementById(container).classList.add('activated');
 }
 function changePage(){
-    const btndis = document.getElementById('previous');
-    btndis.disabled = true;
     if(quizId<quizData.length){
         console.log(quizId+"\n"+quizData.length);
         quizId++;
         loadQuiz(quizId);
         if((quizId)==quizData.length){
             document.getElementById('previous').disabled=true;
-            document.getElementById('previous').textContent="crazytown";
         }
     }
     else{
