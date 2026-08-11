@@ -14,6 +14,7 @@ body{
 .title { font-size: 28px; font-weight: bold; color: #ffffff; letter-spacing: 0.5px; margin-top: 0; margin-bottom: 8px; }
 .subtitle { font-size: 15px; color: #93c5fd; text-transform: uppercase; margin-bottom: 24px; }
 .text { font-size: 15px; line-height: 1.7; color: #e0f2fe; margin-bottom: 16px; }
+.topText { font-size: 15px; line-height: 1.7; color: #cfa561; }
 .question-text { font-size: 18px; font-weight: bold; color: #06B6D4; margin-top: 24px; margin-bottom: 10px; }
 .answer-text { font-size: 15px; color: #e0f2fe; background-color: #064e60; padding: 12px; border-radius: 6px; margin-bottom: 12px; }
 .sub-text { font-size: 12px; color: #38bdf8; }
@@ -126,9 +127,9 @@ body{
 }
 .quizTop{
     display: flex; flex-direction: row; 
-    justify-content: space-between;
+    justify-content: space-between; align-items: center;
     background-color: #06373d; color: #e9e9e9;
-    padding: 4px;
+    padding: 0px;
 }
 .quizBody{
     display: flex; flex-direction: column;
