@@ -12,12 +12,12 @@ body{
 }
 
 .title { font-size: 28px; font-weight: bold; color: #ffffff; letter-spacing: 0.5px; margin-top: 0; margin-bottom: 8px; }
-.subtitle { font-size: 15px; color: #93c5fd; text-transform: uppercase; margin-bottom: 24px; }
-.text { font-size: 15px; line-height: 1.7; color: #e0f2fe; margin-bottom: 16px; }
+.subtitle { font-size: 16px; color: #7fe0e0; text-transform: uppercase; margin-bottom: 24px; }
+.text { font-size: 16px; color: #ffffff; margin-bottom: 8px; }
+.sub-text { font-size: 12px; color: #9dc8cb; }
 .topText { font-size: 18px; color: #cfa561; }
 .question-text { font-size: 18px; font-weight: bold; color: #06B6D4; margin-top: 24px; margin-bottom: 10px; }
 .answer-text { font-size: 15px; color: #e0f2fe; background-color: #064e60; padding: 12px; border-radius: 6px; margin-bottom: 12px; }
-.sub-text { font-size: 12px; color: #38bdf8; }
 .revRowQ { font-size: 15px; font-weight: 800; color: #96b7ce; margin-bottom: 10px; }
 .revRowA { font-size: 14px; font-weight: 400; color: #8cb0c8; margin-bottom: 2px; }
 .option{
@@ -35,6 +35,7 @@ body{
     background-color: #FF9F43;
     color: #0F172A;
     border: 2px solid #FF9F43;
+    width: 480px;
 }
 .btn1:hover {
     background-color: #0F172A;
@@ -130,12 +131,13 @@ body{
     display: flex; flex-direction: row; 
     justify-content: space-between; align-items: center;
     background-color: #06373d; color: #e9e9e9;
-    padding: 0px;
+    padding: 4px 12px;
+    
 }
 .quizBody{
     display: flex; flex-direction: column;
     flex-grow: 1;
-    padding: 40px; margin: 14px;
+    padding: 40px; margin: 80px;
     border-radius: 8px;
     box-shadow: 0 8px 8px rgba(0, 0.2, 0, 0.2);
 }
@@ -151,7 +153,7 @@ body{
     display: flex; flex-direction: row; 
     justify-content: space-between; align-content: center;
     background-color: #06373d; color: #e9e9e9;
-    padding: 4px;
+    padding: 4px 12px;
 }
 .statusIcon{
     width: 16px; height: 20px;

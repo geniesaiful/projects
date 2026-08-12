@@ -42,5 +42,27 @@ const quizData = [
             "7"
         ],
         correctAnswer: 2 
+    },
+    {
+        id: 5,
+        question: "Groot is what?",
+        choices: [
+            "A Raccoon",
+            "An Egg",
+            "A tree",
+            "A Spaceship"
+        ],
+        correctAnswer: 2 
+    },
+    {
+        id: 6,
+        question: "What is the color of Hulk?",
+        choices: [
+            "Red",
+            "Yellow",
+            "Blue",
+            "Green"
+        ],
+        correctAnswer: 3 
     }
 ];

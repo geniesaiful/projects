@@ -9,7 +9,7 @@ A quiz application where users can answer multiple-choice questions, track their
 [x]  Display one question at a time.
 [x]  Next and Previous question navigation.
 [x]  Show current question number and total questions.
-[]  User cannot skip a question without selecting an option.
+[x]  User cannot skip a question without selecting an option.
 
 2. Questions
 
