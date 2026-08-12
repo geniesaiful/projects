@@ -36,10 +36,10 @@ A quiz application where users can answer multiple-choice questions, track their
 
 6. Review Answers (Optional but Recommended)
 
-[]  After quiz completion, show review of all questions with:
-[]  Correct answer
-[]  User's answer
-[]  Whether it was correct or incorrect
+[x]  After quiz completion, show review of all questions with:
+    [x]  Correct answer
+    [x]  User's answer
+    [x]  Whether it was correct or incorrect
 
 7. Data
 

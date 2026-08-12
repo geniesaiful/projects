@@ -2,14 +2,17 @@ let quizPageNo,quizId,quizQuestion,quizChoice,quizAnswer;
 let userChoice,timer,countdown;
 let answerArray = Array(quizData.length);
 let correct,incorrect,incomplete;
-const allowedTime = 10;
-countdown=allowedTime;
+const allowedTime = 120;
+
 
 function beginQuiz(){
     quizId = 1;
     correct = 0;
     incorrect = 0;
     incomplete = 0;
+    countdown=allowedTime;
+    const {displayMinutes, displaySeconds} = toActualTime(countdown);
+    document.getElementById('timer').textContent=`${displayMinutes}:${displaySeconds}`;
     loadQuiz(quizId);
     /*reset timer*/
     userChoice = Array(quizData.length).fill(-1);
@@ -55,6 +58,7 @@ function loadQuiz(id){
     // take the user choice
     for(let i=0;i<allRadioBtn.length;i++){
         //console.log("inside loop");
+        document.getElementById("next");
         allRadioBtn[i].addEventListener("change",function(event){
             userChoice[quizId-1] = event.target.value;
             //console.log(userChoice);
@@ -128,7 +132,8 @@ function calResult(){
 
     document.getElementById('scoreTotal').textContent=correct+"/"+answerArray.length;
     document.getElementById('percentage').textContent=(correct/answerArray.length)*100+"%";
-    document.getElementById('timeSpent').textContent= allowedTime-countdown+" s";
+    const {displayMinutes, displaySeconds} = toActualTime(allowedTime-countdown);
+    document.getElementById('timeSpent').textContent=`${displayMinutes}:${displaySeconds}`;
 
     document.getElementById('statCorrect').textContent=correct;
     document.getElementById('statIncorrect').textContent=incorrect;
@@ -156,16 +161,20 @@ function buildReview(){
             `
     }
     document.getElementById('revBody').innerHTML= totalRowString;
-    console.log(totalRowString);
 }
 function startTimer(){
     clearInterval(timer);
-    countdown = 10;
-    document.getElementById('timer').textContent=countdown;
+
+    //document.getElementById('timer').textContent=countdown;
 
     timer=setInterval(function(){
         countdown--;
-        document.getElementById('timer').textContent=countdown;
+
+        const { displayMinutes, displaySeconds } = toActualTime(countdown); // object destructuring
+        
+        document.getElementById('timer').textContent=`${displayMinutes}:${displaySeconds}`;
+
+        //document.getElementById('timer').textContent=countdown;
             if(countdown==0){
                 clearInterval(timer);
                 document.getElementById('timer').textContent="Time is up";
@@ -173,4 +182,13 @@ function startTimer(){
             }
         }
         ,1000);
+}
+function toActualTime(totalSeconds){
+    const minutes = Math.floor(totalSeconds / 60);
+    const seconds = totalSeconds % 60;
+
+    const displayMinutes = String(minutes).padStart(2, '0');
+    const displaySeconds = String(seconds).padStart(2, '0');
+
+    return { displayMinutes, displaySeconds };
 }
