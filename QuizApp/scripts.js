@@ -67,7 +67,9 @@ function displayContainer(container){
     /*console.log(allActive);*/
     for(let i=0;i<allActive.length;i++){
         allActive[i].classList.remove('activated');
+        console.log(allActive[i].classList);
     }
+    //console.log(allActive);
     document.getElementById(container).classList.add('activated');
 }
 function nextPage(){
@@ -101,7 +103,7 @@ function prevPage(){
     loadQuiz(quizId);
 }
 function quizFinished(){
-    displayContainer('reviewPage');
+    displayContainer('reviewPage'); // this function can be called from "finish" button or time end.
     calResult();
 }
 function calResult(){
@@ -126,6 +128,8 @@ function calResult(){
     document.getElementById('statCorrect').textContent=correct;
     document.getElementById('statIncorrect').textContent=incorrect;
     document.getElementById('statIncomplete').textContent=incomplete;
+
+    
 }
 function startTimer(){
     clearInterval(timer);
