@@ -16,12 +16,12 @@ body{
 .text { font-size: 16px; color: #ffffff; margin-bottom: 8px; }
 .sub-text { font-size: 12px; color: #9dc8cb; }
 .topText { font-size: 18px; color: #cfa561; }
-.question-text { font-size: 18px; font-weight: bold; color: #06B6D4; margin-top: 24px; margin-bottom: 10px; }
-.answer-text { font-size: 15px; color: #e0f2fe; background-color: #064e60; padding: 12px; border-radius: 6px; margin-bottom: 12px; }
-.revRowQ { font-size: 15px; font-weight: 800; color: #96b7ce; margin-bottom: 10px; }
-.revRowA { font-size: 14px; font-weight: 400; color: #8cb0c8; margin-bottom: 2px; }
+.question-text { font-size: 24px; font-weight: bold; color: #15d7f9; margin-top: 24px; margin-bottom: 10px; }
+.answer-text { font-size: 16px; color: #90beff; background-color: #1ba1c3; padding: 12px; border-radius: 6px; margin-bottom: 12px; }
+.revRowQ { font-size: 16px; font-weight: 800; color: #b8e1ff; margin-bottom: 10px; }
+.revRowA { font-size: 14px; font-weight: 400; color: #a0cae5; margin-bottom: 2px; }
 .option{
-    background-color: rgb(110, 87, 57);
+    background-color:  #2d3b4f;
     width: 30%;
 }
 .btn{
@@ -45,6 +45,7 @@ body{
     background-color: #0F172A;
     color: #94A3B8;
     border: 1px solid #1E293B;
+    width: 240px;
 }
 .btn2:hover {
     background-color: #FF9F43;
@@ -53,8 +54,9 @@ body{
 }
 .btn3 {
     background-color: #334155; 
-    color: #E2E8F0;
+    color: #ced4db;
     border: 1px solid #475569;
+    width: 200px;
 }
 .btn3:hover {
     background-color: #e19090; 
@@ -135,11 +137,15 @@ body{
     
 }
 .quizBody{
-    display: flex; flex-direction: column;
+    display: flex; flex-direction: column; justify-content: center;
     flex-grow: 1;
-    padding: 40px; margin: 80px;
+    padding: 20px; margin: 100px;
     border-radius: 8px;
     box-shadow: 0 8px 8px rgba(0, 0.2, 0, 0.2);
+}
+.quizBodyAll{
+    padding: 0px 100px;
+
 }
 
 .reviewDiv{
@@ -180,27 +186,27 @@ body{
 }
 .revRow{
     display: flex; 
-    background-color: azure;
-    margin-bottom: 2px;
-    padding: 20px;
+    padding: 10px 16px;
+    
+    border-bottom: 1px solid #06373d;
 }
 .revQaNumber{
     display: flex; justify-content: center; align-items: center;
     padding: 10px;
-    border: 2px solid whitesmoke; border-radius: 50px;
+    border: 1px none lightgreen; border-radius: 50px;
     height: 40px; width: 40px;
-    background: #666666;
+    background: rgba(144, 238, 144, 0.3);
+    color: #2fe2fa;
 }
 .revRowQa{
     flex-grow: 1;
-    background-color: aqua;
     padding:10px;
 }
 .revRowRightStatDiv{
     width: 120px; height: 40px;
     display: flex; justify-content: center; align-items: center; ;
-    background-color:#666666;
-    border: 2px solid blue; border-radius: 30px;
+    background-color:rgba(255, 0, 0, 0.3);
+    border: 2px none blue; border-radius: 30px;
     
 }
 

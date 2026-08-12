@@ -159,12 +159,14 @@ function buildReview(){
                     <p class="revRowA">Correct Answer: <span id="revRowCorAns">${quizData[i].choices[quizData[i].correctAnswer]}</span></p>
                 </div>
                 <div class="revRowRightStatDiv">
-                    <p class="revRowA" id="revRowRightStatText">${userChoice[i]== -1 ? "Unattempted" : quizData[i].correctAnswer == userChoice[i] ? "Correct":"Icorrect"}</p>
+                    <p class="revRowA" id="revRowRightStatText">${userChoice[i]== -1 ? "Unattempted" : quizData[i].correctAnswer == userChoice[i] ? "Correct":"Incorrect"}</p>
                 </div>
             </div>
+
             `
     }
     document.getElementById('revBody').innerHTML= totalRowString;
+    console.log(totalRowString);
 }
 function startTimer(){
     clearInterval(timer);

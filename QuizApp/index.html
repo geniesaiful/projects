@@ -52,7 +52,7 @@
         </div>
     </div>
 
-    <div class="quizDiv activated" id="quizPage">
+    <div class="quizDiv" id="quizPage">
         <div class="quizTop">
             <p class="topText" id="quizPosText">question 1 of 5</p>
             <div style="display: flex; flex-direction: row; justify-content: center; align-items: center;">
@@ -62,50 +62,91 @@
             <p class="topText"></p>
         </div>
         <div class="quizBody">
+            <div class="quizBodyAll">
+                
             
-            <div>
-                <p class="question-text" id="questionText">Who is the father of Thor?</p>
-            </div>
-            <div style="display: flex; flex-direction: column;">
-                <label class="option answer-text">
-                    <input type="radio" name="quiz-choice" value="0"> <span class="choice-text">Loki</span>
-                </label>
-                <label class="option answer-text">
-                    <input type="radio" name="quiz-choice" value="1"> <span class="choice-text">Medusa</span>
-                </label>
-                <label class="option answer-text">
-                    <input type="radio" name="quiz-choice" value="2"> <span class="choice-text">Zeus</span>
-                </label>
-                <label class="option answer-text">
-                    <input type="radio" name="quiz-choice" value="3"> <span class="choice-text">Asgard</span>
-                </label>
+                <div style="display: flex; flex-direction: column; align-items: center;">
+                    <p class="question-text" id="questionText">Who is the father of Thor?</p>
+                    <label class="option answer-text">
+                        <input type="radio" name="quiz-choice" value="0"> <span class="choice-text">Loki</span>
+                    </label>
+                    <label class="option answer-text">
+                        <input type="radio" name="quiz-choice" value="1"> <span class="choice-text">Medusa</span>
+                    </label>
+                    <label class="option answer-text">
+                        <input type="radio" name="quiz-choice" value="2"> <span class="choice-text">Zeus</span>
+                    </label>
+                    <label class="option answer-text">
+                        <input type="radio" name="quiz-choice" value="3"> <span class="choice-text">Asgard</span>
+                    </label>
+                </div>
 
-            </div>
-            <div style="display: flex;flex-direction: row; justify-content: space-between;">
-                <button class="btn btn2" id="previous" onclick="prevPage()">Previous</button>
-                <button class="btn btn2" id="next" onclick="nextPage()">Next</button>
+                <div style="display: flex;flex-direction: row; justify-content: space-evenly; padding: 4px 16px; margin: 120px 10px;">
+                    <button class="btn btn2" id="previous" onclick="prevPage()">Previous</button>
+                    <button class="btn btn2" id="next" onclick="nextPage()">Next</button>
+                </div>
             </div>
         </div>
     </div>
 
-    <div class="reviewDiv" id="reviewPage">
+    <div class="reviewDiv  activated" id="reviewPage">
         <div class="revTop">
             <p class="topText">Review Answers</p>
             <div class="revStatus">
                 <div style="display: flex;">
-                    <img class="statusIcon" src="resources/alien-svgrepo-com.svg"><p class="topText" id="revStatCorrect">7 Correct</p>
+                    <img class="statusIcon" src="resources/alien-svgrepo-com.svg"><p class="topText" id="revStatCorrect">0 Correct</p>
                 </div>
                 <div style="display: flex;">
-                    <img class="statusIcon" src="resources/alien-svgrepo-com.svg"><p class="topText" id="revStatIncorrect">7 Incorrect</p>
+                    <img class="statusIcon" src="resources/alien-svgrepo-com.svg"><p class="topText" id="revStatIncorrect">0 Incorrect</p>
                 </div>
                 <div style="display: flex;">
-                    <img class="statusIcon" src="resources/alien-svgrepo-com.svg"><p class="topText" id="revStatUnattempted">7 Unattempted</p>
+                    <img class="statusIcon" src="resources/alien-svgrepo-com.svg"><p class="topText" id="revStatUnattempted">0 Unattempted</p>
                 </div>
             </div>
         </div>
         <div class="revBody" id="revBody">
-            /* Will Generate */
+            <!-- /* Will Generate */ -->
             
+
+<!--            ## Sample Data 
+            <div class="revRow" id="revRow">
+                <p class="revQaNumber revRowA">1</p>
+                <div class="revRowQa" id="revRowQa">
+                    <p class="revRowQ" id="revRowQ">What is the real name of Tony Stark's superhero alter ego?</p>
+                    <p class="revRowA">Your answer: <span id="revRowAns">Iron Man</span></p>
+                    <p class="revRowA">Correct Answer: <span id="revRowCorAns">Iron Man</span></p>
+                </div>
+                <div class="revRowRightStatDiv">
+                    <p class="revRowA" id="revRowRightStatText">Correct</p>
+                </div>
+            </div>
+            
+            
+            <div class="revRow" id="revRow">
+                <p class="revQaNumber revRowA">2</p>
+                <div class="revRowQa" id="revRowQa">
+                    <p class="revRowQ" id="revRowQ">What metal is Captain America's shield made of?</p>
+                    <p class="revRowA">Your answer: <span id="revRowAns">Adamantium</span></p>
+                    <p class="revRowA">Correct Answer: <span id="revRowCorAns">Vibranium</span></p>
+                </div>
+                <div class="revRowRightStatDiv">
+                    <p class="revRowA" id="revRowRightStatText">Icorrect</p>
+                </div>
+            </div>
+            
+            
+            <div class="revRow" id="revRow">
+                <p class="revQaNumber revRowA">3</p>
+                <div class="revRowQa" id="revRowQa">
+                    <p class="revRowQ" id="revRowQ">What is the home realm of Thor?</p>
+                    <p class="revRowA">Your answer: <span id="revRowAns">Wakanda</span></p>
+                    <p class="revRowA">Correct Answer: <span id="revRowCorAns">Asgard</span></p>
+                </div>
+                <div class="revRowRightStatDiv">
+                    <p class="revRowA" id="revRowRightStatText">Icorrect</p>
+                </div>
+            </div> -->
+
         </div>
         <div class="revBot">
             <button class="btn btn3" onclick="displayContainer('resultPage')">Show result</button>
@@ -122,21 +163,21 @@
             <h1 class="title">Your Result</h1>
             <div style="display: flex; margin: 12px 0;">
                 <div class="scoreCell" style="border-radius: 12px 0 0 12px;">
-                    <p class="stLabel">Score:</p><p class="dgLabel" id="scoreTotal">7/ 10</p>
+                    <p class="stLabel">Score:</p><p class="dgLabel" id="scoreTotal">0/0</p>
                 </div> 
                 <div class="scoreCell" style="border-left: 1px solid black;">
-                    <p class="stLabel">Percentage:</p><p class="dgLabel" id="percentage">80%</p>
+                    <p class="stLabel">Percentage:</p><p class="dgLabel" id="percentage">0%</p>
                 </div> 
                 <div class="scoreCell" style="border-left: 1px solid black; border-radius: 0 12px 12px 0;">
-                    <p class="stLabel">Time taken:</p><p class="dgLabel" id="timeSpent">08:36</p>
+                    <p class="stLabel">Time taken:</p><p class="dgLabel" id="timeSpent">00:00</p>
                 </div>
             </div>
             <div style="display: flex;">
-                <div class="statusCell"><p class="dgLabel" id="statCorrect">7</p><p class="stLabel">Correct</p>
+                <div class="statusCell"><p class="dgLabel" id="statCorrect">0</p><p class="stLabel">Correct</p>
                 </div> 
-                <div class="statusCell"><p class="dgLabel" id="statIncorrect">1</p><p class="stLabel">Incorrect</p>
+                <div class="statusCell"><p class="dgLabel" id="statIncorrect">0</p><p class="stLabel">Incorrect</p>
                 </div> 
-                <div class="statusCell"><p class="dgLabel" id="statIncomplete">1</p><p class="stLabel">incomplete</p>
+                <div class="statusCell"><p class="dgLabel" id="statIncomplete">0</p><p class="stLabel">incomplete</p>
                 </div>
             </div>
             <div class="resultFooter" style="margin-top: 70px;">
