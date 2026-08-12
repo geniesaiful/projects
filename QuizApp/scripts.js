@@ -135,7 +135,7 @@ function calResult(){
     document.getElementById('revStatUnattempted').textContent=incomplete+" Unattempted";
 
     document.getElementById('scoreTotal').textContent=correct+"/"+answerArray.length;
-    document.getElementById('percentage').textContent=(correct/answerArray.length)*100+"%";
+    document.getElementById('percentage').textContent=((correct/answerArray.length)*100).toFixed(2)+"%";
     const {displayMinutes, displaySeconds} = toActualTime(allowedTime-countdown);
     document.getElementById('timeSpent').textContent=`${displayMinutes}:${displaySeconds}`;
 
