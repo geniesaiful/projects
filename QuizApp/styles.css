@@ -19,11 +19,19 @@ body{
 .question-text { font-size: 24px; font-weight: bold; color: #15d7f9; margin-top: 24px; margin-bottom: 10px; }
 .answer-text { font-size: 16px; color: #90beff; background-color: #1ba1c3; padding: 12px; border-radius: 6px; margin-bottom: 12px; }
 .revRowQ { font-size: 16px; font-weight: 800; color: #b8e1ff; margin-bottom: 10px; }
-.revRowA { font-size: 14px; font-weight: 400; color: #a0cae5; margin-bottom: 2px; }
+.revRowA { font-size: 14px; font-weight: 400; color: #69f0ae; margin-bottom: 2px; }
+.revRowA.txtGray{color: #e2e8f0;}
+.revRowA.txtGreen{color: #69f0ae;}
+.revRowA.txtRed{color: #ff7979;}
+.revRowA.stGray{color: #4c4d4d;}
+.revRowA.stGreen{color: #17814e;}
+.revRowA.stRed{color: #d82626;}
+
 .option{
     background-color:  #2d3b4f;
     width: 30%;
 }
+
 .btn{
     font-size: 1rem; /* by default 1rem=16px, thus 0.5rem=8px and so on. */
     font-weight: 600;
@@ -188,17 +196,21 @@ body{
 .revRow{
     display: flex; 
     padding: 10px 16px;
-    
     border-bottom: 1px solid #06373d;
 }
 .revQaNumber{
     display: flex; justify-content: center; align-items: center;
-    padding: 10px;
+    padding: 10px; margin-bottom: 2px;
     border: 1px none lightgreen; border-radius: 50px;
     height: 40px; width: 40px;
-    background: rgba(144, 238, 144, 0.2);
-    color: #2fe2fa;
+    background: rgba(144, 238, 144, 0.2); color: #232c2e;
+    font-size: 14px; font-weight: 400;  
 }
+.revQaNumber.sldGray{ background: #e2e8f0;}
+.revQaNumber.sldGreen{background: #69f0ae;}
+.revQaNumber.sldRed{background: #ff7979;}
+
+
 .revRowQa{
     flex-grow: 1;
     padding:10px;
@@ -210,7 +222,9 @@ body{
     border: 2px none blue; border-radius: 30px;
     
 }
-
+.revRowRightStatDiv.stGray{background: #e2e8f0;}
+.revRowRightStatDiv.stGreen{background: #69f0ae;}
+.revRowRightStatDiv.stRed{background: #ff7979;}
 
 .resultDiv{
     display: none;

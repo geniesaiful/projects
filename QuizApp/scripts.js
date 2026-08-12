@@ -2,7 +2,7 @@ let quizPageNo,quizId,quizQuestion,quizChoice,quizAnswer;
 let userChoice,timer,countdown;
 let answerArray = Array(quizData.length);
 let correct,incorrect,incomplete;
-const allowedTime = 120;
+const allowedTime = 20;
 
 
 function beginQuiz(){
@@ -148,25 +148,30 @@ function calResult(){
 }
 function buildReview(){
     let totalRowString = "";
-
+// ${userChoice[i]== -1 ? "Unattempted" : quizData[i].correctAnswer == userChoice[i] ? "Correct":"Incorrect"}
     for(let i=0;i<quizData.length;i++){
+        const icoBG = userChoice[i] == -1 ? "sldGray" : userChoice[i] == quizData[i].correctAnswer ? "sldGreen":"sldRed";
+        const txtClr = userChoice[i] == -1 ? "txtGray" : userChoice[i] == quizData[i].correctAnswer ? "txtGreen":"txtRed";
+        const stClr = userChoice[i] == -1 ? "stGray" : userChoice[i] == quizData[i].correctAnswer ? "stGreen":"stRed";
+        const stTxt = userChoice[i]== -1 ? "Unattempted" : quizData[i].correctAnswer == userChoice[i] ? "Correct":"Incorrect"
+        console.log(icoBG);
         totalRowString += `
             <div class="revRow" id="revRow">
-                <p class="revQaNumber revRowA">${i+1}</p>
+                <p class="revQaNumber ${icoBG}">${i+1}</p>
                 <div class="revRowQa" id="revRowQa">
                     <p class="revRowQ" id="revRowQ">${quizData[i].question}</p>
-                    <p class="revRowA">Your answer: <span id="revRowAns">${userChoice[i] == -1 ? "-":quizData[i].choices[userChoice[i]]}</span></p>
+                    <p class="revRowA">Your answer: <span class="revRowA ${txtClr}" id="revRowAns">${userChoice[i] == -1 ? "-":quizData[i].choices[userChoice[i]]}</span></p>
                     <p class="revRowA">Correct Answer: <span id="revRowCorAns">${quizData[i].choices[quizData[i].correctAnswer]}</span></p>
                 </div>
-                <div class="revRowRightStatDiv">
-                    <p class="revRowA" id="revRowRightStatText">${userChoice[i]== -1 ? "Unattempted" : quizData[i].correctAnswer == userChoice[i] ? "Correct":"Incorrect"}</p>
+                <div class="revRowRightStatDiv ${stClr}">
+                    <p class="revRowA ${stClr}" id="revRowRightStatText">${stTxt}</p>
                 </div>
             </div>
 
             `
     }
     document.getElementById('revBody').innerHTML= totalRowString;
-    console.log(totalRowString);
+   // console.log(totalRowString);
 }
 function startTimer(){
     clearInterval(timer);
