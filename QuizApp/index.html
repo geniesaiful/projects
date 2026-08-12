@@ -91,29 +91,29 @@
     <div class="reviewDiv activated" id="reviewPage">
         <div class="revTop">
             <p class="text">Review Answers</p>
-            <div class="revStatus">
-                <div style="display: flex; background-color: cadetblue;">
-                    <img class="statusIcon" src="resources/alien-svgrepo-com.svg"><p>7 Correct</p>
+            <div class="revStatus" style="background-color: rgb(97, 170, 233);">
+                <div style="display: flex; background-color: rgb(150, 200, 244);">
+                    <img class="statusIcon" src="resources/alien-svgrepo-com.svg" id="revStatCorrect"><p>7 Correct</p>
                 </div>
-                <div style="display: flex; background-color: cadetblue;">
-                    <img class="statusIcon" src="resources/alien-svgrepo-com.svg"><p>7 Correct</p>
+                <div style="display: flex; background-color: rgb(150, 200, 244);">
+                    <img class="statusIcon" src="resources/alien-svgrepo-com.svg" id="revStatIncorrect"><p>7 Incorrect</p>
                 </div>
-                <div style="display: flex; background-color: cadetblue;">
-                    <img class="statusIcon" src="resources/alien-svgrepo-com.svg"><p>7 Correct</p>
+                <div style="display: flex;">
+                    <img class="statusIcon" src="resources/alien-svgrepo-com.svg" id="revStatUnattempted"><p>7 Unattempted</p>
                 </div>
             </div>
         </div>
         <div class="revBody" id="revBody">
-            <div style="background-color: azure; display: flex;">
-                <p>number</p>
-                <div style="background-color: aqua;">
-                    <p>Question?</p>
-                    <p>Your answer:</p>
-                    <p>Correct Answer: </p>
+            <div class="revRow" id="revRow">
+                <p class="revQaNumber">number</p>
+                <div class="revRowQa" id="revRowQa">
+                    <p class="revRowQ" id="revRowQ">Question?</p>
+                    <p class="revRowA">Your answer: <span id="revRowAns"></span></p>
+                    <p class="revRowA">Correct Answer: <span id="revRowCorAns"></span></p>
                 </div>
             </div>
-            <div style="background-color: blue;">
-                <p>Correct || Incorrect || Unattempted</p>
+            <div class="revRowRightStatDiv">
+                <p id="revRowRightStatText">Correct || Incorrect || Unattempted</p>
             </div>
         </div>
         <div class="revBot">

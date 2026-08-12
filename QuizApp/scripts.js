@@ -67,7 +67,7 @@ function displayContainer(container){
     /*console.log(allActive);*/
     for(let i=0;i<allActive.length;i++){
         allActive[i].classList.remove('activated');
-        console.log(allActive[i].classList);
+        //console.log(allActive[i].classList);
     }
     //console.log(allActive);
     document.getElementById(container).classList.add('activated');
@@ -107,7 +107,6 @@ function quizFinished(){
     calResult();
 }
 function calResult(){
-    console.log("calResult");
     for(let i=0;i<answerArray.length;i++){
         if(userChoice[i] == answerArray[i]){
             correct++;
@@ -119,8 +118,14 @@ function calResult(){
             incorrect++;
         }
     }
-    console.log("correct: "+correct+" incorrect: "+incorrect+" incomplete: "+incomplete);
-    console.log(userChoice+"\t"+answerArray);
+    // console.log("correct: "+correct+" incorrect: "+incorrect+" incomplete: "+incomplete);
+    // console.log(userChoice+"\t"+answerArray);
+    
+    
+    document.getElementById('revStatCorrect').textContent=correct+" Correct";
+    document.getElementById('revStatIncorrect').textContent=incorrect+" Incorrect";
+    document.getElementById('revStatUnattempted').textContent=incomplete+" Unattempted";
+
     document.getElementById('scoreTotal').textContent=correct+"/"+answerArray.length;
     document.getElementById('percentage').textContent=(correct/answerArray.length)*100+"%";
     document.getElementById('timeSpent').textContent= allowedTime-countdown+" s";
@@ -129,7 +134,28 @@ function calResult(){
     document.getElementById('statIncorrect').textContent=incorrect;
     document.getElementById('statIncomplete').textContent=incomplete;
 
+    buildReview();
     
+}
+function buildReview(){
+    let i = 0;
+    console.log(userChoice);
+    console.log(`<div class="revBody" id="revBody">
+            <div class="revRow" id="revRow">
+                <p class="revQaNumber">${i}</p>
+                <div class="revRowQa" id="revRowQa">
+                    <p class="revRowQ" id="revRowQ">${quizData[i].question}</p>
+                    <p class="revRowA">Your answer: <span id="revRowAns">${quizData[i].choices[userChoice[i]]}</span></p>
+                    <p class="revRowA">Correct Answer: <span id="revRowCorAns">${quizData[i].choices[quizData[i].correctAnswer]}</span></p>
+                </div>
+            </div>
+            <div class="revRowRightStatDiv">
+                <p id="revRowRightStatText">Correct || Incorrect || Unattempted</p>
+            </div>
+        </div>
+        <div class="revBot">
+            <button class="btn btn3" onclick="displayContainer('resultPage')">Show result</button>
+        </div>`);
 }
 function startTimer(){
     clearInterval(timer);
