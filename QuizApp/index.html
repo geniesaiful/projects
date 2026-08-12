@@ -89,7 +89,7 @@
         </div>
     </div>
 
-    <div class="reviewDiv  activated" id="reviewPage">
+    <div class="reviewDiv" id="reviewPage">
         <div class="revTop">
             <p class="topText">Review Answers</p>
             <div class="revStatus">
@@ -153,7 +153,7 @@
         </div>
     </div>
 
-    <div class="resultDiv" id="resultPage">
+    <div class="resultDiv activated" id="resultPage">
         <div class="leftdiv">
             <img src="resources/cup-svgrepo-com.svg">
             <h1 class="title">Congratulations!!</h1>
@@ -161,18 +161,18 @@
         </div>
         <div class="rightdiv">
             <h1 class="title">Your Result</h1>
-            <div style="display: flex; margin: 12px 0;">
+            <div style="display: flex; margin: 6px 0px;justify-content: center; width: 600px;">
                 <div class="scoreCell" style="border-radius: 12px 0 0 12px;">
                     <p class="stLabel">Score:</p><p class="dgLabel" id="scoreTotal">0/0</p>
                 </div> 
-                <div class="scoreCell" style="border-left: 1px solid black;">
+                <div class="scoreCell" style="border-left: 1px none black;">
                     <p class="stLabel">Percentage:</p><p class="dgLabel" id="percentage">0%</p>
                 </div> 
-                <div class="scoreCell" style="border-left: 1px solid black; border-radius: 0 12px 12px 0;">
+                <div class="scoreCell" style="border-left: 1px none black; border-radius: 0 12px 12px 0;">
                     <p class="stLabel">Time taken:</p><p class="dgLabel" id="timeSpent">00:00</p>
                 </div>
             </div>
-            <div style="display: flex;">
+            <div style="display: flex; margin: 6px 0px; justify-content: space-between; width: 600px;">
                 <div class="statusCell"><p class="dgLabel" id="statCorrect">0</p><p class="stLabel">Correct</p>
                 </div> 
                 <div class="statusCell"><p class="dgLabel" id="statIncorrect">0</p><p class="stLabel">Incorrect</p>
@@ -180,7 +180,7 @@
                 <div class="statusCell"><p class="dgLabel" id="statIncomplete">0</p><p class="stLabel">incomplete</p>
                 </div>
             </div>
-            <div class="resultFooter" style="margin-top: 70px;">
+            <div class="resultFooter" style="display: flex;justify-content: space-between; margin-top: 70px;width: 600px;">
                 <button class="btn btn3" onclick="displayContainer('homePage')">Back to home</button>
                 <button class="btn btn4" onclick="beginQuiz()">Restart Quiz</button>
             </div>
