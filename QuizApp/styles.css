@@ -180,6 +180,13 @@ body{
     display: flex;
     background-color: azure;
 }
+.revQaNumber{
+    display: flex; justify-content: center; align-items: center;
+    padding: 10px;
+    border: 2px solid whitesmoke; border-radius: 50px;
+    height: 40px; width: 40px;
+    background: #666666;
+}
 .revRowQa{
 
     background-color: aqua;
@@ -190,6 +197,7 @@ body{
     border: 2px solid blue;
     
 }
+
 
 .resultDiv{
     display: none;

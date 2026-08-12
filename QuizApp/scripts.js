@@ -140,22 +140,33 @@ function calResult(){
 function buildReview(){
     let i = 0;
     console.log(userChoice);
-    console.log(`<div class="revBody" id="revBody">
+    console.log(`
             <div class="revRow" id="revRow">
                 <p class="revQaNumber">${i}</p>
                 <div class="revRowQa" id="revRowQa">
                     <p class="revRowQ" id="revRowQ">${quizData[i].question}</p>
-                    <p class="revRowA">Your answer: <span id="revRowAns">${quizData[i].choices[userChoice[i]]}</span></p>
+                    <p class="revRowA">Your answer: <span id="revRowAns">${userChoice[i] == -1 ? "-":quizData[i].choices[userChoice[i]]}</span></p>
                     <p class="revRowA">Correct Answer: <span id="revRowCorAns">${quizData[i].choices[quizData[i].correctAnswer]}</span></p>
                 </div>
             </div>
             <div class="revRowRightStatDiv">
-                <p id="revRowRightStatText">Correct || Incorrect || Unattempted</p>
+                <p id="revRowRightStatText">${userChoice[i]== -1 ? "Unattempted" : quizData[i].correctAnswer == userChoice[i] ? "Correct":"Icorrect"}</p>
             </div>
-        </div>
-        <div class="revBot">
-            <button class="btn btn3" onclick="displayContainer('resultPage')">Show result</button>
-        </div>`);
+            `);
+        document.getElementById('revBody').innerHTML= `
+            <div class="revRow" id="revRow">
+                <p class="revQaNumber">${i}</p>
+                <div class="revRowQa" id="revRowQa">
+                    <p class="revRowQ" id="revRowQ">${quizData[i].question}</p>
+                    <p class="revRowA">Your answer: <span id="revRowAns">${userChoice[i] == -1 ? "-":quizData[i].choices[userChoice[i]]}</span></p>
+                    <p class="revRowA">Correct Answer: <span id="revRowCorAns">${quizData[i].choices[quizData[i].correctAnswer]}</span></p>
+                </div>
+            </div>
+            <div class="revRowRightStatDiv">
+                <p id="revRowRightStatText">${userChoice[i]== -1 ? "Unattempted" : quizData[i].correctAnswer == userChoice[i] ? "Correct":"Incorrect"}</p>
+            </div>
+            `
+            ;
 }
 function startTimer(){
     clearInterval(timer);
