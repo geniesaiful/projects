@@ -149,13 +149,13 @@ body{
 }
 .revTop{
     display: flex; flex-direction: row; 
-    justify-content: space-between;
+    justify-content: space-between; align-content: center;
     background-color: #06373d; color: #e9e9e9;
     padding: 4px;
 }
 .statusIcon{
-    width: 16px; height: 18px;
-    background-color: #06B6D4;
+    width: 16px; height: 20px;
+    
 }
 .revStatus{
     display: flex; justify-content: center; align-items: center;
@@ -179,7 +179,7 @@ body{
 .revRow{
     display: flex; 
     background-color: azure;
-    margin-bottom: 20px;
+    margin-bottom: 2px;
     padding: 20px;
 }
 .revQaNumber{
@@ -192,6 +192,7 @@ body{
 .revRowQa{
     flex-grow: 1;
     background-color: aqua;
+    padding:10px;
 }
 .revRowRightStatDiv{
     width: 120px; height: 40px;

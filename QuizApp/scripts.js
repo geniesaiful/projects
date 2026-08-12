@@ -143,7 +143,7 @@ function buildReview(){
     for(let i=0;i<quizData.length;i++){
         totalRowString += `
             <div class="revRow" id="revRow">
-                <p class="revQaNumber">${i}</p>
+                <p class="revQaNumber revRowA">${i}</p>
                 <div class="revRowQa" id="revRowQa">
                     <p class="revRowQ" id="revRowQ">${quizData[i].question}</p>
                     <p class="revRowA">Your answer: <span id="revRowAns">${userChoice[i] == -1 ? "-":quizData[i].choices[userChoice[i]]}</span></p>
