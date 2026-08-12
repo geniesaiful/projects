@@ -154,7 +154,7 @@ function buildReview(){
         const txtClr = userChoice[i] == -1 ? "txtGray" : userChoice[i] == quizData[i].correctAnswer ? "txtGreen":"txtRed";
         const stClr = userChoice[i] == -1 ? "stGray" : userChoice[i] == quizData[i].correctAnswer ? "stGreen":"stRed";
         const stTxt = userChoice[i]== -1 ? "Unattempted" : quizData[i].correctAnswer == userChoice[i] ? "Correct":"Incorrect"
-        console.log(icoBG);
+        //console.log(icoBG);
         totalRowString += `
             <div class="revRow" id="revRow">
                 <p class="revQaNumber ${icoBG}">${i+1}</p>
