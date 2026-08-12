@@ -166,7 +166,7 @@ body{
     
 }
 .revBody{
-    display: flex; 
+    display: flex; flex-direction: column;
     justify-content: space-between;
     padding: 80px;
 }
@@ -177,8 +177,10 @@ body{
     align-items: center;
 }
 .revRow{
-    display: flex;
+    display: flex; 
     background-color: azure;
+    margin-bottom: 20px;
+    padding: 20px;
 }
 .revQaNumber{
     display: flex; justify-content: center; align-items: center;
@@ -188,13 +190,14 @@ body{
     background: #666666;
 }
 .revRowQa{
-
+    flex-grow: 1;
     background-color: aqua;
 }
 .revRowRightStatDiv{
-    display: flex; justify-content: center; align-items: center;
+    width: 120px; height: 40px;
+    display: flex; justify-content: center; align-items: center; ;
     background-color:#666666;
-    border: 2px solid blue;
+    border: 2px solid blue; border-radius: 30px;
     
 }
 
