@@ -58,9 +58,10 @@ function loadQuiz(id){
     // take the user choice
     for(let i=0;i<allRadioBtn.length;i++){
         //console.log("inside loop");
-        document.getElementById("next");
+        document.getElementById("next").disabled=true;
         allRadioBtn[i].addEventListener("change",function(event){
             userChoice[quizId-1] = event.target.value;
+            document.getElementById("next").disabled=false;
             //console.log(userChoice);
         });
     }
@@ -99,12 +100,15 @@ function prevPage(){
         document.getElementById('next').textContent="Next";
     }
     //console.log(quizId+"\n"+quizData.length);
-        quizId--;
+        
     if(quizId==1){
         document.getElementById('previous').disabled=true;
         loadQuiz(quizId);
     }
-    loadQuiz(quizId);
+    else{
+        quizId--;
+        loadQuiz(quizId);
+    }
 }
 function quizFinished(){
     displayContainer('reviewPage'); // this function can be called from "finish" button or time end.
