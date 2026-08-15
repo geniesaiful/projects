@@ -214,27 +214,44 @@ function toActualTime(totalSeconds){
 
     return { displayMinutes, displaySeconds };
 }
-
-function confettiFall(){
-   // console.log("hello");
+function triggerConfetti() {
+    document.getElementById('conftettiTrigger').disabled=true;
     const quizBox = document.querySelector('.leftdiv');
-    
+    const colors = ['#ff4757', '#2ed573', '#1e90ff', '#ffa502', '#eccc68', '#9b59b6'];
+
+    if (!quizBox) return;
+
+    for (let i = 0; i < 50; i++) {
+        createSingleConfetti(quizBox, colors);
+    }
+}
+
+function createSingleConfetti(quizBox, colors) {
     const piece = document.createElement('div');
     piece.classList.add('confetti-piece');
-
     quizBox.appendChild(piece);
-    piece.style.left = '50%';
 
-    let currentY = -15;
+    let currentX = Math.random() * quizBox.clientWidth; 
+    let currentY = -(Math.random() * 100 + 15); 
+    let waveTime = Math.random() * 100; 
+    const fallSpeed = Math.random() * 3 + 2;
+    
+    piece.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
 
     const animationTimer = setInterval(function() {
-    currentY += 4; // Move down 4 pixels every 15 milliseconds
-    piece.style.top = currentY + 'px';
+        currentY += fallSpeed; 
+        waveTime += 0.08; 
+        let zigzag = Math.sin(waveTime) * 2;
+        currentX += zigzag;
 
-    // 7. Check if it hit the bottom boundary of your leftdiv
-    if (currentY >= quizBox.clientHeight) {
-        clearInterval(animationTimer); // Stop the animation timer
-        piece.remove();                 // Delete the piece from the page to clean up memory
-    }
-}, 15);
+        piece.style.top = currentY + 'px';
+        piece.style.left = currentX + 'px';
+
+        if (currentY >= quizBox.clientHeight) {
+            clearInterval(animationTimer); 
+            piece.remove();                 
+        }
+       
+    }, 15);
+   
 }
