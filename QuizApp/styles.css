@@ -154,7 +154,18 @@ body{
 }
 .quizBodyAll{
     padding: 0px 100px;
-
+}
+.progressBar{
+    width: 300px;
+    height: 15px;
+    background-color: #7f7b7b;
+    border-radius: 25px;
+}
+.progress{
+    width: 0%;
+    height: 100%;
+    background-color: #26eb26c4;
+    border-radius: 25px;
 }
 
 .reviewDiv{
@@ -241,10 +252,21 @@ body{
     width: 30%; height: 100vh;
     display: flex; flex-direction: column;
     justify-content: center; align-items: center;
+    position: relative; /* Crucial: Keeps the confetti contained inside this specific div */
+    overflow: hidden;
 }
 .leftdiv img{
     width: 250px; height: 400px;
 }
+.confetti-piece {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background-color: #d5ffbc;
+    pointer-events: none;
+}
+
+
 .rightdiv{
     display: flex; flex-direction: column; flex: 1; 
     justify-content: center; align-items: center;

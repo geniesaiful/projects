@@ -47,6 +47,7 @@ function loadQuiz(id){
     quizCoice = quizData[quizId-1].choices;
     quizAnswer = quizData[quizId-1].correctAnswer;
     //console.log(quizQuestion+"\n"+quizCoice+"\n"+quizAnswer);
+    document.getElementById("progress").style.width = "0%";
     
     document.getElementById('quizPosText').textContent = "Question "+quizId+" of "+quizData.length;
 
@@ -85,6 +86,7 @@ function nextPage(){
         //console.log(quizId+"\n"+quizData.length);
         quizId++;
         loadQuiz(quizId);
+        changeBar(quizId);
         if((quizId)==quizData.length){
             //console.log("HIT == "+quizId);
             document.getElementById('next').textContent="Finish Quiz";
@@ -104,11 +106,20 @@ function prevPage(){
     if(quizId==1){
         document.getElementById('previous').disabled=true;
         loadQuiz(quizId);
+        changeBar(quizId);
     }
     else{
         quizId--;
         loadQuiz(quizId);
+        changeBar(quizId);
     }
+}
+function changeBar(quizId){
+    let currentQuiz = quizId -1;
+    progressStat = document.getElementById("progress");
+    progressStat.style.width = ((currentQuiz/quizData.length)*100).toFixed(2) + "%";
+    // console.log(((currentQuiz/quizData.length)*100).toFixed(2) + "%");
+    // console.log(currentQuiz);
 }
 function quizFinished(){
     displayContainer('reviewPage'); // this function can be called from "finish" button or time end.
@@ -116,18 +127,18 @@ function quizFinished(){
 }
 function calResult(){
     for(let i=0;i<answerArray.length;i++){
-        if(userChoice[i] == answerArray[i]){
-            correct++;
-        }
         if(userChoice[i]==-1){
             incomplete++;
+        }
+        else if(userChoice[i] == answerArray[i]){
+            correct++;
         }
         else{
             incorrect++;
         }
     }
-    // console.log("correct: "+correct+" incorrect: "+incorrect+" incomplete: "+incomplete);
-    // console.log(userChoice+"\t"+answerArray);
+     console.log("correct: "+correct+" incorrect: "+incorrect+" incomplete: "+incomplete);
+     console.log(userChoice+"\t"+answerArray);
     
     
     document.getElementById('revStatCorrect').textContent=correct+" Correct";
@@ -202,4 +213,28 @@ function toActualTime(totalSeconds){
     const displaySeconds = String(seconds).padStart(2, '0');
 
     return { displayMinutes, displaySeconds };
+}
+
+function confettiFall(){
+   // console.log("hello");
+    const quizBox = document.querySelector('.leftdiv');
+    
+    const piece = document.createElement('div');
+    piece.classList.add('confetti-piece');
+
+    quizBox.appendChild(piece);
+    piece.style.left = '50%';
+
+    let currentY = -15;
+
+    const animationTimer = setInterval(function() {
+    currentY += 4; // Move down 4 pixels every 15 milliseconds
+    piece.style.top = currentY + 'px';
+
+    // 7. Check if it hit the bottom boundary of your leftdiv
+    if (currentY >= quizBox.clientHeight) {
+        clearInterval(animationTimer); // Stop the animation timer
+        piece.remove();                 // Delete the piece from the page to clean up memory
+    }
+}, 15);
 }

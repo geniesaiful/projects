@@ -8,7 +8,7 @@
 </head>
 
 <body>
-    <div class="hpDiv activated" id="homePage">
+    <div class="hpDiv" id="homePage">
         <div class="leftBar">
             <img src="resources/banner1.jpg">
         </div>
@@ -20,7 +20,7 @@
             <div class="rContentDiv">
                 <div class="hpContentDiv">
                     <div class="hpImgContainer">
-                        <img src="resources/alien-svgrepo-com.svg" style="height: 32px; width: 32px;">
+                        <img src="resources/checklist-clipboard-multiple-choice-svgrepo-com.svg" style="height: 32px; width: 32px; border-radius: 50px;;">
                     </div>
                     <div class="hpTextContainer">
                         <p class="text">Multiple choice question</p>
@@ -29,7 +29,7 @@
                 </div>
                 <div class="hpContentDiv">
                     <div class="hpImgContainer">
-                        <img src="resources/alien-svgrepo-com.svg" style="height: 32px; width: 32px;">
+                        <img src="resources/check-education-exam-svgrepo-com.svg" style="height: 32px; width: 32px;">
                     </div>
                     <div class="hpTextContainer">
                         <p class="text">Score Calculation</p>
@@ -38,7 +38,7 @@
                 </div>
                 <div class="hpContentDiv">
                     <div class="hpImgContainer">
-                        <img src="resources/alien-svgrepo-com.svg" style="height: 32px; width: 32px;">
+                        <img src="resources/timer-stopwatch-time-watch-svgrepo-com.svg" style="height: 32px; width: 32px;">
                     </div>
                     <div class="hpTextContainer">
                         <p class="text">Timer</p>
@@ -59,7 +59,7 @@
                 <img src="resources/timer-error-svgrepo-com.svg" style="height: 26px; width: 26px;">
                 <p class="topText" id="timer"></p>
             </div>
-            <p class="topText"></p>
+            <div class="progressBar"><div class="progress" id="progress"></div></div>
         </div>
         <div class="quizBody">
             <div class="quizBodyAll">
@@ -94,13 +94,13 @@
             <p class="topText">Review Answers</p>
             <div class="revStatus">
                 <div style="display: flex;">
-                    <img class="statusIcon" src="resources/alien-svgrepo-com.svg"><p class="topText" id="revStatCorrect">0 Correct</p>
+                    <img class="statusIcon" src="resources/correct-success-tick-svgrepo-com.svg"><p class="topText" id="revStatCorrect">0 Correct</p>
                 </div>
                 <div style="display: flex;">
-                    <img class="statusIcon" src="resources/alien-svgrepo-com.svg"><p class="topText" id="revStatIncorrect">0 Incorrect</p>
+                    <img class="statusIcon" src="resources/wrong-cancel-close-svgrepo-com.svg"><p class="topText" id="revStatIncorrect">0 Incorrect</p>
                 </div>
                 <div style="display: flex;">
-                    <img class="statusIcon" src="resources/alien-svgrepo-com.svg"><p class="topText" id="revStatUnattempted">0 Unattempted</p>
+                    <img class="statusIcon" src="resources/incomplete-svgrepo-com.svg"><p class="topText" id="revStatUnattempted">0 Unattempted</p>
                 </div>
             </div>
         </div>
@@ -152,11 +152,12 @@
         </div>
     </div>
 
-    <div class="resultDiv" id="resultPage">
+    <div class="resultDiv activated" id="resultPage">
         <div class="leftdiv">
             <img src="resources/cup-svgrepo-com.svg">
             <h1 class="title">Congratulations!!</h1>
             <p class="subtitle">You Completed the quiz!!!</p>
+            <button class="btn btn2" onclick="confettiFall()">Celebrate</button>
         </div>
         <div class="rightdiv">
             <h1 class="title">Your Result</h1>

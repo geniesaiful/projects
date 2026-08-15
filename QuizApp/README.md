@@ -47,6 +47,6 @@ A quiz application where users can answer multiple-choice questions, track their
 
 - 8. Additional Features
 
-- []  Progress bar to show completion.
+- [x]  Progress bar to show completion.
 - []  Responsive design for mobile and desktop.
 - []  Clean UI with good user experience.
