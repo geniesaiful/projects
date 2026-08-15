@@ -266,6 +266,26 @@ body{
     pointer-events: none;
 }
 
+.confetti{
+    position: absolute;
+    width: 10px;
+    height: 15px;
+    top: -20px; 
+    /* z-index: 999;  */
+    animation: fall 3s linear forwards; 
+    background-color:#15d7f9;
+}
+@keyframes fall {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(105vh) rotate(360deg);
+    opacity: 0.25;
+  }
+}
+
 
 .rightdiv{
     display: flex; flex-direction: column; flex: 1; 

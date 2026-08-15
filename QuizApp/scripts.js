@@ -214,44 +214,65 @@ function toActualTime(totalSeconds){
 
     return { displayMinutes, displaySeconds };
 }
-function triggerConfetti() {
-    document.getElementById('conftettiTrigger').disabled=true;
-    const quizBox = document.querySelector('.leftdiv');
-    const colors = ['#ff4757', '#2ed573', '#1e90ff', '#ffa502', '#eccc68', '#9b59b6'];
+// function triggerConfetti() {
+//     document.getElementById('conftettiTrigger').disabled=true;
+//     const quizBox = document.querySelector('.leftdiv');
+//     const colors = ['#ff4757', '#2ed573', '#1e90ff', '#ffa502', '#eccc68', '#9b59b6'];
 
-    if (!quizBox) return;
+//     if (!quizBox) return;
 
-    for (let i = 0; i < 50; i++) {
-        createSingleConfetti(quizBox, colors);
-    }
-}
+//     for (let i = 0; i < 50; i++) {
+//         createSingleConfetti(quizBox, colors);
+//     }
+// }
 
-function createSingleConfetti(quizBox, colors) {
-    const piece = document.createElement('div');
-    piece.classList.add('confetti-piece');
-    quizBox.appendChild(piece);
+// function createSingleConfetti(quizBox, colors) {
+//     const piece = document.createElement('div');
+//     piece.classList.add('confetti-piece');
+//     quizBox.appendChild(piece);
 
-    let currentX = Math.random() * quizBox.clientWidth; 
-    let currentY = -(Math.random() * 100 + 15); 
-    let waveTime = Math.random() * 100; 
-    const fallSpeed = Math.random() * 3 + 2;
+//     let currentX = Math.random() * quizBox.clientWidth; 
+//     let currentY = -(Math.random() * 100 + 15); 
+//     let waveTime = Math.random() * 100; 
+//     const fallSpeed = Math.random() * 3 + 2;
     
-    piece.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+//     piece.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
 
-    const animationTimer = setInterval(function() {
-        currentY += fallSpeed; 
-        waveTime += 0.08; 
-        let zigzag = Math.sin(waveTime) * 2;
-        currentX += zigzag;
+//     const animationTimer = setInterval(function() {
+//         currentY += fallSpeed; 
+//         waveTime += 0.08; 
+//         let zigzag = Math.sin(waveTime) * 2;
+//         currentX += zigzag;
 
-        piece.style.top = currentY + 'px';
-        piece.style.left = currentX + 'px';
+//         piece.style.top = currentY + 'px';
+//         piece.style.left = currentX + 'px';
 
-        if (currentY >= quizBox.clientHeight) {
-            clearInterval(animationTimer); 
-            piece.remove();                 
-        }
+//         if (currentY >= quizBox.clientHeight) {
+//             clearInterval(animationTimer); 
+//             piece.remove();                 
+//         }
        
-    }, 15);
+//     }, 15);
    
+// }
+
+function triggerConfetti(){
+    const container = document.querySelector('.leftdiv');
+
+    for(let i=0;i<100;i++){
+        const confetti = document.createElement('div');
+        confetti.classList.add("confetti");
+
+        confetti.style.left = Math.random() * 100 + 'vw';
+        confetti.style.animationDelay = Math.random() * 2 + 's'; // dont fall at the same time
+        confetti.style.animationDuration = (Math.random() * 2 + 2.5) + 's'; // different speed
+
+        container.appendChild(confetti);
+            setTimeout(() => {
+            confetti.remove();
+        }, 5000); 
+    }
+
+    
+
 }
