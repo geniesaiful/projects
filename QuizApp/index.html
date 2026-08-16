@@ -8,7 +8,7 @@
 </head>
 
 <body>
-    <div class="hpDiv" id="homePage">
+    <div class="hpDiv activated" id="homePage">
         <div class="leftBar">
             <img src="resources/banner1.jpg">
         </div>
@@ -20,7 +20,7 @@
             <div class="rContentDiv">
                 <div class="hpContentDiv">
                     <div class="hpImgContainer">
-                        <img src="resources/checklist-clipboard-multiple-choice-svgrepo-com.svg" style="height: 32px; width: 32px; border-radius: 50px;;">
+                        <img src="resources/question.png" style="height: 32px; width: 32px; border-radius: 50px;;">
                     </div>
                     <div class="hpTextContainer">
                         <p class="text">Multiple choice question</p>
@@ -29,7 +29,7 @@
                 </div>
                 <div class="hpContentDiv">
                     <div class="hpImgContainer">
-                        <img src="resources/check-education-exam-svgrepo-com.svg" style="height: 32px; width: 32px;">
+                        <img src="resources/scoring.png" style="height: 32px; width: 32px;">
                     </div>
                     <div class="hpTextContainer">
                         <p class="text">Score Calculation</p>
@@ -38,7 +38,7 @@
                 </div>
                 <div class="hpContentDiv">
                     <div class="hpImgContainer">
-                        <img src="resources/timer-stopwatch-time-watch-svgrepo-com.svg" style="height: 32px; width: 32px;">
+                        <img src="resources/stopwatch.png" style="height: 32px; width: 32px;">
                     </div>
                     <div class="hpTextContainer">
                         <p class="text">Timer</p>
@@ -54,17 +54,16 @@
 
     <div class="quizDiv" id="quizPage">
         <div class="quizTop">
-            <p class="topText" id="quizPosText">question 1 of 5</p>
-            <div style="display: flex; flex-direction: row; justify-content: center; align-items: center;">
-                <img src="resources/timer-error-svgrepo-com.svg" style="height: 26px; width: 26px;">
-                <p class="topText" id="timer"></p>
+            <p class="topText" id="quizPosText">Question 1 of 5</p>
+            <div style="display: flex; flex-direction: row; justify-content: center; align-items: center; gap: 6px">
+                <img src="resources/chronometer.png" style="height: 24px; width: 24px;">
+                <p class="topText" id="timer" style=></p>
             </div>
             <div class="progressBar"><div class="progress" id="progress"></div></div>
         </div>
         <div class="quizBody">
             <div class="quizBodyAll">
-                
-            
+
                 <div style="display: flex; flex-direction: column; align-items: center;">
                     <p class="question-text" id="questionText">Who is the father of Thor?</p>
                     <label class="option answer-text">
@@ -91,16 +90,16 @@
 
     <div class="reviewDiv" id="reviewPage">
         <div class="revTop">
-            <p class="topText">Review Answers</p>
+            <p class="topText" style="align-content: center;">Review Answers</p>
             <div class="revStatus">
-                <div style="display: flex;">
-                    <img class="statusIcon" src="resources/correct-success-tick-svgrepo-com.svg"><p class="topText" id="revStatCorrect">0 Correct</p>
+                <div class="statBox" style="display: flex;">
+                    <img class="statusIcon" src="resources/check.png"><p class="topText" id="revStatCorrect">0 Correct</p>
                 </div>
-                <div style="display: flex;">
-                    <img class="statusIcon" src="resources/wrong-cancel-close-svgrepo-com.svg"><p class="topText" id="revStatIncorrect">0 Incorrect</p>
+                <div class="statBox" style="display: flex;">
+                    <img class="statusIcon" src="resources/delete.png"><p class="topText" id="revStatIncorrect">0 Incorrect</p>
                 </div>
-                <div style="display: flex;">
-                    <img class="statusIcon" src="resources/incomplete-svgrepo-com.svg"><p class="topText" id="revStatUnattempted">0 Unattempted</p>
+                <div class="statBox" style="display: flex;">
+                    <img class="statusIcon" src="resources/clipboard.png"><p class="topText" id="revStatUnattempted">0 Unattempted</p>
                 </div>
             </div>
         </div>
@@ -148,11 +147,11 @@
 
         </div>
         <div class="revBot">
-            <button class="btn btn3" onclick="displayContainer('resultPage')">Show result</button>
+            <button class="btn btn3" id="revShowResult">Show result</button>
         </div>
     </div>
 
-    <div class="resultDiv activated" id="resultPage">
+    <div class="resultDiv" id="resultPage">
         <div class="leftdiv">
             <img src="resources/cup-svgrepo-com.svg">
             <h1 class="title">Congratulations!!</h1>

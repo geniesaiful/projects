@@ -1,9 +1,9 @@
 let quizPageNo,quizId,quizQuestion,quizChoice,quizAnswer;
 let userChoice,timer,countdown;
-let answerArray = Array(quizData.length);
 let correct,incorrect,incomplete;
 const allowedTime = 20;
-
+const numberOfQuestions = quizData.length;
+let answerArray = Array(numberOfQuestions);
 
 function beginQuiz(){
     quizId = 1;
@@ -15,8 +15,8 @@ function beginQuiz(){
     document.getElementById('timer').textContent=`${displayMinutes}:${displaySeconds}`;
     loadQuiz(quizId);
     /*reset timer*/
-    userChoice = Array(quizData.length).fill(-1);
-    for(let i=0;i<quizData.length;i++){
+    userChoice = Array(numberOfQuestions).fill(-1);
+    for(let i=0;i<numberOfQuestions;i++){
         answerArray[i]=quizData[i].correctAnswer;
         //console.log(answerArray[i]);
     }
@@ -49,7 +49,7 @@ function loadQuiz(id){
     //console.log(quizQuestion+"\n"+quizCoice+"\n"+quizAnswer);
     document.getElementById("progress").style.width = "0%";
     
-    document.getElementById('quizPosText').textContent = "Question "+quizId+" of "+quizData.length;
+    document.getElementById('quizPosText').textContent = "Question "+quizId+" of "+numberOfQuestions;
 
     document.getElementById("questionText").textContent = quizQuestion;
     for(let i=0;i<quizCoice.length;i++){
@@ -82,12 +82,12 @@ function nextPage(){
     if(document.getElementById('previous').disabled){
         document.getElementById('previous').disabled=false;
     }
-    if(quizId<quizData.length){
-        //console.log(quizId+"\n"+quizData.length);
+    if(quizId<numberOfQuestions){
+        //console.log(quizId+"\n"+numberOfQuestions);
         quizId++;
         loadQuiz(quizId);
         changeBar(quizId);
-        if((quizId)==quizData.length){
+        if((quizId)==numberOfQuestions){
             //console.log("HIT == "+quizId);
             document.getElementById('next').textContent="Finish Quiz";
         }
@@ -101,7 +101,7 @@ function prevPage(){
     if(document.getElementById('next').textContent==="Finish Quiz"){
         document.getElementById('next').textContent="Next";
     }
-    //console.log(quizId+"\n"+quizData.length);
+    //console.log(quizId+"\n"+numberOfQuestions);
         
     if(quizId==1){
         document.getElementById('previous').disabled=true;
@@ -117,13 +117,14 @@ function prevPage(){
 function changeBar(quizId){
     let currentQuiz = quizId -1;
     progressStat = document.getElementById("progress");
-    progressStat.style.width = ((currentQuiz/quizData.length)*100).toFixed(2) + "%";
-    // console.log(((currentQuiz/quizData.length)*100).toFixed(2) + "%");
+    progressStat.style.width = ((currentQuiz/numberOfQuestions)*100).toFixed(2) + "%";
+    // console.log(((currentQuiz/numberOfQuestions)*100).toFixed(2) + "%");
     // console.log(currentQuiz);
 }
 function quizFinished(){
     displayContainer('reviewPage'); // this function can be called from "finish" button or time end.
     calResult();
+    
 }
 function calResult(){
     for(let i=0;i<answerArray.length;i++){
@@ -160,7 +161,7 @@ function calResult(){
 function buildReview(){
     let totalRowString = "";
 // ${userChoice[i]== -1 ? "Unattempted" : quizData[i].correctAnswer == userChoice[i] ? "Correct":"Incorrect"}
-    for(let i=0;i<quizData.length;i++){
+    for(let i=0;i<numberOfQuestions;i++){
         const icoBG = userChoice[i] == -1 ? "sldGray" : userChoice[i] == quizData[i].correctAnswer ? "sldGreen":"sldRed";
         const txtClr = userChoice[i] == -1 ? "txtGray" : userChoice[i] == quizData[i].correctAnswer ? "txtGreen":"txtRed";
         const stClr = userChoice[i] == -1 ? "stGray" : userChoice[i] == quizData[i].correctAnswer ? "stGreen":"stRed";
@@ -175,14 +176,21 @@ function buildReview(){
                     <p class="revRowA">Correct Answer: <span id="revRowCorAns">${quizData[i].choices[quizData[i].correctAnswer]}</span></p>
                 </div>
                 <div class="revRowRightStatDiv ${stClr}">
-                    <p class="revRowA ${stClr}" id="revRowRightStatText">${stTxt}</p>
+                    <p class="revRowA ${txtClr}" id="revRowRightStatText">${stTxt}</p>
                 </div>
             </div>
 
             `
     }
     document.getElementById('revBody').innerHTML= totalRowString;
-   // console.log(totalRowString);
+    document.getElementById('revShowResult').addEventListener('click',() =>{
+        
+        if((correct/numberOfQuestions)*100 > 49){
+            triggerConfetti();
+        }
+        displayContainer('resultPage');
+    });
+    // console.log(totalRowString);
 }
 function startTimer(){
     clearInterval(timer);
@@ -258,17 +266,21 @@ function toActualTime(totalSeconds){
 
 function triggerConfetti(){
     const container = document.querySelector('.leftdiv');
-
+    const chars = '0123456789ABCDEF';
+    
     for(let i=0;i<100;i++){
         const confetti = document.createElement('div');
         confetti.classList.add("confetti");
-
+        const randomHex = Array.from({ length: 6 }, () => chars[Math.floor(Math.random() * 16)]).join('');
+        const colors = `#${randomHex}`;
+        
         confetti.style.left = Math.random() * 100 + 'vw';
         confetti.style.animationDelay = Math.random() * 2 + 's'; // dont fall at the same time
         confetti.style.animationDuration = (Math.random() * 2 + 2.5) + 's'; // different speed
-
+        confetti.style.backgroundColor = colors; //colors[Math.floor(Math.random()*colors.length)];
         container.appendChild(confetti);
-            setTimeout(() => {
+
+        setTimeout(() => {
             confetti.remove();
         }, 5000); 
     }
