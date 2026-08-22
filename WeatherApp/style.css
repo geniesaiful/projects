@@ -11,7 +11,8 @@ body{
     color: var(--genText);
     display: flex;
 }
-
+.superscriptText{ font-size: 2rem; font-weight: bold;margin-left: 2px;color: #ffffff;}
+.bigText { font-size: 5rem; font-weight: bold; color: #ffffff; letter-spacing: 0.5px; margin-top: 0; margin-bottom: 8px; }
 
 .containerLeft{
     display: flex; flex-direction: column;
@@ -21,7 +22,7 @@ body{
 }
 .leftTop{
     display: flex;
-    padding: 40px; gap: 20px;
+    padding: 2.5rem; gap: 1.25rem;
     background-color: #74aae1;
 }
 .leftMiddle{
@@ -36,7 +37,44 @@ body{
 .leftBottom{
     display: flex; padding: 1rem; background-color: #74aae1; 
 }
+
+
+
 .containerRight{
+    display: flex; flex-direction: column; flex-grow: 1;
     width: 80vw; height: 100vh;
     background-color: #9dada4;
+}
+.rightTop{
+    display: flex;
+    padding: 2rem 8rem;
+    background-color: cadetblue;
+}
+.rightMiddle{
+    display: flex; flex-direction: column; flex-grow: 1; background-color: aqua;
+    padding: 3rem;
+    background-image: url('resources/hot.jpg');
+}
+.mainDisplay{
+    display: flex; flex-direction: column; flex-grow: 1;
+    border: .1rem solid black;
+    border-radius: 1rem;
+}
+.mdTempartureText{
+    display: inline-flex;
+    align-items: flex-start;
+}
+.mdCondition{
+    display: flex; flex-direction: row;
+}
+
+.extraDisplay{
+    display: flex;
+    background-color: blanchedalmond;
+    border-radius: 1rem;
+    width: 100%; padding: 1rem;
+}
+
+.rightBottom{
+    padding: 1rem; background-color: #5f81b8;
 }
