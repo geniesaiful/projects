@@ -43,17 +43,18 @@ body{
 .containerRight{
     display: flex; flex-direction: column; flex-grow: 1;
     width: 80vw; height: 100vh;
-    background-color: #9dada4;
+    background-color: #9dada4; padding: 2rem; gap: 1rem;
 }
 .rightTop{
     display: flex;
-    padding: 2rem 8rem;
+    padding: 2rem 8rem; border-radius: 2rem;
     background-color: cadetblue;
 }
 .rightMiddle{
     display: flex; flex-direction: column; flex-grow: 1; background-color: aqua;
-    padding: 3rem;
-    background-image: url('resources/hot.jpg');
+    padding: 3rem; border-radius: 2rem;
+    background-image: url('resources/cloudy.jpg');
+    background-size: cover; background-position: center; 
 }
 .mainDisplay{
     display: flex; flex-direction: column; flex-grow: 1;
@@ -76,5 +77,5 @@ body{
 }
 
 .rightBottom{
-    padding: 1rem; background-color: #5f81b8;
+    padding: 1rem; background-color: #5f81b8; border-radius: 2rem;
 }
