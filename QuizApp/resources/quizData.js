@@ -64,5 +64,49 @@ const quizData = [
             "Green"
         ],
         correctAnswer: 3 
+    },
+    {
+        id: 7,
+        question: "What is the metal bonded to Wolverine's skeleton?",
+        choices: [
+            "Vibranium",
+            "Uru",
+            "Adamantium",
+            "Kryptonite"
+        ],
+        correctAnswer: 2
+    },
+    {
+        id: 8,
+        question: "What is the real name of Batman?",
+        choices: [
+            "Clark Kent",
+            "Bruce Wayne",
+            "Peter Parker",
+            "Barry Allen"
+        ],
+        correctAnswer: 1
+    },
+    {
+        id: 9,
+        question: "Which planet is known as the Red Planet?",
+        choices: [
+            "Venus",
+            "Jupiter",
+            "Mars",
+            "Saturn"
+        ],
+        correctAnswer: 2
+    },
+    {
+        id: 10,
+        question: "What is the name of Thor's hammer?",
+        choices: [
+            "Stormbreaker",
+            "Mjolnir",
+            "Gungnir",
+            "Jarnbjorn"
+        ],
+        correctAnswer: 1
     }
 ];
