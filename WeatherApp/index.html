@@ -18,9 +18,9 @@
         </div>
 
         <div class="leftMiddle">
-            <div class="leftMenuItem"><img src="resources/weather-svgrepo-com.svg" style="width: 1.5rem; height: 1.5rem;"><p>Home</p></div>
-            <div class="leftMenuItem"><img src="resources/weather-svgrepo-com.svg" style="width: 1.5rem; height: 1.5rem;"><p>Recent</p></div>
-            <div class="leftMenuItem"><img src="resources/weather-svgrepo-com.svg" style="width: 1.5rem; height: 1.5rem;"><p>Setting</p></div>
+            <div class="leftMenuItem" onclick="showRigtContainer('homeDiv')"><img src="resources/weather-svgrepo-com.svg" style="width: 1.5rem; height: 1.5rem;"><p>Home</p></div>
+            <div class="leftMenuItem" onclick="showRigtContainer('recentDiv')"><img src="resources/weather-svgrepo-com.svg" style="width: 1.5rem; height: 1.5rem;" ><p>Recent</p></div>
+            <div class="leftMenuItem" onclick="showRigtContainer('settingsDiv')"><img src="resources/weather-svgrepo-com.svg" style="width: 1.5rem; height: 1.5rem;" ><p>Setting</p></div>
         </div>
 
         <div class="leftBottom">
@@ -31,7 +31,7 @@
 
 
 
-    <div class="containerRight">
+    <div class="container active" id="homeDiv">
         <div class="rightTop">
             <input type="search" id="city-input" style="width: 50rem; height: 2rem;">
             <button id="search-btn">Search</button>
@@ -53,24 +53,24 @@
                     <div class="highlightDisplay">
                         <div class="infoCards">
                             <img src="resources/weather-svgrepo-com.svg" style="width: 1.5rem; height: 1.5rem;">
-                            <div style="display: flex; flex-direction: column;"><p>Humidity</p><p id="mdHumidity"></p></div>
+                            <div style="display: flex; flex-direction: column;"><p class="smallText">Humidity</p><p id="mdHumidity"></p></div>
                         </div>
                         <div class="infoCards">
                             <img src="resources/weather-svgrepo-com.svg" style="width: 1.5rem; height: 1.5rem;">
-                            <div style="display: flex; flex-direction: column;"><p>Wind</p><p id="mdWind"></p></div>
+                            <div style="display: flex; flex-direction: column;"><p class="smallText">Wind</p><p id="mdWind"></p></div>
                         </div>
                         <div class="infoCards">
                             <img src="resources/weather-svgrepo-com.svg" style="width: 1.5rem; height: 1.5rem;">
-                            <div style="display: flex; flex-direction: column;"><p>Pressure</p><p id="mdPressure"></p></div>
+                            <div style="display: flex; flex-direction: column;"><p class="smallText">Pressure</p><p id="mdPressure"></p></div>
                         </div>
                         <div class="infoCards">
                             <img src="resources/weather-svgrepo-com.svg" style="width: 1.5rem; height: 1.5rem;">
-                            <div style="display: flex; flex-direction: column;"><p>Visibiliy</p><p id="mdVisibility"></p></div>
+                            <div style="display: flex; flex-direction: column;"><p class="smallText">Visibiliy</p><p id="mdVisibility"></p></div>
                         </div>
                     </div>
                 </div>
                 <div class="detailsDisplay">
-                    Details
+                    <p class="headlineText">Details</p>
                     <div class="details-grid">
                         <div class="item">
                             <span>UV Index</span>
@@ -98,13 +98,14 @@
                             <span>Heat Index</span>
                             <span id="mdHeatIndex">Good (42)</span>
                         </div>
+                    </div>
 
 
                 </div>
             </div>
         </div>
         <div class="rightBottom">
-            <p>Recent Searches</p>
+            <p class="sectionText">Recent Searches</p>
             <div class="infoCardHolder" id="infoCardHolder">
                 <!-- <div class="infoCards">
                     <img src="resources/weather-svgrepo-com.svg"><div style="display: flex; flex-direction: column;">
@@ -113,7 +114,15 @@
             </div>
         </div>
     </div>
-
+    <div class="container" id="recentDiv">
+        <p class="topText">Recently Searched</p>
+        <div class="bigInfoCardHolder" id="bigInfoCardHolder">
+            infocards
+        </div>
+    </div>
+    <div class="container" id="settingsDiv">
+        Settings
+    </div>
 <script src="script.js"></script>
 </body>
 </html>

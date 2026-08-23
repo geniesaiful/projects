@@ -1,7 +1,7 @@
 const apiKey = '4c4bfb50e8aa436c81193431262208';
 const searchBtn = document.getElementById('search-btn');
 const cityInput = document.getElementById('city-input');
-
+//getWeatherData("Dhaka");
 //
 const allSavedObjects = JSON.parse(localStorage.getItem('weatherAppApiData')) || [];
 updateUI(allSavedObjects[allSavedObjects.length-1]);
@@ -10,14 +10,12 @@ updateUI(allSavedObjects[allSavedObjects.length-1]);
 
 searchBtn.addEventListener('click', () => {
     getWeatherData(cityInput.value.trim());
-    console.log(cityInput.value.trim())
 });
 
 // Enable search when pressing the Enter key
 cityInput.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') {
         getWeatherData(cityInput.value.trim());
-        console.log(cityInput.value.trim())
     }
 });
 
@@ -35,7 +33,7 @@ async function getWeatherData(city) {
         const data = await response.json();
         updateUI(data);
         saveData(data);
-
+        updateRecent();
     }catch(error){
         document.getElementById('resultT').innerHTML = error.message;
     }
@@ -71,7 +69,7 @@ function saveData(newData){
     dataList.push(newData);
     localStorage.setItem('weatherAppApiData', JSON.stringify(dataList));
     const allSavedObjects = JSON.parse(localStorage.getItem('weatherAppApiData')) || [];
-    console.log("Here is last data      "+allSavedObjects[allSavedObjects.length-2].location.name); 
+   // console.log("Here is last data      "+allSavedObjects[allSavedObjects.length-2].location.name); 
 }
 
 function updateRecent(){
@@ -81,10 +79,9 @@ function updateRecent(){
     const cardHolder = document.getElementById('infoCardHolder');
     cardHolder.innerHTML = "";
 
-    let totalInfoCard = "";
+    //let totalInfoCard = "";
     recentSavedData.forEach(item => {
-        console.log("Rendering item:", item);
-        
+               
         const div = document.createElement('div');
         div.className = "infoCards";
         div.role = "button";
@@ -92,7 +89,7 @@ function updateRecent(){
 
         div.innerHTML = `
             <img src="https:${item.current.condition.icon}">
-            <div class="infoCardText">
+            <div class="infoCardText smallText">
                 <p>${item.location.name}</p><p>${item.current.temp_c}&deg;C</p>
             </div>
         `;
@@ -109,5 +106,43 @@ function updateRecent(){
         // </div>
         //`
     });
+    updateRecentAll();
     //document.getElementById('infoCardHolder').innerHTML = totalInfoCard;
+}
+
+function updateRecentAll(){
+    const totalSavedData = JSON.parse(localStorage.getItem('weatherAppApiData')) || [];
+
+    const cardHolder = document.getElementById('bigInfoCardHolder');
+    cardHolder.innerHTML = "";
+    totalSavedData.forEach(item => {
+        
+        const div = document.createElement('div');
+        div.className = "infoCards";
+        div.role = "button";
+        div.tabIndex = 0;
+
+        div.innerHTML = `
+            <img src="https:${item.current.condition.icon}">
+            <div class="infoCardText smallText">
+                <p>${item.location.name}</p><p>${item.current.temp_c}&deg;C</p>
+            </div>
+        `;
+        div.addEventListener('click', () => {
+            updateUI(item);
+            showRigtContainer('homeDiv');
+        });
+        cardHolder.appendChild(div);
+    }
+    );
+}
+
+function showRigtContainer(sectionName){
+    const allSections = document.querySelectorAll('.container');
+    for (let i = 0; i < allSections.length; i++) {
+        allSections[i].classList.remove('active');  
+    }
+    const selectedSection = document.getElementById(sectionName);
+    selectedSection.classList.add('active');
+        
 }
