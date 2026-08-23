@@ -33,29 +33,84 @@
 
     <div class="containerRight">
         <div class="rightTop">
-            <input type="search" style="width: 50rem; height: 2rem;">
-            <button>Search</button>
+            <input type="search" id="city-input" style="width: 50rem; height: 2rem;">
+            <button id="search-btn">Search</button>
         </div>
         <div class="rightMiddle">
-            <div class="mainDisplay">
-                <div>
-                    <p id="mdLocation">Dhaka, Bangladesh</p>
-                    <p id="mdDateTime">Date and time</p>
+            <div class="midSection">
+                <div class="mainDisplay">
+                    <div>
+                        <p id="mdLocation"></p>
+                        <p id="mdDateTime"></p>
+                    </div>
+                    <div>
+                        <div class="mdTempartureText"><span class="bigText" id="resultT"></span><span class="superscriptText">&deg;C</span></div>
+                        <div class="mdCondition"><p id="mdCondition">Sunny</p><p id="mdConditionDetails"></p></div>
+                    </div>
+                    <div>
+                        <p id="mdFeelsLike"></p>
+                    </div>
+                    <div class="highlightDisplay">
+                        <div class="infoCards">
+                            <img src="resources/weather-svgrepo-com.svg" style="width: 1.5rem; height: 1.5rem;">
+                            <div style="display: flex; flex-direction: column;"><p>Humidity</p><p id="mdHumidity"></p></div>
+                        </div>
+                        <div class="infoCards">
+                            <img src="resources/weather-svgrepo-com.svg" style="width: 1.5rem; height: 1.5rem;">
+                            <div style="display: flex; flex-direction: column;"><p>Wind</p><p id="mdWind"></p></div>
+                        </div>
+                        <div class="infoCards">
+                            <img src="resources/weather-svgrepo-com.svg" style="width: 1.5rem; height: 1.5rem;">
+                            <div style="display: flex; flex-direction: column;"><p>Pressure</p><p id="mdPressure"></p></div>
+                        </div>
+                        <div class="infoCards">
+                            <img src="resources/weather-svgrepo-com.svg" style="width: 1.5rem; height: 1.5rem;">
+                            <div style="display: flex; flex-direction: column;"><p>Visibiliy</p><p id="mdVisibility"></p></div>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <div class="mdTempartureText"><span class="bigText" id="resultT">32</span><span class="superscriptText">&deg;C</span></div>
-                    <div class="mdCondition"><p>Sunny</p><p>Clear Sky</p></div>
-                </div>
-                <div>
-                    <p>Feels like 35 degree</p>
-                </div>
-            </div>
-            <div class="extraDisplay">
+                <div class="detailsDisplay">
+                    Details
+                    <div class="details-grid">
+                        <div class="item">
+                            <span>UV Index</span>
+                            <span id="mdUVIndex">7 (High)</span>
+                        </div>
+                        <div class="item">
+                            <span>Cloud Cover</span>
+                            <span id="mdCloudCover">20%</span>
+                        </div>
 
+                        <div class="item">
+                            <span>Wind Direction</span>
+                            <span id="mdWindDirection">5:25 AM</span>
+                        </div>
+                        <div class="item">
+                            <span>Dew Point</span>
+                            <span id="mdDewPoint">25°C</span>
+                        </div>
+
+                        <div class="item">
+                            <span>Wind Temperature</span>
+                            <span id="mdWindTemperature">6:38 PM</span>
+                        </div>
+                        <div class="item">
+                            <span>Heat Index</span>
+                            <span id="mdHeatIndex">Good (42)</span>
+                        </div>
+
+
+                </div>
             </div>
         </div>
         <div class="rightBottom">
-            Recent Searches
+            <p>Recent Searches</p>
+            <div class="infoCardHolder" id="infoCardHolder">
+                <!-- <div class="infoCards">
+                    <img src="resources/weather-svgrepo-com.svg"><div style="display: flex; flex-direction: column;">
+                    <p>Dhaka</p><p>32&deg;C</p></div>
+                </div> -->
+            </div>
         </div>
     </div>
 

@@ -51,15 +51,21 @@ body{
     background-color: cadetblue;
 }
 .rightMiddle{
-    display: flex; flex-direction: column; flex-grow: 1; background-color: aqua;
-    padding: 3rem; border-radius: 2rem;
-    background-image: url('resources/cloudy.jpg');
-    background-size: cover; background-position: center; background-repeat: no-repeat;
+    display: flex; flex-direction: column; background-color: aqua;
+    padding: .3rem; border-radius: 2rem; height: 50rem;
 }
+.midSection{
+    display: flex; flex-direction: row;
+    background-color: beige;
+    height: 18rem;
+}
+
+
 .mainDisplay{
-    display: flex; flex-direction: column; flex-grow: 1;
-    border: .1rem solid black;
-    border-radius: 1rem;
+    display: flex; flex-direction: column;
+    border: .1rem  none black; border-radius: 1rem;
+    padding: .5rem; width: 50%;
+    background-image: url('resources/cloudy.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;
 }
 .mdTempartureText{
     display: inline-flex;
@@ -68,14 +74,60 @@ body{
 .mdCondition{
     display: flex; flex-direction: row;
 }
-
-.extraDisplay{
+.highlightDisplay{
     display: flex;
     background-color: blanchedalmond;
     border-radius: 1rem;
-    width: 100%; padding: 1rem;
+    width: 100%; padding: .1rem;
+    margin-top: auto;
+}
+.detailsDisplay{
+    background-color: #5f81b8;
+    border-radius: 1rem;
+    width: 50%; padding: 1rem;
+}
+
+.details-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 32px;
+  position: relative;
+}
+
+.details-grid::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 1px;
+  background: #000;
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid;
 }
 
 .rightBottom{
+    height: 8rem;
     padding: 1rem; background-color: #5f81b8; border-radius: 2rem;
+    margin-top: auto;
+}
+.infoCardHolder{
+    display: flex; flex-direction: row; justify-content: space-between;
+}
+.infoCards{
+    display: flex; flex-direction: row; justify-content: center; align-items: center;
+    background-color: bisque;
+    height: 4.5rem; width: 8rem;
+    gap: .7rem; padding: .5rem;
+}
+.infoCards img{
+    width: 1rem; height: 1rem;;
+}
+.infoCardText{
+    display: flex; flex-direction: column;
 }
