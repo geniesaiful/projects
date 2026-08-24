@@ -1,0 +1,21 @@
+:root{
+    --genBg: #F8FAFC; /*#4CAF50 #FAF8F5;*/
+    --genText: #1E293B; /*#2f54e7 #0F172A; */
+    --selectorBg: #334563;
+    --selectorText: #ece9f6;
+    --mdText: #484848;
+}
+*{
+    box-sizing: border-box; margin: 0; padding: 0;
+}
+body{
+    display: flex;
+    font-family: Arial, sans-serif;
+    background-color: var(--genBg); color: var(--genText);
+}
+body.dark{
+    --genBg:  #1E293B; /*#4CAF50 #FAF8F5;*/
+    --genText: #F8FAFC; /*#2f54e7 #0F172A; */
+    --selectorBg: #ece9f6;
+    --selectorText: #334563 ;
+}
