@@ -16,44 +16,46 @@
         <div style="display: flex;">
             <button class="buttonWide"> + Add Notes </button>
         </div>
-        <div>
+        <div class="menuDiv">
             <nav class="sidebar-menu">
-                <!-- Added data-id attribute to map to your database or state -->
-                <button class="menu-item active" data-id="all-notes">
+                <button class="menu-item active" id="all-notes">
                     <span class="icon">🏠</span>
                     <span class="label">All Notes</span>
                     <span class="count">24</span>
                 </button>
 
-                <button class="menu-item" data-id="pinned">
+                <button class="menu-item" id="pinned">
                     <span class="icon">📌</span>
                     <span class="label">Pinned</span>
                     <span class="count">5</span>
                 </button>
 
-                <button class="menu-item" data-id="categories">
+                <button class="menu-item" id="categories">
                     <span class="icon">📁</span>
                     <span class="label">Categories</span>
                 </button>
                 
-                <button class="menu-item" data-id="tags">
+                <button class="menu-item" ="tags">
                     <span class="icon">🏷️</span>
                     <span class="label">Tags</span>
                 </button>
                 
-                <button class="menu-item" data-id="trash">
+                <button class="menu-item" id="trash">
                     <span class="icon">🗑️</span>
                     <span class="label">Trash</span>
                 </button>
 
-                <button class="menu-item" data-id="tags">
+                <button class="menu-item" id="themes">
                     <span class="icon">☾</span>
                     <span class="label">Theme</span>
                 </button>
             </nav>
         </div>
-        <div>
-            
+        <div class="noteCount">
+            <div><span class="icon">📀</span><span></span>Notes Storage</div>
+            <div>progress bar</div>
+            <div>0/100 notes used</div>
+
         </div>
     </div>
     <div class="content">
