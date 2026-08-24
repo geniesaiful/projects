@@ -52,7 +52,7 @@ function updateUI(data){
     document.getElementById('mdPressure').innerHTML=`${data.current.pressure_mb} hPa`;
     document.getElementById('mdVisibility').innerHTML=`${data.current.vis_km} km`;
 
-//    console.log(data);
+    console.log(data);
 
     document.getElementById('mdUVIndex').innerHTML=`${data.current.uv}`;
     document.getElementById('mdCloudCover').innerHTML=`${data.current.cloud}%`;
@@ -61,6 +61,8 @@ function updateUI(data){
     document.getElementById('mdWindTemperature').innerHTML=`${data.current.windchill_c}&deg;C`;
     document.getElementById('mdHeatIndex').innerHTML=`${data.current.heatindex_c}&deg;C`;
     updateRecent();
+    applyWeatherBackground(data.current.condition.code);
+
 }
 
 function saveData(newData){
@@ -74,7 +76,7 @@ function saveData(newData){
 
 function updateRecent(){
     const totalSavedData = JSON.parse(localStorage.getItem('weatherAppApiData')) || [];
-    const recentSavedData = totalSavedData.slice(-7);
+    const recentSavedData = totalSavedData.slice(-8);
 
     const cardHolder = document.getElementById('infoCardHolder');
     cardHolder.innerHTML = "";
@@ -130,19 +132,84 @@ function updateRecentAll(){
         `;
         div.addEventListener('click', () => {
             updateUI(item);
-            showRigtContainer('homeDiv');
+            showRigtContainer('homeDiv','homeMenu');
         });
         cardHolder.appendChild(div);
     }
     );
 }
 
-function showRigtContainer(sectionName){
+function showRigtContainer(sectionName,menuName){
     const allSections = document.querySelectorAll('.container');
+    const allMenuItem = document.querySelectorAll('.leftMenuItem')
     for (let i = 0; i < allSections.length; i++) {
-        allSections[i].classList.remove('active');  
+        allSections[i].classList.remove('active');
+        allMenuItem[i].classList.remove('active');  
     }
-    const selectedSection = document.getElementById(sectionName);
-    selectedSection.classList.add('active');
-        
+    document.getElementById(sectionName).classList.add('active');
+    document.getElementById(menuName).classList.add('active');       
+}
+
+function applyWeatherBackground(code) {
+  const container = document.getElementById("mainDisplay");
+  
+  // Clear any existing weather classes, keeping base layout
+  container.className = "mainDisplay";
+
+  switch (true) {
+    // 1. Clear / Sunny
+    case (code === 1000):
+      container.classList.add("sunny");
+      break;
+
+    // 2. Partly Cloudy
+    case (code === 1003):
+      container.classList.add("partly-cloudy");
+      break;
+
+    // 3. Overcast / Heavy Clouds
+    case ([1006, 1009].includes(code)):
+      container.classList.add("overcast");
+      break;
+
+    // 4. Fog / Mist / Atmospheric Haze
+    case ([1030, 1135, 1147].includes(code)):
+      container.classList.add("foggy");
+      break;
+
+    // 5. Rain / Drizzle (Includes patches, showers, and heavy downpours)
+    case ((code >= 1063 && code <= 1072) || 
+          (code >= 1150 && code <= 1201) || 
+          (code >= 1240 && code <= 1246)):
+      container.classList.add("rainy");
+      break;
+
+    // 6. Thunderstorm
+    case ([1087, 1273, 1276, 1279, 1282].includes(code)):
+      container.classList.add("thunderstorm");
+      break;
+
+    // 7. Snow / Ice Pellets / Sleet
+    case ((code >= 1066 && code <= 1069) ||
+          (code >= 1114 && code <= 1125) ||
+          (code >= 1204 && code <= 1237) ||
+          (code >= 1249 && code <= 1264)):
+      container.classList.add("snowy");
+      break;
+
+    // Default
+    default:
+      container.classList.add("sunny");
+      break;
+  }
+}
+
+function darkModeToggle(element){
+    if(element.checked){ 
+        document.body.classList.add('dark');
+    }
+    else{
+        document.body.classList.remove('dark');
+    }
+    
 }

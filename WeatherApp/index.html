@@ -12,19 +12,19 @@
         <div class="leftTop">
             <img src="resources/weather-svgrepo-com.svg" style="width: 3.75rem; height: 3.75rem;">
             <div style="align-content: center;">
-                <p>Weather App</p>
-                <p>Get realtime weather</p>
+                <p class="headlineText">Weather App</p>
+                <p >Get realtime weather</p>
             </div>
         </div>
 
         <div class="leftMiddle">
-            <div class="leftMenuItem" onclick="showRigtContainer('homeDiv')"><img src="resources/weather-svgrepo-com.svg" style="width: 1.5rem; height: 1.5rem;"><p>Home</p></div>
-            <div class="leftMenuItem" onclick="showRigtContainer('recentDiv')"><img src="resources/weather-svgrepo-com.svg" style="width: 1.5rem; height: 1.5rem;" ><p>Recent</p></div>
-            <div class="leftMenuItem" onclick="showRigtContainer('settingsDiv')"><img src="resources/weather-svgrepo-com.svg" style="width: 1.5rem; height: 1.5rem;" ><p>Setting</p></div>
+            <div class="leftMenuItem active" id="homeMenu" data-target="homeDiv" onclick="showRigtContainer('homeDiv','homeMenu')"><img src="resources/weather-svgrepo-com.svg" style="width: 1.5rem; height: 1.5rem;"><p>Home</p></div>
+            <div class="leftMenuItem" id="recentMenu" data-target="recentDiv" onclick="showRigtContainer('recentDiv','recentMenu')"><img src="resources/weather-svgrepo-com.svg" style="width: 1.5rem; height: 1.5rem;" ><p>Recent</p></div>
+            <div class="leftMenuItem" id="settingsMenu" data-target="settingsDiv" onclick="showRigtContainer('settingsDiv','settingsMenu')"><img src="resources/weather-svgrepo-com.svg" style="width: 1.5rem; height: 1.5rem;" ><p>Setting</p></div>
         </div>
 
         <div class="leftBottom">
-            <p> All rights reserved </p>
+            <p class="smallText"> All rights reserved </p>
         </div>
 
     </div>
@@ -33,12 +33,12 @@
 
     <div class="container active" id="homeDiv">
         <div class="rightTop">
-            <input type="search" id="city-input" style="width: 50rem; height: 2rem;">
+            <input type="search" class="search-input" id="city-input" style="width: 50rem; height: 2rem;">
             <button id="search-btn">Search</button>
         </div>
         <div class="rightMiddle">
             <div class="midSection">
-                <div class="mainDisplay">
+                <div class="mainDisplay" id="mainDisplay">
                     <div>
                         <p id="mdLocation"></p>
                         <p id="mdDateTime"></p>
@@ -53,19 +53,19 @@
                     <div class="highlightDisplay">
                         <div class="infoCards">
                             <img src="resources/weather-svgrepo-com.svg" style="width: 1.5rem; height: 1.5rem;">
-                            <div style="display: flex; flex-direction: column;"><p class="smallText">Humidity</p><p id="mdHumidity"></p></div>
+                            <div style="display: flex; flex-direction: column;"><p class="mediumText">Humidity</p><p class="mdDataText" id="mdHumidity"></p></div>
                         </div>
                         <div class="infoCards">
                             <img src="resources/weather-svgrepo-com.svg" style="width: 1.5rem; height: 1.5rem;">
-                            <div style="display: flex; flex-direction: column;"><p class="smallText">Wind</p><p id="mdWind"></p></div>
+                            <div style="display: flex; flex-direction: column;"><p class="mediumText">Wind</p><p class="mdDataText" id="mdWind"></p></div>
                         </div>
                         <div class="infoCards">
                             <img src="resources/weather-svgrepo-com.svg" style="width: 1.5rem; height: 1.5rem;">
-                            <div style="display: flex; flex-direction: column;"><p class="smallText">Pressure</p><p id="mdPressure"></p></div>
+                            <div style="display: flex; flex-direction: column;"><p class="mediumText">Pressure</p><p class="mdDataText" id="mdPressure"></p></div>
                         </div>
                         <div class="infoCards">
                             <img src="resources/weather-svgrepo-com.svg" style="width: 1.5rem; height: 1.5rem;">
-                            <div style="display: flex; flex-direction: column;"><p class="smallText">Visibiliy</p><p id="mdVisibility"></p></div>
+                            <div style="display: flex; flex-direction: column;"><p class="mediumText">Visibiliy</p><p class="mdDataText" id="mdVisibility"></p></div>
                         </div>
                     </div>
                 </div>
@@ -121,7 +121,11 @@
         </div>
     </div>
     <div class="container" id="settingsDiv">
-        Settings
+        <label class="simple-check-label">
+            <input type="checkbox" id="simple-check" onchange="darkModeToggle(this)">
+            Dark Mode
+        </label>
+
     </div>
 <script src="script.js"></script>
 </body>
