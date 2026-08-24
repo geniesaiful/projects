@@ -19,13 +19,20 @@ body.dark{
     --selectorBg: #ece9f6;
     --selectorText: #334563 ;
 }
-
+.search-btn{
+    display: flex; align-items: center; gap: 8px;
+    background-color: #707070; color: #ffffff;
+    border: none; outline: none; padding: .6rem 1.5rem; border-radius: 1rem;
+    font-size: 1rem; font-weight: 500; cursor: pointer;
+}
+.search-btn:hover { background-color: #515151; }
 .buttonWide{ 
     display: flex; align-items: center; justify-content: center;
     width: 100%; border: none; outline: none; padding: .6rem 1.5rem; border-radius: 1rem;
     background-color: #707070; color: #ffffff;
     font-size: 1rem; font-weight: 500; cursor: pointer;
 }
+.buttonWide:hover{ background-color: #515151; }
 
 
 .leftBar{
@@ -77,7 +84,36 @@ body.dark{
 
 
 
-.content{
+.contents{
+    display: flex; flex-direction: column; flex: 1;
     background-color: aquamarine;
-    flex: 1;
 }
+
+.contentTop{
+    display: flex; align-items: center; width: 100%; max-width: 100rem; gap: 1rem;
+    padding: 2rem 8rem; border-radius: 2rem;  background-color: aqua;
+}
+.search-input {
+    flex: 1;  border: .1rem solid #707070;
+    background: transparent;  padding: 10px 18px; font-size: 1rem;  color: #1e293b;
+    border-radius: 1.5rem;
+}
+
+.contentAll{
+    display: flex; background-color: #5e5ce6;
+    flex-grow: 1;
+}
+
+.notesOperation{
+    display: flex; flex-direction: column; width: 70%; background-color: #00ff9d;
+}
+.notesOperationTop{
+    display: flex; height: 10%;background-color: #ffd0ff;
+}
+.notesHolder{
+    display: flex; height: 100%; background-color: #cadeff;
+}
+.noteDetails{
+    display: flex; width:30%;background-color: #f9e1d8;
+}
+
