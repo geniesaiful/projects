@@ -4,11 +4,61 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Notes Application</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
+    <div class="leftBar">
+        <div class="titleDiv">
+            <img src="resources/note-book.png" style="width: 3rem; height: 3rem;">
+            <div style="display: flex;flex-direction: column;"><span>Notes Application</span><span>Track your notes</span></div>
+        </div>
+        <div style="display: flex;">
+            <button class="buttonWide"> + Add Notes </button>
+        </div>
+        <div>
+            <nav class="sidebar-menu">
+                <!-- Added data-id attribute to map to your database or state -->
+                <button class="menu-item active" data-id="all-notes">
+                    <span class="icon">🏠</span>
+                    <span class="label">All Notes</span>
+                    <span class="count">24</span>
+                </button>
 
+                <button class="menu-item" data-id="pinned">
+                    <span class="icon">📌</span>
+                    <span class="label">Pinned</span>
+                    <span class="count">5</span>
+                </button>
+
+                <button class="menu-item" data-id="categories">
+                    <span class="icon">📁</span>
+                    <span class="label">Categories</span>
+                </button>
+                
+                <button class="menu-item" data-id="tags">
+                    <span class="icon">🏷️</span>
+                    <span class="label">Tags</span>
+                </button>
+                
+                <button class="menu-item" data-id="trash">
+                    <span class="icon">🗑️</span>
+                    <span class="label">Trash</span>
+                </button>
+
+                <button class="menu-item" data-id="tags">
+                    <span class="icon">☾</span>
+                    <span class="label">Theme</span>
+                </button>
+            </nav>
+        </div>
+        <div>
+            
+        </div>
+    </div>
+    <div class="content">
+        
+    </div>
 
 <script src="script.js"></script>
 </body>

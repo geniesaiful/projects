@@ -3,19 +3,73 @@
     --genText: #1E293B; /*#2f54e7 #0F172A; */
     --selectorBg: #334563;
     --selectorText: #ece9f6;
-    --mdText: #484848;
 }
 *{
-    box-sizing: border-box; margin: 0; padding: 0;
+    box-sizing: border-box;
 }
 body{
-    display: flex;
+    display: flex;  margin: 0; padding: 0;
     font-family: Arial, sans-serif;
     background-color: var(--genBg); color: var(--genText);
+    width: 100vw; height: 100vh; 
 }
 body.dark{
     --genBg:  #1E293B; /*#4CAF50 #FAF8F5;*/
     --genText: #F8FAFC; /*#2f54e7 #0F172A; */
     --selectorBg: #ece9f6;
     --selectorText: #334563 ;
+}
+
+.buttonWide{ 
+    display: flex; align-items: center; justify-content: center;
+    width: 100%; border: none; outline: none; padding: .6rem 1.5rem; border-radius: 1rem;
+    background-color: #707070; color: #ffffff;
+    font-size: 1rem; font-weight: 500; cursor: pointer;
+}
+
+
+.leftBar{
+    display: flex; flex-direction: column;
+    background-color: azure;
+    width: 20%; margin: .5rem; padding: .5rem; gap: 1rem;
+    border: .1rem solid #00000020; border-radius: 1.5rem;
+}
+.titleDiv{  display: flex; flex-direction: row; align-items: center; gap: .5rem; }
+
+.sidebar-menu {
+  display: flex; flex-direction: column; 
+  gap: .5rem;  width: 100%; padding-top: 16px;
+}
+
+.menu-item {
+  display: flex; align-items: center;
+  width: 100%; padding: .75rem 1.25rem;background: transparent; border: none;
+  border-left: .25rem solid transparent;
+  color: var(--genText); font-size: 1rem; font-weight: 500;
+  cursor: pointer;
+}
+.menu-item .icon {
+  height: 20px; width: auto; aspect-ratio: 1 / 1;
+  display: flex; align-items: center; justify-content: center;
+  margin-right: 1rem; 
+}
+.menu-item .label { flex-grow: 1; text-align: left;}
+.menu-item .count { font-size: 13px; font-weight: 600; color: #5e5ce6; }
+.menu-item.active {
+  background-color: #f4f3ff; color: #5e5ce6;
+  border-left-color: #5e5ce6; border-radius: 0 12px 12px 0;
+}
+.menu-item:hover:not(.active) { background-color: #f8f9fa; border-radius: 0 12px 12px 0; }
+
+
+
+
+
+
+
+
+
+.content{
+    background-color: aquamarine;
+    flex: 1;
 }
