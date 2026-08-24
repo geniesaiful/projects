@@ -86,7 +86,7 @@ body.dark{
 
 .contents{
     display: flex; flex-direction: column; flex: 1;
-    background-color: aquamarine;
+    
 }
 
 .contentTop{
@@ -110,6 +110,8 @@ body.dark{
 .notesOperationTop{
     display: flex; height: 10%;background-color: #ffd0ff;
 }
+.notesOperationTopText{ display: flex; flex-direction: column; width: 100%; background-color: white;}
+.notesOperationTopAction{ display: flex; flex-direction:row-reverse;  width: 100%; background-color: #ffbdbd;}
 .notesHolder{
     display: flex; height: 100%; background-color: #cadeff;
 }
