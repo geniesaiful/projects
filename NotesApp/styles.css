@@ -34,7 +34,7 @@ body.dark{
 }
 .buttonWide:hover{ background-color: #515151; }
 
-.titleTxt{ font-size: 1.75rem; letter-spacing: -0.02rem; color: var(--genText);}
+.titleTxt{ font-size: 1.75rem; letter-spacing: -0.02rem; color: var(--genText); margin: 0rem 1rem;}
 .normalHeading{font-size: 1.25rem; font-weight: 600; letter-spacing: 0.008rem; color: var(--genText); margin-bottom: .25rem;}
 .normalTxt{ font-size: 1.25rem; letter-spacing: 0.01rem; color: var(--genText);}
 .smallerHeading{font-size: 0.9rem; font-weight: 600; letter-spacing: 0.0rem; color: var(--genText); margin: .35rem 0;}

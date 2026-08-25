@@ -8,7 +8,7 @@ const tempNotes = [
     tags: ["Life","lifestyle"],
     content: "Today was a productive day. I started the morning with a good workout and reading for 30 minutes.\n\nWorked on the quiz application and implemented the timer functionality.\n\nIn the evening, I learned about local storage and how to persist data in JavaScript.\n\nGrateful for small progress every day! 🙂",
     createdAt: "2026-05-16T09:15:00.000Z",
-    updatedAt: "2026-05-16T10:25:00.000Z"
+    updatedAt: "2026-07-16T10:25:00.000Z"
   },
   {
     id: "note_02",
@@ -19,7 +19,7 @@ const tempNotes = [
     tags: ["Home","Food"],
     content: "- Almond milk\n- Whole grain bread\n- Fresh blueberries\n- Greek yogurt",
     createdAt: "2026-05-15T14:30:00.000Z",
-    updatedAt: "2026-05-15T14:30:00.000Z"
+    updatedAt: "2026-07-15T14:30:00.000Z"
   },
   {
     id: "note_03",
