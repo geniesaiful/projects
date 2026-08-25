@@ -139,8 +139,16 @@ body.dark{
 .nscBot{ display: flex; flex-direction: row; width: 100%; background-color: wheat;}
 
 .noteDetails{
-    display: flex; flex-direction: column; width:30%;background-color: #f9e1d8;
+    display: flex; flex-direction: column; width:30%; background-color: #f9e1d8;
+    padding: 1rem; gap: 1rem;
 }
 .ndTop{ display: flex; flex-direction: row; justify-content: space-between; width: 100%; background-color: #00ff9d; }
 .ndTop img{width: 2rem; height: 2rem; padding: .3rem; background-color: #1E293B;}
 .emoji{ font-size: 1.75rem; width: 2rem;height: 2rem;}
+.ndTitle{display: flex;}
+.ndTitleDateTime{display: flex;}
+.ndCatTag{display: flex;}
+.ndDesc{display: flex; flex-grow: 1;}
+.ndDates{display: flex;flex-direction: column;}
+.ndDates span{ margin: .1rem .3rem; }
+.ndAction{display: flex;margin: 1rem 0rem;justify-content: space-between;}
