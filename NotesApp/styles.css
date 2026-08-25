@@ -34,6 +34,14 @@ body.dark{
 }
 .buttonWide:hover{ background-color: #515151; }
 
+.titleTxt{ font-size: 1.75rem; letter-spacing: -0.02rem; color: var(--genText);}
+.normalHeading{font-size: 1.25rem; font-weight: 600; letter-spacing: 0.008rem; color: var(--genText); margin-bottom: .25rem;}
+.normalTxt{ font-size: 1.25rem; letter-spacing: 0.01rem; color: var(--genText);}
+.smallerHeading{font-size: 0.9rem; font-weight: 600; letter-spacing: 0.0rem; color: var(--genText); margin: .35rem 0;}
+.smallerTxt{font-size: 0.9rem; font-weight: 100; letter-spacing: 0.015rem; color: var(--genText);}
+.catTxt{font-size: 0.8rem; font-weight: 600; letter-spacing: 0.0rem; color: var(--genText);}
+.tagTxt{font-size: 0.8rem; font-weight: 100; letter-spacing: 0.015rem; color: var(--genText);}
+
 
 .leftBar{
     display: flex; flex-direction: column;
@@ -126,10 +134,11 @@ body.dark{
 .noteSummaryCard{
     display: flex; flex-direction: column;
     width: 15rem; height: 17rem; background-color: #c7c7c7;
-    margin: .5rem; border: .1rem solid #2a1b1b; border-radius: 1rem; padding: .3rem;
+    margin: .5rem; border: .1rem solid #2a1b1b; border-radius: 1rem; padding: .3rem; gap: .5rem;
 }
 .nscTop{ display: flex; flex-direction: row; justify-content: space-between; width: 100%; background-color: #00ff9d;}
 .nscTop img{ width: 2rem; height: 2rem; padding: .3rem; background-color: #1E293B;}
-.nscText{ display: flex; flex-direction: column; width: 100%; background-color: #707070;}
-.nscCatTag{ display: flex; flex-direction: row; flex-grow: 1; width: 100%; background-color: violet;}
+.nscText{ display: flex; flex-direction: column; flex-grow: 1; width: 100%; background-color: #bfbfbf;}
+.nscDesc{ display: inline-block; line-height: 1rem; max-height: 7.0rem; overflow: hidden; }
+.nscCatTag{ display: flex; flex-direction: row; gap: .5rem; width: 100%; background-color: violet;}
 .nscBot{ display: flex; flex-direction: row; width: 100%; background-color: wheat;}
