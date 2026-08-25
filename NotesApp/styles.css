@@ -148,6 +148,7 @@ body.dark{
 .ndEmoji{ font-size: 1.75rem;}
 .ndTitle{display: flex;}
 .ndTitleDateTime{display: flex;}
+.ndTopDateTime{display: flex; margin-left: .5rem;}
 .ndCatTag{display: flex;}
 .ndDesc{display: flex; flex-grow: 1;}
 .ndDates{display: flex;flex-direction: column;}

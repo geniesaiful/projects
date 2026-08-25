@@ -1,10 +1,19 @@
-console.log(tempNotes[0]);
-console.log(Object.values(tempCategories)[0]);
 
-updateNoteCard(tempNotes[0]);
+saveNotes(tempNotes);
+const tempNotesFrmLS = getNotes();
+//updateNoteCard(tempNotesFrmLS[0]);
+tempNotesFrmLS.forEach(updateNoteCard);
+
+function saveNotes(notes) {
+  localStorage.setItem("notesApp", JSON.stringify(notes));
+}
+
+function getNotes() {
+  const data = localStorage.getItem("notesApp");
+  return data ? JSON.parse(data) : [];
+}
 
 function updateNoteCard(note){
-    console.log(note.title);
     document.getElementById('nscTopEmojiID').textContent = note.emoji;
     document.getElementById('nscHeadingID').textContent = note.title;
     document.getElementById('nscDescID').textContent = note.content;
