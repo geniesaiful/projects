@@ -113,19 +113,14 @@ body.dark{
 }
 
 .notesOperation{
-    display: flex; flex-direction: column; width: 70%; background-color: #00ff9d;
+    display: flex; flex-direction: column; width: 70%; background-color: #a3afaa;
 }
 .notesOperationTop{
     display: flex; height: 10%;background-color: #ffd0ff;
 }
 .notesOperationTopText{ display: flex; flex-direction: column; width: 100%; background-color: white;}
 .notesOperationTopAction{ display: flex; flex-direction:row-reverse;  width: 100%; background-color: #ffbdbd;}
-.notesHolder{
-    display: flex; height: 100%; background-color: #cadeff;
-}
-.noteDetails{
-    display: flex; width:30%;background-color: #f9e1d8;
-}
+
 .notesHolder{
     display: flex; flex-direction: row; flex-wrap: wrap; justify-content: space-between;
     gap: .5rem; padding: .5rem;
@@ -142,3 +137,10 @@ body.dark{
 .nscDesc{ display: inline-block; line-height: 1rem; max-height: 7.0rem; overflow: hidden; }
 .nscCatTag{ display: flex; flex-direction: row; gap: .5rem; width: 100%; background-color: violet;}
 .nscBot{ display: flex; flex-direction: row; width: 100%; background-color: wheat;}
+
+.noteDetails{
+    display: flex; flex-direction: column; width:30%;background-color: #f9e1d8;
+}
+.ndTop{ display: flex; flex-direction: row; justify-content: space-between; width: 100%; background-color: #00ff9d; }
+.ndTop img{width: 2rem; height: 2rem; padding: .3rem; background-color: #1E293B;}
+.emoji{ font-size: 1.75rem; width: 2rem;height: 2rem;}
