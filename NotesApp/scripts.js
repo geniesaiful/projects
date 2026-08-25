@@ -5,11 +5,13 @@ updateNoteCard(tempNotes[0]);
 
 function updateNoteCard(note){
     console.log(note.title);
+    document.getElementById('nscTopEmojiID').textContent = note.emoji;
     document.getElementById('nscHeadingID').textContent = note.title;
     document.getElementById('nscDescID').textContent = note.content;
     document.getElementById('nscCatID').textContent = note.category;
     document.getElementById('nscBotDateTime').textContent = dateFormatter(note.createdAt);
 
+    document.getElementById('ndEmojiID').textContent = note.emoji;
     document.getElementById('ndTitleTxtID').textContent = note.title;
     document.getElementById('ndTopDateTimeID').textContent = dateFormatter(note.updatedAt);
     document.getElementById('ndCatID').textContent = note.category;
