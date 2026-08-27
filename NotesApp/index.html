@@ -117,6 +117,48 @@
             </div>
 
         </div>
+        <div class = "addNote">
+            <p class="titleTxt"> What's in your mind? </p>
+            <div class="anInputForm">
+                <form id="noteForm" class="note-form">
+                    
+                    <div class="form-row">
+                        <input 
+                            type="text" 
+                            id="title" 
+                            maxlength="100" 
+                            placeholder="Note Title (max 100 chars)" 
+                            required
+                        />
+                    </div>
+
+                    <div class="form-row">
+                        <textarea 
+                            id="content" 
+                            maxlength="800" 
+                            placeholder="Note Details (max 800 chars)" 
+                            required>
+                        </textarea>
+                    </div>
+                    <div class="form-row">
+                        <select id="category" required>
+                            <option value="">Select Category</option>
+                        </select>
+
+                        <input 
+                            type="text" 
+                            id="tags" 
+                            maxlength="50" 
+                            placeholder="Tags (max 3, comma separated)" 
+                        />
+                    </div>
+                    <div class="form-row actions">
+                        <button type="button" id="cancelBtn">Cancel</button>
+                        <button type="submit">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
     <div class="categories">
 
