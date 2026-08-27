@@ -50,16 +50,14 @@ function populateNotes(){
     clone.querySelector(".nscTopPin").addEventListener("click", (event) => {
      note.isPinned = note.isPinned ? false : true;
       console.log("Is pinned:" + note.isPinned);
-      event.currentTarget.classList.add('pinned');
+      event.currentTarget.classList.toggle('pinned');
     });
     // Append clone directly
     noteHolder.appendChild(clone);
   });
   updateNoteDetails(allNotes[allNotes.length-1]);
 }
-function togglePin(){
 
-}
 function updateNoteCard(note){
 
   // document.getElementById('nscTopEmojiID').textContent = note.emoji;
