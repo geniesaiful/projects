@@ -1,9 +1,11 @@
 
 //saveNotes(tempNotes);
-const tempNotesFrmLS = getNotes();
+//const tempNotesFrmLS = getNotes();
 //updateNoteCard(tempNotesFrmLS[0]);
-tempNotesFrmLS.forEach(updateNoteCard);
+//tempNotesFrmLS.forEach(updateNoteCard);
 populateCategoryDropdown();
+populateNotes();
+
 function saveNotes(notes) {
   localStorage.setItem("notesApp", JSON.stringify(notes));
   localStorage.setItem("tempCategories", JSON.stringify(tempCategories));
@@ -14,15 +16,37 @@ function getNotes() {
   console.log(data);
   return data ? JSON.parse(data) : [];
 }
+function populateNotes(){
+  const allNotes = getNotes();
+  const noteHolder = document.getElementById("noteHolder");
+  const template = document.getElementById("noteCardTemplate");
+  
+  noteHolder.innerHTML = "";
+  allNotes.forEach(note => {
+    // Clone template markup
+    const clone = template.content.cloneNode(true);
 
+    // Populate data
+    clone.querySelector(".nscTopEmoji").textContent = note.emoji;
+    clone.querySelector(".nscHeading").textContent = note.title;
+    clone.querySelector(".nscDesc").textContent = note.content;
+    clone.querySelector(".nscCat").textContent = note.category;
+    clone.querySelector(".nscBotDate").textContent = dateFormatter(note.createdAt);
+
+    // Append clone directly
+    noteHolder.appendChild(clone);
+  });
+  updateNoteDetails(allNotes[allNotes.length-1]);
+}
 function updateNoteCard(note){
-  document.getElementById('nscTopEmojiID').textContent = note.emoji;
-  document.getElementById('nscHeadingID').textContent = note.title;
-  document.getElementById('nscDescID').textContent = note.content;
-  document.getElementById('nscCatID').textContent = note.category;
-  document.getElementById('nscBotDateTime').textContent = dateFormatter(note.createdAt);
 
-  updateNoteDetails(note);
+  // document.getElementById('nscTopEmojiID').textContent = note.emoji;
+  // document.getElementById('nscHeadingID').textContent = note.title;
+  // document.getElementById('nscDescID').textContent = note.content;
+  // document.getElementById('nscCatID').textContent = note.category;
+  // document.getElementById('nscBotDateTime').textContent = dateFormatter(note.createdAt);
+
+  
 }
 function updateNoteDetails(note){
   document.getElementById('ndEmojiID').textContent = note.emoji;
