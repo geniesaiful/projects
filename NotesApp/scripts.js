@@ -5,15 +5,15 @@
 //tempNotesFrmLS.forEach(updateNoteCard);
 populateCategoryDropdown();
 populateNotes();
-
+console.log(notesDataJs);
 function saveNotes(notes) {
   localStorage.setItem("notesApp", JSON.stringify(notes));
-  localStorage.setItem("tempCategories", JSON.stringify(tempCategories));
+  notesDataJs = notes;
+  console.log(notesDataJs);
 }
 
 function getNotes() {
   const data = localStorage.getItem("notesApp");
-  console.log(data);
   return data ? JSON.parse(data) : [];
 }
 function populateNotes(){
@@ -46,7 +46,6 @@ function updateNoteCard(note){
   // document.getElementById('nscCatID').textContent = note.category;
   // document.getElementById('nscBotDateTime').textContent = dateFormatter(note.createdAt);
 
-  
 }
 function updateNoteDetails(note){
   document.getElementById('ndEmojiID').textContent = note.emoji;
@@ -69,8 +68,8 @@ function createID(){
 }
 
 function addNotes(){
-  const mainNotesView = document.getElementById("contentAll");
-  const formContainer = document.getElementById("addNote"); 
+  const mainNotesView = document.getElementById("contentAllID");
+  const formContainer = document.getElementById("addNoteDivID"); 
   mainNotesView.style.display = "none";
   formContainer.style.display = "block";
 
@@ -84,7 +83,7 @@ function populateCategoryDropdown() {
   categorySelect.innerHTML = '<option value="">Select Category</option>';
 
   const categoriesObj = JSON.parse(localStorage.getItem("tempCategories")) || {};
-  console.log(categoriesObj);
+  //console.log(categoriesObj);
   Object.entries(categoriesObj).forEach(([key, cat]) => {
     const option = document.createElement("option");
     option.value = cat.name;                 // e.g., "Ideas"

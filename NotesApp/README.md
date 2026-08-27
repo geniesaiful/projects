@@ -2,15 +2,15 @@
 
 ## Core Application
 
-- [] Create a note
+- [x] Create a note
 - [] Edit a note
 - [] Delete a note
-- [] View note details
+- [x] View note details
 - [] Search notes
 - [] Pin/unpin notes
-- [] Categories/tags
-- [] Local Storage
-- [] Created/updated date
+- [x] Categories/tags
+- [x] Local Storage
+- [x] Created/updated date
 - [] Empty state
 - [] Responsive UI
 - [] Dark/Light mode

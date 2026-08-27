@@ -51,8 +51,13 @@ body.dark{
 }
 .titleDiv{  display: flex; flex-direction: row; align-items: center; gap: .5rem; }
 
+.addNoteDiv{
+ display: none;
+}
+.addNoteDiv.active{
+    display: flex;
+}
 .menuDiv{ display: flex;flex-direction: column;flex-grow: 1;}
-
 
 .sidebar-menu {
     display: flex; flex-direction: column; 
@@ -105,10 +110,12 @@ body.dark{
 }
 
 .contentAll{
-    display: flex; background-color: #5e5ce6;
+    display: none; background-color: #5e5ce6;
     flex-grow: 1;
 }
-
+.contentAll.active{
+    display: flex;
+}
 .notesOperation{
     display: flex; flex-direction: column; width: 70%; background-color: #a3afaa;
 }
