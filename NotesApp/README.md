@@ -7,7 +7,7 @@
 - [] Delete a note
 - [x] View note details
 - [] Search notes
-- [] Pin/unpin notes
+- [x] Pin/unpin notes
 - [x] Categories/tags
 - [x] Local Storage
 - [x] Created/updated date
