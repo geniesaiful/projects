@@ -47,9 +47,10 @@ function populateNotes(){
     clone.querySelector(".nscDesc").textContent = note.content;
     clone.querySelector(".nscCat").textContent = note.category;
     clone.querySelector(".nscBotDate").textContent = dateFormatter(note.createdAt);
-    // clone.getElementById("pinIcon").addEventListener("click", () => {
-    // console.log("Is pinned:" + note.isPinned);
-    // });
+    clone.querySelector(".nscTopPin").addEventListener("click", () => {
+     note.isPinned = note.isPinned ? false : true;
+      console.log("Is pinned:" + note.isPinned);
+    });
     // Append clone directly
     noteHolder.appendChild(clone);
   });
