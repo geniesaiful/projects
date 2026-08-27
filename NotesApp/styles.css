@@ -132,7 +132,8 @@ body.dark{
 }
 .nscTopEmoji{font-size: 1.25rem; padding: .1rem; background-color: #88b0f0; border: 1px solid black;}
 .nscTop{ display: flex; flex-direction: row; justify-content: space-between; width: 100%; background-color: #00ff9d;}
-.nscTop img{ width: 2rem; height: 2rem; padding: .3rem; background-color: #1E293B;}
+.nscTopPin{ width: 2rem; height: 2rem; padding: .3rem; background-color: #1E293B;}
+.nscTopPin.pinned{ background-color: #00ff9d;}
 .nscText{ display: flex; flex-direction: column; flex-grow: 1; width: 100%; background-color: #bfbfbf;}
 .nscDesc{ display: inline-block; line-height: 1rem; max-height: 7.0rem; overflow: hidden; }
 .nscCatTag{ display: flex; flex-direction: row; gap: .5rem; width: 100%; background-color: violet;}
