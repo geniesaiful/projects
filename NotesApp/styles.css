@@ -51,12 +51,7 @@ body.dark{
 }
 .titleDiv{  display: flex; flex-direction: row; align-items: center; gap: .5rem; }
 
-.addNoteDiv{
- display: none;
-}
-.addNoteDiv.active{
-    display: flex;
-}
+
 .menuDiv{ display: flex;flex-direction: column;flex-grow: 1;}
 
 .sidebar-menu {
@@ -109,11 +104,11 @@ body.dark{
     border-radius: 1.5rem;
 }
 
-.contentAll{
-    display: none; background-color: #5e5ce6;
+.content{
+    display: none; background-color: #b1b1b9;
     flex-grow: 1;
 }
-.contentAll.active{
+.content.active{
     display: flex;
 }
 .notesOperation{

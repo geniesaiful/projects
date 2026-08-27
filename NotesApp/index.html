@@ -18,34 +18,34 @@
         </div>
         <div class="menuDiv">
             <nav class="sidebar-menu">
-                <button class="menu-item active" id="all-notes">
+                <button class="menu-item active" id="contentAllMenuID" onclick="showRigtContainer('contentAllID','contentAllMenuID')">
                     <span class="icon">🏠</span>
                     <span class="label">All Notes</span>
                     <span class="count">24</span>
                 </button>
 
-                <button class="menu-item" id="pinned">
+                <button class="menu-item" id="pinnedMenuID" onclick="showRigtContainer('pinnedDivID','pinnedMenuID')">
                     <span class="icon">📌</span>
                     <span class="label">Pinned</span>
                     <span class="count">5</span>
                 </button>
 
-                <button class="menu-item" id="categories">
+                <button class="menu-item" id="categoriesMenuID" onclick="showRigtContainer('categoriesDivID','categoriesMenuID')">
                     <span class="icon">📁</span>
                     <span class="label">Categories</span>
                 </button>
                 
-                <button class="menu-item" ="tags">
+                <button class="menu-item" id="tagsMenuID" onclick="showRigtContainer('tagsDivID','tagsMenuID')">
                     <span class="icon">🏷️</span>
                     <span class="label">Tags</span>
                 </button>
                 
-                <button class="menu-item" id="trash">
+                <button class="menu-item" id="trashMenuID" onclick="showRigtContainer('trashDivID','trashMenuID')">
                     <span class="icon">🗑️</span>
                     <span class="label">Trash</span>
                 </button>
 
-                <button class="menu-item" id="themes">
+                <button class="menu-item" id="themeMenuID" onclick="showRigtContainer('themeDivID','themeMenuID')">
                     <span class="icon">☾</span>
                     <span class="label">Theme</span>
                 </button>
@@ -63,7 +63,7 @@
             <input type="search" class="search-input" id="search-input" style="width: 50rem; height: 2rem;">
             <button class="search-btn" id="search-btn">Search</button>
         </div>
-        <div class="contentAll active" id="contentAllID">
+        <div class="content active" id="contentAllID">
             <div class="notesOperation" >
                 <div class="notesOperationTop">
                     <div class="notesOperationTopText"><span>All Notes</span><span>24 Notes</span></div>
@@ -101,7 +101,7 @@
             </div>
 
         </div>
-        <div class = "addNoteDiv" id="addNoteDivID">
+        <div class = "content" id="addNoteDivID">
             <p class="titleTxt"> What's in your mind? </p>
             <div class="anInputForm">
                 <form id="noteForm" class="note-form">
@@ -144,8 +144,20 @@
             </div>
         </div>
     </div>
-    <div class="categories">
-
+    <div class="content" id="pinnedDivID">
+        Pined Div
+    </div>
+    <div class="content" id="categoriesDivID">
+        Categories
+    </div>
+    <div class="content" id="tagsDivID">
+        Tags
+    </div>
+    <div class="content" id="trashDivID">
+        Trash
+    </div>
+    <div class="content" id="themeDivID">
+        Themes
     </div>
 <script src="tempData.js"></script>
 <script src="scripts.js"></script>
