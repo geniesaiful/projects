@@ -14,38 +14,38 @@
             <div style="display: flex;flex-direction: column;"><span>Notes Application</span><span>Track your notes</span></div>
         </div>
         <div style="display: flex;">
-            <button class="buttonWide" id="sidebarAddNoteBtn"> + Add Notes </button>
+            <button class="buttonWide" id="sidebarAddNoteBtn" data-target="addNoteDivID"> + Add Notes </button>
         </div>
         <div class="menuDiv">
             <nav class="sidebar-menu">
-                <button class="menu-item active" id="contentAllMenuID" onclick="showRigtContainer('contentAllID','contentAllMenuID')">
+                <button class="menu-item active" id="contentAllMenuID" data-target="contentAllID">
                     <span class="icon">🏠</span>
                     <span class="label">All Notes</span>
                     <span class="count">24</span>
                 </button>
 
-                <button class="menu-item" id="pinnedMenuID" onclick="showRigtContainer('pinnedDivID','pinnedMenuID')">
+                <button class="menu-item" id="pinnedMenuID" data-target="pinnedDivID">
                     <span class="icon">📌</span>
                     <span class="label">Pinned</span>
                     <span class="count">5</span>
                 </button>
 
-                <button class="menu-item" id="categoriesMenuID" onclick="showRigtContainer('categoriesDivID','categoriesMenuID')">
+                <button class="menu-item" id="categoriesMenuID" data-target="categoriesDivID">
                     <span class="icon">📁</span>
                     <span class="label">Categories</span>
                 </button>
                 
-                <button class="menu-item" id="tagsMenuID" onclick="showRigtContainer('tagsDivID','tagsMenuID')">
+                <button class="menu-item" id="tagsMenuID" data-target="tagsDivID">
                     <span class="icon">🏷️</span>
                     <span class="label">Tags</span>
                 </button>
                 
-                <button class="menu-item" id="trashMenuID" onclick="showRigtContainer('trashDivID','trashMenuID')">
+                <button class="menu-item" id="trashMenuID" data-target="trashDivID">
                     <span class="icon">🗑️</span>
                     <span class="label">Trash</span>
                 </button>
 
-                <button class="menu-item" id="themeMenuID" onclick="showRigtContainer('themeDivID','themeMenuID')">
+                <button class="menu-item" id="themeMenuID" data-target="themeDivID">
                     <span class="icon">☾</span>
                     <span class="label">Theme</span>
                 </button>
@@ -143,22 +143,29 @@
                 </form>
             </div>
         </div>
+        <div class="content" id="pinnedDivID">
+            Pined Div
+        </div>
+        <div class="content" id="categoriesDivID">
+            Categories
+        </div>
+        <div class="content" id="tagsDivID">
+            Tags
+        </div>
+        <div class="content" id="trashDivID">
+            Trash
+        </div>
+        <div class="content" id="themeDivID">
+            Themes
+        </div>
+
+
+
+
+
+
     </div>
-    <div class="content" id="pinnedDivID">
-        Pined Div
-    </div>
-    <div class="content" id="categoriesDivID">
-        Categories
-    </div>
-    <div class="content" id="tagsDivID">
-        Tags
-    </div>
-    <div class="content" id="trashDivID">
-        Trash
-    </div>
-    <div class="content" id="themeDivID">
-        Themes
-    </div>
+    
 <script src="tempData.js"></script>
 <script src="scripts.js"></script>
 </body>

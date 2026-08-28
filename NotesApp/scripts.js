@@ -6,20 +6,31 @@
 populateCategoryDropdown();
 populateNotes();
 
-function showRigtContainer(sectionName,menuName){
-    const allSections = document.querySelectorAll('.content');
-    const allMenuItem = document.querySelectorAll('.menu-item');
-    for (let i = 0; i < allSections.length; i++) {
-        
-      allSections[i].classList.remove('active');
-      //allMenuItem[i].classList.remove('active');  
-
-    }
-    document.getElementById(sectionName).classList.add('active');
-    document.getElementById(menuName).classList.add('active');       
-    console.log(sectionName,menuName);
+function navigateTo(targetId){
+  document.querySelectorAll('.content').forEach(item =>{
+    item.classList.toggle('active', item.id === targetId);
+  });
+  document.querySelectorAll('.menu-item').forEach(btn =>{
+    btn.classList.toggle('active', btn.dataset.target === targetId);
+  });
 
 }
+
+
+// function showRigtContainer(sectionName,menuName){
+//     const allSections = document.querySelectorAll('.content');
+//     const allMenuItem = document.querySelectorAll('.menu-item');
+//     for (let i = 0; i < allSections.length; i++) {
+        
+//       allSections[i].classList.remove('active');
+//       //allMenuItem[i].classList.remove('active');  
+
+//     }
+//     document.getElementById(sectionName).classList.add('active');
+//     document.getElementById(menuName).classList.add('active');       
+//     console.log(sectionName,menuName);
+
+// }
 
 function saveNotes(notes) {
   localStorage.setItem("notesApp", JSON.stringify(notes));
@@ -88,11 +99,6 @@ function createID(){
 }
 
 function addNotes(){
-  const mainNotesView = document.getElementById("contentAllID");
-  const formContainer = document.getElementById("addNoteDivID"); 
-  mainNotesView.style.display = "none";
-  formContainer.style.display = "block";
-
   const form = document.getElementById("noteForm");
   form.reset();
 
@@ -177,4 +183,11 @@ document.addEventListener("DOMContentLoaded", () => {
   cancelBtn.addEventListener("click", () => {
     closeFormView();
   });
+});
+
+document.addEventListener('click',(event)=>{
+  const btnclicked = event.target.closest('[data-target]'); // where the click event happened, get the colest element's data-target attribute
+  if(btnclicked){
+    navigateTo(btnclicked.dataset.target);
+  }
 });
