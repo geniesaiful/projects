@@ -1,3 +1,5 @@
+let currentEditId = null;
+
 populateCategoryDropdown();
 populateNotes();
 
@@ -8,7 +10,6 @@ function navigateTo(targetId){
   document.querySelectorAll('.menu-item').forEach(btn =>{
     btn.classList.toggle('active', btn.dataset.target === targetId);
   });
-
 }
 
 function saveNotes(notes) {
@@ -20,6 +21,22 @@ function saveNotes(notes) {
 function getNotes() {
   const data = localStorage.getItem("notesApp");
   return data ? JSON.parse(data) : [];
+}
+
+function populateCategoryDropdown() {
+  const categorySelect = document.getElementById("category");
+  categorySelect.innerHTML = '<option value="">Select Category</option>';
+
+  const categoriesObj = JSON.parse(localStorage.getItem("tempCategories")) || {};
+  //console.log(categoriesObj);
+  Object.entries(categoriesObj).forEach(([key, cat]) => {
+    const option = document.createElement("option");
+    option.value = cat.name;                 // e.g., "Ideas"
+    option.textContent = `${cat.emoji} ${cat.name}`;
+    option.dataset.emoji = cat.emoji;        // Attach emoji to dataset
+    option.dataset.key = key;                // Keep reference to key if needed
+    categorySelect.appendChild(option);
+  });
 }
 function populateNotes(){
   const allNotes = getNotes();
@@ -78,89 +95,97 @@ function createID(){
 }
 
 function addNotes(){
+  currentEditId = null; 
   const form = document.getElementById("noteForm");
   form.reset();
-
   populateCategoryDropdown();
+  navigateTo("addNoteDivID");
 }
-function populateCategoryDropdown() {
-  const categorySelect = document.getElementById("category");
-  categorySelect.innerHTML = '<option value="">Select Category</option>';
+function editNotes(){
+  const allNotes = getNotes();
+  // Grab the note currently displayed in noteDetails
+  const note = allNotes.find(n => n.title === document.getElementById('ndTitleTxtID').textContent);
+  if (!note) return;
 
-  const categoriesObj = JSON.parse(localStorage.getItem("tempCategories")) || {};
-  //console.log(categoriesObj);
-  Object.entries(categoriesObj).forEach(([key, cat]) => {
-    const option = document.createElement("option");
-    option.value = cat.name;                 // e.g., "Ideas"
-    option.textContent = `${cat.emoji} ${cat.name}`;
-    option.dataset.emoji = cat.emoji;        // Attach emoji to dataset
-    option.dataset.key = key;                // Keep reference to key if needed
-    categorySelect.appendChild(option);
-  });
-}
-function closeFormView() {
-  const mainNotesView = document.getElementById("contentAllID");
-  const formContainer = document.getElementById("addNoteDivID");
+  currentEditId = note.id;
+  populateCategoryDropdown();
 
-  formContainer.style.display = "none";
-  mainNotesView.style.display = "flex";
+  // Pre-fill form values
+  document.getElementById("title").value = note.title;
+  document.getElementById("content").value = note.content;
+  document.getElementById("category").value = note.category;
+  document.getElementById("tags").value = note.tags ? note.tags.join(", ") : "";
+
+  navigateTo("addNoteDivID");
 }
 
 document.addEventListener("DOMContentLoaded", () => {
   const noteForm = document.getElementById("noteForm");
   const cancelBtn = document.getElementById("cancelBtn");
   const sidebarAddBtn = document.getElementById("sidebarAddNoteBtn");
+  const editBtn = document.getElementById("ndEditbtnID");
 
-  if (sidebarAddBtn) {
-    sidebarAddBtn.addEventListener("click", addNotes);
-  }
+  if (sidebarAddBtn) sidebarAddBtn.addEventListener("click", addNotes);
+  
+  if (editBtn) editBtn.addEventListener("click", editNotes); // change the add container to edit.
 
   // Form Submission
   noteForm.addEventListener("submit", (e) => {
     e.preventDefault();
 
-    // Process tags into clean array (max 3 tags)
+    //get data to appropriate variables
+    
     const rawTags = document.getElementById("tags").value;
     const tagsArray = rawTags
-      .split(",")
-      .map(tag => tag.trim())
-      .filter(tag => tag.length > 0)
+      .split(",")                    //["javascript", " ", "coding"]
+      .map(tag => tag.trim())        //strips surrounding whitespaces ["javascript", "", "coding"].
+      .filter(tag => tag.length > 0)  //Empty strings ("") evaluate to false and are removed["javascript", "coding"].
       .slice(0, 3);
 
-    // Extract selected category details
     const categorySelect = document.getElementById("category");
     const selectedOption = categorySelect.options[categorySelect.selectedIndex];
-    const categoryName = selectedOption.value;
-    const categoryEmoji = selectedOption.dataset.emoji || "";
-
-    // Generate ISO Timestamps
-    const nowISO = new Date().toISOString();
-
-    // Construct complete note object
-    const newNote = {
-      id: createID(),
-      isPinned: false,
-      emoji: categoryEmoji,
-      title: document.getElementById("title").value.trim(),
-      category: categoryName,
-      tags: tagsArray,
-      content: document.getElementById("content").value.trim(),
-      createdAt: nowISO,
-      updatedAt: nowISO,
-      isDeleted: false
-    };
-
-    // Save note to localStorage array
-    const allNotes = getNotes();
-    allNotes.push(newNote);
-    saveNotes(allNotes);
+    const nowISO = new Date().toISOString(); // Generate ISO Timestamps
     
-    closeFormView();
+    allNotes = getNotes();
+    
+    if(currentEditId){
+      const note = allNotes.find(n => n.id === currentEditId);
+      if(note){
+        note.title = document.getElementById("title").value.trim();
+        note.content = document.getElementById("content").value.trim();
+        note.category = selectedOption.value;
+        note.emoji = selectedOption.dataset.emoji || "";
+        note.tags = tagsArray;
+        note.updatedAt = nowISO;
+      }
+      else console.log("Error! Note not found! Somehow!!");
+    }
+
+    else{
+      // Construct complete note object
+      const newNote = {
+        id: createID(),
+        isPinned: false,
+        emoji: selectedOption.dataset.emoji || "",
+        title: document.getElementById("title").value.trim(),
+        category: selectedOption.value,
+        tags: tagsArray,
+        content: document.getElementById("content").value.trim(),
+        createdAt: nowISO,
+        updatedAt: nowISO,
+        isDeleted: false
+      };
+      
+      allNotes.push(newNote);
+    }
+
+    saveNotes(allNotes);
+    populateNotes();
+    navigateTo("contentAllID");
   });
 
-  // Handle Cancel Button Click
   cancelBtn.addEventListener("click", () => {
-    closeFormView();
+    navigateTo("contentAllID");
   });
 });
 
