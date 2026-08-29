@@ -1,8 +1,3 @@
-
-//saveNotes(tempNotes);
-//const tempNotesFrmLS = getNotes();
-//updateNoteCard(tempNotesFrmLS[0]);
-//tempNotesFrmLS.forEach(updateNoteCard);
 populateCategoryDropdown();
 populateNotes();
 
@@ -15,22 +10,6 @@ function navigateTo(targetId){
   });
 
 }
-
-
-// function showRigtContainer(sectionName,menuName){
-//     const allSections = document.querySelectorAll('.content');
-//     const allMenuItem = document.querySelectorAll('.menu-item');
-//     for (let i = 0; i < allSections.length; i++) {
-        
-//       allSections[i].classList.remove('active');
-//       //allMenuItem[i].classList.remove('active');  
-
-//     }
-//     document.getElementById(sectionName).classList.add('active');
-//     document.getElementById(menuName).classList.add('active');       
-//     console.log(sectionName,menuName);
-
-// }
 
 function saveNotes(notes) {
   localStorage.setItem("notesApp", JSON.stringify(notes));
