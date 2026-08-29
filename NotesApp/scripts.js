@@ -6,6 +6,7 @@ function renderAll(){
   populateNotes();
   showDeletedNotes();
   showPinnedNotes();
+  updateStats();
   
 }
 
@@ -55,16 +56,12 @@ function generateLightColor() {
 
   return `#${r}${g}${b}`.toUpperCase();
 }
-// function getTags(){
-//   const data = localStorage.getItem("notesApp");
-//   if (!data) {
-//     console.log('All quiet on Eastern fromt');
-//     return null;
-//   }
-
-// }
-
-
+function updateStats(){
+  const allNotes = getNotes();
+  const validNotes = allNotes.filter(note => !note.isDeleted);
+  document.getElementById('noTopNumber').textContent=`${validNotes.length} Notes`;
+  
+}
 function populateTagsSection(){
   console.log("function called");
   const listContainer = document.getElementById('tagsList');
@@ -105,7 +102,6 @@ function populateCategorySection()
       listContainer.appendChild(card);
   });
 }
-
 
 function populateCategoryDropdown() {
   const categorySelect = document.getElementById("category");
