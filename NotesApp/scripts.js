@@ -39,10 +39,9 @@ function populateNotes(){
   const noteHolder = document.getElementById("noteHolder");
   const template = document.getElementById("noteCardTemplate");
   
-  console.log(allNotes);
-  //noteHolder.innerHTML = "";
   noteHolder.querySelectorAll(".noteSummaryCard").forEach(card => card.remove()); //removes all cards.
-  allNotes.forEach(note => {
+  const notesToShow = allNotes.filter(note => !note.isDeleted);
+  notesToShow.forEach(note => {
     // Clone template markup
     const clone = template.content.cloneNode(true);
 
@@ -56,20 +55,47 @@ function populateNotes(){
      note.isPinned = note.isPinned ? false : true;
       console.log("Is pinned:" + note.isPinned);
       event.currentTarget.classList.toggle('pinned');
+
     });
+
     // Append clone directly
     noteHolder.appendChild(clone);
   });
-  updateNoteDetails(allNotes[allNotes.length-1]);
+  updateNoteDetails(notesToShow[notesToShow.length-1]);
 }
+function showDeletedNotes(){
+  const allNotes = getNotes();
+  
+  const noteHolder = document.getElementById("noteHolderTrash");
+  const template = document.getElementById("noteCardTemplateTrash");
+  noteHolder.querySelectorAll(".noteSummaryCardTrash").forEach(card => card.remove()); //removes all cards.
+  const notesToShow = allNotes.filter(note => note.isDeleted);
 
-function updateNoteCard(note){
 
-  // document.getElementById('nscTopEmojiID').textContent = note.emoji;
-  // document.getElementById('nscHeadingID').textContent = note.title;
-  // document.getElementById('nscDescID').textContent = note.content;
-  // document.getElementById('nscCatID').textContent = note.category;
-  // document.getElementById('nscBotDateTime').textContent = dateFormatter(note.createdAt);
+  notesToShow.forEach(note => {
+    // Clone template markup
+    const clone = template.content.cloneNode(true);
+
+    // Populate data
+    clone.querySelector(".nscTopEmoji").textContent = note.emoji;
+    clone.querySelector(".nscHeading").textContent = note.title;
+    clone.querySelector(".nscDesc").textContent = note.content;
+    clone.querySelector(".nscCat").textContent = note.category;
+    clone.querySelector(".nscBotDate").textContent = dateFormatter(note.updatedAt);
+    clone.querySelector(".nscTopPin").addEventListener("click", (event) => {
+      note.isDeleted = !note.isDeleted;
+      note.updatedAt = new Date().toISOString();
+      
+      saveNotes(allNotes);
+      showDeletedNotes();
+      populateNotes();
+          
+    });
+
+    // Append clone directly
+    noteHolder.appendChild(clone);
+  });
+  
 
 }
 function updateNoteDetails(note){
@@ -116,20 +142,40 @@ function editNotes(){
 
   navigateTo("addNoteDivID");
 }
+function softDeleteNotes() {
+  
+  const allNotes = getNotes();
+  const currentTitle = document.getElementById('ndTitleTxtID').textContent;
+    
+  const targetNote = allNotes.find(n => n.title === currentTitle);
+  
+  if (targetNote) {
+    // Soft delete: toggle flag and update timestamp
+    targetNote.isDeleted = true;
+    targetNote.updatedAt = new Date().toISOString();
+
+    saveNotes(allNotes);
+
+    populateNotes();
+  }
+  console.log('Note Soft Delete: '+targetNote.isDeleted);
+}
 
 document.addEventListener("DOMContentLoaded", () => {
   populateCategoryDropdown();
   populateNotes();
+  showDeletedNotes();
 
   const noteForm = document.getElementById("noteForm");
   const cancelBtn = document.getElementById("cancelBtn");
   const sidebarAddBtn = document.getElementById("sidebarAddNoteBtn");
   const editBtn = document.getElementById("ndEditbtnID");
+  const deleteBtn = document.getElementById("ndDeletebtnID");
 
   if (sidebarAddBtn) sidebarAddBtn.addEventListener("click", addNotes);
   
   if (editBtn) editBtn.addEventListener("click", editNotes); // change the add container to edit.
-
+  if (deleteBtn) deleteBtn.addEventListener('click', softDeleteNotes);
   // Form Submission
   noteForm.addEventListener("submit", (e) => {
     e.preventDefault();
