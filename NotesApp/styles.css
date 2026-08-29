@@ -13,7 +13,7 @@ body{
     background-color: var(--genBg); color: var(--genText);
     width: 100%;       /* Changed from 100vw */
     max-width: 100%;
-    min-height: 100vh;
+    height: 100vh;
 }
 body.dark{
     --genBg:  #1E293B; /*#4CAF50 #FAF8F5;*/
@@ -91,7 +91,7 @@ body.dark{
 
 
 
-.contents{display: flex; flex-direction: column; flex: 1;min-width: 0;}
+.contents{display: flex; flex-direction: column; flex: 1;min-width: 0;height: 100vh;}
 
 .contentTop{
     display: flex; align-items: center; width: 100%; max-width: 100rem; gap: 1rem;
@@ -125,6 +125,7 @@ body.dark{
     gap: 1rem;
     padding: 1rem;
     overflow-y: auto;
+    height: 100%;
 
 }
 .noteSummaryCard{

@@ -1,8 +1,5 @@
 let currentEditId = null;
 
-populateCategoryDropdown();
-populateNotes();
-
 function navigateTo(targetId){
   document.querySelectorAll('.content').forEach(item =>{
     item.classList.toggle('active', item.id === targetId);
@@ -15,7 +12,6 @@ function navigateTo(targetId){
 function saveNotes(notes) {
   localStorage.setItem("notesApp", JSON.stringify(notes));
   notesDataJs = notes;
-  console.log(notesDataJs);
 }
 
 function getNotes() {
@@ -43,7 +39,9 @@ function populateNotes(){
   const noteHolder = document.getElementById("noteHolder");
   const template = document.getElementById("noteCardTemplate");
   
-  noteHolder.innerHTML = "";
+  console.log(allNotes);
+  //noteHolder.innerHTML = "";
+  noteHolder.querySelectorAll(".noteSummaryCard").forEach(card => card.remove()); //removes all cards.
   allNotes.forEach(note => {
     // Clone template markup
     const clone = template.content.cloneNode(true);
@@ -120,6 +118,9 @@ function editNotes(){
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+  populateCategoryDropdown();
+  populateNotes();
+
   const noteForm = document.getElementById("noteForm");
   const cancelBtn = document.getElementById("cancelBtn");
   const sidebarAddBtn = document.getElementById("sidebarAddNoteBtn");
