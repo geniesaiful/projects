@@ -196,6 +196,10 @@ body.dark{
     border-radius: 1rem; color: #1E293B; font-weight: 600; font-size: 1rem; border: 1px solid #00000010;
 }
 
+.tagContainer{ display: flex; flex-direction: column; width: 100%; padding: 1.5rem; gap: 1.5rem; overflow-y: auto;}
+.tagsList{ display: flex; flex-wrap: wrap; gap: 1rem; width: 100%; }
+.tagCard{ display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.25rem;
+    border-radius: 1rem; background-color: var(--genBg); color: var(--genText); font-weight: 600; font-size: 1rem; border: 1px solid #00000010; }
 
 .trashViewDiv{display: flex; flex-direction: column; flex: 1; min-width: 0; background-color: #a3afaa;}
 .noteSummaryCardTrash{
@@ -203,3 +207,4 @@ body.dark{
     width: 100%; height: 16rem; background-color: #c7c7c7;
     border: .1rem solid #2a1b1b; border-radius: 1rem; padding: .3rem; gap: .5rem;
 }
+

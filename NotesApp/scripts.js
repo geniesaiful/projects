@@ -1,4 +1,13 @@
 let currentEditId = null;
+function renderAll(){
+  populateCategoryDropdown();
+  populateCategorySection();
+  populateTagsSection();
+  populateNotes();
+  showDeletedNotes();
+  showPinnedNotes();
+  
+}
 
 function navigateTo(targetId){
   document.querySelectorAll('.content').forEach(item =>{
@@ -46,7 +55,38 @@ function generateLightColor() {
 
   return `#${r}${g}${b}`.toUpperCase();
 }
+// function getTags(){
+//   const data = localStorage.getItem("notesApp");
+//   if (!data) {
+//     console.log('All quiet on Eastern fromt');
+//     return null;
+//   }
 
+// }
+
+
+function populateTagsSection(){
+  console.log("function called");
+  const listContainer = document.getElementById('tagsList');
+  if (!listContainer) return;
+  listContainer.innerHTML = "";
+
+  const allNotes = getNotes();
+  let allTags = [];
+  allNotes.forEach(note => {
+    if (note.tags) {
+      allTags = allTags.concat(note.tags);
+      console.log(note.tags);
+    }
+  });
+  const uniqueTags = [...new Set(allTags)];  //removes duplicates
+  uniqueTags.forEach(tag => {
+    const card = document.createElement("div");
+    card.className = "tagCard";
+    card.innerHTML = `<span>${tag}</span>`;
+    listContainer.appendChild(card);
+  });
+}
 function populateCategorySection()
 {
   const listContainer = document.getElementById('categoriesList');
@@ -244,11 +284,8 @@ function softDeleteNotes() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  populateCategoryDropdown();
-  populateCategorySection();
-  populateNotes();
-  showDeletedNotes();
-  showPinnedNotes()
+  
+  renderAll();
 
   const noteForm = document.getElementById("noteForm");
   const cancelBtn = document.getElementById("cancelBtn");
