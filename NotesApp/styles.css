@@ -165,3 +165,10 @@ body.dark{
 .form-row select {  width: 100%; padding: 8px; box-sizing: border-box; }
 .form-row textarea { height: 120px; resize: vertical; }
 .actions { justify-content: flex-end;}
+
+.trashViewDiv{display: flex; flex-direction: column; flex: 1; min-width: 0; background-color: #a3afaa;}
+.noteSummaryCardTrash{
+    display: flex; flex-direction: column;
+    width: 100%; height: 16rem; background-color: #c7c7c7;
+    border: .1rem solid #2a1b1b; border-radius: 1rem; padding: .3rem; gap: .5rem;
+}
