@@ -148,14 +148,18 @@ function softDeleteNotes() {
   const currentTitle = document.getElementById('ndTitleTxtID').textContent;
     
   const targetNote = allNotes.find(n => n.title === currentTitle);
+
+  /* In JavaScript, objects are passed by reference, not by value. 
+  When we run const note = allNotes.find(...), note does not hold a new copy of the data,
+  it holds a reference pointing to the exact same object stored inside the allNotes array.
+  So that updating the targetNote will also update the allNotes[targetNote].isDisabled and so on...*/
   
   if (targetNote) {
-    // Soft delete: toggle flag and update timestamp
+    
     targetNote.isDeleted = true;
     targetNote.updatedAt = new Date().toISOString();
 
     saveNotes(allNotes);
-
     populateNotes();
   }
   console.log('Note Soft Delete: '+targetNote.isDeleted);
