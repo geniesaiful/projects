@@ -13,7 +13,7 @@ body{
     background-color: var(--genBg); color: var(--genText);
     width: 100%;       /* Changed from 100vw */
     max-width: 100%;
-    height: 100vh;
+    height: 100vh; /*overflow: hidden;*/
 }
 body.dark{
     --genBg:  #1E293B; /*#4CAF50 #FAF8F5;*/
@@ -108,13 +108,13 @@ body.dark{
     flex-grow: 1;
 }
 .content.active{
-    display: flex; gap: 1rem;
+    display: flex; gap: 1rem;min-height: 0;
 }
 .notesOperation{
     display: flex; flex-direction: column; flex: 1; min-width: 0; background-color: #a3afaa;
 }
 .notesOperationTop{
-    display: flex; height: 10%;background-color: #ffd0ff;
+    display: flex; height: 10%;background-color: #ffd0ff;min-height: 0;
 }
 .notesOperationTopText{ display: flex; flex-direction: column; width: 100%; background-color: white;}
 .notesOperationTopAction{ display: flex; flex-direction:row-reverse;  width: 100%; background-color: #ffbdbd;}
@@ -122,9 +122,8 @@ body.dark{
 .notesHolder{
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 1rem;
-    padding: 1rem;
-    overflow-y: auto;
+    gap: 1rem; padding: 1rem;
+    overflow-y: auto; overflow-x: hidden;
     height: 100%;
 
 }
@@ -138,7 +137,7 @@ body.dark{
 .nscTopPin{ width: 2rem; height: 2rem; padding: .3rem; background-color: #1E293B;}
 .nscTopPin.pinned{ background-color: #00ff9d;}
 .nscText{ display: flex; flex-direction: column; flex-grow: 1; width: 100%; background-color: #bfbfbf;}
-.nscDesc{ display: inline-block; line-height: 1rem; max-height: 7.0rem; overflow: hidden; }
+.nscDesc{ display: inline-block; line-height: 1rem; max-height: 100vh; overflow: hidden; }
 .nscCatTag{ display: flex; flex-direction: row; gap: .5rem; width: 100%; background-color: violet;}
 .nscBot{ display: flex; flex-direction: row; width: 100%; background-color: wheat;}
 
