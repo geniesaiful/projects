@@ -44,7 +44,7 @@ function populateNotes(){
   notesToShow.forEach(note => {
     // Clone template markup
     const clone = template.content.cloneNode(true);
-
+    console.log(note.title+" Is pinned:" + note.isPinned);
     // Populate data
     clone.querySelector(".nscTopEmoji").textContent = note.emoji;
     clone.querySelector(".nscHeading").textContent = note.title;
@@ -55,9 +55,12 @@ function populateNotes(){
      note.isPinned = note.isPinned ? false : true;
       console.log("Is pinned:" + note.isPinned);
       event.currentTarget.classList.toggle('pinned');
-
+      saveNotes(allNotes);
+      showDeletedNotes();
+      showPinnedNotes();
+      populateNotes();
     });
-
+    
     // Append clone directly
     noteHolder.appendChild(clone);
   });
@@ -65,7 +68,7 @@ function populateNotes(){
 }
 function showDeletedNotes(){
   const allNotes = getNotes();
-  
+
   const noteHolder = document.getElementById("noteHolderTrash");
   const template = document.getElementById("noteCardTemplateTrash");
   noteHolder.querySelectorAll(".noteSummaryCardTrash").forEach(card => card.remove()); //removes all cards.
@@ -91,12 +94,40 @@ function showDeletedNotes(){
       populateNotes();
           
     });
-
-    // Append clone directly
     noteHolder.appendChild(clone);
   });
-  
+}
 
+function showPinnedNotes(){
+  const allNotes = getNotes();
+  const noteHolder = document.getElementById("noteHolderPinned");
+  const template = document.getElementById("noteCardTemplatePinned");
+
+  noteHolder.querySelectorAll(".noteSummaryCard").forEach(card => card.remove()); //removes all cards.
+
+  const notesToShow = allNotes.filter(note => note.isPinned);
+
+  notesToShow.forEach(note => {
+    // Clone template markup
+    const clone = template.content.cloneNode(true);
+
+    // Populate data
+    clone.querySelector(".nscTopEmoji").textContent = note.emoji;
+    clone.querySelector(".nscHeading").textContent = note.title;
+    clone.querySelector(".nscDesc").textContent = note.content;
+    clone.querySelector(".nscCat").textContent = note.category;
+    clone.querySelector(".nscBotDate").textContent = "Last Updated: "+dateFormatter(note.updatedAt);
+    clone.querySelector(".nscTopPin").addEventListener("click", (event) => {
+      note.isPinned = !note.isPinned;
+      note.updatedAt = new Date().toISOString();
+      
+      saveNotes(allNotes);
+      //showDeletedNotes();
+      showPinnedNotes();
+      populateNotes();
+    });
+    noteHolder.appendChild(clone);
+  });
 }
 function updateNoteDetails(note){
   document.getElementById('ndEmojiID').textContent = note.emoji;
@@ -169,6 +200,7 @@ document.addEventListener("DOMContentLoaded", () => {
   populateCategoryDropdown();
   populateNotes();
   showDeletedNotes();
+  showPinnedNotes()
 
   const noteForm = document.getElementById("noteForm");
   const cancelBtn = document.getElementById("cancelBtn");

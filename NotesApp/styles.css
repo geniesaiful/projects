@@ -137,7 +137,7 @@ body.dark{
 .nscTopPin{ width: 2rem; height: 2rem; padding: .3rem; background-color: #1E293B;}
 .nscTopPin.pinned{ background-color: #00ff9d;}
 .nscText{ display: flex; flex-direction: column; flex-grow: 1; width: 100%; background-color: #bfbfbf;}
-.nscDesc{ display: inline-block; line-height: 1rem; max-height: 100vh; overflow: hidden; }
+.nscDesc{ display: inline-block; line-height: 1rem; max-height: 100vh; overflow:hidden; }
 .nscCatTag{ display: flex; flex-direction: row; gap: .5rem; width: 100%; background-color: violet;}
 .nscBot{ display: flex; flex-direction: row; width: 100%; background-color: wheat;}
 
