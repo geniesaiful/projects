@@ -44,5 +44,3 @@ const tempCategories = {
   shopping: { name: "Shopping", emoji: "🛒", color: "#DCFCE7" }, // Light Green
   goals: { name: "Goals", emoji: "🎯", color: "#FCE7F3" }      // Light Pink
 };
-
-let notesDataJs,categoriesDatajs;

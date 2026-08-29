@@ -11,20 +11,67 @@ function navigateTo(targetId){
 
 function saveNotes(notes) {
   localStorage.setItem("notesApp", JSON.stringify(notes));
-  notesDataJs = notes;
+
 }
 
 function getNotes() {
   const data = localStorage.getItem("notesApp");
   return data ? JSON.parse(data) : [];
 }
+function saveCategories(categories){
+  localStorage.setItem("notesCategories", JSON.stringify(categories));
+}
+function getCategories() {
+  const data = localStorage.getItem("notesCategories");
+  if (!data) {
+    saveCategories(tempCategories);
+    return tempCategories;
+  }
+  return JSON.parse(data);
+}
+function setCategory(key, name, emoji, color = null) {
+  const categories = getCategories();
+  
+  categories[key] = {
+    name: name,
+    emoji: emoji,
+    color: color || generateLightColor() // Auto-generates if no color passed
+  };
+  saveCategories(categories);
+}
+function generateLightColor() {
+  const r = Math.floor(200 + Math.random() * 56).toString(16).padStart(2, '0');
+  const g = Math.floor(200 + Math.random() * 56).toString(16).padStart(2, '0');
+  const b = Math.floor(200 + Math.random() * 56).toString(16).padStart(2, '0');
+
+  return `#${r}${g}${b}`.toUpperCase();
+}
+
+function populateCategorySection()
+{
+  const listContainer = document.getElementById('categoriesList');
+  if (!listContainer) return;
+
+  listContainer.innerHTML = "";
+  const categoriesObj = getCategories();
+  
+  Object.entries(categoriesObj).forEach(([key, cat]) => {
+      const card = document.createElement("div");
+      card.className = "categoryCard";
+
+      card.style.backgroundColor = cat.color || '#E0E7FF';
+
+      card.innerHTML = `<span>${cat.emoji}</span><span>${cat.name}</span>`;
+      listContainer.appendChild(card);
+  });
+}
+
 
 function populateCategoryDropdown() {
   const categorySelect = document.getElementById("category");
   categorySelect.innerHTML = '<option value="">Select Category</option>';
 
-  const categoriesObj = JSON.parse(localStorage.getItem("tempCategories")) || {};
-  //console.log(categoriesObj);
+  const categoriesObj = getCategories();
   Object.entries(categoriesObj).forEach(([key, cat]) => {
     const option = document.createElement("option");
     option.value = cat.name;                 // e.g., "Ideas"
@@ -198,6 +245,7 @@ function softDeleteNotes() {
 
 document.addEventListener("DOMContentLoaded", () => {
   populateCategoryDropdown();
+  populateCategorySection();
   populateNotes();
   showDeletedNotes();
   showPinnedNotes()
@@ -207,6 +255,34 @@ document.addEventListener("DOMContentLoaded", () => {
   const sidebarAddBtn = document.getElementById("sidebarAddNoteBtn");
   const editBtn = document.getElementById("ndEditbtnID");
   const deleteBtn = document.getElementById("ndDeletebtnID");
+  const cancelCatBtn = document.getElementById("cancelCatBtn");
+
+  const catForm = document.getElementById("categoryForm");
+  if (catForm) {
+    catForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      const emoji = document.getElementById("catEmojiInput").value.trim();
+      const name = document.getElementById("catNameInput").value.trim();
+
+      if (!emoji || !name) return;
+
+      const key = name.toLowerCase().replace(/\s+/g, '_');
+
+      // Save object with light background color property
+      setCategory(key, name, emoji);
+
+      catForm.reset();
+      populateCategorySection();
+      populateCategoryDropdown();
+    });
+  }
+  if (cancelCatBtn) {
+      cancelCatBtn.addEventListener("click", () => {
+          catForm.reset();
+      });
+  }
+
 
   if (sidebarAddBtn) sidebarAddBtn.addEventListener("click", addNotes);
   

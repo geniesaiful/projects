@@ -129,7 +129,7 @@ body.dark{
 }
 .noteSummaryCard{
     display: flex; flex-direction: column;
-    width: 100%; height: 16rem; background-color: #c7c7c7;
+    width: 100%; height: 20rem; background-color: #c7c7c7;
     border: .1rem solid #2a1b1b; border-radius: 1rem; padding: .3rem; gap: .5rem;
 }
 .nscTopEmoji{font-size: 1.25rem; padding: .1rem; background-color: #88b0f0; border: 1px solid black;}
@@ -165,6 +165,37 @@ body.dark{
 .form-row select {  width: 100%; padding: 8px; box-sizing: border-box; }
 .form-row textarea { height: 120px; resize: vertical; }
 .actions { justify-content: flex-end;}
+
+.categoriesContainer { display: flex; flex-direction: column; width: 100%; padding: 1.5rem; gap: 1.5rem; overflow-y: auto;}
+.categoryForm { display: flex; gap: 0.5rem; align-items: center; background-color: var(--genBg);
+    padding: 1rem; border-radius: 1rem; width: 100%; max-width: 35rem; border: 1px solid #00000015;
+}
+.catEmojiInput { width: 3rem; text-align: center; padding: 0.5rem; font-size: 1.2rem;
+    border: 1px solid #707070; border-radius: 0.5rem; background: transparent; color: var(--genText);
+}
+.catNameInput { flex: 1; padding: 0.5rem; font-size: 1rem; border: 1px solid #707070;
+    border-radius: 0.5rem; background: transparent; color: var(--genText);
+}
+.catSubmitBtn { padding: 0.5rem 1rem; background-color: #5e5ce6; color: #ffffff;
+    border: none; border-radius: 0.5rem; cursor: pointer; font-weight: 500;
+}
+.catSubmitBtn:hover {
+    background-color: #4b48d6;
+}
+
+.catCancelBtn { padding: 0.5rem 1rem; background-color: #707070; color: #ffffff;
+    border: none; border-radius: 0.5rem; cursor: pointer; font-weight: 500;
+}
+
+.catCancelBtn:hover {
+    background-color: #515151;
+}
+.categoriesList { display: flex; flex-wrap: wrap; gap: 1rem; width: 100%; }
+
+.categoryCard { display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.25rem;
+    border-radius: 1rem; color: #1E293B; font-weight: 600; font-size: 1rem; border: 1px solid #00000010;
+}
+
 
 .trashViewDiv{display: flex; flex-direction: column; flex: 1; min-width: 0; background-color: #a3afaa;}
 .noteSummaryCardTrash{
