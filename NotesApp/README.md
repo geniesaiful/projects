@@ -3,7 +3,7 @@
 ## Core Application
 
 - [x] Create a note
-- [] Edit a note
+- [x] Edit a note
 - [] Delete a note
 - [x] View note details
 - [] Search notes
