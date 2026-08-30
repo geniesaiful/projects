@@ -38,7 +38,7 @@ body.dark{
 
 .btrSelectBtn{width: 100%; padding: 8px; box-sizing: border-box;}
 
-.titleTxt{ font-size: 1.75rem; letter-spacing: -0.02rem; color: var(--genText); margin: 0rem 1rem;}
+.titleTxt{ font-size: 1.75rem; letter-spacing: -0.02rem; color: var(--genText); margin: .5rem .5rem;}
 .normalHeading{font-size: 1.15rem; font-weight: 600; letter-spacing: 0.008rem; color: var(--genText); margin-bottom: .25rem;}
 .normalTxt{ font-size: 1rem; letter-spacing: 0.01rem; color: var(--genText);}
 .smallerHeading{font-size: 0.9rem; font-weight: 600; letter-spacing: 0.0rem; color: var(--genText); margin: .35rem 0;}
@@ -158,7 +158,7 @@ body.dark{
 .ndDesc{display: flex; flex-grow: 1;}
 .ndDates{display: flex;flex-direction: column;}
 .ndDates span{ margin: .1rem .3rem; }
-.ndAction{display: flex;margin: 1rem 0rem;justify-content: space-between;}
+.ndAction{display: flex; margin: 1rem 0rem;justify-content: space-between;}
 
 .note-form { max-width: 600px; margin: 20px auto; font-family: sans-serif;  }
 .form-row { margin-bottom: 15px; display: flex; gap: 10px; }
