@@ -283,6 +283,7 @@ function createID(){
 
 
 function handleSearch() {
+  navigateTo("contentAllID");
   const query = document.getElementById("search-input").value.toLowerCase().trim();
   const allNotes = getNotes();
   console.log('searching...');
@@ -443,6 +444,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (editBtn) editBtn.addEventListener("click", editNotes); // change the add container to edit.
   if (deleteBtn) deleteBtn.addEventListener('click', softDeleteNotes);
   if (searchInput) {
+    
     searchInput.addEventListener("input", handleSearch);
   }
   if (filterSelect) {
