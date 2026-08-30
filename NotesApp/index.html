@@ -21,13 +21,13 @@
                 <button class="menu-item active" id="contentAllMenuID" data-target="contentAllID">
                     <span class="icon">🏠</span>
                     <span class="label">All Notes</span>
-                    <span class="count">24</span>
+                    <span class="count" id="menuAllNumber">24</span>
                 </button>
 
                 <button class="menu-item" id="pinnedMenuID" data-target="pinnedDivID">
                     <span class="icon">📌</span>
                     <span class="label">Pinned</span>
-                    <span class="count">5</span>
+                    <span class="count" id="menuPinnedNumber">5</span>
                 </button>
 
                 <button class="menu-item" id="categoriesMenuID" data-target="categoriesDivID">
@@ -43,6 +43,7 @@
                 <button class="menu-item" id="trashMenuID" data-target="trashDivID">
                     <span class="icon">🗑️</span>
                     <span class="label">Trash</span>
+                    <span class="count" id="menuDeltedNumber">5</span>
                 </button>
 
                 <button class="menu-item" id="themeMenuID" data-target="themeDivID">
@@ -60,8 +61,8 @@
     </div>
     <div class="contents">
         <div class="contentTop">
-            <input type="search" class="search-input" id="search-input">
-            <button class="search-btn" id="search-btn">Search</button>
+            <input type="search" class="search-input" id="search-input" placeholder="Search in Title, Note and Tags">
+            <!-- <button class="search-btn" id="search-btn">Search</button> -->
         </div>
         <div class="content active" id="contentAllID">
             <div class="notesOperation" >

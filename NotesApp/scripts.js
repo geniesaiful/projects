@@ -59,11 +59,17 @@ function generateLightColor() {
 function updateStats(){
   const allNotes = getNotes();
   const validNotes = allNotes.filter(note => !note.isDeleted);
+  const pinned = allNotes.filter(note => note.isPinned);
+  const deleted = allNotes.filter(note => note.isDeleted);
   document.getElementById('noTopNumber').textContent=`${validNotes.length} Notes`;
+  //menuAllNumber
+  document.getElementById('menuAllNumber').textContent=`${validNotes.length}`;
+  document.getElementById('menuPinnedNumber').textContent=`${pinned.length}`;
+  document.getElementById('menuDeltedNumber').textContent=`${deleted.length}`;
   
 }
 function populateTagsSection(){
-  console.log("function called");
+  //console.log("function called");
   const listContainer = document.getElementById('tagsList');
   if (!listContainer) return;
   listContainer.innerHTML = "";
@@ -73,7 +79,7 @@ function populateTagsSection(){
   allNotes.forEach(note => {
     if (note.tags) {
       allTags = allTags.concat(note.tags);
-      console.log(note.tags);
+    //  console.log(note.tags);
     }
   });
   const uniqueTags = [...new Set(allTags)];  //removes duplicates
@@ -119,15 +125,19 @@ function populateCategoryDropdown() {
 }
 function populateNotes(){
   const allNotes = getNotes();
+  const notesToShow = allNotes.filter(note => !note.isDeleted);
+  showSelectedNotes(notesToShow,allNotes);
+}
+function showSelectedNotes(notesToShow,notes){
+  const allNotes = notes;
   const noteHolder = document.getElementById("noteHolder");
   const template = document.getElementById("noteCardTemplate");
   
-  noteHolder.querySelectorAll(".noteSummaryCard").forEach(card => card.remove()); //removes all cards.
-  const notesToShow = allNotes.filter(note => !note.isDeleted);
+  noteHolder.querySelectorAll(".noteSummaryCard").forEach(card => card.remove()); 
   notesToShow.forEach(note => {
     // Clone template markup
     const clone = template.content.cloneNode(true);
-    console.log(note.title+" Is pinned:" + note.isPinned);
+    //console.log(note.title+" Is pinned:" + note.isPinned);
     // Populate data
     clone.querySelector(".nscTopEmoji").textContent = note.emoji;
     clone.querySelector(".nscHeading").textContent = note.title;
@@ -135,16 +145,15 @@ function populateNotes(){
     clone.querySelector(".nscCat").textContent = note.category;
     clone.querySelector(".nscBotDate").textContent = dateFormatter(note.createdAt);
     clone.querySelector(".nscTopPin").addEventListener("click", (event) => {
-     note.isPinned = note.isPinned ? false : true;
+      note.isPinned = note.isPinned ? false : true;
       console.log("Is pinned:" + note.isPinned);
       event.currentTarget.classList.toggle('pinned');
-      saveNotes(allNotes);
+      saveNotes(allNotes); // This is important! we always need the allnotes alongside with the notes to show. because object reference.
       showDeletedNotes();
       showPinnedNotes();
       populateNotes();
+      updateStats();
     });
-    
-    // Append clone directly
     noteHolder.appendChild(clone);
   });
   updateNoteDetails(notesToShow[notesToShow.length-1]);
@@ -231,7 +240,24 @@ function createID(){
   const randomPart = Math.floor(100 + Math.random() * 900); 
   return Number(`${timestamp}${randomPart}`);
 }
+function handleSearch() {
+  const query = document.getElementById("search-input").value.toLowerCase().trim();
+  const allNotes = getNotes();
+  console.log('searching...');
 
+  let filtered = allNotes.filter(note => !note.isDeleted);
+  if (query) {
+    filtered = filtered.filter(note => {
+      const titleMatch = note.title && note.title.toLowerCase().includes(query);
+      const contentMatch = note.content && note.content.toLowerCase().includes(query);
+      const tagMatch = note.tags && note.tags.some(tag => tag.toLowerCase().includes(query));
+
+      return titleMatch || contentMatch || tagMatch;
+    });
+  }
+
+  showSelectedNotes(filtered,allNotes);
+}
 function addNotes(){
   currentEditId = null; 
   const form = document.getElementById("noteForm");
@@ -289,6 +315,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const editBtn = document.getElementById("ndEditbtnID");
   const deleteBtn = document.getElementById("ndDeletebtnID");
   const cancelCatBtn = document.getElementById("cancelCatBtn");
+  const searchBtn = document.getElementById('search-btn');
+  const searchInput = document.getElementById("search-input");
 
   const catForm = document.getElementById("categoryForm");
   if (catForm) {
@@ -321,6 +349,9 @@ document.addEventListener("DOMContentLoaded", () => {
   
   if (editBtn) editBtn.addEventListener("click", editNotes); // change the add container to edit.
   if (deleteBtn) deleteBtn.addEventListener('click', softDeleteNotes);
+  if (searchInput) {
+    searchInput.addEventListener("input", handleSearch);
+  }
   // Form Submission
   noteForm.addEventListener("submit", (e) => {
     e.preventDefault();
