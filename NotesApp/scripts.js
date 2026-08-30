@@ -152,14 +152,16 @@ function showSelectedNotes(notesToShow,notes){
   notesToShow.forEach(note => {
     // Clone template markup
     const clone = template.content.cloneNode(true);
+    const cardElement = clone.querySelector(".noteSummaryCard");
     //console.log(note.title+" Is pinned:" + note.isPinned);
     // Populate data
     clone.querySelector(".nscTopEmoji").textContent = note.emoji;
     clone.querySelector(".nscHeading").textContent = note.title;
     clone.querySelector(".nscDesc").textContent = note.content;
     clone.querySelector(".nscCat").textContent = note.category;
-    clone.querySelector(".nscBotDate").textContent = dateFormatter(note.createdAt);
+    clone.querySelector(".nscBotDate").textContent = `Last Updated: ${dateFormatter(note.updatedAt)}`;
     clone.querySelector(".nscTopPin").addEventListener("click", (event) => {
+      event.stopPropagation(); //clicking the pin icon toggles pin status without accidentally changing the active detail selection.
       note.isPinned = note.isPinned ? false : true;
       console.log("Is pinned:" + note.isPinned);
       event.currentTarget.classList.toggle('pinned');
@@ -169,6 +171,11 @@ function showSelectedNotes(notesToShow,notes){
       populateNotes();
       updateStats();
     });
+    
+    cardElement.addEventListener("click", () => {
+      updateNoteDetails(note);
+    });
+
     noteHolder.appendChild(clone);
   });
   updateNoteDetails(notesToShow[notesToShow.length-1]);
@@ -191,7 +198,7 @@ function showDeletedNotes(){
     clone.querySelector(".nscHeading").textContent = note.title;
     clone.querySelector(".nscDesc").textContent = note.content;
     clone.querySelector(".nscCat").textContent = note.category;
-    clone.querySelector(".nscBotDate").textContent = dateFormatter(note.updatedAt);
+    clone.querySelector(".nscBotDate").textContent =`Last Updated: ${dateFormatter(note.updatedAt)}`;
     clone.querySelector(".nscTopPin").addEventListener("click", (event) => {
       note.isDeleted = !note.isDeleted;
       note.updatedAt = new Date().toISOString();
@@ -223,7 +230,7 @@ function showPinnedNotes(){
     clone.querySelector(".nscHeading").textContent = note.title;
     clone.querySelector(".nscDesc").textContent = note.content;
     clone.querySelector(".nscCat").textContent = note.category;
-    clone.querySelector(".nscBotDate").textContent = "Last Updated: "+dateFormatter(note.updatedAt);
+    clone.querySelector(".nscBotDate").textContent = `Last Updated: ${dateFormatter(note.updatedAt)}`;
     clone.querySelector(".nscTopPin").addEventListener("click", (event) => {
       note.isPinned = !note.isPinned;
       note.updatedAt = new Date().toISOString();
