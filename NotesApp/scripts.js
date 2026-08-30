@@ -372,8 +372,10 @@ function permaDeleteNotes(noteID){
   const allNotes = getNotes();
   console.log(noteID);
 
-  const noteToDelete = allNotes.find(n => n.id === noteID);
-
+  const updatedNotes = allNotes.filter(note => note.id !== noteID);
+  saveNotes(updatedNotes);
+  showDeletedNotes();
+  updateStats();
 }
 
 document.addEventListener("DOMContentLoaded", () => {
