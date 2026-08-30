@@ -111,17 +111,32 @@ function populateCategorySection()
 
 function populateCategoryDropdown() {
   const categorySelect = document.getElementById("category");
+  const filterSelect = document.getElementById("categoryFilter");
+
+  // Add notes page dropdown
   categorySelect.innerHTML = '<option value="">Select Category</option>';
 
   const categoriesObj = getCategories();
   Object.entries(categoriesObj).forEach(([key, cat]) => {
     const option = document.createElement("option");
-    option.value = cat.name;                 // e.g., "Ideas"
+    option.value = cat.name;               
     option.textContent = `${cat.emoji} ${cat.name}`;
-    option.dataset.emoji = cat.emoji;        // Attach emoji to dataset
-    option.dataset.key = key;                // Keep reference to key if needed
+    option.dataset.emoji = cat.emoji;        
+    option.dataset.key = key;                
     categorySelect.appendChild(option);
   });
+
+  // Main page Filter dropdown
+  filterSelect.innerHTML = '<option value="">All Categories</option>';
+
+  const catObjects = getCategories();
+  Object.values(catObjects).forEach(cat => {
+    const option = document.createElement("option");
+    option.value = cat.name;
+    option.textContent = cat.name; 
+    filterSelect.appendChild(option);
+  });
+
 }
 function populateNotes(){
   const allNotes = getNotes();
@@ -258,6 +273,17 @@ function handleSearch() {
 
   showSelectedNotes(filtered,allNotes);
 }
+function handleCategoryFilter() {
+  const selectedCategory = document.getElementById("categoryFilter").value;
+  const allNotes = getNotes();
+
+  let activeNotes = allNotes.filter(note => !note.isDeleted);
+
+  if (selectedCategory) {
+    activeNotes = activeNotes.filter(note => note.category === selectedCategory);
+  }
+  showSelectedNotes(activeNotes,allNotes);
+}
 function addNotes(){
   currentEditId = null; 
   const form = document.getElementById("noteForm");
@@ -317,6 +343,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const cancelCatBtn = document.getElementById("cancelCatBtn");
   const searchBtn = document.getElementById('search-btn');
   const searchInput = document.getElementById("search-input");
+  const filterSelect = document.getElementById("categoryFilter");
 
   const catForm = document.getElementById("categoryForm");
   if (catForm) {
@@ -343,14 +370,15 @@ document.addEventListener("DOMContentLoaded", () => {
           catForm.reset();
       });
   }
-
-
   if (sidebarAddBtn) sidebarAddBtn.addEventListener("click", addNotes);
   
   if (editBtn) editBtn.addEventListener("click", editNotes); // change the add container to edit.
   if (deleteBtn) deleteBtn.addEventListener('click', softDeleteNotes);
   if (searchInput) {
     searchInput.addEventListener("input", handleSearch);
+  }
+  if (filterSelect) {
+    filterSelect.addEventListener("change", handleCategoryFilter);
   }
   // Form Submission
   noteForm.addEventListener("submit", (e) => {

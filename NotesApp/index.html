@@ -68,7 +68,13 @@
             <div class="notesOperation" >
                 <div class="notesOperationTop">
                     <div class="notesOperationTopText"><span class="titleTxt">All Notes</span><span id="noTopNumber">24 Notes</span></div>
-                    <div class="notesOperationTopAction"><span>Filter</span><span>sort</span></div>
+                    <div class="notesOperationTopAction">
+                        <span>sort</span>
+                        <select id="categoryFilter" class="category-select">
+                            <option value="">All Categories</option>
+                        </select>
+                        
+                    </div>
                 </div>
                 <div class="notesHolder" id="noteHolder">
                     <template id="noteCardTemplate">
