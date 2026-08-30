@@ -160,6 +160,7 @@ function showSelectedNotes(notesToShow,notes){
     clone.querySelector(".nscDesc").textContent = note.content;
     clone.querySelector(".nscCat").textContent = note.category;
     clone.querySelector(".nscBotDate").textContent = `Last Updated: ${dateFormatter(note.updatedAt)}`;
+    clone.querySelector(".nscBotNoteIDNo").textContent = `Note ID: ${note.id}`;
     clone.querySelector(".nscTopPin").addEventListener("click", (event) => {
       event.stopPropagation(); //clicking the pin icon toggles pin status without accidentally changing the active detail selection.
       note.isPinned = note.isPinned ? false : true;
@@ -199,14 +200,13 @@ function showDeletedNotes(){
     clone.querySelector(".nscDesc").textContent = note.content;
     clone.querySelector(".nscCat").textContent = note.category;
     clone.querySelector(".nscBotDate").textContent =`Last Updated: ${dateFormatter(note.updatedAt)}`;
-    clone.querySelector(".nscTopPin").addEventListener("click", (event) => {
-      note.isDeleted = !note.isDeleted;
-      note.updatedAt = new Date().toISOString();
-      
-      saveNotes(allNotes);
-      showDeletedNotes();
-      populateNotes();
-          
+    clone.querySelector(".nscBotNoteIDNo").textContent = `Note ID: ${note.id}`;
+    const deleteIcon = clone.querySelector(".nscTopPin");
+    deleteIcon.addEventListener("click", () => {
+      const confirmDelete = confirm("Are you sure you want to permanently delete this note?");
+      if (confirmDelete) {
+        permaDeleteNotes(note.id);
+      }
     });
     noteHolder.appendChild(clone);
   });
@@ -231,6 +231,7 @@ function showPinnedNotes(){
     clone.querySelector(".nscDesc").textContent = note.content;
     clone.querySelector(".nscCat").textContent = note.category;
     clone.querySelector(".nscBotDate").textContent = `Last Updated: ${dateFormatter(note.updatedAt)}`;
+    clone.querySelector(".nscBotNoteIDNo").textContent = `Note ID: ${note.id}`;
     clone.querySelector(".nscTopPin").addEventListener("click", (event) => {
       note.isPinned = !note.isPinned;
       note.updatedAt = new Date().toISOString();
@@ -366,6 +367,13 @@ function softDeleteNotes() {
     populateNotes();
   }
   console.log('Note Soft Delete: '+targetNote.isDeleted);
+}
+function permaDeleteNotes(noteID){
+  const allNotes = getNotes();
+  console.log(noteID);
+
+  const noteToDelete = allNotes.find(n => n.id === noteID);
+
 }
 
 document.addEventListener("DOMContentLoaded", () => {

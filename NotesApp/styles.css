@@ -141,7 +141,7 @@ body.dark{
 .nscText{ display: flex; flex-direction: column; flex-grow: 1; width: 100%; background-color: #bfbfbf;}
 .nscDesc{ display: inline-block; line-height: 1rem; max-height: 100vh; overflow:hidden; }
 .nscCatTag{ display: flex; flex-direction: row; gap: .5rem; width: 100%; background-color: violet;}
-.nscBot{ display: flex; flex-direction: row; width: 100%; background-color: wheat;}
+.nscBot{ display: flex; flex-direction: column; width: 100%; background-color: wheat;}
 
 .noteDetails{
     display: flex; flex-direction: column; width:24rem; background-color: #f9e1d8;
