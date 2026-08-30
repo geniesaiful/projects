@@ -200,12 +200,21 @@ function showDeletedNotes(){
     const clone = template.content.cloneNode(true);
 
     // Populate data
-    clone.querySelector(".nscTopEmoji").textContent = note.emoji;
+    //clone.querySelector(".nscTopEmoji").textContent = note.emoji;
     clone.querySelector(".nscHeading").textContent = note.title;
     clone.querySelector(".nscDesc").textContent = note.content;
     clone.querySelector(".nscCat").textContent = note.category;
     clone.querySelector(".nscBotDate").textContent =`Last Updated: ${dateFormatter(note.updatedAt)}`;
     clone.querySelector(".nscBotNoteIDNo").textContent = `Note ID: ${note.id}`;
+    
+    const undoIcon = clone.querySelector(".nscTopDLUndo");
+    undoIcon.addEventListener("click", () =>{
+      const confirmUndo = confirm("Do you want to recover the note?");
+      if(confirmUndo){
+        undoDeletedNote(note.id);
+      }
+    });
+
     const deleteIcon = clone.querySelector(".nscTopPin");
     deleteIcon.addEventListener("click", () => {
       const confirmDelete = confirm("Are you sure you want to permanently delete this note?");
@@ -213,6 +222,7 @@ function showDeletedNotes(){
         permaDeleteNotes(note.id);
       }
     });
+    
     noteHolder.appendChild(clone);
   });
 }
@@ -454,7 +464,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (sortSelect) {
     sortSelect.addEventListener("change", handleSort);
   }
-  // Form Submission
+  
   noteForm.addEventListener("submit", (e) => {
     e.preventDefault();
 
