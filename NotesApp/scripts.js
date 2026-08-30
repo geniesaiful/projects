@@ -284,6 +284,36 @@ function handleCategoryFilter() {
   }
   showSelectedNotes(activeNotes,allNotes);
 }
+function handleSort() {
+  const sortBy = document.getElementById("sortID").value;
+  const allNotes = getNotes();
+  console.log("sort caller function.")
+  let notesToDisplay = allNotes.filter(note => !note.isDeleted);
+
+  if (sortBy === "createdAt" || sortBy === "updatedAt") {
+    notesToDisplay.sort((a, b) => {
+      const timeA = a[sortBy] ? new Date(a[sortBy]).getTime() : 0;
+      const timeB = b[sortBy] ? new Date(b[sortBy]).getTime() : 0;
+      return timeB - timeA;
+    });
+  }
+
+  if (sortBy === "titleAZ" || sortBy === "categoryAZ") {
+    // Determine target property ('title' or 'category')
+    const key = sortBy === "titleAZ" ? "title" : "category";
+
+    notesToDisplay.sort((a, b) => {
+      const textA = (a[key] || "").toLowerCase();
+      const textB = (b[key] || "").toLowerCase();
+
+      if (textA < textB) return -1;
+      if (textA > textB) return 1;
+      return 0;
+    });
+  }
+
+  showSelectedNotes(notesToDisplay,allNotes);
+}
 function addNotes(){
   currentEditId = null; 
   const form = document.getElementById("noteForm");
@@ -341,11 +371,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const editBtn = document.getElementById("ndEditbtnID");
   const deleteBtn = document.getElementById("ndDeletebtnID");
   const cancelCatBtn = document.getElementById("cancelCatBtn");
-  const searchBtn = document.getElementById('search-btn');
+  //const searchBtn = document.getElementById('search-btn');
   const searchInput = document.getElementById("search-input");
   const filterSelect = document.getElementById("categoryFilter");
-
+  const sortSelect = document.getElementById("sortID");
   const catForm = document.getElementById("categoryForm");
+
+
   if (catForm) {
     catForm.addEventListener("submit", (e) => {
       e.preventDefault();
@@ -379,6 +411,9 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   if (filterSelect) {
     filterSelect.addEventListener("change", handleCategoryFilter);
+  }
+  if (sortSelect) {
+    sortSelect.addEventListener("change", handleSort);
   }
   // Form Submission
   noteForm.addEventListener("submit", (e) => {
