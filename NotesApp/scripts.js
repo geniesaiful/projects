@@ -23,7 +23,6 @@ function saveNotes(notes) {
   localStorage.setItem("notesApp", JSON.stringify(notes));
 
 }
-
 function getNotes() {
   const data = localStorage.getItem("notesApp");
   return data ? JSON.parse(data) : [];
@@ -69,6 +68,7 @@ function updateStats(){
   document.getElementById('statusTotalNotesID').textContent=`${allNotes.length}/100 notes used`;
   
 }
+
 function populateTagsSection(){
   //console.log("function called");
   const listContainer = document.getElementById('tagsList');
@@ -109,7 +109,6 @@ function populateCategorySection()
       listContainer.appendChild(card);
   });
 }
-
 function populateCategoryDropdown() {
   const categorySelect = document.getElementById("category");
   const filterSelect = document.getElementById("categoryFilter");
@@ -139,11 +138,14 @@ function populateCategoryDropdown() {
   });
 
 }
+
+
 function populateNotes(){
   const allNotes = getNotes();
   const notesToShow = allNotes.filter(note => !note.isDeleted);
   showSelectedNotes(notesToShow,allNotes);
 }
+
 function showSelectedNotes(notesToShow,notes){
   const allNotes = notes;
   const noteHolder = document.getElementById("noteHolder");
@@ -151,17 +153,18 @@ function showSelectedNotes(notesToShow,notes){
   
   noteHolder.querySelectorAll(".noteSummaryCard").forEach(card => card.remove()); 
   notesToShow.forEach(note => {
-    // Clone template markup
+
     const clone = template.content.cloneNode(true);
     const cardElement = clone.querySelector(".noteSummaryCard");
     //console.log(note.title+" Is pinned:" + note.isPinned);
-    // Populate data
+
     clone.querySelector(".nscTopEmoji").textContent = note.emoji;
     clone.querySelector(".nscHeading").textContent = note.title;
     clone.querySelector(".nscDesc").textContent = note.content;
     clone.querySelector(".nscCat").textContent = note.category;
     clone.querySelector(".nscBotDate").textContent = `Last Updated: ${dateFormatter(note.updatedAt)}`;
     clone.querySelector(".nscBotNoteIDNo").textContent = `Note ID: ${note.id}`;
+    clone.querySelector(".nscTopPin").classList.toggle("pinned", Boolean(note.isPinned));
     clone.querySelector(".nscTopPin").addEventListener("click", (event) => {
       event.stopPropagation(); //clicking the pin icon toggles pin status without accidentally changing the active detail selection.
       note.isPinned = note.isPinned ? false : true;
@@ -212,7 +215,6 @@ function showDeletedNotes(){
     noteHolder.appendChild(clone);
   });
 }
-
 function showPinnedNotes(){
   const allNotes = getNotes();
   const noteHolder = document.getElementById("noteHolderPinned");
@@ -245,6 +247,7 @@ function showPinnedNotes(){
     noteHolder.appendChild(clone);
   });
 }
+
 function updateNoteDetails(note){
   document.getElementById('ndEmojiID').textContent = note.emoji;
   document.getElementById('ndTitleTxtID').textContent = note.title;
@@ -264,6 +267,8 @@ function createID(){
   const randomPart = Math.floor(100 + Math.random() * 900); 
   return Number(`${timestamp}${randomPart}`);
 }
+
+
 function handleSearch() {
   const query = document.getElementById("search-input").value.toLowerCase().trim();
   const allNotes = getNotes();
@@ -394,6 +399,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const filterSelect = document.getElementById("categoryFilter");
   const sortSelect = document.getElementById("sortID");
   const catForm = document.getElementById("categoryForm");
+  const ndPin = document.getElementById('ndPinID');
 
 
   if (catForm) {
@@ -421,7 +427,6 @@ document.addEventListener("DOMContentLoaded", () => {
       });
   }
   if (sidebarAddBtn) sidebarAddBtn.addEventListener("click", addNotes);
-  
   if (editBtn) editBtn.addEventListener("click", editNotes); // change the add container to edit.
   if (deleteBtn) deleteBtn.addEventListener('click', softDeleteNotes);
   if (searchInput) {

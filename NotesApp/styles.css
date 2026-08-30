@@ -129,15 +129,16 @@ body.dark{
     height: 100%;
 
 }
+.noteSummaryCardTrash,
 .noteSummaryCard{
     display: flex; flex-direction: column;
     width: 100%; height: 20rem; background-color: #c7c7c7;
     border: .1rem solid #2a1b1b; border-radius: 1rem; padding: .3rem; gap: .5rem;
 }
-.nscTopEmoji{font-size: 1.25rem; padding: .1rem; background-color: #88b0f0; border: 1px solid black;}
-.nscTop{ display: flex; flex-direction: row; justify-content: space-between; width: 100%; background-color: #00ff9d;}
-.nscTopPin{ width: 2rem; height: 2rem; padding: .3rem; background-color: #1E293B;}
-.nscTopPin.pinned{ background-color: #00ff9d;}
+.nscTopEmoji{font-size: 1.25rem; padding: .3rem; border: 1px solid #00000020; border-radius: 1rem;}
+.nscTop{ display: flex; flex-direction: row; justify-content: space-between; width: 100%;}
+.nscTopPin{ width: 2rem; height: 2rem; padding: .3rem; opacity: 0.5; filter: grayscale(100%);}
+.nscTopPin.pinned{ opacity: 1; filter: grayscale(0%);}
 .nscText{ display: flex; flex-direction: column; flex-grow: 1; width: 100%; background-color: #bfbfbf;}
 .nscDesc{ display: inline-block; line-height: 1rem; max-height: 100vh; overflow:hidden; }
 .nscCatTag{ display: flex; flex-direction: row; gap: .5rem; width: 100%; background-color: violet;}
@@ -148,8 +149,7 @@ body.dark{
     padding: 1rem; gap: 1rem;
     flex-shrink: 0;
 }
-.ndTop{ display: flex; flex-direction: row; justify-content: space-between; width: 100%; background-color: #00ff9d; }
-.ndTop img{width: 2rem; height: 2rem; padding: .3rem; background-color: #1E293B;}
+.ndTop{ display: flex; flex-direction: row; justify-content:flex-end; width: 100%; }
 .ndEmoji{ font-size: 1.75rem;}
 .ndTitle{display: flex;}
 .ndTitleDateTime{display: flex;}
@@ -204,9 +204,3 @@ body.dark{
     border-radius: 1rem; background-color: var(--genBg); color: var(--genText); font-weight: 600; font-size: 1rem; border: 1px solid #00000010; }
 
 .trashViewDiv{display: flex; flex-direction: column; flex: 1; min-width: 0; background-color: #a3afaa;}
-.noteSummaryCardTrash{
-    display: flex; flex-direction: column;
-    width: 100%; height: 16rem; background-color: #c7c7c7;
-    border: .1rem solid #2a1b1b; border-radius: 1rem; padding: .3rem; gap: .5rem;
-}
-

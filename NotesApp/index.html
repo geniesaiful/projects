@@ -84,7 +84,7 @@
                 <div class="notesHolder" id="noteHolder">
                     <template id="noteCardTemplate">
                         <div class="noteSummaryCard">
-                            <div class="nscTop"><span class="nscTopEmoji" id="nscTopEmojiID"></span><img class="nscTopPin" src="resources/note-book.png"></div>
+                            <div class="nscTop"><span class="nscTopEmoji" id="nscTopEmojiID"></span><img class="nscTopPin" src="resources/pin.svg"></div>
                             <div class="nscText">
                                 <span class="nscHeading smallerHeading" id="nscHeadingID">Heading</span>
                                 <span class="nscDesc smallerTxt" id="nscDescID">Description</span>
@@ -100,7 +100,7 @@
             </div>
             <div class="noteDetails">
                 <div class="ndTop" id="ndTopID">
-                    <img src="resources/note-book.png"><img src="resources/note-book.png">
+                    <img class="nscTopPin pinned" id="ndPinID" src="resources/pin.svg"">
                 </div>
                 <div class="ndTitle" id="ndTitleID">
                     <span class="ndEmoji" id="ndEmojiID">😊</span><span class="ndtitleTxt titleTxt" id="ndTitleTxtID">TITLE</span>
@@ -160,10 +160,11 @@
         </div>
         <div class="content" id="pinnedDivID">
             <div class="pinnedNotesView">
+                <span class="titleTxt">Pinned Notes</span>
                 <div class="notesHolder" id="noteHolderPinned">
                     <template id="noteCardTemplatePinned">
                         <div class="noteSummaryCard">
-                            <div class="nscTop"><span class="nscTopEmoji" id="nscTopEmojiID"></span><img class="nscTopPin" src="resources/note-book.png"></div>
+                            <div class="nscTop"><span class="nscTopEmoji" id="nscTopEmojiID"></span><img class="nscTopPin pinned" src="resources/pin.svg"></div>
                             <div class="nscText">
                                 <span class="nscHeading smallerHeading" id="nscHeadingID">Heading</span>
                                 <span class="nscDesc smallerTxt" id="nscDescID">Description</span>
@@ -202,7 +203,7 @@
                 <div class="notesHolder" id="noteHolderTrash">
                     <template id="noteCardTemplateTrash">
                         <div class="noteSummaryCardTrash">
-                            <div class="nscTop"><span class="nscTopEmoji" id="nscTopEmojiID"></span><img class="nscTopPin" src="resources/note-book.png"></div>
+                            <div class="nscTop"><span class="nscTopEmoji" id="nscTopEmojiID"></span><img class="nscTopPin pinned" src="resources/delete.svg"></div>
                             <div class="nscText">
                                 <span class="nscHeading smallerHeading" id="nscHeadingID">Heading</span>
                                 <span class="nscDesc smallerTxt" id="nscDescID">Description</span>
