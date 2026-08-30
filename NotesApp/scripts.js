@@ -66,6 +66,7 @@ function updateStats(){
   document.getElementById('menuPinnedNumber').textContent=`${pinned.length}`;
   document.getElementById('menuDeltedNumber').textContent=`${deleted.length}`;
   document.getElementById('statusTotalNotesID').textContent=`${allNotes.length}/100 notes used`;
+  document.getElementById("progress").style.width = `${(allNotes.length)}%`;
   
 }
 
