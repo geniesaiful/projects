@@ -222,7 +222,7 @@ function showDeletedNotes(){
         permaDeleteNotes(note.id);
       }
     });
-    
+
     noteHolder.appendChild(clone);
   });
 }
@@ -405,6 +405,20 @@ function permaDeleteNotes(noteID){
 
   const updatedNotes = allNotes.filter(note => note.id !== noteID);
   saveNotes(updatedNotes);
+  showDeletedNotes();
+  updateStats();
+}
+function undoDeletedNote(noteID){
+  const allNotes = getNotes();
+  console.log(noteID);
+  const targetNote = allNotes.find(note => note.id === noteID);
+  if (targetNote) {
+    targetNote.isDeleted = false;
+    targetNote.updatedAt = new Date().toISOString();
+  }
+  saveNotes(allNotes);
+
+  populateNotes();
   showDeletedNotes();
   updateStats();
 }
