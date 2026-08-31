@@ -113,7 +113,10 @@
                     <div style="display: flex;"><span>Created: </span><span class="ndCreatedDate" id="ndCreatedDateID"></span></div>
                     <div style="display: flex;"><span>Modified: </span><span class="ndModifiedDate" id="ndModifiedDateID"></span></div>
                 </div>
-                <div class="ndAction"><button id="ndEditbtnID">Edit</button><button id="ndDeletebtnID">Delete</button> </div>
+                <div class="ndAction">
+                    <button class="univSubmitBtn" id="ndEditbtnID">Edit</button>
+                    <button class="univCancelBtn" id="ndDeletebtnID">Delete</button> 
+                </div>
             </div>
 
         </div>
@@ -134,12 +137,7 @@
                         </div>
 
                         <div class="form-row">
-                            <textarea 
-                                id="content" 
-                                maxlength="800" 
-                                placeholder="Note Details (max 800 chars)" 
-                                required>
-                            </textarea>
+                            <textarea id="content" maxlength="800" placeholder="Note Details (max 800 chars)" required></textarea>
                         </div>
                         <div class="form-row">
                             <select id="category" required>
@@ -154,8 +152,8 @@
                             />
                         </div>
                         <div class="form-row actions">
-                            <button type="button" id="cancelBtn">Cancel</button>
-                            <button type="submit">Submit</button>
+                            <button class="univCancelBtn" type="button" id="cancelBtn">Cancel</button>
+                            <button class="univSubmitBtn" type="submit">Submit</button>
                         </div>
                     </form>
                 </div>
@@ -188,8 +186,8 @@
                 <form id="categoryForm" class="categoryForm">
                     <input type="text" id="catEmojiInput" class="catEmojiInput" placeholder="😀" maxlength="2" required />
                     <input type="text" id="catNameInput" class="catNameInput" placeholder="Category" maxlength="20" required />
-                    <button type="submit" class="catSubmitBtn">Add</button>
-                    <button type="button" id="cancelCatBtn" class="catCancelBtn">Cancel</button>
+                    <button class="univSubmitBtn" type="submit" class="catSubmitBtn">Add</button>
+                    <button class="univCancelBtn" type="button" id="cancelCatBtn" class="catCancelBtn">Cancel</button>
                 </form>
                 <div id="categoriesList" class="categoriesList"></div>
             </div>

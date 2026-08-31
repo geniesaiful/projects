@@ -25,13 +25,13 @@ body.dark{
     --selectorBg: #ece9f6;
     --selectorText: #334563;
 }
-.search-btn{
+/* .search-btn{
     display: flex; align-items: center; gap: 8px;
     background-color: #707070; color: #ffffff;
     border: none; outline: none; padding: .6rem 1.5rem; border-radius: 1rem;
     font-size: 1rem; font-weight: 500; cursor: pointer;
 }
-.search-btn:hover { background-color: #515151; }
+.search-btn:hover { background-color: #515151; } */
 .buttonWide{ 
     display: flex; align-items: center; justify-content: center;
     width: 100%; border: none; outline: none; padding: .6rem 1.5rem; border-radius: 1rem;
@@ -39,6 +39,16 @@ body.dark{
     font-size: 1rem; font-weight: 500; cursor: pointer;
 }
 .buttonWide:hover{ background-color: #3b3157; }
+.univCancelBtn{
+    display: flex; align-items: center; justify-content: center; background-color: #de4242; color: #ffffff;
+    padding: .6rem 1.5rem; font-size: .8rem; font-weight: 500; cursor: pointer; border-radius: 1rem; border:none;
+}
+.univCancelBtn:hover{background-color: #782424}
+.univSubmitBtn{
+    display: flex; align-items: center; justify-content: center; background-color: #344d7f; color: #ffffff;
+    padding: .6rem 1.5rem; font-size: .8rem; font-weight: 500; cursor: pointer; border-radius: 1rem; border:none;
+}
+.univSubmitBtn:hover{ background-color: #1a2742;}
 
 .btrSelectBtn{background: #77777750;  border: 1px none #ced4da;  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 border-radius: .5rem; margin: .4rem 1rem; padding: .5rem 1rem; font-size: .9rem;}
@@ -46,6 +56,8 @@ border-radius: .5rem; margin: .4rem 1rem; padding: .5rem 1rem; font-size: .9rem;
   background: #e9ecef;
   font-weight: 600;
 }
+
+
 .titleTxt{ font-size: 1.75rem; letter-spacing: -0.02rem; color: var(--genText); margin-bottom: .15rem;}
 .subTitleTxt{ font-size: 1rem; font-weight: lighter; color: var(--genText);margin-bottom: .15rem}
 .normalHeading{font-size: 1.15rem; font-weight: 600; letter-spacing: 0.008rem; color: var(--genText); margin-bottom: .35rem;}
@@ -180,11 +192,15 @@ border-radius: .5rem; margin: .4rem 1rem; padding: .5rem 1rem; font-size: .9rem;
 .ndDates span{ margin: .1rem .3rem; }
 .ndAction{display: flex; margin: 1rem 0rem;justify-content: space-between;}
 
-.note-form { max-width: 600px; margin: 20px auto; font-family: sans-serif;  }
-.form-row { margin-bottom: 15px; display: flex; gap: 10px; }
+.note-form { max-width: 60rem; margin: 20px auto; padding: 1.5rem;
+    background-color: var(--genBgDark); border: 1px solid #e0e0e0; border-radius: 8px;
+    box-shadow: 0 2px 8px #0000000d; box-sizing: border-box;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;  }
+.form-row { margin-bottom: 1rem; display: flex; gap: .65rem; }
 .form-row input, 
 .form-row textarea, 
-.form-row select {  width: 100%; padding: 8px; box-sizing: border-box; }
+.form-row select {  width: 100%; padding: 10px 12px; border: 1px solid #ccc; border-radius: 1rem; 
+    font-size: .9rem; box-sizing: border-box; outline: none;}
 .form-row textarea { height: 120px; resize: vertical; }
 .actions { justify-content: flex-end;}
 
