@@ -450,6 +450,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const sortSelect = document.getElementById("sortID");
   const catForm = document.getElementById("categoryForm");
   const ndPin = document.getElementById('ndPinID');
+  const dmToggle = document.getElementById('darkModeToggle');
 
 
   if (catForm) {
@@ -488,6 +489,11 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   if (sortSelect) {
     sortSelect.addEventListener("change", handleSort);
+  }
+  if(dmToggle){ 
+    dmToggle.addEventListener('change', () => {
+    document.body.classList.toggle('dark', dmToggle.checked);
+});
   }
   
   noteForm.addEventListener("submit", (e) => {

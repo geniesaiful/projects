@@ -1,6 +1,8 @@
 :root{
     --genBg: #F8FAFC; /*#4CAF50 #FAF8F5;*/
     --genText: #1E293B; /*#2f54e7 #0F172A; */
+    --genTextLight: #3b5379;
+    --genBgDark: #e0e0e0;
     --selectorBg: #334563;
     --selectorText: #ece9f6;
 }
@@ -18,8 +20,10 @@ body{
 body.dark{
     --genBg:  #1E293B; /*#4CAF50 #FAF8F5;*/
     --genText: #F8FAFC; /*#2f54e7 #0F172A; */
+    --genTextLight: #e0e0e0;
+    --genBgDark: #2f415e;
     --selectorBg: #ece9f6;
-    --selectorText: #334563 ;
+    --selectorText: #334563;
 }
 .search-btn{
     display: flex; align-items: center; gap: 8px;
@@ -51,11 +55,11 @@ border-radius: .5rem; margin: .4rem 1rem; padding: .5rem 1rem; font-size: .9rem;
 .catTxt{font-size: 0.8rem; font-weight: 600; letter-spacing: 0.0rem; color: var(--genText);}
 .tagTxt{font-size: 0.7rem; font-weight: 200; letter-spacing: 0.05rem; color: var(--genText);}
 .editorial-title { font-family: 'Playfair Display', 'Georgia', serif;
-  font-size: 1.5rem; font-weight: 400; font-style:normal; color: #2c2c2c; letter-spacing: 0.05em;
+  font-size: 1.5rem; font-weight: 400; font-style:normal; color: var(--genText); letter-spacing: 0.05em;
   text-align: left; position: relative; padding-bottom: .7rem;
 }
 .editorial-subtitle{font-family: 'Playfair Display', 'Georgia', serif;
-  font-size: 1rem; font-weight: 100; font-style: italic; color: #2c2c2c90; letter-spacing: 0.05em;
+  font-size: 1rem; font-weight: 100; font-style: italic; color: var(--genTextLight); letter-spacing: 0.05em;
   text-align: left; position: relative; padding-bottom: .3rem;
 }
 
@@ -220,3 +224,7 @@ border-radius: .5rem; margin: .4rem 1rem; padding: .5rem 1rem; font-size: .9rem;
     border-radius: 1rem; background-color: var(--genBg); color: var(--genText); font-weight: 600; font-size: 1rem; border: 1px solid #00000010; }
 
 .trashViewDiv{display: flex; flex-direction: column; flex: 1; min-width: 0;}
+
+.theme-switch{
+    display: inline-flex; align-items: center; gap: 8px; cursor: pointer;
+}
