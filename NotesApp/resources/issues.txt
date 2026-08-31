@@ -1,5 +1,1 @@
--   Pin function not working after changing the function populatenotes to showselectednotes. 
-    The status (numbers beside labels) not working. buttons (delete, pin) not working
--   tags are not updating instantly.
--   Some labels and note list does not update instantly.
 -   Sort is not working properly. default view last updated must be implemented.

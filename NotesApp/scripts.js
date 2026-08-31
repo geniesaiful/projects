@@ -172,10 +172,7 @@ function showSelectedNotes(notesToShow,notes){
       console.log("Is pinned:" + note.isPinned);
       event.currentTarget.classList.toggle('pinned');
       saveNotes(allNotes); // This is important! we always need the allnotes alongside with the notes to show. because object reference.
-      showDeletedNotes();
-      showPinnedNotes();
-      populateNotes();
-      updateStats();
+      renderAll();
     });
     
     cardElement.addEventListener("click", () => {
@@ -251,36 +248,36 @@ function showPinnedNotes(){
       note.updatedAt = new Date().toISOString();
       
       saveNotes(allNotes);
-      //showDeletedNotes();
-      showPinnedNotes();
-      populateNotes();
+      renderAll();
     });
     noteHolder.appendChild(clone);
   });
 }
 
 function updateNoteDetails(note){
-  document.getElementById('ndEmojiID').textContent = note.emoji;
-  document.getElementById('ndTitleTxtID').textContent = note.title;
-  document.getElementById('ndTopDateTimeID').textContent = dateFormatter(note.updatedAt);
-  document.getElementById('ndCatID').textContent = note.category;
-  //document.getElementById('ndTagID').textContent = note.tags;
-  document.getElementById('ndDescTxtID').textContent = note.content;
-  document.getElementById('ndCreatedDateID').textContent = dateFormatter(note.createdAt);
-  document.getElementById('ndModifiedDateID').textContent = dateFormatter(note.updatedAt);
-  
-  const ndTagsdiv = document.getElementById('ndTagID');
-  ndTagsdiv.innerHTML = '';
+  if(note){
+    document.getElementById('ndEmojiID').textContent = note.emoji;
+    document.getElementById('ndTitleTxtID').textContent = note.title;
+    document.getElementById('ndTopDateTimeID').textContent = dateFormatter(note.updatedAt);
+    document.getElementById('ndCatID').textContent = note.category;
+    //document.getElementById('ndTagID').textContent = note.tags;
+    document.getElementById('ndDescTxtID').textContent = note.content;
+    document.getElementById('ndCreatedDateID').textContent = dateFormatter(note.createdAt);
+    document.getElementById('ndModifiedDateID').textContent = dateFormatter(note.updatedAt);
+    
+    const ndTagsdiv = document.getElementById('ndTagID');
+    ndTagsdiv.innerHTML = '';
 
-  if (Array.isArray(note.tags) && note.tags.length > 0) {
-    note.tags.forEach(tag => {
-      const tagSpan = document.createElement('span');
-      tagSpan.className = 'ndTagItem';
-      tagSpan.textContent = `${tag.trim()}`;
-      ndTagsdiv.appendChild(tagSpan);
-    });
+    if (Array.isArray(note.tags) && note.tags.length > 0) {
+      note.tags.forEach(tag => {
+        const tagSpan = document.createElement('span');
+        tagSpan.className = 'ndTagItem';
+        tagSpan.textContent = `${tag.trim()}`;
+        ndTagsdiv.appendChild(tagSpan);
+      });
+    }
+    else {console.log("no notes to update...");}
   }
-
 }
 function dateFormatter(rawDate){
   const formatted = new Date(rawDate).toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' }).replace(',', ' at');
@@ -395,7 +392,7 @@ function softDeleteNotes() {
     targetNote.updatedAt = new Date().toISOString();
 
     saveNotes(allNotes);
-    populateNotes();
+    renderAll();
   }
   console.log('Note Soft Delete: '+targetNote.isDeleted);
 }
@@ -405,8 +402,7 @@ function permaDeleteNotes(noteID){
 
   const updatedNotes = allNotes.filter(note => note.id !== noteID);
   saveNotes(updatedNotes);
-  showDeletedNotes();
-  updateStats();
+  renderAll();
 }
 function undoDeletedNote(noteID){
   const allNotes = getNotes();
@@ -417,10 +413,7 @@ function undoDeletedNote(noteID){
     targetNote.updatedAt = new Date().toISOString();
   }
   saveNotes(allNotes);
-
-  populateNotes();
-  showDeletedNotes();
-  updateStats();
+  renderAll();
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -529,7 +522,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     saveNotes(allNotes);
-    populateNotes();
+    renderAll();
     navigateTo("contentAllID");
   });
 
