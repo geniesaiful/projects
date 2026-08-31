@@ -128,7 +128,7 @@ function populateCategoryDropdown() {
   });
 
   // Main page Filter dropdown
-  filterSelect.innerHTML = '<option value="">All Categories</option>';
+  filterSelect.innerHTML = '<option value="">All Notes</option>';
 
   const catObjects = getCategories();
   Object.values(catObjects).forEach(cat => {
@@ -321,12 +321,14 @@ function handleSearch() {
 function handleCategoryFilter() {
   const selectedCategory = document.getElementById("categoryFilter").value;
   const allNotes = getNotes();
-
+  const titleID = document.getElementById("contentTitleID");
+  titleID.textContent = selectedCategory;
   let activeNotes = allNotes.filter(note => !note.isDeleted);
 
   if (selectedCategory) {
     activeNotes = activeNotes.filter(note => note.category === selectedCategory);
   }
+
   showSelectedNotes(activeNotes,allNotes);
 }
 function handleSort() {
