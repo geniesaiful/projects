@@ -436,6 +436,11 @@ function undoDeletedNote(noteID){
   saveNotes(allNotes);
   renderAll();
 }
+function updateUI(isDark) {
+  const dmLabel = document.getElementById('toggleLabel');
+  document.body.classList.toggle('dark', isDark);
+  dmLabel.textContent = isDark ? "Toggle to light mode" : "Toggle to dark mode";
+}
 
 document.addEventListener("DOMContentLoaded", () => {
   
@@ -452,9 +457,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const filterSelect = document.getElementById("categoryFilter");
   const sortSelect = document.getElementById("sortID");
   const catForm = document.getElementById("categoryForm");
-  const ndPin = document.getElementById('ndPinID');
-  const dmToggle = document.getElementById('darkModeToggle');
-
+  //const ndPin = document.getElementById('ndPinID');
+  const dmToggle = document.getElementById('toggleSwitch');
+  
+  const isDark = localStorage.getItem('theme') === 'dark';
+  dmToggle.checked = isDark;
+  updateUI(isDark);
 
   if (catForm) {
     catForm.addEventListener("submit", (e) => {
@@ -495,7 +503,9 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   if(dmToggle){ 
     dmToggle.addEventListener('change', () => {
-      document.body.classList.toggle('dark', dmToggle.checked);
+      const currentDark = dmToggle.checked;
+      localStorage.setItem('theme', currentDark ? 'dark' : 'light');
+      updateUI(currentDark);
     });
   }
   
