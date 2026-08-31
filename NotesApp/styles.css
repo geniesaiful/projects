@@ -49,8 +49,15 @@ border-radius: .5rem; margin: .4rem 1rem; padding: .5rem 1rem; font-size: .9rem;
 .smallerHeading{font-size: 0.9rem; font-weight: 600; letter-spacing: 0.0rem; color: var(--genText); margin: .35rem 0;}
 .smallerTxt{font-size: 0.9rem; font-weight: 100; letter-spacing: 0.015rem; color: var(--genText);}
 .catTxt{font-size: 0.8rem; font-weight: 600; letter-spacing: 0.0rem; color: var(--genText);}
-.tagTxt{font-size: 0.8rem; font-weight: 100; letter-spacing: 0.015rem; color: var(--genText);}
-
+.tagTxt{font-size: 0.7rem; font-weight: 200; letter-spacing: 0.01rem; color: var(--genText);}
+.editorial-title { font-family: 'Playfair Display', 'Georgia', serif;
+  font-size: 1.5rem; font-weight: 400; font-style: italic; color: #2c2c2c; letter-spacing: 0.05em;
+  text-align: left; position: relative; padding-bottom: .7rem;
+}
+.editorial-subtitle{font-family: 'Playfair Display', 'Georgia', serif;
+  font-size: 1rem; font-weight: 100; font-style: italic; color: #2c2c2c90; letter-spacing: 0.05em;
+  text-align: left; position: relative; padding-bottom: .3rem;
+}
 
 .leftBar{
     display: flex; flex-direction: column; flex-shrink: 0;
