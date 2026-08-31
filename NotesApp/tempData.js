@@ -38,7 +38,7 @@ const tempNotes = [
 ];
 
 const tempCategories = {
-  ideas: { name: "Ideas", emoji: "💡", color: "#FEF08A" },     // Light Yellow
+  ideas: { name: "Ideas", emoji: "💡", color: "hsl(53, 98%, 77%)" },     // Light Yellow
   personal: { name: "Personal", emoji: "👤", color: "#FED7AA" }, // Light Orange
   work: { name: "Work", emoji: "💼", color: "#E0E7FF" },     // Light Indigo
   shopping: { name: "Shopping", emoji: "🛒", color: "#DCFCE7" }, // Light Green
