@@ -225,7 +225,7 @@ border-radius: .5rem; margin: .4rem 1rem; padding: .5rem 1rem; font-size: .9rem;
 
 .trashViewDiv{display: flex; flex-direction: column; flex: 1; min-width: 0;}
 
-.switch-container{ position: relative; display: inline-block; width: 4rem; height: 2rem; }
+.switch-container{ position: relative; display: inline-block; width: 4rem; height: 2rem;}
 .switch-container input { opacity: 0; width: 0; height: 0; }
 .slider {position: absolute; cursor: pointer;top: 0;left: 0;right: 0;bottom: 0;
       background-color: #ccc; border-radius: 34px; transition: background-color 0.3s ease;
@@ -240,3 +240,4 @@ border-radius: .5rem; margin: .4rem 1rem; padding: .5rem 1rem; font-size: .9rem;
       transform: translateX(1.55rem);
     }
 
+.toggleTitle{ font-size: 1.5rem; font-weight: 600; letter-spacing: 0.008rem; color: var(--genText); margin-bottom: .35rem;}
