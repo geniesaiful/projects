@@ -265,10 +265,17 @@ function showPinnedNotes(){
 
 function updateNoteDetails(note){
   if(note){
+    const allNotes = getNotes();
+    const categories = getCategories();
+    const themeColor = categories[note.category.toLowerCase()].color;
+
+    document.querySelector('.noteDetails').style.backgroundColor = themeColor+"75";
+  
     document.getElementById('ndEmojiID').textContent = note.emoji;
     document.getElementById('ndTitleTxtID').textContent = note.title;
     document.getElementById('ndTopDateTimeID').textContent = dateFormatter(note.updatedAt);
     document.getElementById('ndCatID').textContent = note.category;
+    document.getElementById('ndCatID').style.backgroundColor = themeColor;
     //document.getElementById('ndTagID').textContent = note.tags;
     document.getElementById('ndDescTxtID').textContent = note.content;
     document.getElementById('ndCreatedDateID').textContent = dateFormatter(note.createdAt);

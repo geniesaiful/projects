@@ -169,7 +169,7 @@ border-radius: .5rem; margin: .4rem 1rem; padding: .5rem 1rem; font-size: .9rem;
 .ndTopDateTime{display: flex; margin-left: .5rem;}
 .ndCatTag{display: flex;gap: .5rem;}
 .ndTag{display: flex; flex-wrap: wrap; gap: .25rem;}
-.ndTagItem{padding: 0.2rem 0.5rem; border: 1px hidden #a3afaa;  background-color: #a3afaa; border-radius: 0.375rem;}
+.ndTagItem{padding: 0.2rem 0.5rem; border: 1px hidden #a3afaa98;  background-color: #d4e3dc80; border-radius: 0.375rem;}
 .ndCat{ padding: 0.2rem 0.5rem; border: 1px hidden #a3afaa;  background-color: #a3afaa; border-radius: 0.375rem; }
 .ndDesc{display: flex; flex-grow: 1;}
 .ndDates{display: flex;flex-direction: column;}
