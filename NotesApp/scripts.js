@@ -49,9 +49,9 @@ function setCategory(key, name, emoji, color = null) {
   saveCategories(categories);
 }
 function generateLightColor() {
-  const r = Math.floor(200 + Math.random() * 56).toString(16).padStart(2, '0');
-  const g = Math.floor(200 + Math.random() * 56).toString(16).padStart(2, '0');
-  const b = Math.floor(200 + Math.random() * 56).toString(16).padStart(2, '0');
+  const r = Math.floor(150 + Math.random() * 56).toString(16).padStart(2, '0');
+  const g = Math.floor(150 + Math.random() * 56).toString(16).padStart(2, '0');
+  const b = Math.floor(150 + Math.random() * 56).toString(16).padStart(2, '0');
 
   return `#${r}${g}${b}`.toUpperCase();
 }
@@ -171,7 +171,7 @@ function showSelectedNotes(notesToShow,notes){
     clone.querySelector(".nscTopPin").addEventListener("click", (event) => {
       event.stopPropagation(); //clicking the pin icon toggles pin status without accidentally changing the active detail selection.
       note.isPinned = note.isPinned ? false : true;
-      console.log("Is pinned:" + note.isPinned);
+      //console.log("Is pinned:" + note.isPinned);
       event.currentTarget.classList.toggle('pinned');
       saveNotes(allNotes); // This is important! we always need the allnotes alongside with the notes to show. because object reference.
       renderAll();
@@ -197,12 +197,15 @@ function showDeletedNotes(){
 
   notesToShow.forEach(note => {
     const clone = template.content.cloneNode(true);
-    const themeColor = categories[note.category.toLowerCase()].color;
-    noteSummaryCardTrash
+    const cardElement = clone.querySelector(".noteSummaryCardTrash");
+    const themeColor = categories[note.category.toLowerCase()].color+"70";
+    
+    cardElement.style.backgroundColor=themeColor;
     
     clone.querySelector(".nscHeading").textContent = note.title;
     clone.querySelector(".nscDesc").textContent = note.content;
     clone.querySelector(".nscCat").textContent = note.category;
+    clone.querySelector(".nscCat").style.backgroundColor = themeColor;
     clone.querySelector(".nscBotDate").textContent =`Last Updated: ${dateFormatter(note.updatedAt)}`;
     clone.querySelector(".nscBotNoteIDNo").textContent = `Note ID: ${note.id}`;
     
@@ -227,6 +230,7 @@ function showDeletedNotes(){
 }
 function showPinnedNotes(){
   const allNotes = getNotes();
+  const categories = getCategories();
   const noteHolder = document.getElementById("noteHolderPinned");
   const template = document.getElementById("noteCardTemplatePinned");
 
@@ -235,19 +239,22 @@ function showPinnedNotes(){
   const notesToShow = allNotes.filter(note => note.isPinned);
 
   notesToShow.forEach(note => {
-    // Clone template markup
     const clone = template.content.cloneNode(true);
+    const cardElement = clone.querySelector(".noteSummaryCard");
+    const themeColor = categories[note.category.toLowerCase()].color;
+    //console.log(themeColor);
+    cardElement.style.backgroundColor = themeColor+"70";
 
-    // Populate data
     clone.querySelector(".nscTopEmoji").textContent = note.emoji;
     clone.querySelector(".nscHeading").textContent = note.title;
     clone.querySelector(".nscDesc").textContent = note.content;
     clone.querySelector(".nscCat").textContent = note.category;
+    clone.querySelector(".nscCat").style.backgroundColor = themeColor;
     clone.querySelector(".nscBotDate").textContent = `Last Updated: ${dateFormatter(note.updatedAt)}`;
     clone.querySelector(".nscBotNoteIDNo").textContent = `Note ID: ${note.id}`;
     clone.querySelector(".nscTopPin").addEventListener("click", (event) => {
       note.isPinned = !note.isPinned;
-      note.updatedAt = new Date().toISOString();
+      //note.updatedAt = new Date().toISOString();
       
       saveNotes(allNotes);
       renderAll();
