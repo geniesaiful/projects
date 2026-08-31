@@ -142,13 +142,13 @@ function populateCategoryDropdown() {
 
 
 function populateNotes(){
-  const allNotes = getNotes();
-  const notesToShow = allNotes.filter(note => !note.isDeleted);
-  showSelectedNotes(notesToShow,allNotes);
+  handleSort();
 }
 
 function showSelectedNotes(notesToShow,notes){
   const allNotes = notes;
+  const categories = getCategories();
+  //console.log(categories);
   const noteHolder = document.getElementById("noteHolder");
   const template = document.getElementById("noteCardTemplate");
   
@@ -157,12 +157,14 @@ function showSelectedNotes(notesToShow,notes){
 
     const clone = template.content.cloneNode(true);
     const cardElement = clone.querySelector(".noteSummaryCard");
-    //console.log(note.title+" Is pinned:" + note.isPinned);
-
+    const themeColor = categories[note.category.toLowerCase()].color;
+    //console.log(themeColor);
+    cardElement.style.backgroundColor = themeColor+"70";
     clone.querySelector(".nscTopEmoji").textContent = note.emoji;
     clone.querySelector(".nscHeading").textContent = note.title;
     clone.querySelector(".nscDesc").textContent = note.content;
     clone.querySelector(".nscCat").textContent = note.category;
+    clone.querySelector(".nscCat").style.backgroundColor = themeColor;
     clone.querySelector(".nscBotDate").textContent = `Last Updated: ${dateFormatter(note.updatedAt)}`;
     clone.querySelector(".nscBotNoteIDNo").textContent = `Note ID: ${note.id}`;
     clone.querySelector(".nscTopPin").classList.toggle("pinned", Boolean(note.isPinned));
@@ -181,10 +183,11 @@ function showSelectedNotes(notesToShow,notes){
 
     noteHolder.appendChild(clone);
   });
-  updateNoteDetails(notesToShow[notesToShow.length-1]);
+  updateNoteDetails(notesToShow[0]);
 }
 function showDeletedNotes(){
   const allNotes = getNotes();
+  const categories = getCategories();
 
   const noteHolder = document.getElementById("noteHolderTrash");
   const template = document.getElementById("noteCardTemplateTrash");
@@ -193,11 +196,10 @@ function showDeletedNotes(){
 
 
   notesToShow.forEach(note => {
-    // Clone template markup
     const clone = template.content.cloneNode(true);
-
-    // Populate data
-    //clone.querySelector(".nscTopEmoji").textContent = note.emoji;
+    const themeColor = categories[note.category.toLowerCase()].color;
+    noteSummaryCardTrash
+    
     clone.querySelector(".nscHeading").textContent = note.title;
     clone.querySelector(".nscDesc").textContent = note.content;
     clone.querySelector(".nscCat").textContent = note.category;
