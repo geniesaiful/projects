@@ -146,6 +146,7 @@ function populateNotes(){
 }
 
 function showSelectedNotes(notesToShow,notes){
+  
   const allNotes = notes;
   const categories = getCategories();
   //console.log(categories);
@@ -292,7 +293,10 @@ function updateNoteDetails(note){
         ndTagsdiv.appendChild(tagSpan);
       });
     }
-    else {console.log("no notes to update...");}
+    
+  }
+  else {
+      console.log("no Notes to show");
   }
 }
 function dateFormatter(rawDate){
@@ -341,7 +345,6 @@ function handleCategoryFilter() {
 function handleSort() {
   const sortBy = document.getElementById("sortID").value;
   const allNotes = getNotes();
-  console.log("sort caller function.")
   let notesToDisplay = allNotes.filter(note => !note.isDeleted);
 
   if (sortBy === "createdAt" || sortBy === "updatedAt") {
@@ -492,8 +495,8 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   if(dmToggle){ 
     dmToggle.addEventListener('change', () => {
-    document.body.classList.toggle('dark', dmToggle.checked);
-});
+      document.body.classList.toggle('dark', dmToggle.checked);
+    });
   }
   
   noteForm.addEventListener("submit", (e) => {
