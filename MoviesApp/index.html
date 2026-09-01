@@ -8,13 +8,203 @@
 </head>
 
 <body>
+    <aside class="leftMenuBar">
+        <header class="appTitleArea" style="display: flex; flex-direction: row;">
+            <img src="resources/icons8-movie-94.png" style="width: 3rem; height: 3rem; margin-right: .5rem;">
+            <div style="display: flex; flex-direction: column;">
+                <h1 class="btrh1">Movie Search</h1>
+                <span class="btrh2Lt">Search your favourite movie</span>
+                <!-- <span class="normalTxt">Text demo </span>
+                <span class="normalTxtBold">Text demo </span>
+                <span class="smallTxt">Text demo </span>
+                <span class="catTxt">Text demo </span>
+                <span class="rcntTxt">Text demo </span> -->
+            </div>
+        </header>
+        <div class="menuDiv">
+            <nav class="sidebarMenu" aria-label="Main Navigation">
+                <button type="button" class="menuItem active" id="menuItemHomeID" data-target="contentHomeID">
+                    <span class="icon">🏠</span>
+                    <span class="label">Home</span>
+                </button>
+                <button type="button" class="menuItem" id="menuItemPopularID" data-target="contentPopularID">
+                    <span class="icon">⭐</span>
+                    <span class="label">Popular</span>
+                </button>
+                <button type="button" class="menuItem" id="menuItemTopRatedID" data-target="contentTopRatedID">
+                    <span class="icon">🏆</span>
+                    <span class="label">Top Rated</span>
+                </button>
+                <button type="button" class="menuItem" id="menuItemNowPlayingID" data-target="contentNowPlayingID">
+                    <span class="icon">▶️</span>
+                    <span class="label">Now Playing</span>
+                </button>
+                <button type="button" class="menuItem" id="menuItemUpcomingID" data-target="contentUpcomingID">
+                    <span class="icon">📅</span>
+                    <span class="label">Upcoming</span>
+                </button>
+                <button type="button" class="menuItem" id="menuItemGenresID" data-target="contentGenresID">
+                    <span class="icon">🧩</span>
+                    <span class="label">Genres</span>
+                </button>
+                
+                <button type="button" class="menuItem" id="menuItemWatchlistID" data-target="contentWatchlistDivID">
+                    <span class="icon">🔖</span>
+                    <span class="label">Watchlist</span>
+                    <span class="count" id="menuWatchlistNumber">12</span>
+                </button>
+            </nav>
+        </div>
+        <section class="recentSearches" id="recentSearchesID">
+            <span class="smallerHeading">🕒 Recent Searches</span>
+            <ul id="recentSearchesList" class="recentSearchesListID">
+                <li class="recentSearchesCard">Inception</li>
+                <li class="recentSearchesCard">The Dark Knight</li>
+                <li class="recentSearchesCard">Interstellar</li>
+                <li class="recentSearchesCard">Avengers</li>
+                <li class="recentSearchesCard">Spider-Man</li>
+            </ul>
+        </section>
+        <footer class="sidebarFooter">
+            <div class="themeToggle" id="themeToggleID">
+                <span class="smallTxt">Dark Mode</span>
+                <label class="toggleSwitchContainer">
+                    <input type="checkbox" id="toggleSwitchID" checked>
+                    <span class="toggleSwithSlider"></span>
+                </label>
+            </div>
+        </footer>
+    </aside>
+
+
+    <main class="contents">
+
+
+        <header class="contentTop">
+            <form class="searchForm" role="search" style="flex: 1;">
+                <input type="search" class="searchInput" id="searchInputID" placeholder="Search for movies, genres, actors...">
+                <button type="submit" class="univSubmitBtn">Search</button>
+            </form>
+        </header>
+
+
+        <div class="content active" id="contentAllID">
+      
+
+            <section class="notesOperation">
+                
+                <!-- Popular Section -->
+                <article class="movie-section">
+                <header class="notesOperationTop">
+                    <h2 class="titleTxt">Popular Movies</h2>
+                    <button type="button" class="link-btn">View All &gt;</button>
+                </header>
+                
+                <div class="notesHolder horizontal-scroll" id="popularHolder">
+                    <template id="movieCardTemplate">
+                    <article class="noteSummaryCard movie-card">
+                        <div class="nscTop">
+                        <span class="rating-badge">★ <span class="rating-val">8.8</span></span>
+                        </div>
+                        <img src="" alt="Movie Poster" class="poster-img">
+                        <div class="nscText">
+                        <h3 class="nscHeading smallerHeading">Movie Title</h3>
+                        <span class="smallerTxt">2010</span>
+                        </div>
+                    </article>
+                    </template>
+                </div>
+                </article>
+
+                <!-- Top Rated Section -->
+                <article class="movie-section">
+                <header class="notesOperationTop">
+                    <h2 class="titleTxt">Top Rated</h2>
+                    <button type="button" class="link-btn">View All &gt;</button>
+                </header>
+                <div class="notesHolder horizontal-scroll" id="topRatedHolder"></div>
+                </article>
+
+                <!-- Genres Grid Section -->
+                <article class="movie-section">
+                <header class="notesOperationTop">
+                    <h2 class="titleTxt">Genres</h2>
+                    <button type="button" class="link-btn">View All &gt;</button>
+                </header>
+                <div class="categoriesList" id="categoriesList">
+                    <div class="categoryCard"><span class="icon">🚀</span><span>Action</span><span class="tagTxt">1,230</span></div>
+                    <div class="categoryCard"><span class="icon">🧭</span><span>Adventure</span><span class="tagTxt">880</span></div>
+                    <div class="categoryCard"><span class="icon">😂</span><span>Comedy</span><span class="tagTxt">1,150</span></div>
+                    <div class="categoryCard"><span class="icon">🎭</span><span>Drama</span><span class="tagTxt">1,640</span></div>
+                    <div class="categoryCard"><span class="icon">🪐</span><span>Sci-Fi</span><span class="tagTxt">970</span></div>
+                    <div class="categoryCard"><span class="icon">⚡</span><span>Thriller</span><span class="tagTxt">1,050</span></div>
+                </div>
+                </article>
+
+            </section>
+
+            <!-- RIGHT SIDEBAR: SELECTED MOVIE DETAILS -->
+            <aside class="noteDetails movie-detail-panel" aria-labelledby="ndTitleTxtID">
+                <header class="ndTop">
+                <button type="button" class="close-btn" aria-label="Close Details">✕</button>
+                </header>
+                
+                <div class="detail-poster-wrapper">
+                <img src="resources/inception.jpg" alt="Inception Poster" class="detail-poster">
+                </div>
+
+                <div class="ndTitle">
+                <h2 class="titleTxt" id="ndTitleTxtID">Inception</h2>
+                </div>
+
+                <div class="ndTitleDateTime">
+                <span class="rating-highlight">★ 8.8/10</span>
+                <span class="tagTxt">2010</span>
+                <span class="tagTxt">2h 28m</span>
+                <span class="age-rating">PG-13</span>
+                </div>
+
+                <div class="ndCatTag" id="ndTagID">
+                <span class="ndTagItem">Action</span>
+                <span class="ndTagItem">Sci-Fi</span>
+                <span class="ndTagItem">Adventure</span>
+                </div>
+
+                <div class="credits-info smallerTxt">
+                <p><strong>Director:</strong> Christopher Nolan</p>
+                <p><strong>Cast:</strong> Leonardo DiCaprio, Joseph Gordon-Levitt, Elliot Page, Tom Hardy</p>
+                <p><strong>Release Date:</strong> July 16, 2010</p>
+                </div>
+
+                <section class="ndDesc">
+                <h3 class="smallerHeading">Overview</h3>
+                <p class="normalTxt" id="ndDescTxtID">
+                    A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O.
+                </p>
+                </section>
+
+                <div class="ndAction">
+                <button type="button" class="buttonWide" id="addWatchlistBtn">▶ Add to Watchlist</button>
+                <button type="button" class="univCancelBtn" id="bookmarkBtn">🔖</button>
+                </div>
+
+                <!-- Similar Recommendations inside Details panel -->
+                <section class="recommendations">
+                <header class="notesOperationTop">
+                    <h3 class="smallerHeading">You might also like</h3>
+                    <button type="button" class="link-btn">View All</button>
+                </header>
+                <div class="notesHolder mini-grid" id="recommendationsHolder"></div>
+                </section>
+            </aside>
+
+            </div>
+    </main>
 
 
 
 
 
 
-
-<script src="tempData.js"></script>
 <script src="scripts.js"></script>
 </body>

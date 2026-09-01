@@ -1,0 +1,50 @@
+:root{
+    --genBg1: #eeeaff; /*#4CAF50 #FAF8F5;*/
+    --genBg2: #ffbdbd;
+    --genBg3: #ffecca;
+    --genText1: #1E293B; /*#2f54e7 #0F172A; */
+    --genText2: #271818;
+    --genText3: #322100;
+    --genText3Lt: #966400;
+    --genText1Lt: #3b5175;
+    --genText2Lt: #885555;
+    --selectorBg: #334563;
+    --selectorText: #ece9f6;
+    
+    --font-modern: system-ui, -apple-system, Ubuntu, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+body{
+    display: flex;  margin: 0; padding: 0;
+    font-family: var(--font-modern);
+    background-color: var(--genBg2); color: var(--genText2);
+    width: 100%;       /* Changed from 100vw */
+    max-width: 100%;
+    height: 100vh; /*overflow: hidden;*/
+}
+body.dark{
+    --genBg1: #1a2333; 
+    --genBg2: #271818;
+    --genBg3: #322100;
+    --genText1: #eeeaff;/*#2f54e7 #0F172A; */
+    --genText2: #ffbdbd;
+    --genText3: #ffecca;
+    --genText3Lt: #966400;
+    --genText1Lt: #3b5175;
+    --genText2Lt: #b16b6b;
+    --selectorBg:  #ece9f6;
+    --selectorText: #334563;
+}
+
+.btrh1 {font-size: 1.8rem; font-weight: 800; color: var(--genTextR2); letter-spacing: -0.06rem; 
+    line-height: 1.1; margin-top: 0rem; margin-bottom: .2rem; display: block; }
+.btrh2 {font-size: 1.2rem; font-weight: 600; color: var(--genTextR2); letter-spacing: -0.04rem; 
+    line-height: 1.1; margin-top: 0rem; margin-bottom: .2rem; display: block; }
+.btrh2Lt {font-size: 1.1rem; font-weight: 400; color: var(--genText2Lt); letter-spacing: -0.06rem; 
+    line-height: 1.1; margin-top: 0rem; margin-bottom: .2rem; display: block; }
+.normalTxt{font-size: .8rem; font-weight: 400; color: var(--genTextR2); }
+.normalTxtBold{font-size: .9rem; font-weight: 800; color: var(--genTextR2);}
+.smallTxt{font-size: .7rem; font-weight: 400; color: var(--genTextR2); letter-spacing: .08rem;}
+.catTxt{font-size: .8rem; font-weight: 400; color: var(--genTextR2); 
+    padding: .4rem;background-color: #27181850; border-radius: .5rem;}
+.rcntTxt{font-size: .9rem; font-weight: 800; color: var(--genTextR2);
+    padding: .4rem;background-color: #27181850; border-radius: .5rem;}
