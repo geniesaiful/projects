@@ -38,12 +38,12 @@ body.dark{
     --selectorText: #334563;
 }
 
-.btrh1 {font-size: 1.8rem; font-weight: 800; color: var(--genTextR2); letter-spacing: -0.06rem; 
+.btrh1 {font-size: 1.75rem; font-weight: 800; color: var(--genTextR2); letter-spacing: -0.08rem; 
     line-height: 1.1; margin-top: 0rem; margin-bottom: .2rem; display: block; }
 .btrh2 {font-size: 1.2rem; font-weight: 600; color: var(--genTextR2); letter-spacing: -0.04rem; 
     line-height: 1.1; margin-top: 0rem; margin-bottom: .2rem; display: block; }
-.btrh2Lt {font-size: 1.1rem; font-weight: 400; color: var(--genText2Lt); letter-spacing: -0.06rem; 
-    line-height: 1.1; margin-top: 0rem; margin-bottom: .2rem; display: block; }
+.btrh2Lt {font-size: 1rem; font-weight: 400; color: var(--genText2Lt); letter-spacing: -0.06rem; 
+    line-height: 1.1; margin-top: 0rem; margin-bottom: .2rem; display: block; font-style: italic;}
 .normalTxt{font-size: .8rem; font-weight: 400; color: var(--genTextR2); }
 .normalTxtBold{font-size: .9rem; font-weight: 800; color: var(--genTextR2);}
 .smallTxt{font-size: .7rem; font-weight: 400; color: var(--genTextR2); letter-spacing: .08rem;}
@@ -55,7 +55,7 @@ body.dark{
 
 
 .leftMenuBar, .leftMenuBar * {  box-sizing: border-box;  margin: 0;  padding: 0;}
-.leftMenuBar { width: 16rem; height: 100vh; display: flex; flex-direction: column; padding: .5rem .5rem;
+.leftMenuBar { width: 18rem; height: 100vh; display: flex; flex-direction: column; padding: .5rem .5rem;
   border-right: 1px solid #1f1f2e;
 }
     .appTitleArea{display: flex; align-items: center; gap: .2rem; margin-bottom: 2rem; }
@@ -74,4 +74,20 @@ body.dark{
             border-left-color: #e65c5c; border-radius: .75rem}
         .menuItem:hover:not(.active) { background-color: var(--selectorBg); color: var(--selectorText); 
             border-radius: .75rem }
+
+
+.contents{ display: flex;flex-direction: column; min-width: 0; height: 100vh; gap: .2rem;}
+    
+    .contentTop{ display: flex; align-items: center; width: 100%; max-width: 100rem; gap: 1rem;
+    padding: 1rem 2rem; border-radius: 1rem; 
+    box-shadow: 0 10px 25px -5px #0000000d, 0 8px 16px -8px #0000000d;
+    }
+        .searchInput{flex: 1;  border: .1rem solid #70707050;
+            background: #ff000012; width:100%; padding: 10px 18px; font-size: 1rem;  color: #1e293b;
+            border-radius: 1rem;
+        }
+    .content{ display: none; margin-top: 1rem; flex-grow: 1;}
+    .content.active{ display: flex; gap: 1rem; min-height: 0;}
+
+        .genreCardHolder{ display: flex; gap: .3rem; padding: 1rem; width:100%; background-color: #b5b5f0;}
         

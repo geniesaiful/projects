@@ -10,10 +10,10 @@
 <body>
     <aside class="leftMenuBar">
         <header class="appTitleArea" style="display: flex; flex-direction: row;">
-            <img src="resources/icons8-movie-94.png" style="width: 3rem; height: 3rem; margin-right: .5rem;">
+            <img src="resources/icons8-movie-94.png" style="width: 3rem; height: 3rem; margin-right: .3rem;">
             <div style="display: flex; flex-direction: column;">
                 <h1 class="btrh1">Movie Search</h1>
-                <span class="btrh2Lt">Search your favourite movie</span>
+                <span class="btrh2Lt">Everything about movies</span>
             </div>
         </header>
         <div class="menuDiv">
@@ -43,7 +43,7 @@
                     <span class="label">Genres</span>
                 </button>
                 
-                <button type="button" class="menuItem" id="menuItemWatchlistID" data-target="contentWatchlistDivID">
+                <button type="button" class="menuItem" id="menuItemWatchlistID" data-target="contentWatchlistID">
                     <span class="icon">🔖</span>
                     <span class="label">Watchlist</span>
                     <span class="count" id="menuWatchlistNumber">12</span>
@@ -72,8 +72,45 @@
     </aside>
 
 
-    <main>
+    <main class="contents" style="width: 100%;">
+        <header class="contentTop">
+            <form role="search" style="width: 100%;">
+                <input type="search" class="searchInput" id="mainSearchInputID" placeholder="Search by title, director, actor, or genre...">
+            </form>
+        </header>
+
+        <section class="content" id="contentHomeID">
+            contentHomeID
+        </section>
+
+        <section class="content" id="contentPopularID">
+            contentPopularID
+        </section>
         
+        <section class="content" id="contentTopRatedID">
+            contentTopRatedID
+        </section>
+        
+        <section class="content" id="contentNowPlayingID">
+            contentNowPlayingID
+        </section>
+        
+        <section class="content" id="contentUpcomingID">
+            contentUpcomingID
+        </section>
+        
+        <section class="content active" id="contentGenresID">
+            <div class="genreCardHolder" id="genreCardHolder">
+                <h2 class="btrh2">All Genres</h2>
+                <div class="genreCard">
+                    
+                </div>
+            </div>
+        </section>
+        
+        <section class="content" id="contentWatchlistID">
+            contentWatchlistID
+        </section>
 
         
     </main>

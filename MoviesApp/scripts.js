@@ -8,6 +8,55 @@ const options = {
   }
 };
 
+function injectGenreEmojis() {
+  const rawData = localStorage.getItem("MOVIEAPP_GENRES");
+  
+  if (!rawData) {
+    console.error("No data found in localStorage under 'MOVIEAPP_GENRES'");
+    return;
+  }
+  const genresArray = JSON.parse(rawData);
+  console.log(genresArray)
+
+  const emojiMap = {
+    "action": "💥",
+    "adventure": "🤠",
+    "animation": "🎨",
+    "comedy": "😂",
+    "crime": "🕵️",
+    "documentary": "📹",
+    "drama": "🎭",
+    "family": "🏡",
+    "fantasy": "🧙",
+    "history": "📜",
+    "horror": "👻",
+    "music": "🎵",
+    "mystery": "🔍",
+    "romance": "💖",
+    "sci-fi": "🚀",
+    "science fiction": "🚀",
+    "tv movie": "📺",
+    "thriller": "⏳",
+    "war": "🪖",
+    "western": "🌵"
+  };
+
+  const updatedGenres = genresArray.map(genreObj => {
+
+    const normalizedName = genreObj.name.toLowerCase().trim();
+    
+    const assignedEmoji = emojiMap[normalizedName] || "🎬";
+    return {
+      ...genreObj,
+      emoji: assignedEmoji
+    };
+  });
+
+  localStorage.setItem("MOVIEAPP_GENRES", JSON.stringify(updatedGenres));
+  
+  console.log("Successfully injected emojis into MOVIEAPP_GENRES!", updatedGenres);
+}
+
 async function getGenresWithNumbersAPI() {
   console.log('Fetching fresh data from TMDB API...');
   try{
@@ -26,7 +75,7 @@ async function getGenresWithNumbersAPI() {
       
       return {
         id: g.id,
-        genre: g.name,
+        name: g.name,
         totalMovies: discoverData.total_results
       };
     });
@@ -48,13 +97,14 @@ async function getGenres(fromAPI = false) {
   if (cachedData && !fromAPI) {
     console.log('Loaded from localStorage:');
     const data = JSON.parse(cachedData);
-    console.table(data);
+    //console.log(data);
     return data;
   }
 
   // Otherwise, fetch from API
   const apiData = await getGenresWithNumbersAPI();
-  console.table(apiData);
+  //console.log(apiData);
   return apiData;
 }
 getGenres();
+//injectGenreEmojis();
