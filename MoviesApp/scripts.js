@@ -1,78 +1,60 @@
+const TMDB_TOKEN = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlNTMzNjkwZmE0MjU5MjQxZTIyYTZlNDU4N2ExZDEyOSIsIm5iZiI6MTc4ODI1NzIwMS45MSwic3ViIjoiNmE5NmEzYjE2YTNjZjkzODY2Yzg1YjhmIiwic2NvcGVzIjpbImFwaV9yZWFkIl0sInZlcnNpb24iOjF9.9eKEQSm79FSk8gyZjJ0YXXa2IRkJbHdyrzNh7O4zw94';
 
+const options = {
+  method: 'GET',
+  headers: {
+    accept: 'application/json',
+    Authorization: `Bearer ${TMDB_TOKEN}`
+  }
+};
 
-
-
-const OMDB_API_KEY = '61423af4'; 
-
-const BASE_URL = `https://www.omdbapi.com/?i=tt3896198&apikey=${OMDB_API_KEY}`;
-
-/**
- * FEATURE 1: Search movies containing a keyword
- * Uses OMDb parameter `s` (Search)
- */
-async function searchMovies(keyword) {
-  console.log(`--- Searching for titles containing: "${keyword}" ---`);
-  
-  // URL simply appends the search string directly to the end
-  const endpoint = `${BASE_URL}&s=${encodeURIComponent(keyword)}&type=movie`;
-  
-  try {
-    const response = await fetch(endpoint);
-    const data = await response.json();
+async function getGenresWithNumbersAPI() {
+  console.log('Fetching fresh data from TMDB API...');
+  try{
     
-    if (data.Response === "False") {
-      console.log(`Error from API: ${data.Error}`);
-      return;
-    }
+    const genreResponse = await fetch('https://api.themoviedb.org/3/genre/movie/list?language=en-US', options);
+    const genreData = await genreResponse.json();
+    const genres = genreData.genres;
+    console.log(genres);
 
-    // Display basic items returned in the search payload
-    data.Search.forEach(movie => {
-      console.log(`Title: ${movie.Title} (${movie.Year}) - IMDb ID: ${movie.imdbID}`);
+    //Get movies for each genres using genre id, so that we can count how many movies are there.
+    //We will use promise so that the function will execute sequentially.
+
+    const numberofMoviesPerGenre = genres.map(async (g) => {
+      const discoverResponse = await fetch(`https://api.themoviedb.org/3/discover/movie?with_genres=${g.id}`,options);
+      const discoverData = await discoverResponse.json();
+      
+      return {
+        id: g.id,
+        genre: g.name,
+        totalMovies: discoverData.total_results
+      };
     });
+    // Promise is used when those awit functions are not really depending on the results of each other.
+    const results = await Promise.all(numberofMoviesPerGenre);
 
-  } catch (error) {
-    console.error('Search failed:', error.message);
-  }
-}
-
-/**
- * FEATURE 2: Get full details using the exact title text
- * Uses OMDb parameter `t` (Title)
- */
-async function getMovieDetailsByTitle(titleText) {
-  console.log(`\n--- Fetching details for Title: "${titleText}" ---`);
+  localStorage.setItem('MOVIEAPP_GENRES', JSON.stringify(results));
   
-  // URL simply looks up the full profile by matching text string directly
-  const endpoint = `${BASE_URL}&t=${encodeURIComponent(titleText)}&plot=full`;
+  return results;
   
-  try {
-    const response = await fetch(endpoint);
-    const movie = await response.json();
-    
-    if (movie.Response === "False") {
-      console.log(`Error from API: ${movie.Error}`);
-      return;
-    }
-
-    // Print all your required dataset variables directly to the console
-    console.log(`Title: ${movie.Title}`);
-    console.log(`Release Year: ${movie.Year}`);
-    console.log(`Rating: ⭐ ${movie.imdbRating} / 10`);
-    console.log(`Genre: ${movie.Genre}`);
-    console.log(`Poster Image URL: ${movie.Poster}`);
-    console.log(`Plot/Description:\n"${movie.Plot}"`);
-
-  } catch (error) {
-    console.error('Failed to get movie details:', error.message);
+  }catch (error) {
+    console.error('Error fetching data from TMDB API:', error);
   }
+  
 }
+async function getGenres(fromAPI = false) {
+  const cachedData = localStorage.getItem('MOVIEAPP_GENRES');
 
-// ==========================================
-// TEST EXECUTION RUNNERS
-// ==========================================
+  if (cachedData && !fromAPI) {
+    console.log('Loaded from localStorage:');
+    const data = JSON.parse(cachedData);
+    console.table(data);
+    return data;
+  }
 
-// Run search query test first
-searchMovies('avengers').then(() => {
-  // Directly pull exact details matching the title string text
-  getMovieDetailsByTitle('Infinity War (2018)');
-});
+  // Otherwise, fetch from API
+  const apiData = await getGenresWithNumbersAPI();
+  console.table(apiData);
+  return apiData;
+}
+getGenres();

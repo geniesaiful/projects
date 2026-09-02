@@ -1,0 +1,16 @@
+The OMDb API is strictly a query-driven metadata look-up tool. It requires you to pass a specific search word (&s=) or an exact title/IMDb ID (&t= / &i=). It cannot generate broad categorical lists on its own. So that we switch back to The Movie Database (TMDB) API.
+
+TMDB:
+ref: https://developer.themoviedb.org/docs/search-and-query-for-details
+
+
+TMDB requires authentication on every request using your API Read Access Token (v4) via the HTTP Authorization header. 
+TMDB API Architecture
+
+Base URL: https://api.themoviedb.org/3/
+
+Genre List Endpoint: https://api.themoviedb.org/3/genre/movie/list (fetches all genres and their unique IDs).
+
+Discover Endpoint: https://api.themoviedb.org/3/discover/movie?with_genres={GENRE_ID} (fetches movies belonging to a specific genre, returning the total_results count).
+
+
