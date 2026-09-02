@@ -106,5 +106,47 @@ async function getGenres(fromAPI = false) {
   //console.log(apiData);
   return apiData;
 }
+
+function renderGenreCards() {
+ 
+  const holder = document.getElementById("genreCardHolder");
+  if (!holder) return;
+
+  holder.innerHTML = "";
+
+  const rawData = localStorage.getItem("MOVIEAPP_GENRES");
+  if (!rawData) {
+    holder.innerHTML = "<p>No genres found. Please run your injector script first!</p>";
+    return;
+  }
+  const genresArray = JSON.parse(rawData);
+
+  const bgColors = [
+    "#ffe6e6", "#e6f2ff", "#e6ffe6", "#fff9e6", 
+    "#f3e6ff", "#e6ffff", "#ffe6f9", "#fff0e6"
+  ];
+
+  genresArray.forEach((genre, index) => {
+    // Safely pull totalMovies, or fall back to 0 if the field is missing
+    const totalCount = genre.totalMovies || 0;
+    const assignedBgColor = bgColors[index % bgColors.length];
+    //console.log(index,genre.totalMovies);
+
+    const card = document.createElement("div");
+    card.className = "genreCard";
+
+    // Inject the structured column code (Emoji badge -> Name -> Count)
+    card.innerHTML = `
+      <span class="genre-emoji" style="background-color: ${assignedBgColor};">
+        ${genre.emoji}
+      </span>
+      <p class="genre-name">${genre.name}</p>
+      <p class="movie-count">${totalCount} Movies</p>
+    `;
+    holder.appendChild(card);
+  });
+}
+
 getGenres();
 //injectGenreEmojis();
+renderGenreCards();

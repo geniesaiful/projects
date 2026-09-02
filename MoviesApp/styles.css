@@ -89,5 +89,15 @@ body.dark{
     .content{ display: none; margin-top: 1rem; flex-grow: 1;}
     .content.active{ display: flex; gap: 1rem; min-height: 0;}
 
-        .genreCardHolder{ display: flex; gap: .3rem; padding: 1rem; width:100%; background-color: #b5b5f0;}
+        .genreCardHolder{ display: flex; flex-wrap: wrap; gap: .3rem; padding: 1rem; width:100%;
+             background-color: #b5b5f0;}
         
+             .genreCard { background-color: #ffffff; border: 1px solid #e1e4e8; border-radius: .75rem;
+                padding: 1rem; text-align: center; box-shadow: 0 4px 6px #0000000d;
+                transition: transform 0.2s ease, box-shadow 0.2s ease; cursor: pointer;
+                display: flex; flex-direction: column; align-items: center;
+                
+                /* Sizing controls for responsive wrapping */
+                flex: 1 1 4rem; /* Grow to fill space, shrink if needed, base width of 140px */
+                max-width: 8rem; max-height: 8rem; /* Prevents cards from getting stretched too wide on huge screens */
+                }
