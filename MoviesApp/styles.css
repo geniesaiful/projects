@@ -1,17 +1,20 @@
 :root{
-    --genBg1: #eeeaff; /*#4CAF50 #FAF8F5;*/
-    --genBg2: #ffbdbd;
+    --genBg1: #eeeaff; 
+    --genBg2: #dbdbdb;
     --genBg3: #ffecca;
-    --genText1: #1E293B; /*#2f54e7 #0F172A; */
+    --genText1: #1E293B; 
     --genText2: #271818;
     --genText3: #322100;
     --genText3Lt: #966400;
     --genText1Lt: #3b5175;
     --genText2Lt: #885555;
-    --selectorBg: #334563;
-    --selectorText: #ece9f6;
+    --selectorBg: #9f1e1e;
+    --selectorText: #f6e9e9;
     
     --font-modern: system-ui, -apple-system, Ubuntu, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+*{
+    box-sizing: border-box;
 }
 body{
     display: flex;  margin: 0; padding: 0;
@@ -31,7 +34,7 @@ body.dark{
     --genText3Lt: #966400;
     --genText1Lt: #3b5175;
     --genText2Lt: #b16b6b;
-    --selectorBg:  #ece9f6;
+    --selectorBg:  #ece9f6; 
     --selectorText: #334563;
 }
 
@@ -48,3 +51,27 @@ body.dark{
     padding: .4rem;background-color: #27181850; border-radius: .5rem;}
 .rcntTxt{font-size: .9rem; font-weight: 800; color: var(--genTextR2);
     padding: .4rem;background-color: #27181850; border-radius: .5rem;}
+
+
+
+.leftMenuBar, .leftMenuBar * {  box-sizing: border-box;  margin: 0;  padding: 0;}
+.leftMenuBar { width: 16rem; height: 100vh; display: flex; flex-direction: column; padding: .5rem .5rem;
+  border-right: 1px solid #1f1f2e;
+}
+    .appTitleArea{display: flex; align-items: center; gap: .2rem; margin-bottom: 2rem; }
+    .sidebarMenu{ display: flex; flex-direction: column; }
+        .menuItem{ display: flex; align-items: center; width: 100%; padding: .5rem 1.25rem;
+            background: transparent; border: none; border-left: .25rem solid transparent; cursor: pointer;
+        }
+        .menuItem .icon { height: 1rem; width: auto; aspect-ratio: 1 / 1;
+            display: flex; align-items: center; justify-content: center; margin-right: 1rem; 
+        }
+        .menuItem .label { flex-grow: 1; text-align: left;}
+        .menuItem .count { padding: .2rem; font-size: .7rem; font-weight: 600;
+            color: #eebebe; background-color: #633333; border-radius: 1rem; }
+
+        .menuItem.active { background-color: var(--selectorBg); color: var(--selectorText);
+            border-left-color: #e65c5c; border-radius: .75rem}
+        .menuItem:hover:not(.active) { background-color: var(--selectorBg); color: var(--selectorText); 
+            border-radius: .75rem }
+        
