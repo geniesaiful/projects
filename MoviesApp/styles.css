@@ -1,14 +1,14 @@
 :root{
     --genBg1: #eeeaff; 
-    --genBg2: #dbdbdb;
+    --genBg2: #FAF6F6; /*#FAF6F6 dbdbdb */
     --genBg3: #ffecca;
     --genText1: #1E293B; 
-    --genText2: #271818;
+    --genText2: #2B1A1C; /*2B1A1C 271818*/
     --genText3: #322100;
     --genText3Lt: #966400;
     --genText1Lt: #3b5175;
     --genText2Lt: #885555;
-    --selectorBg: #9f1e1e;
+    --selectorBg: #9f1e1e; /* B21F24 9f1e1e C92A2A*/
     --selectorText: #f6e9e9;
     
     --font-modern: system-ui, -apple-system, Ubuntu, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
@@ -47,8 +47,8 @@ body.dark{
 .normalTxt{font-size: .8rem; font-weight: 400; color: var(--genTextR2); }
 .normalTxtBold{font-size: .9rem; font-weight: 800; color: var(--genTextR2);}
 .smallTxt{font-size: .7rem; font-weight: 400; color: var(--genTextR2); letter-spacing: .08rem;}
-.catTxt{font-size: .8rem; font-weight: 400; color: var(--genTextR2); 
-    padding: .4rem;background-color: #27181850; border-radius: .5rem;}
+.catTxt{font-size: .8rem; font-weight: 600; color: var(--genTextR2); }
+.catTxtLt{font-size: .8rem; font-weight: 200; color: var(--genTextR2); }
 .rcntTxt{font-size: .9rem; font-weight: 800; color: var(--genTextR2);
     padding: .4rem;background-color: #27181850; border-radius: .5rem;}
 
@@ -89,15 +89,20 @@ body.dark{
     .content{ display: none; margin-top: 1rem; flex-grow: 1;}
     .content.active{ display: flex; gap: 1rem; min-height: 0;}
 
-        .genreCardHolder{ display: flex; flex-wrap: wrap; gap: .3rem; padding: 1rem; width:100%;
-             background-color: #b5b5f0;}
+        .genreCardHolder{ display: flex; justify-content: space-between; align-content: flex-start;
+            flex-wrap: wrap; gap: .5rem; padding: .5rem; width:100%;}
         
-             .genreCard { background-color: #ffffff; border: 1px solid #e1e4e8; border-radius: .75rem;
-                padding: 1rem; text-align: center; box-shadow: 0 4px 6px #0000000d;
-                transition: transform 0.2s ease, box-shadow 0.2s ease; cursor: pointer;
-                display: flex; flex-direction: column; align-items: center;
-                
-                /* Sizing controls for responsive wrapping */
-                flex: 1 1 4rem; /* Grow to fill space, shrink if needed, base width of 140px */
-                max-width: 8rem; max-height: 8rem; /* Prevents cards from getting stretched too wide on huge screens */
-                }
+             .genreCard { border-radius: .75rem; padding: .5rem; text-align: center;
+                cursor: pointer; display: flex; flex-direction: column; align-items: center;
+                justify-content:center; flex: 0 0 6.5rem; height: 8rem;
+                box-shadow: 0 4px 6px -1px #2b1a1c0d, 0 10px 15px -3px #2b1a1c08;
+             }
+             .genre-name {
+                margin: 0.2rem 0 0 0; margin-top: auto; margin-bottom: auto; 
+                background-color: #27181810; border-radius: .5rem; padding: .2rem;;
+            }
+            .genre-emoji {
+                font-size: 1.2rem; width: 2.2rem; height: 2.2rem; line-height: 2.2rem;
+                border-radius: 50%; margin-bottom: .05rem; display: inline-block;
+            }
+            .movie-count { margin-top: 0; padding: .4rem;}

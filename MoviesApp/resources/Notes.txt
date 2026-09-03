@@ -13,4 +13,6 @@ Genre List Endpoint: https://api.themoviedb.org/3/genre/movie/list (fetches all 
 
 Discover Endpoint: https://api.themoviedb.org/3/discover/movie?with_genres={GENRE_ID} (fetches movies belonging to a specific genre, returning the total_results count).
 
-
+======================================================================================================
+https://developer.themoviedb.org/reference/getting-started
+https://developer.themoviedb.org/reference/movie-popular-list

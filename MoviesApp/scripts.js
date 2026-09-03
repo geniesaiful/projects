@@ -56,6 +56,27 @@ function injectGenreEmojis() {
   
   console.log("Successfully injected emojis into MOVIEAPP_GENRES!", updatedGenres);
 }
+function setupNavigation() {
+  const menuButtons = document.querySelectorAll('.menuItem');
+  const contentSections = document.querySelectorAll('.content');
+
+  menuButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const targetId = button.getAttribute('data-target');
+
+      menuButtons.forEach(btn => btn.classList.remove('active'));
+      button.classList.add('active');
+
+      contentSections.forEach(section => {
+        if (section.id === targetId) {
+          section.classList.add('active');
+        } else {
+          section.classList.remove('active');
+        }
+      });
+    });
+  });
+}
 
 async function getGenresWithNumbersAPI() {
   console.log('Fetching fresh data from TMDB API...');
@@ -101,7 +122,6 @@ async function getGenres(fromAPI = false) {
     return data;
   }
 
-  // Otherwise, fetch from API
   const apiData = await getGenresWithNumbersAPI();
   //console.log(apiData);
   return apiData;
@@ -122,8 +142,8 @@ function renderGenreCards() {
   const genresArray = JSON.parse(rawData);
 
   const bgColors = [
-    "#ffe6e6", "#e6f2ff", "#e6ffe6", "#fff9e6", 
-    "#f3e6ff", "#e6ffff", "#ffe6f9", "#fff0e6"
+    "#f5836d", "#69acf4", "#62f162", "#f6c112", 
+    "#877498", "#55adad", "#c990bc", "#e49159"
   ];
 
   genresArray.forEach((genre, index) => {
@@ -134,14 +154,15 @@ function renderGenreCards() {
 
     const card = document.createElement("div");
     card.className = "genreCard";
-
-    // Inject the structured column code (Emoji badge -> Name -> Count)
+    card.style = `background-color: ${assignedBgColor}35;`;
+    console.log(card.style);
+    // Inject the  structured column code (Emoji badge -> Name -> Count)
     card.innerHTML = `
-      <span class="genre-emoji" style="background-color: ${assignedBgColor};">
+      <span class="genre-emoji" style="background-color: #ff000020;">
         ${genre.emoji}
       </span>
-      <p class="genre-name">${genre.name}</p>
-      <p class="movie-count">${totalCount} Movies</p>
+      <span class="genre-name catTxt">${genre.name}</span>
+      <span class="movie-count catTxtLt">${totalCount}</span>
     `;
     holder.appendChild(card);
   });
@@ -150,3 +171,4 @@ function renderGenreCards() {
 getGenres();
 //injectGenreEmojis();
 renderGenreCards();
+setupNavigation();
