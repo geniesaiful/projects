@@ -116,7 +116,7 @@ body.dark{
             width: 35%; display: flex; flex-direction: column; background-color:#0000000d;
         }
             .mdHeader{ display: flex; flex-direction: row; align-items: start;}
-            .mdBody{}
+            .mdBody{display: flex; flex-direction: column;}
                 .mdMetadata{ margin-bottom: .5rem;}
                 .mdGerneTag{ background-color: #27181850; gap:1rem; padding: .2rem;}
                 

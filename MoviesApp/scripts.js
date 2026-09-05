@@ -285,7 +285,7 @@ async function showMovieDetail(selectedMovie,containerID){
     movieDetailDiv.innerHTML=`
       <div class='mdHeader'>
         <img src="https://image.tmdb.org/t/p/w154${movie.poster_path}" alt="${movie.title}">
-        <button>close</button>
+        <button class='mdCloseBtn'>close</button>
       </div> 
       <div class='mdBody'>
         
@@ -312,13 +312,13 @@ async function showMovieDetail(selectedMovie,containerID){
       </div>
 
       <div class='mdFooter'>
-        <button>Add to watchlist</button>
+        <button class='mdAddWLBtn'>Add to watchlist</button>
       </div>
     `;    
     movieDetailDiv.classList.add('movieDetailsDiv');
 
     sectionDiv.appendChild(movieDetailDiv);
-    
+    movieDetailDiv.querySelector('.mdCloseBtn').addEventListener('click', () => movieDetailDiv.remove());
     // Because .mdFernes is created now i can use the loop.
     
     const genresContainer = movieDetailDiv.querySelector('.mdGernes');
