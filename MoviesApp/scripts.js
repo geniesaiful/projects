@@ -16,7 +16,7 @@ function injectGenreEmojis() {
     return;
   }
   const genresArray = JSON.parse(rawData);
-  console.log(genresArray)
+  //console.log(genresArray)
 
   const emojiMap = {
     "action": "💥",
@@ -78,14 +78,14 @@ function setupNavigation() {
   });
 }
 
-async function getGenresWithNumbersAPI() {
-  console.log('Fetching fresh data from TMDB API...');
+async function fetchGenresWithNumbersAPI() {
+  //console.log('Fetching fresh data from TMDB API...');
   try{
     
     const genreResponse = await fetch('https://api.themoviedb.org/3/genre/movie/list?language=en-US', options);
     const genreData = await genreResponse.json();
     const genres = genreData.genres;
-    console.log(genres);
+    //console.log(genres);
 
     //Get movies for each genres using genre id, so that we can count how many movies are there.
     //We will use promise so that the function will execute sequentially.
@@ -122,7 +122,7 @@ async function getGenres(fromAPI = false) {
     return data;
   }
 
-  const apiData = await getGenresWithNumbersAPI();
+  const apiData = await fetchGenresWithNumbersAPI();
   //console.log(apiData);
   return apiData;
 }
@@ -155,8 +155,8 @@ function renderGenreCards() {
     const card = document.createElement("div");
     card.className = "genreCard";
     card.style = `background-color: ${assignedBgColor}35;`;
-    console.log(card.style);
-    // Inject the  structured column code (Emoji badge -> Name -> Count)
+    
+  
     card.innerHTML = `
       <span class="genre-emoji" style="background-color: #ff000020;">
         ${genre.emoji}
@@ -168,7 +168,92 @@ function renderGenreCards() {
   });
 }
 
+async function getPopularFromAPI(){
+  try{
+
+    const response = await fetch(`https://api.themoviedb.org/3/movie/popular?language=en-US&page=1`, options);
+    const data = await response.json();
+    console.log(`Fetched Data: ${data.results[0].id}`);
+    //localStorage.setItem(MOVIEAPP_POPULAR, JSON.stringify(data.results));
+  }catch(error){
+    console.error('Error fetching data from TMDB API: ', error);
+  }
+}
+
+async function fetchAndStoreMoviesFP() {
+  const categories = [
+    { key: 'MOVIEAPP_POPULAR', endpoint: 'popular' },
+    { key: 'MOVIEAPP_TOP_RATED', endpoint: 'top_rated' },
+    { key: 'MOVIEAPP_NOW_PLAYING', endpoint: 'now_playing' },
+    { key: 'MOVIEAPP_UPCOMING', endpoint: 'upcoming' }
+  ];
+
+  try {
+    const fetchPromises = categories.map(async (cat) => {
+      const response = await fetch(`https://api.themoviedb.org/3/movie/${cat.endpoint}?language=en-US&page=1`, options);
+      const data = await response.json();
+
+      localStorage.setItem(cat.key, JSON.stringify(data.results));
+      
+      return { category: cat.endpoint, movies: data.results };
+    });
+
+    // Resolve all requests in parallel
+    const results = await Promise.all(fetchPromises);
+
+    console.log('--- Fetched Movie Categories ---');
+    results.forEach(item => {
+      console.log(`[${item.category.toUpperCase()}]:`, item.movies);
+    });
+
+  } catch (error) {
+    console.error('Error fetching movie lists from TMDB:', error);
+  }
+}
+
+function renderMovieSectionsAll(){
+
+  const popularDiv = document.getElementById('contentPopularID');
+  const topRatedDiv = document.getElementById('contentTopRatedID');
+  const nowPlayingDiv = document.getElementById('contentNowPlayingID');
+  const upcomingDiv = document.getElementById('contentUpcomingID');
+
+  popularDiv.innerHTML = "";
+
+  const cachedPopularData = localStorage.getItem('MOVIEAPP_POPULAR');
+  const cachedTopRatedData = localStorage.getItem('MOVIEAPP_TOP_RATED');
+  const cachedNowPlayigData = localStorage.getItem('MOVIEAPP_NOW_PLAYING');
+  const cachedUpcomingData = localStorage.getItem('MOVIEAPP_UPCOMING');
+
+  const targetSections = [
+  { element: popularDiv, movies: cachedPopularData },
+  { element: topRatedDiv, movies: cachedTopRatedData },
+  { element: nowPlayingDiv, movies: cachedNowPlayigData },
+  { element: upcomingDiv, movies: cachedUpcomingData }
+  ];
+
+  targetSections.forEach(({ element, movies }) =>  {
+    movies.forEach(movie =>{
+      const movieCard = document.createElement('div');
+      movieCard.classList.add = 'movieCard';
+
+      movieCard.innerHTML = `
+        <img src="https://tmdb.org{movie.poster_path}" alt="${movie.title}">
+        <span>${movie.title}</span>
+      
+      `;
+
+      element.appendChild(movieCard);
+    });
+  });
+  
+
+}
+
 getGenres();
 //injectGenreEmojis();
 renderGenreCards();
 setupNavigation();
+//getPopularFromAPI();
+//fetchAndStoreMoviesFP();
+renderMovieSectionsAll();
