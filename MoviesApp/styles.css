@@ -112,6 +112,10 @@ body.dark{
                 min-width: 7rem; /* Ensures cards don't shrink too small on mobile */
                 border-radius: 0.5rem; overflow: hidden; display: flex; flex-direction: column; }
         .movieDetailsDiv{
-            width: 35%; display: flex;flex-direction: column; background-color:#0000000d;
+            width: 35%; display: flex; flex-direction: column; background-color:#0000000d;
         }
-            .mdHeader{ display: flex; align-items: start;  }
+            .mdHeader{ display: flex; flex-direction: row; align-items: start;}
+            .mdBody{}
+                .mdMetadata{ margin-bottom: .5rem;}
+                .mdGerneTag{ background-color: #27181850; gap:1rem; padding: .2rem;}
+                

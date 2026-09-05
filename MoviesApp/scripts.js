@@ -253,32 +253,68 @@ function renderMovieSectionsAll(){
   });
   
 }
-function showMovieDetail(movie,containerID){
-  console.log(movie.id,containerID);
+async function FetchMovieDetails(movieID) {
+  const url = `https://api.themoviedb.org/3/movie/${movieID}?append_to_response=credits,release_dates,recommendations`;
+  
+  try{
+    const response = await fetch(url, options);
+    const rawData = await response.json();
+    return rawData;
+  }catch(error){
+    console.error('Error fetching data with TMDB v4:', error);
+  }
+
+}
+
+async function showMovieDetail(selectedMovie,containerID){
+  //console.log(movie.id,containerID);
   const sectionDiv = document.getElementById(containerID);
   const prevDiv = sectionDiv.querySelector('.movieDetailsDiv');
   if (prevDiv) {
     prevDiv.remove();
   }
-  
-  const movieDetailDiv = document.createElement('div');
-  movieDetailDiv.innerHTML=`
-    <div class='mdHeader'>
-      <img src="https://image.tmdb.org/t/p/w154${movie.poster_path}" alt="${movie.title}">
-      <button>close</button>
-    <div> 
-    <div class='mdBody'>
-      <h4>${movie.title}</h4>
-    </div>
-    <div class='mdFooter'>
+  try{
+    const movie = await FetchMovieDetails(selectedMovie.id);
+    console.log(movie);
+    const movieDetailDiv = document.createElement('div');
+    movieDetailDiv.innerHTML=`
+      <div class='mdHeader'>
+        <img src="https://image.tmdb.org/t/p/w154${movie.poster_path}" alt="${movie.title}">
+        <button>close</button>
+      </div> 
+      <div class='mdBody'>
+        <h4>${movie.title}</h4>
+        <div class='mdMetadata'> <span> ${movie.vote_average?.toFixed(1)} </span> <span>${movie.release_date}</span><span> ${movie.runtime}</span></div>
+        <div class='mdGernes'></div>
+        <div></div>
+        
+      </div>
 
-    </div>
-  `;
-  
-  
-  movieDetailDiv.classList.add('movieDetailsDiv');
+      <div class='mdFooter'>
 
-  sectionDiv.appendChild(movieDetailDiv);
+      </div>
+    `;    
+    movieDetailDiv.classList.add('movieDetailsDiv');
+
+    sectionDiv.appendChild(movieDetailDiv);
+    
+    // Because .mdFernes is created now i can use the loop.
+    
+    const genresContainer = movieDetailDiv.querySelector('.mdGernes');
+
+    if (movie.genres && movie.genres.length > 0) {
+      movie.genres.forEach(genre => {
+        const tag = document.createElement('span');
+        tag.classList.add('mdGerneTag'); 
+        tag.textContent = genre.name;
+        genresContainer.appendChild(tag);
+      });
+    }
+  }catch(error){
+    console.error("Error from the other side...", error);
+  }
+  
+
 }
 getGenres();
 //injectGenreEmojis();
