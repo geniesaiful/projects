@@ -243,7 +243,7 @@ function renderMovieSectionsAll(){
         <span>${movie.title}</span>
       `;
       movieCard.addEventListener("click", ()=>{
-        showMovieDetail(movie.id,element.id);
+        showMovieDetail(movie,element.id);
       });
 
       moviesHolder.appendChild(movieCard);
@@ -253,10 +253,32 @@ function renderMovieSectionsAll(){
   });
   
 }
-function showMovieDetail(id,containerID){
-  console.log(id,containerID);
+function showMovieDetail(movie,containerID){
+  console.log(movie.id,containerID);
+  const sectionDiv = document.getElementById(containerID);
+  const prevDiv = sectionDiv.querySelector('.movieDetailsDiv');
+  if (prevDiv) {
+    prevDiv.remove();
+  }
+  
+  const movieDetailDiv = document.createElement('div');
+  movieDetailDiv.innerHTML=`
+    <div class='mdHeader'>
+      <img src="https://image.tmdb.org/t/p/w154${movie.poster_path}" alt="${movie.title}">
+      <button>close</button>
+    <div> 
+    <div class='mdBody'>
+      <h4>${movie.title}</h4>
+    </div>
+    <div class='mdFooter'>
+
+    </div>
+  `;
   
   
+  movieDetailDiv.classList.add('movieDetailsDiv');
+
+  sectionDiv.appendChild(movieDetailDiv);
 }
 getGenres();
 //injectGenreEmojis();
