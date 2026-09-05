@@ -300,7 +300,7 @@ async function showMovieDetail(selectedMovie,containerID){
         <div class='mdGernes'></div>
         
         <div class='mdCredits'>
-          <p><span class='mdcTxtTitle'>Director </span><span class='mdcTxtDetails'>${directorNames};</span></p>
+          <p><span class='mdcTxtTitle'>Director </span><span class='mdcTxtDetails'>${directorNames}</span></p>
           <p><span class='mdcTxtTitle'>Cast </span><span class='mdcTxtDetails'></span>${castNames}</p>
           <p><span class='mdcTxtTitle'>Release Date </span><span class='mdcTxtDetails'>${movie.release_date}</span></p>    
         </div>
