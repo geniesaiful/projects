@@ -276,6 +276,11 @@ async function showMovieDetail(selectedMovie,containerID){
   try{
     const movie = await FetchMovieDetails(selectedMovie.id);
     console.log(movie);
+    const directorsArray = movie.credits.crew.filter(member => member.job === 'Director');
+    const directorNames = directorsArray.map(d => d.name).join(', ');
+    const topCastArray = movie.credits.cast.slice(0, 5);
+    const castNames = topCastArray.map(actor => actor.name).join(', ');
+
     const movieDetailDiv = document.createElement('div');
     movieDetailDiv.innerHTML=`
       <div class='mdHeader'>
@@ -283,23 +288,31 @@ async function showMovieDetail(selectedMovie,containerID){
         <button>close</button>
       </div> 
       <div class='mdBody'>
+        
         <h4>${movie.title}</h4>
+        
         <div class='mdMetadata'> 
           <span> ${movie.vote_average?.toFixed(1)} </span> 
           <span>${movie.release_date?.split('-')[0]}</span>
           <span> ${movie.runtime}</span>
         </div>
+        
         <div class='mdGernes'></div>
+        
         <div class='mdCredits'>
-          <span class='mdcTxtTitle>Director\t</span><span class='mdcTxtDetails></span>
-          <span class='mdcTxtTitle>Cast\t</span><span class='mdcTxtDetails></span>
-          <span class='mdcTxtTitle>Release Date\t</span><span class='mdcTxtDetails></span>    
+          <p><span class='mdcTxtTitle'>Director </span><span class='mdcTxtDetails'>${directorNames};</span></p>
+          <p><span class='mdcTxtTitle'>Cast </span><span class='mdcTxtDetails'></span>${castNames}</p>
+          <p><span class='mdcTxtTitle'>Release Date </span><span class='mdcTxtDetails'>${movie.release_date}</span></p>    
         </div>
         
+        <div>
+          <p>Overview</p>
+          <p> ${movie.overview}</p>
+        </div>
       </div>
 
       <div class='mdFooter'>
-
+        <button>Add to watchlist</button>
       </div>
     `;    
     movieDetailDiv.classList.add('movieDetailsDiv');
