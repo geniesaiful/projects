@@ -107,4 +107,7 @@ body.dark{
             }
             .movie-count { margin-top: 0; padding: .4rem;}
 
-            
+        .moviesHolder{ display: flex; flex-wrap: wrap; gap: 1rem;  width: 100%;}
+            .movieCard{ flex: 1 0 calc(10% - 1rem); 
+                min-width: 7rem; /* Ensures cards don't shrink too small on mobile */
+                border-radius: 0.5rem; overflow: hidden; display: flex; flex-direction: column; }

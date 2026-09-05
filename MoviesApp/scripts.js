@@ -218,12 +218,10 @@ function renderMovieSectionsAll(){
   const nowPlayingDiv = document.getElementById('contentNowPlayingID');
   const upcomingDiv = document.getElementById('contentUpcomingID');
 
-  popularDiv.innerHTML = "";
-
-  const cachedPopularData = localStorage.getItem('MOVIEAPP_POPULAR');
-  const cachedTopRatedData = localStorage.getItem('MOVIEAPP_TOP_RATED');
-  const cachedNowPlayigData = localStorage.getItem('MOVIEAPP_NOW_PLAYING');
-  const cachedUpcomingData = localStorage.getItem('MOVIEAPP_UPCOMING');
+  const cachedPopularData = JSON.parse(localStorage.getItem('MOVIEAPP_POPULAR'));
+  const cachedTopRatedData = JSON.parse(localStorage.getItem('MOVIEAPP_TOP_RATED'));
+  const cachedNowPlayigData = JSON.parse(localStorage.getItem('MOVIEAPP_NOW_PLAYING'));
+  const cachedUpcomingData = JSON.parse(localStorage.getItem('MOVIEAPP_UPCOMING'));
 
   const targetSections = [
   { element: popularDiv, movies: cachedPopularData },
@@ -233,23 +231,33 @@ function renderMovieSectionsAll(){
   ];
 
   targetSections.forEach(({ element, movies }) =>  {
+    //console.log(movies);
+    element.innerHTML="";
+    const moviesHolder = document.createElement('div');
+    moviesHolder.classList.add('moviesHolder');
     movies.forEach(movie =>{
       const movieCard = document.createElement('div');
-      movieCard.classList.add = 'movieCard';
-
+      movieCard.classList.add('movieCard');
       movieCard.innerHTML = `
-        <img src="https://tmdb.org{movie.poster_path}" alt="${movie.title}">
+        <img src="https://image.tmdb.org/t/p/w92${movie.poster_path}" alt="${movie.title}">
         <span>${movie.title}</span>
-      
       `;
+      movieCard.addEventListener("click", ()=>{
+        showMovieDetail(movie.id,element.id);
+      });
 
-      element.appendChild(movieCard);
+      moviesHolder.appendChild(movieCard);
     });
+    //console.log( moviesHolder.classList);
+    element.appendChild(moviesHolder);
   });
   
-
 }
-
+function showMovieDetail(id,containerID){
+  console.log(id,containerID);
+  
+  
+}
 getGenres();
 //injectGenreEmojis();
 renderGenreCards();
