@@ -284,9 +284,17 @@ async function showMovieDetail(selectedMovie,containerID){
       </div> 
       <div class='mdBody'>
         <h4>${movie.title}</h4>
-        <div class='mdMetadata'> <span> ${movie.vote_average?.toFixed(1)} </span> <span>${movie.release_date}</span><span> ${movie.runtime}</span></div>
+        <div class='mdMetadata'> 
+          <span> ${movie.vote_average?.toFixed(1)} </span> 
+          <span>${movie.release_date?.split('-')[0]}</span>
+          <span> ${movie.runtime}</span>
+        </div>
         <div class='mdGernes'></div>
-        <div></div>
+        <div class='mdCredits'>
+          <span class='mdcTxtTitle>Director\t</span><span class='mdcTxtDetails></span>
+          <span class='mdcTxtTitle>Cast\t</span><span class='mdcTxtDetails></span>
+          <span class='mdcTxtTitle>Release Date\t</span><span class='mdcTxtDetails></span>    
+        </div>
         
       </div>
 
