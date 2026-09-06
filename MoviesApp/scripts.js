@@ -184,6 +184,20 @@ function renderGenreCards() {
     holder.appendChild(card);
   });
 }
+async function getData(storageKey, apiFetcher) {
+  const isApiChecked = document.getElementById('liveApiToggleID')?.checked;
+  const cached = localStorage.getItem(storageKey);
+
+  // If checkbox is NOT checked and local data exists, use localStorage
+  if (!isApiChecked && cached) {
+    return JSON.parse(cached);
+  }
+
+  // Otherwise (checkbox is checked OR no cache available), fetch fresh data
+  const freshData = await apiFetcher();
+  localStorage.setItem(storageKey, JSON.stringify(freshData));
+  return freshData;
+}
 
 async function loadSectionPage(sectionKey, endpoint, containerId, page = 1) {
   const container = document.getElementById(containerId);
