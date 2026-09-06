@@ -19,7 +19,8 @@ const movieSections = [
   { key: 'popular', endpoint: 'popular', containerId: 'contentPopularID' },
   { key: 'top_rated', endpoint: 'top_rated', containerId: 'contentTopRatedID' },
   { key: 'now_playing', endpoint: 'now_playing', containerId: 'contentNowPlayingID' },
-  { key: 'upcoming', endpoint: 'upcoming', containerId: 'contentUpcomingID' }
+  { key: 'upcoming', endpoint: 'upcoming', containerId: 'contentUpcomingID' },
+  { key: 'search', endpoint: '', containerId: 'contentSearchID' }
 ];
 pageState.search = 1;
 let currentSearchQuery = '';
@@ -132,7 +133,7 @@ async function getGenres(fromAPI = false) {
   const cachedData = localStorage.getItem('MOVIEAPP_GENRES');
 
   if (cachedData && !fromAPI) {
-    console.log('Loaded from localStorage:');
+    //console.log('Loaded from localStorage:');
     const data = JSON.parse(cachedData);
     //console.log(data);
     return data;
@@ -266,7 +267,11 @@ function renderMovieGrid(container, movies, sectionKey, currentPage, totalPages)
   document.getElementById(`next-${sectionKey}`).addEventListener('click', () => {
     if (pageState[sectionKey] < totalPages) {
       pageState[sectionKey]++;
-      loadSectionPage(sectionKey, sectionConfig.endpoint, sectionConfig.containerId, pageState[sectionKey]);
+      if (sectionKey === 'search') {
+        executeMovieSearch(currentSearchQuery, pageState[sectionKey]);
+      } else {
+        loadSectionPage(sectionKey, sectionConfig.endpoint, sectionConfig.containerId, pageState[sectionKey]);
+      }
     }
   });
 }
@@ -384,31 +389,87 @@ function closeModal() {
   }
 }
 function setupSearchFeature() {
+  // takes input, make it query and execute
   const searchInput = document.getElementById('mainSearchInputID');
   if (!searchInput) return;
 
-  // Listen for 'Enter' keypress inside the search bar
   searchInput.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') {
-      e.preventDefault(); // Prevent form submission page refresh
+      e.preventDefault();
       const query = searchInput.value.trim();
 
       if (query !== '') {
         currentSearchQuery = query;
-        pageState.search = 1; // Reset to page 1 for new searches
+        pageState.search = 1;
         executeMovieSearch(query, 1);
       }
     }
   });
 }
 
+async function executeMovieSearch(query, page = 1) {
+  const searchContainer = document.getElementById('contentSearchID');
+  if (!searchContainer) return;
+
+  switchToSearchSection();
+  searchContainer.innerHTML = `<p>Searching for "${query}"...</p>`;
+
+  try {
+    const encodedQuery = encodeURIComponent(query);
+    const response = await fetch(
+      `https://api.themoviedb.org/3/search/movie?query=${encodedQuery}&include_adult=false&language=en-US&page=${page}`,
+      options
+    );
+    const data = await response.json();
+
+    if (!data.results || data.results.length === 0) {
+      searchContainer.innerHTML = `<p class="btrh2">No movies found matching "${query}".</p>`;
+      return;
+    }
+
+    // Reuse your existing rendering function
+    renderMovieGrid(searchContainer, data.results, 'search', page, data.total_pages);
+
+  } catch (error) {
+    console.error('Error executing movie search:', error);
+    searchContainer.innerHTML = `<p>Failed to load search results.</p>`;
+  }
+}
+function switchToSearchSection() {
+  // the active stat changer.
+  const contentSections = document.querySelectorAll('.content');
+  const menuButtons = document.querySelectorAll('.menuItem');
+
+  contentSections.forEach(section => {
+    if (section.id === 'contentSearchID') {
+      section.classList.add('active');
+    } else {
+      section.classList.remove('active');
+    }
+  });
+
+  menuButtons.forEach(btn => btn.classList.remove('active'));
+}
+
+
 function initAllMovieSections() {
   movieSections.forEach(section => {
+    if (section.key === 'search') return;
     loadSectionPage(section.key, section.endpoint, section.containerId, 1);
   });
 }
 
+getGenres();
+//injectGenreEmojis();
+renderGenreCards();
+setupNavigation();
+//getPopularFromAPI();
+//fetchAndStoreMoviesFP();
+//renderMovieSectionsAll();
+initAllMovieSections();
+setupSearchFeature();
 
+//// OLD functions
 
 async function getPopularFromAPI(){
   try{
@@ -568,11 +629,7 @@ async function showMovieDetail(selectedMovie,containerID){
   
 
 }
-getGenres();
-//injectGenreEmojis();
-renderGenreCards();
-setupNavigation();
-//getPopularFromAPI();
-//fetchAndStoreMoviesFP();
-//renderMovieSectionsAll();
-initAllMovieSections();
+
+
+
+
