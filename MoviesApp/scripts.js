@@ -334,6 +334,53 @@ async function handleMovieClick(movieId) {
     openMovieModal('<div class="modalError">Failed to load movie details.</div>');
   }
 }
+function openMovieModal(contentHTML) {
+  let modalOverlay = document.getElementById('movieModalOverlay');
+  
+  if (!modalOverlay) {
+    modalOverlay = document.createElement('div');
+    modalOverlay.id = 'movieModalOverlay';
+    modalOverlay.className = 'modalOverlay';
+    document.body.appendChild(modalOverlay);
+
+    // Close when clicking outside content box
+    modalOverlay.addEventListener('click', (e) => {
+      if (e.target === modalOverlay) closeModal();
+    });
+
+    // Close on Escape keypress
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeModal();
+    });
+  }
+
+  modalOverlay.innerHTML = `<div class="modalCard">${contentHTML}</div>`;
+  modalOverlay.classList.add('active');
+
+  // Attach close event to button dynamically
+  const closeBtn = document.getElementById('modalCloseBtn');
+  if (closeBtn) {
+    closeBtn.addEventListener('click', closeModal);
+  }
+}
+async function FetchMovieDetails(movieID) {
+  const url = `https://api.themoviedb.org/3/movie/${movieID}?append_to_response=credits,release_dates,recommendations`;
+  
+  try{
+    const response = await fetch(url, options);
+    const rawData = await response.json();
+    return rawData;
+  }catch(error){
+    console.error('Error fetching data with TMDB v4:', error);
+  }
+
+}
+function closeModal() {
+  const modalOverlay = document.getElementById('movieModalOverlay');
+  if (modalOverlay) {
+    modalOverlay.classList.remove('active');
+  }
+}
 
 
 function initAllMovieSections() {
@@ -429,18 +476,7 @@ function renderMovieSectionsAll(){
   });
   
 }
-async function FetchMovieDetails(movieID) {
-  const url = `https://api.themoviedb.org/3/movie/${movieID}?append_to_response=credits,release_dates,recommendations`;
-  
-  try{
-    const response = await fetch(url, options);
-    const rawData = await response.json();
-    return rawData;
-  }catch(error){
-    console.error('Error fetching data with TMDB v4:', error);
-  }
 
-}
 
 async function showMovieDetail(selectedMovie,containerID){
   //console.log(movie.id,containerID);

@@ -129,4 +129,32 @@ body.dark{
             .mdBody{display: flex; flex-direction: column;}
                 .mdMetadata{ margin-bottom: .5rem;}
                 .mdGerneTag{ background-color: #27181850; gap:1rem; padding: .2rem;}
-                
+
+
+
+.modalOverlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(5px); display: flex; align-items: center; justify-content: center; z-index: 1000; opacity: 0;
+  pointer-events: none; transition: opacity 0.25s ease-in-out;}
+  
+.modalOverlay.active { opacity: 1; pointer-events: auto;}
+
+    .modalCard { background-color: var(--genBg2); color: var(--genText2); width: 90%; max-width: 550px; max-height: 85vh;
+        border-radius: 1rem; overflow-y: auto; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5); display: flex;
+        flex-direction: column; position: relative;}
+        .modalBanner { position: relative; width: 100%; height: 200px; background-size: cover; background-position: center;
+            display: flex; align-items: flex-end; padding: 1rem;}
+
+        .mdCloseBtn { position: absolute; top: 0.75rem; right: 0.75rem; background: rgba(0, 0, 0, 0.6); border: none;
+            color: #fff; font-size: 1.5rem; width: 2rem; height: 2rem; border-radius: 50%; cursor: pointer; display: flex;
+            align-items: center; justify-content: center;}
+        .mdBody { padding: 1.5rem; padding-top: 2rem; display: flex; flex-direction: column; gap: 0.75rem;}
+        .mdMetadata { display: flex; gap: 1rem; font-weight: 600; font-size: 0.9rem;}
+        .mdGernes { display: flex; flex-wrap: wrap; gap: 0.4rem;}
+        .mdGerneTag { background-color: var(--selectorBg); color: var(--selectorText); font-size: 0.75rem; padding: 0.2rem 0.6rem; border-radius: 1rem;}
+        .mdOverview h3 { margin: 0.5rem 0 0.2rem 0; font-size: 1rem;}
+        .mdOverview p { font-size: 0.85rem; line-height: 1.4; margin: 0;}
+        .mdCredits p { font-size: 0.85rem; margin: 0.2rem 0;}
+        .mdFooter { margin-top: 0.5rem;}
+        .mdAddWLBtn { width: 100%; padding: 0.6rem; border: none; background-color: var(--selectorBg); color: var(--selectorText);
+            font-weight: bold; border-radius: 0.5rem; cursor: pointer;}
+        .modalLoading, .modalError { padding: 3rem; text-align: center; font-weight: bold;}
