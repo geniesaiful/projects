@@ -450,7 +450,93 @@ function switchToSearchSection() {
 
   menuButtons.forEach(btn => btn.classList.remove('active'));
 }
+function renderHomePage() {
+  const popularData = JSON.parse(localStorage.getItem('MOVIEAPP_POPULAR')) || [];
+  renderHomeMovieRow('homePopularGrid', popularData);
 
+  const topRatedData = JSON.parse(localStorage.getItem('MOVIEAPP_TOP_RATED')) || [];
+  renderHomeMovieRow('homeTopRatedGrid', topRatedData);
+
+  // 3. Clone existing genre cards into Home genres container
+  const homeGenreContainer = document.getElementById('homeGenresGrid');
+  const mainGenreHolder = document.getElementById('genreCardHolder');
+  if (homeGenreContainer && mainGenreHolder) {
+    homeGenreContainer.innerHTML = '';
+    // Reuses rendered genre cards from localStorage
+    const cards = mainGenreHolder.querySelectorAll('.genreCard');
+    cards.forEach(card => {
+      homeGenreContainer.appendChild(card.cloneNode(true));
+    });
+  }
+
+  // 4. Attach View All button triggers using existing navigation logic
+  setupViewAllButtons();
+}
+function renderHomeMovieRow(containerId, movies) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+  container.innerHTML = '';
+
+  movies.forEach(movie => {
+    const poster = `https://image.tmdb.org/t/p/w342${movie.poster_path}`;
+    const card = document.createElement('div');
+    card.className = 'movieCard';
+    card.innerHTML = `
+      <img src="${poster}" alt="${movie.title}">
+      <div class="movieInfo">
+        <h4 style="font-size: 0.85rem; margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${movie.title}</h4>
+        <span style="font-size: 0.75rem;">⭐ ${movie.vote_average.toFixed(1)}</span>
+      </div>
+    `;
+    // Reuses existing movie details modal trigger
+    card.addEventListener('click', () => handleMovieClick(movie.id));
+    container.appendChild(card);
+  });
+}
+function setupViewAllButtons() {
+  const viewAllBtns = document.querySelectorAll('.viewAllBtn');
+  viewAllBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const targetId = btn.getAttribute('data-target');
+
+      // Programmatically click the matching menu button to sync menu active states
+      const targetMenuBtn = document.querySelector(`.menuItem[data-target="${targetId}"]`);
+      if (targetMenuBtn) {
+        targetMenuBtn.click();
+      }
+    });
+  });
+}
+
+async function initApp() {
+  await getGenres();
+  renderGenreCards();
+  setupNavigation();
+  
+  // Wait for section pages to populate localStorage, then render Home page
+  await Promise.all(
+    movieSections
+      .filter(s => s.key !== 'search') // take all section without search section
+      .map(s => loadSectionPage(s.key, s.endpoint, s.containerId, 1)) // do(run the function) for all sections
+  );
+
+  renderHomePage();
+  setupSearchFeature();
+}
+
+initApp();
+
+//getGenres();
+//injectGenreEmojis();
+//renderGenreCards();
+//setupNavigation();
+//getPopularFromAPI();
+//fetchAndStoreMoviesFP();
+//renderMovieSectionsAll();
+//initAllMovieSections();
+//setupSearchFeature();
+
+//// OLD functions
 
 function initAllMovieSections() {
   movieSections.forEach(section => {
@@ -458,19 +544,6 @@ function initAllMovieSections() {
     loadSectionPage(section.key, section.endpoint, section.containerId, 1);
   });
 }
-
-getGenres();
-//injectGenreEmojis();
-renderGenreCards();
-setupNavigation();
-//getPopularFromAPI();
-//fetchAndStoreMoviesFP();
-//renderMovieSectionsAll();
-initAllMovieSections();
-setupSearchFeature();
-
-//// OLD functions
-
 async function getPopularFromAPI(){
   try{
 
