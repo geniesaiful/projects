@@ -240,8 +240,8 @@ function renderMovieGrid(container, movies, sectionKey, currentPage, totalPages)
     card.innerHTML = `
       <img src="${poster}" alt="${movie.title}">
       <div class="movieInfo">
-        <h4>${movie.title}</h4>
-        <span>⭐ ${movie.vote_average.toFixed(1)}</span>
+        <h4 class="normalTxtBold">${movie.title}</h4>
+        <span style="font-size: 0.75rem;">⭐ ${movie.vote_average.toFixed(1)}</span>
       </div>
     `;
     //console.log(card.innerHTML);
