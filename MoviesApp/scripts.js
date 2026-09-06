@@ -21,6 +21,8 @@ const movieSections = [
   { key: 'now_playing', endpoint: 'now_playing', containerId: 'contentNowPlayingID' },
   { key: 'upcoming', endpoint: 'upcoming', containerId: 'contentUpcomingID' }
 ];
+pageState.search = 1;
+let currentSearchQuery = '';
 
 function injectGenreEmojis() {
   const rawData = localStorage.getItem("MOVIEAPP_GENRES");
