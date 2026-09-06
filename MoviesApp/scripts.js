@@ -383,7 +383,24 @@ function closeModal() {
     modalOverlay.classList.remove('active');
   }
 }
+function setupSearchFeature() {
+  const searchInput = document.getElementById('mainSearchInputID');
+  if (!searchInput) return;
 
+  // Listen for 'Enter' keypress inside the search bar
+  searchInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault(); // Prevent form submission page refresh
+      const query = searchInput.value.trim();
+
+      if (query !== '') {
+        currentSearchQuery = query;
+        pageState.search = 1; // Reset to page 1 for new searches
+        executeMovieSearch(query, 1);
+      }
+    }
+  });
+}
 
 function initAllMovieSections() {
   movieSections.forEach(section => {
