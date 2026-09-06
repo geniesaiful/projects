@@ -7,6 +7,20 @@ const options = {
     Authorization: `Bearer ${TMDB_TOKEN}`
   }
 };
+const pageState = {
+  popular: 1,
+  top_rated: 1,
+  now_playing: 1,
+  upcoming: 1
+};
+
+// Config for sections mapping to container IDs
+const movieSections = [
+  { key: 'popular', endpoint: 'popular', containerId: 'contentPopularID' },
+  { key: 'top_rated', endpoint: 'top_rated', containerId: 'contentTopRatedID' },
+  { key: 'now_playing', endpoint: 'now_playing', containerId: 'contentNowPlayingID' },
+  { key: 'upcoming', endpoint: 'upcoming', containerId: 'contentUpcomingID' }
+];
 
 function injectGenreEmojis() {
   const rawData = localStorage.getItem("MOVIEAPP_GENRES");
@@ -168,6 +182,168 @@ function renderGenreCards() {
   });
 }
 
+async function loadSectionPage(sectionKey, endpoint, containerId, page = 1) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+
+  container.innerHTML = `<p>Loading page ${page}...</p>`;
+
+  try {
+    const response = await fetch(
+      `https://api.themoviedb.org/3/movie/${endpoint}?language=en-US&page=${page}`,
+      options
+    );
+    const data = await response.json();
+    const movies = data.results;
+
+    // Save current 20 items to localStorage for immediate section use
+    localStorage.setItem(`MOVIEAPP_${sectionKey.toUpperCase()}`, JSON.stringify(movies));
+    //console.log(`Successfully fetched and stored to MOVIEAPP_${sectionKey.toUpperCase()}; ${sectionKey}, ${page}, ${containerId}`);
+    // Render movies and pagination buttons
+    renderMovieGrid(container, movies, sectionKey, page, data.total_pages);
+
+  } catch (error) {
+    console.error(`Error loading page ${page} for ${sectionKey}:`, error);
+    container.innerHTML = `<p>Failed to load data.</p>`;
+  }
+}
+
+function renderMovieGrid(container, movies, sectionKey, currentPage, totalPages) {
+  container.innerHTML = ''; // Clear container
+
+  // 1. Movie Grid Container
+  const grid = document.createElement('div');
+  grid.className = 'moviesHolder';
+
+  movies.forEach(movie => {
+    const poster = `https://image.tmdb.org/t/p/w342${movie.poster_path}`;
+
+    const card = document.createElement('div');
+    card.className = 'movieCard';
+    card.innerHTML = `
+      <img src="${poster}" alt="${movie.title}">
+      <div class="movieInfo">
+        <h4>${movie.title}</h4>
+        <span>⭐ ${movie.vote_average.toFixed(1)}</span>
+      </div>
+    `;
+    //console.log(card.innerHTML);
+    card.addEventListener('click', () => handleMovieClick(movie.id));
+    grid.appendChild(card);
+  });
+  
+  // 2. Pagination Controls
+  const pagination = document.createElement('div');
+  pagination.className = 'pagination-controls';
+
+  pagination.innerHTML = `
+    <button class="page-btn" id="first-${sectionKey}" ${currentPage === 1 ? 'disabled' : ''}>« First</button>
+    <button class="page-btn" id="prev-${sectionKey}" ${currentPage === 1 ? 'disabled' : ''}>‹ Prev</button>
+    <span class="page-info">Page <strong>${currentPage}</strong> of ${totalPages}</span>
+    <button class="page-btn" id="next-${sectionKey}" ${currentPage >= totalPages ? 'disabled' : ''}>Next ›</button>
+  `;
+
+  container.appendChild(grid);
+  container.appendChild(pagination);
+
+  // 3. Attach Event Listeners to Buttons
+  const sectionConfig = movieSections.find(s => s.key === sectionKey);
+
+  document.getElementById(`first-${sectionKey}`).addEventListener('click', () => {
+    pageState[sectionKey] = 1;
+    loadSectionPage(sectionKey, sectionConfig.endpoint, sectionConfig.containerId, 1);
+  });
+
+  document.getElementById(`prev-${sectionKey}`).addEventListener('click', () => {
+    if (pageState[sectionKey] > 1) {
+      pageState[sectionKey]--;
+      loadSectionPage(sectionKey, sectionConfig.endpoint, sectionConfig.containerId, pageState[sectionKey]);
+    }
+  });
+
+  document.getElementById(`next-${sectionKey}`).addEventListener('click', () => {
+    if (pageState[sectionKey] < totalPages) {
+      pageState[sectionKey]++;
+      loadSectionPage(sectionKey, sectionConfig.endpoint, sectionConfig.containerId, pageState[sectionKey]);
+    }
+  });
+}
+
+async function handleMovieClick(movieId) {
+  // Render loading skeleton inside overlay
+  openMovieModal('<div class="modalLoading">Loading details...</div>');
+
+  try {
+    const movie = await FetchMovieDetails(movieId);
+    
+    // Extract Directors & Cast
+    const directors = movie.credits?.crew
+      .filter(member => member.job === 'Director')
+      .map(d => d.name)
+      .join(', ') || 'N/A';
+
+    const topCast = movie.credits?.cast
+      .slice(0, 5)
+      .map(actor => actor.name)
+      .join(', ') || 'N/A';
+
+    const genresMarkup = movie.genres
+      ? movie.genres.map(g => `<span class="mdGerneTag">${g.name}</span>`).join('')
+      : '';
+
+    const poster = movie.poster_path 
+      ? `https://image.tmdb.org/t/p/w342${movie.poster_path}`
+      : 'https://via.placeholder.com/342x513?text=No+Poster';
+
+    const backdrop = movie.backdrop_path 
+      ? `https://image.tmdb.org/t/p/w1280${movie.backdrop_path}`
+      : '';
+
+    // Populate modal container
+    const modalContent = `
+      <div class="modalBanner" style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.85)), url('${backdrop}');">
+        <button class="mdCloseBtn" id="modalCloseBtn">&times;</button>
+        <img class="modalPoster" src="${poster}" alt="${movie.title}">
+      </div>
+      <div class="mdBody">
+        <h2>${movie.title}</h2>
+        <div class="mdMetadata">
+          <span>⭐ ${movie.vote_average?.toFixed(1) || 'N/A'}</span>
+          <span>📅 ${movie.release_date?.split('-')[0] || 'N/A'}</span>
+          <span>⏱️ ${movie.runtime ? movie.runtime + ' mins' : 'N/A'}</span>
+        </div>
+        <div class="mdGernes">${genresMarkup}</div>
+        <div class="mdOverview">
+          <h3>Overview</h3>
+          <p>${movie.overview || 'No overview available.'}</p>
+        </div>
+        <div class="mdCredits">
+          <p><strong>Director:</strong> ${directors}</p>
+          <p><strong>Cast:</strong> ${topCast}</p>
+        </div>
+        <div class="mdFooter">
+          <button class="mdAddWLBtn" onclick="alert('Added to Watchlist!')">🔖 Add to Watchlist</button>
+        </div>
+      </div>
+    `;
+
+    openMovieModal(modalContent);
+
+  } catch (error) {
+    console.error('Failed to display movie details:', error);
+    openMovieModal('<div class="modalError">Failed to load movie details.</div>');
+  }
+}
+
+
+function initAllMovieSections() {
+  movieSections.forEach(section => {
+    loadSectionPage(section.key, section.endpoint, section.containerId, 1);
+  });
+}
+
+
+
 async function getPopularFromAPI(){
   try{
 
@@ -239,7 +415,7 @@ function renderMovieSectionsAll(){
       const movieCard = document.createElement('div');
       movieCard.classList.add('movieCard');
       movieCard.innerHTML = `
-        <img src="https://image.tmdb.org/t/p/w92${movie.poster_path}" alt="${movie.title}">
+        <img src="https://image.tmdb.org/t/p/w194${movie.poster_path}" alt="${movie.title}">
         <span>${movie.title}</span>
       `;
       movieCard.addEventListener("click", ()=>{
@@ -343,4 +519,5 @@ renderGenreCards();
 setupNavigation();
 //getPopularFromAPI();
 //fetchAndStoreMoviesFP();
-renderMovieSectionsAll();
+//renderMovieSectionsAll();
+initAllMovieSections();

@@ -86,7 +86,7 @@ body.dark{
             background: #ff000012; width:100%; padding: 10px 18px; font-size: 1rem;  color: #1e293b;
             border-radius: 1rem;
         }
-    .content{ display: none; margin-top: 1rem; flex-grow: 1;}
+    .content{ display: none; flex-direction: column; margin-top: 1rem; flex-grow: 1;}
     .content.active{ display: flex; gap: 1rem; min-height: 0;}
 
         .genreCardHolder{ display: flex; justify-content: space-between; align-content: flex-start;
@@ -107,11 +107,21 @@ body.dark{
             }
             .movie-count { margin-top: 0; padding: .4rem;}
 
-        .moviesHolder{ display: flex; flex-wrap: wrap; gap: 1rem;  width: 100%; align-content: flex-start}
-            .movieCard{ flex: 1 0 calc(10% - 1rem); 
-                min-width: 7rem; /* Ensures cards don't shrink too small on mobile */
-                max-width: 8rem;
-                border-radius: 0.5rem; overflow: hidden; display: flex; flex-direction: column; }
+        .moviesHolder{ display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 1.25rem;
+            width: 100%; align-content: start; padding-bottom: 2rem;}
+            .movieCard{ width: 100%; display: flex; flex-direction: column; border-radius: 0.5rem; overflow: hidden;
+                cursor: pointer; transition: transform 0.2s ease, box-shadow 0.2s ease; }
+            .movieCard:hover { transform: translateY(-4px); box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); }
+            .movieCard img { width: 100%; height: auto; aspect-ratio: 2 / 3; object-fit: cover; border-radius: 0.5rem;}
+                .movieInfo{padding: 0.5rem;}
+        .pagination-controls {display: flex;  align-items: center;  justify-content: center;  gap: 0.5rem;  margin: 1.5rem 0;  width: 100%;}
+
+            .page-btn { padding: 0.4rem 0.8rem; border: 1px solid var(--selectorBg);background: var(--genBg1);
+            color: var(--genText1); border-radius: 0.4rem; cursor: pointer; font-weight: 600;  }
+
+            .page-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+            .page-info { font-size: 0.85rem; margin: 0 0.5rem;}
         .movieDetailsDiv{
             width: 35%; display: flex; flex-direction: column; background-color:#0000000d;
         }
