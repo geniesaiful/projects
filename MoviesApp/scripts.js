@@ -187,37 +187,42 @@ function renderGenreCards() {
 async function getData(storageKey, apiFetcher) {
   const isApiChecked = document.getElementById('liveApiToggleID')?.checked;
   const cached = localStorage.getItem(storageKey);
-
+  console.log("The getData function. ANd the checkbox is: "+isApiChecked);
   // If checkbox is NOT checked and local data exists, use localStorage
   if (!isApiChecked && cached) {
+    console.log("Data From LocalStorage");
     return JSON.parse(cached);
   }
 
   // Otherwise (checkbox is checked OR no cache available), fetch fresh data
   const freshData = await apiFetcher();
   localStorage.setItem(storageKey, JSON.stringify(freshData));
+  console.log("Data From API");
   return freshData;
 }
 
 async function loadSectionPage(sectionKey, endpoint, containerId, page = 1) {
+  console.log("Loading a page");
   const container = document.getElementById(containerId);
   if (!container) return;
 
   container.innerHTML = `<p>Loading page ${page}...</p>`;
 
   try {
-    const response = await fetch(
-      `https://api.themoviedb.org/3/movie/${endpoint}?language=en-US&page=${page}`,
-      options
-    );
-    const data = await response.json();
-    const movies = data.results;
+    const storageKey = `MOVIEAPP_${sectionKey.toUpperCase()}`;
 
-    // Save current 20 items to localStorage for immediate section use
-    localStorage.setItem(`MOVIEAPP_${sectionKey.toUpperCase()}`, JSON.stringify(movies));
-    //console.log(`Successfully fetched and stored to MOVIEAPP_${sectionKey.toUpperCase()}; ${sectionKey}, ${page}, ${containerId}`);
-    // Render movies and pagination buttons
-    renderMovieGrid(container, movies, sectionKey, page, data.total_pages);
+    // Pass the key and the API fetch function to the helper
+    const movies = await getData(storageKey, async () => {
+      const response = await fetch(
+        `https://api.themoviedb.org/3/movie/${endpoint}?language=en-US&page=${page}`,
+        options
+      );
+      const data = await response.json();
+      return data.results;
+    });
+
+    // Render movie grid using existing function
+    renderMovieGrid(container, movies, sectionKey, page, 500);
 
   } catch (error) {
     console.error(`Error loading page ${page} for ${sectionKey}:`, error);
