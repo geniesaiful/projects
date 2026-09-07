@@ -226,7 +226,7 @@ async function loadSectionPage(sectionKey, endpoint, containerId, page = 1) {
 }
 
 function renderMovieGrid(container, movies, sectionKey, currentPage, totalPages) {
-  container.innerHTML = ''; // Clear container
+  container.innerHTML = `<h2 class="btrh2">${sectionKey.toUpperCase()}</h2>`; // Clear container
 
   // 1. Movie Grid Container
   const grid = document.createElement('div');
