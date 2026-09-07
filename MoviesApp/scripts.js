@@ -422,8 +422,9 @@ function setupSearchFeature() {
       const query = searchInput.value.trim();
 
       if (query !== '') {
-        currentSearchQuery = query;
+        currentSearchQuery = query; // saving the query to global variable so that we can use it to call the api function for page 2 and so on.
         pageState.search = 1;
+        saveSearchQuery(query);
         executeMovieSearch(query, 1);
       }
     }
@@ -608,7 +609,46 @@ function renderWatchlistSection() {
   container.innerHTML = '';
   container.appendChild(grid);
 }
+function getRecentSearches() {
+  return JSON.parse(localStorage.getItem('MOVIEAPP_RECENT_SEARCHES')) || [];
+}
+function saveSearchQuery(query) {
+  let searches = getRecentSearches();
+  searches = searches.filter(item => item.toLowerCase() !== query.toLowerCase()); // take out the query if it exists.
 
+  searches.unshift(query); // unshift adds item in the beginning and increases the length by 1
+
+  searches = searches.slice(0, 6);
+
+  localStorage.setItem('MOVIEAPP_RECENT_SEARCHES', JSON.stringify(searches));
+  renderRecentSearches();
+}
+function renderRecentSearches() {
+  const listContainer = document.getElementById('recentSearchesList');
+  if (!listContainer) return;
+
+  const searches = getRecentSearches();
+  listContainer.innerHTML = '';
+
+  searches.forEach(query => {
+    const li = document.createElement('li');
+    li.className = 'rcntTxt';
+    li.style.cssText = 'cursor: pointer; margin-bottom: 0.4rem; list-style: none;';
+    li.textContent = query;
+
+    // Click event to re-execute search using existing functions
+    li.addEventListener('click', () => {
+      const searchInput = document.getElementById('mainSearchInputID');
+      if (searchInput) searchInput.value = query; //showing the search query in the search input field.
+
+      currentSearchQuery = query;
+      pageState.search = 1;
+      executeMovieSearch(query, 1);
+    });
+
+    listContainer.appendChild(li);
+  });
+}
 
 async function initApp() {
   await getGenres();
@@ -626,6 +666,7 @@ async function initApp() {
   setupSearchFeature();
   updateWatchlistBadge();
   renderWatchlistSection();
+  renderRecentSearches();
 }
 
 initApp();
