@@ -651,18 +651,18 @@ function renderRecentSearches() {
 }
 
 async function initApp() {
-  // await getGenres();
-  // renderGenreCards();
+  await getGenres();
+  renderGenreCards();
   setupNavigation();
   
   // Wait for section pages to populate localStorage, then render Home page
-  // await Promise.all(
-  //   movieSections
-  //     .filter(s => s.key !== 'search') // take all section without search section
-  //     .map(s => loadSectionPage(s.key, s.endpoint, s.containerId, 1)) // do(run the function) for all sections
-  // );
+  await Promise.all(
+    movieSections
+      .filter(s => s.key !== 'search') // take all section without search section
+      .map(s => loadSectionPage(s.key, s.endpoint, s.containerId, 1)) // do(run the function) for all sections
+  );
 
-  //renderHomePage();
+  renderHomePage();
   setupSearchFeature();
   updateWatchlistBadge();
   renderWatchlistSection();

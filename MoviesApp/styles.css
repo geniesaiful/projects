@@ -10,6 +10,7 @@
     --genText2Lt: #885555;
     --selectorBg: #9f1e1e; /* B21F24 9f1e1e C92A2A*/
     --selectorText: #f6e9e9;
+    --leftPanelBg: #fff0f0;
     
     --font-modern: system-ui, -apple-system, Ubuntu, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 }
@@ -36,6 +37,7 @@ body.dark{
     --genText2Lt: #b16b6b;
     --selectorBg:  #ece9f6; 
     --selectorText: #334563;
+    --leftPanelBg: #652c2c;
 }
 
 .btrh1 {font-size: 1.75rem; font-weight: 800; color: var(--genText2); letter-spacing: -0.08rem; 
@@ -55,9 +57,8 @@ body.dark{
 
 
 .leftMenuBar, .leftMenuBar * {  box-sizing: border-box;  margin: 0;  padding: 0;}
-.leftMenuBar { width: 18rem; height: 100vh; display: flex; flex-direction: column; padding: .5rem .5rem;
-  border-right: 1px solid #1f1f2e;
-}
+.leftMenuBar { width: 18rem; height: 100vh; display: flex; flex-direction: column; padding: .7rem .7rem;
+  border-right: 1px solid #3f3f783b; background-color: var(--leftPanelBg);}
     .appTitleArea{display: flex; align-items: center; gap: .2rem; margin-bottom: 2rem; }
     .sidebarMenu{ display: flex; flex-direction: column; }
         .menuItem{ display: flex; align-items: center; width: 100%; padding: .5rem 1.25rem;
@@ -74,7 +75,7 @@ body.dark{
             border-left-color: #e65c5c; border-radius: .75rem}
         .menuItem:hover:not(.active) { background-color: var(--selectorBg); color: var(--selectorText); 
             border-radius: .75rem }
-        #menuItemWatchlistID{ margin-top: .5rem; border-top: 1px solid black; border-bottom: 1px solid black }
+        #menuItemWatchlistID{ margin-top: .5rem; border-top: 1px solid #0000003f; border-bottom: 1px solid #0000003f }
     .recentSearches{ margin: 2rem 0rem; display: flex;flex-direction: column; flex-grow: 1;}
         .recentSearchesList{ padding: 1rem 0rem;}
         .recentSearchesList li{ padding: .1rem 1rem;}
