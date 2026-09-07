@@ -580,7 +580,7 @@ function toggleWatchlist(movie) {
 function renderWatchlistSection() {
   const container = document.getElementById('contentWatchlistID');
   if (!container) return;
-
+  container.innerHTML=`<h2 class="btrh2">My Watchlist</h2>`;
   const watchlist = getWatchlist();
 
   if (watchlist.length === 0) {
