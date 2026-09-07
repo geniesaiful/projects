@@ -291,6 +291,7 @@ function renderMovieGrid(container, movies, sectionKey, currentPage, totalPages)
 }
 
 async function handleMovieClick(movieId) {
+  
   // Render loading skeleton inside overlay
   openMovieModal('<div class="modalLoading">Loading details...</div>');
 
@@ -319,7 +320,11 @@ async function handleMovieClick(movieId) {
     const backdrop = movie.backdrop_path 
       ? `https://image.tmdb.org/t/p/w1280${movie.backdrop_path}`
       : '';
-
+      // if it is in watchlist button become remove from watchlist.
+    const watchlist = getWatchlist();
+    const isInWatchlist = watchlist.some(m => m.id === movie.id);
+    const btnText = isInWatchlist ? '❌ Remove from Watchlist' : '🔖 Add to Watchlist';
+    const btnBg = isInWatchlist ? '#cf7c7c' : 'var(--selectorBg)';
     // Populate modal container
     const modalContent = `
       <div class="modalBanner" style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.85)), url('${backdrop}');">
@@ -343,12 +348,16 @@ async function handleMovieClick(movieId) {
           <p><strong>Cast:</strong> ${topCast}</p>
         </div>
         <div class="mdFooter">
-          <button class="mdAddWLBtn" onclick="alert('Added to Watchlist!')">🔖 Add to Watchlist</button>
+          <button class="mdAddWLBtn" id="watchlistToggleBtn" style="background-color: ${btnBg};">${btnText}</button>
         </div>
       </div>
     `;
-
-    openMovieModal(modalContent);
+    openMovieModal(modalContent)
+    // listener to Watchlist button
+    const watchlistBtn = document.getElementById('watchlistToggleBtn');
+    if (watchlistBtn) {
+      watchlistBtn.addEventListener('click', () => toggleWatchlist(movie));
+    }
 
   } catch (error) {
     console.error('Failed to display movie details:', error);
@@ -522,6 +531,85 @@ function setupViewAllButtons() {
   });
 }
 
+function getWatchlist() {
+  return JSON.parse(localStorage.getItem('MOVIEAPP_WATCHLIST')) || [];
+}
+
+function saveWatchlist(watchlist) {
+  localStorage.setItem('MOVIEAPP_WATCHLIST', JSON.stringify(watchlist));
+  updateWatchlistBadge();
+}
+
+function updateWatchlistBadge() {
+  const badge = document.getElementById('menuWatchlistNumber');
+  if (badge) {
+    const list = getWatchlist();
+    badge.textContent = list.length;
+  }
+}
+function toggleWatchlist(movie) {
+  let watchlist = getWatchlist();
+  const exists = watchlist.some(m => m.id === movie.id); // watchlist.some will check if the element is exist in the array. returs true or false.
+
+  if (exists) {
+    watchlist = watchlist.filter(m => m.id !== movie.id); // creates a copy of the array without that item. Used as remove from watchlist function.
+  } else {
+    // Save minimal data needed for rendering cards and reopening details
+    watchlist.push({
+      id: movie.id,
+      title: movie.title,
+      poster_path: movie.poster_path,
+      vote_average: movie.vote_average
+    });
+  }
+
+  saveWatchlist(watchlist);
+  renderWatchlistSection();
+
+  // Re-render modal footer button if open
+  const btn = document.getElementById('watchlistToggleBtn');
+  if (btn) {
+    const isNowInList = watchlist.some(m => m.id === movie.id);
+    btn.textContent = isNowInList ? '❌ Remove from Watchlist' : '🔖 Add to Watchlist';
+    btn.style.backgroundColor = isNowInList ? '#c92a2a' : 'var(--selectorBg)';
+  }
+}
+
+function renderWatchlistSection() {
+  const container = document.getElementById('contentWatchlistID');
+  if (!container) return;
+
+  const watchlist = getWatchlist();
+
+  if (watchlist.length === 0) {
+    container.innerHTML = `<p class="btrh2" style="padding: 1rem;">Your watchlist is empty.</p>`;
+    return;
+  }
+
+  // Create grid container using existing styles
+  const grid = document.createElement('div');
+  grid.className = 'moviesHolder';
+
+  watchlist.forEach(movie => {
+
+    const card = document.createElement('div');
+    card.className = 'movieCard';
+    card.innerHTML = `
+      <img src="https://image.tmdb.org/t/p/w342${movie.poster_path}" alt="${movie.title}">
+      <div class="movieInfo">
+        <h4 class="normalTxtBold">${movie.title}</h4>
+        <span style="font-size: 0.75rem;">⭐ ${movie.vote_average ? movie.vote_average.toFixed(1) : 'N/A'}</span>
+      </div>
+    `;
+    card.addEventListener('click', () => handleMovieClick(movie.id));
+    grid.appendChild(card);
+  });
+
+  container.innerHTML = '';
+  container.appendChild(grid);
+}
+
+
 async function initApp() {
   await getGenres();
   renderGenreCards();
@@ -536,6 +624,8 @@ async function initApp() {
 
   renderHomePage();
   setupSearchFeature();
+  updateWatchlistBadge();
+  renderWatchlistSection();
 }
 
 initApp();
