@@ -79,6 +79,14 @@ body.dark{
     .recentSearches{ margin: 2rem 0rem; display: flex;flex-direction: column; flex-grow: 1;}
         .recentSearchesList{ padding: 1rem 0rem;}
         .recentSearchesList li{ padding: .1rem 1rem;}
+    
+    .sidebarFooter { padding: 0.75rem 0;border-top: 1px solid #0000001a;}
+        .themeToggle { display: flex; align-items: center; justify-content: space-between;width: 100%;}
+        .toggleSwitchContainer { position: relative; display: inline-block; width: 2.25rem; height: 1.25rem;}
+        .toggleSwitchContainer input { opacity: 0; width: 0; height: 0;}
+        .toggleSwithSlider {position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc;
+            transition: 0.3s ease; border-radius: 1.25rem;}
+        
 
 .contents{ display: flex;flex-direction: column; min-width: 0; height: 100vh; gap: .2rem; padding: .8rem;}
     
