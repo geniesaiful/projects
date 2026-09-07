@@ -38,19 +38,19 @@ body.dark{
     --selectorText: #334563;
 }
 
-.btrh1 {font-size: 1.75rem; font-weight: 800; color: var(--genTextR2); letter-spacing: -0.08rem; 
+.btrh1 {font-size: 1.75rem; font-weight: 800; color: var(--genText2); letter-spacing: -0.08rem; 
     line-height: 1.1; margin-top: 0rem; margin-bottom: .2rem; display: block; }
-.btrh2 {font-size: 1.2rem; font-weight: 600; color: var(--genTextR2); letter-spacing: -0.04rem; 
+.btrh2 {font-size: 1.2rem; font-weight: 600; color: var(--genText2); letter-spacing: -0.04rem; 
     line-height: 1.1; margin-top: 0rem; margin-bottom: .2rem; display: block; }
 .btrh2Lt {font-size: 1rem; font-weight: 400; color: var(--genText2Lt); letter-spacing: -0.06rem; 
     line-height: 1.1; margin-top: 0rem; margin-bottom: .2rem; display: block; font-style: italic;}
-.normalTxt{font-size: .8rem; font-weight: 400; color: var(--genTextR2); }
-.normalTxtBold{font-size: .9rem; font-weight: 800; color: var(--genTextR2);}
-.smallTxt{font-size: .7rem; font-weight: 400; color: var(--genTextR2); letter-spacing: .08rem;}
-.catTxt{font-size: .8rem; font-weight: 600; color: var(--genTextR2); }
-.catTxtLt{font-size: .8rem; font-weight: 200; color: var(--genTextR2); }
-.rcntTxt{font-size: .9rem; font-weight: 800; color: var(--genTextR2);
-    padding: .4rem;background-color: #27181850; border-radius: .5rem;}
+.normalTxt{font-size: .8rem; font-weight: 400; color: var(--genText2); }
+.normalTxtBold{font-size: .9rem; font-weight: 800; color: var(--genText2);}
+.smallTxt{font-size: .7rem; font-weight: 400; color: var(--genText2); letter-spacing: .08rem;}
+.catTxt{font-size: .8rem; font-weight: 600; color: var(--genText2); }
+.catTxtLt{font-size: .8rem; font-weight: 200; color: var(--genText2); }
+.rcntTxt{font-size: .9rem; font-weight: 600; color: var(--genText2);
+    padding: .4rem;background-color: #ff030320; border-radius: .5rem;}
 
 
 
@@ -67,14 +67,17 @@ body.dark{
             display: flex; align-items: center; justify-content: center; margin-right: 1rem; 
         }
         .menuItem .label { flex-grow: 1; text-align: left;}
-        .menuItem .count { padding: .2rem; font-size: .7rem; font-weight: 600;
-            color: #eebebe; background-color: #633333; border-radius: 1rem; }
+        .menuItem .count { padding: .25rem; font-size: .7rem; font-weight: 400;
+            color: var(--genBg2); background-color: var(--genText2); border-radius: 3rem; }
 
         .menuItem.active { background-color: var(--selectorBg); color: var(--selectorText);
             border-left-color: #e65c5c; border-radius: .75rem}
         .menuItem:hover:not(.active) { background-color: var(--selectorBg); color: var(--selectorText); 
             border-radius: .75rem }
-
+        #menuItemWatchlistID{ margin-top: .5rem; border-top: 1px solid black; border-bottom: 1px solid black }
+    .recentSearches{ margin: 2rem 0rem; display: flex;flex-direction: column; flex-grow: 1;}
+        .recentSearchesList{ padding: 1rem 0rem;}
+        .recentSearchesList li{ padding: .1rem 1rem;}
 
 .contents{ display: flex;flex-direction: column; min-width: 0; height: 100vh; gap: .2rem;}
     
