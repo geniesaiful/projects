@@ -53,7 +53,7 @@ body.dark{
 .catTxtLt{font-size: .8rem; font-weight: 200; color: var(--genText2); }
 .rcntTxt{font-size: .9rem; font-weight: 600; color: var(--genText2);
     padding: .4rem;background-color: #ff030320; border-radius: .5rem;}
-
+.yearText{font-size: .7rem; font-weight: 400; color: var(--genText2); letter-spacing: .08rem; margin-left: .2rem;}
 
 
 .leftMenuBar, .leftMenuBar * {  box-sizing: border-box;  margin: 0;  padding: 0;}

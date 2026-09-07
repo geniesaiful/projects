@@ -242,7 +242,7 @@ function renderMovieGrid(container, movies, sectionKey, currentPage, totalPages)
       <div class="movieInfo">
         <span>⭐ ${movie.vote_average.toFixed(1)}</span>
       </div>
-      <h4 class="normalTxtBold">${movie.title}</h4>
+      <h4 class="normalTxtBold">${movie.title}<span class="yearText">(${(movie.release_date).split("-")[0]})</span></h4>
     `;
     //console.log(card.innerHTML);
     card.addEventListener('click', () => handleMovieClick(movie.id));
@@ -510,7 +510,7 @@ function renderHomeMovieRow(containerId, movies) {
       <div class="movieInfo">
         <span>⭐ ${movie.vote_average.toFixed(1)}</span>
       </div>
-      <h4 class="normalTxtBold">${movie.title}</h4>
+      <h4 class="normalTxtBold">${movie.title}<span class="yearText">(${(movie.release_date).split("-")[0]})</span></h4>
     `;
     // Reuses existing movie details modal trigger
     card.addEventListener('click', () => handleMovieClick(movie.id));
@@ -560,7 +560,8 @@ function toggleWatchlist(movie) {
       id: movie.id,
       title: movie.title,
       poster_path: movie.poster_path,
-      vote_average: movie.vote_average
+      vote_average: movie.vote_average,
+      release_date: movie.release_date
     });
   }
 
