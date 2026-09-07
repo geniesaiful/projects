@@ -175,11 +175,11 @@ function renderGenreCards() {
     
   
     card.innerHTML = `
-      <span class="genre-emoji" style="background-color: #ff000020;">
-        ${genre.emoji}
-      </span>
-      <span class="genre-name catTxt">${genre.name}</span>
-      <span class="movie-count catTxtLt">${totalCount}</span>
+      <img src="${poster}" alt="${movie.title}">
+      <div class="movieInfo">
+        <span>⭐ ${movie.vote_average.toFixed(1)}</span>
+      </div>
+      <h4 class="normalTxtBold">${movie.title}</h4>
     `;
     holder.appendChild(card);
   });
@@ -240,9 +240,9 @@ function renderMovieGrid(container, movies, sectionKey, currentPage, totalPages)
     card.innerHTML = `
       <img src="${poster}" alt="${movie.title}">
       <div class="movieInfo">
-        <h4 class="normalTxtBold">${movie.title}</h4>
-        <span style="font-size: 0.75rem;">⭐ ${movie.vote_average.toFixed(1)}</span>
+        <span>⭐ ${movie.vote_average.toFixed(1)}</span>
       </div>
+      <h4 class="normalTxtBold">${movie.title}</h4>
     `;
     //console.log(card.innerHTML);
     card.addEventListener('click', () => handleMovieClick(movie.id));
@@ -508,9 +508,9 @@ function renderHomeMovieRow(containerId, movies) {
     card.innerHTML = `
       <img src="${poster}" alt="${movie.title}">
       <div class="movieInfo">
-        <h4 style="font-size: 0.85rem; margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${movie.title}</h4>
-        <span style="font-size: 0.75rem;">⭐ ${movie.vote_average.toFixed(1)}</span>
+        <span>⭐ ${movie.vote_average.toFixed(1)}</span>
       </div>
+      <h4 class="normalTxtBold">${movie.title}</h4>
     `;
     // Reuses existing movie details modal trigger
     card.addEventListener('click', () => handleMovieClick(movie.id));
@@ -596,11 +596,11 @@ function renderWatchlistSection() {
     const card = document.createElement('div');
     card.className = 'movieCard';
     card.innerHTML = `
-      <img src="https://image.tmdb.org/t/p/w342${movie.poster_path}" alt="${movie.title}">
+      <img src="${poster}" alt="${movie.title}">
       <div class="movieInfo">
-        <h4 class="normalTxtBold">${movie.title}</h4>
-        <span style="font-size: 0.75rem;">⭐ ${movie.vote_average ? movie.vote_average.toFixed(1) : 'N/A'}</span>
+        <span>⭐ ${movie.vote_average.toFixed(1)}</span>
       </div>
+      <h4 class="normalTxtBold">${movie.title}</h4>
     `;
     card.addEventListener('click', () => handleMovieClick(movie.id));
     grid.appendChild(card);

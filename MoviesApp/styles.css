@@ -93,31 +93,36 @@ body.dark{
     .content{ display: none; flex-direction: column; margin-top: 1rem; flex-grow: 1;}
     .content.active{ display: flex; gap: 1rem; min-height: 0;}
 
-        .genreCardHolder{ display: flex; justify-content: space-between; align-content: flex-start;
-            flex-wrap: wrap; gap: .5rem; padding: .5rem; width:100%;}
+        .genreCardHolder{display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            gap: 1rem; padding: 0.5rem; width: 100%;}
         
-             .genreCard { border-radius: .75rem; padding: .5rem; text-align: center;
-                cursor: pointer; display: flex; flex-direction: column; align-items: center;
-                justify-content:center; flex: 0 0 6.5rem; height: 8rem;
-                box-shadow: 0 4px 6px -1px #2b1a1c0d, 0 10px 15px -3px #2b1a1c08;
-             }
-             .genre-name {
-                margin: 0.2rem 0 0 0; margin-top: auto; margin-bottom: auto; 
-                background-color: #27181810; border-radius: .5rem; padding: .2rem;;
-            }
+             .genreCard { border-radius: 0.75rem; padding: 0.75rem 0.5rem; text-align: center; cursor: pointer;
+                display: flex; flex-direction: column; align-items: center; justify-content: center; height: 8.5rem;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); }
+             .genre-name {margin-top: 0.2rem; font-weight: 400; }
             .genre-emoji {
-                font-size: 1.2rem; width: 2.2rem; height: 2.2rem; line-height: 2.2rem;
-                border-radius: 50%; margin-bottom: .05rem; display: inline-block;
-            }
-            .movie-count { margin-top: 0; padding: .4rem;}
+                font-size: 1.5rem;  width: 2.5rem; height: 2.5rem; line-height: 2.5rem; border-radius: 50%; 
+                margin-bottom: 0.4rem; display: inline-block;  }
+            .movie-count { margin-top: 0.1rem;}
 
         .moviesHolder{ display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 1.25rem;
             width: 100%; align-content: start; padding-bottom: 1rem;}
-            .movieCard{ width: 100%; display: flex; flex-direction: column; border-radius: 0.5rem; overflow: hidden;
-                cursor: pointer; transition: transform 0.2s ease, box-shadow 0.2s ease; }
-            .movieCard:hover { transform: translateY(-4px); box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); }
-            .movieCard img { width: 100%; height: auto; aspect-ratio: 2 / 3; object-fit: cover; border-radius: 0.5rem;}
-                .movieInfo{padding: 0.5rem;}
+            
+            .movieCard { position: relative; /* Anchor for absolute positioning */
+                width: 100%; display: flex; flex-direction: column; border-radius: 0.5rem; overflow: hidden; cursor: pointer;
+                transition: transform 0.2s ease, box-shadow 0.2s ease;}
+
+            /* Position rating badge on top-right of poster */
+            .movieCard .movieInfo { position: absolute; top: 0.4rem; right: 0.4rem; padding: 0; margin: 0;z-index: 2;}
+
+            /* Style the star rating chip */
+            .movieCard .movieInfo span { background: #000000bf; color: #fff; padding: 0.2rem 0.4rem; border-radius: 0.3rem;
+                font-size: 0.75rem; font-weight: 700; backdrop-filter: blur(4px);}
+
+            /* Reduced margin under movie titles */
+            .movieCard h4, 
+            .movieCard .normalTxtBold { margin-top: 0.3rem; margin-bottom: 0.1rem; line-height: 1.1;}
+
         .pagination-controls {display: flex;  align-items: center;  justify-content: center;  gap: 0.5rem;  margin: 1.5rem 0;  width: 100%;}
 
             .page-btn { padding: 0.4rem 0.8rem; border: 1px solid var(--selectorBg);background: var(--genBg1);
