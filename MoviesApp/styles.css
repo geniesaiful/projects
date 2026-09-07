@@ -67,8 +67,8 @@ body.dark{
             display: flex; align-items: center; justify-content: center; margin-right: 1rem; 
         }
         .menuItem .label { flex-grow: 1; text-align: left;}
-        .menuItem .count { padding: .25rem; font-size: .7rem; font-weight: 400;
-            color: var(--genBg2); background-color: var(--genText2); border-radius: 3rem; }
+        .menuItem .count { padding: .2rem .4rem; font-size: .7rem; font-weight: 400;
+            color: var(--genBg2); background-color: var(--genText2); border-radius: 50%; }
 
         .menuItem.active { background-color: var(--selectorBg); color: var(--selectorText);
             border-left-color: #e65c5c; border-radius: .75rem}
@@ -79,7 +79,7 @@ body.dark{
         .recentSearchesList{ padding: 1rem 0rem;}
         .recentSearchesList li{ padding: .1rem 1rem;}
 
-.contents{ display: flex;flex-direction: column; min-width: 0; height: 100vh; gap: .2rem;}
+.contents{ display: flex;flex-direction: column; min-width: 0; height: 100vh; gap: .2rem; padding: .8rem;}
     
     .contentTop{ display: flex; align-items: center; width: 100%; max-width: 100rem; gap: 1rem;
     padding: 1rem 2rem; border-radius: 1rem; 
