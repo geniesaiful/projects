@@ -9,7 +9,7 @@
     --genText1Lt: #3b5175;
     --genText2Lt: #885555;
     --selectorBg: #9f1e1e; /* B21F24 9f1e1e C92A2A*/
-    --selectorText: #f6e9e9;
+    --selectorText: #f7f0f0;
     --leftPanelBg: #fff0f0;
     
     --font-modern: system-ui, -apple-system, Ubuntu, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
@@ -71,10 +71,14 @@ body.dark{
         .menuItem .count { padding: .2rem .4rem; font-size: .7rem; font-weight: 400;
             color: var(--genBg2); background-color: var(--genText2); border-radius: 50%; }
 
-        .menuItem.active { background-color: var(--selectorBg); color: var(--selectorText);
-            border-left-color: #e65c5c; border-radius: .75rem}
-        .menuItem:hover:not(.active) { background-color: var(--selectorBg); color: var(--selectorText); 
-            border-radius: .75rem }
+        .menuItem.active,
+        .menuItem:hover:not(.active) { background-color: var(--selectorBg); border-radius: .75rem;}
+
+        .menuItem.active .label,
+        .menuItem:hover:not(.active) .label { color: var(--selectorText); }
+
+        .menuItem.active {border-left-color: #e65c5c;}
+        
         #menuItemWatchlistID{ margin-top: .5rem; border-top: 1px solid #0000003f; border-bottom: 1px solid #0000003f }
     .recentSearches{ margin: 2rem 0rem; display: flex;flex-direction: column; flex-grow: 1;}
         .recentSearchesList{ padding: 1rem 0rem;}
@@ -84,10 +88,10 @@ body.dark{
         .themeToggle { display: flex; align-items: center; justify-content: space-between;width: 100%;}
         .toggleSwitchContainer { position: relative; display: inline-block; width: 2.25rem; height: 1.25rem;}
         .toggleSwitchContainer input { opacity: 0; width: 0; height: 0;}
-        .toggleSwithSlider {position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc;
+        .toggleSwithSlider {position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: var(--selectorBg);
             transition: 0.3s ease; border-radius: 1.25rem;}
         .toggleSwithSlider:before { position: absolute; content: ""; height: 0.95rem; width: 0.95rem; left: 0.15rem;
-            bottom: 0.15rem; background-color: white; transition: 0.3s ease; border-radius: 50%;}
+            bottom: 0.15rem; background-color: var(--selectorText); transition: 0.3s ease; border-radius: 50%;}
         input:checked + .toggleSwithSlider { background-color: var(--selectorBg);}
         input:checked + .toggleSwithSlider:before { transform: translateX(1rem);}
 
