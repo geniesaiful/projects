@@ -650,8 +650,35 @@ function renderRecentSearches() {
     listContainer.appendChild(li);
   });
 }
+function setupThemeToggle() {
+  const toggleSwitch = document.getElementById('toggleSwitchID');
+  if (!toggleSwitch) return;
+
+  const savedTheme = localStorage.getItem('MOVIEAPP_THEME') || 'dark';
+
+  if (savedTheme === 'dark') {
+    document.body.classList.add('dark'); 
+    toggleSwitch.checked = true;
+  } else {
+    document.body.classList.remove('dark'); 
+    toggleSwitch.checked = false;
+  }
+
+  toggleSwitch.addEventListener('change', () => {
+    if (toggleSwitch.checked) {
+      document.body.classList.add('dark');
+      localStorage.setItem('MOVIEAPP_THEME', 'dark');
+    } else {
+      document.body.classList.remove('dark');
+      localStorage.setItem('MOVIEAPP_THEME', 'light');
+    }
+  });
+}
 
 async function initApp() {
+  setupThemeToggle();
+  renderWatchlistSection();
+  renderRecentSearches();
   await getGenres();
   renderGenreCards();
   setupNavigation();
@@ -666,8 +693,7 @@ async function initApp() {
   renderHomePage();
   setupSearchFeature();
   updateWatchlistBadge();
-  renderWatchlistSection();
-  renderRecentSearches();
+
 }
 
 initApp();
