@@ -106,7 +106,7 @@ body.dark{
             border-radius: 1rem;
         }
     .content{ display: none; flex-direction: column; margin-top: 1rem; flex-grow: 1;}
-    .content.active{ display: flex; gap: 1rem; min-height: 0;}
+    .content.active{ display: flex; gap: 1rem; min-height: 0; overflow-y: auto; padding-right: 0.5rem;}
 
         .genreCardHolder{display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
             gap: 1rem; padding: 0.5rem; width: 100%;}
@@ -189,6 +189,6 @@ body.dark{
     .viewAllBtn { background: transparent; border: 1px solid var(--selectorBg); color: var(--genText2); padding: 0.25rem 0.75rem;
         border-radius: 0.5rem; cursor: pointer; font-weight: 600; font-size: 0.8rem; transition: background-color 0.2s;}
     .viewAllBtn:hover { background-color: var(--selectorBg); color: var(--selectorText);}
-    .homeRowGrid { display: flex; gap: 1rem; overflow-x: auto; padding-bottom: 0.5rem; scroll-behavior: smooth; }
-    .homeRowGrid .movieCard { flex: 0 0 8.75rem; width: 8.75rem; }
-    .homeRowGrid .genreCard { flex: 0 0 6.5rem; width: 6.5rem;}
+    .homeRowGrid { display: flex; gap: 1rem; overflow-x: hidden; padding-bottom: 0.5rem; flex-wrap: wrap; }
+    .homeRowGrid .movieCard { flex: 0 0 6.5rem; width: 6.5rem; }
+    .homeRowGrid .genreCard { flex: 0 0 5.5rem; width: 5.5rem; height: 6.5rem;}

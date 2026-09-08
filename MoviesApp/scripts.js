@@ -476,10 +476,10 @@ function switchToSearchSection() {
 }
 function renderHomePage() {
   const popularData = JSON.parse(localStorage.getItem('MOVIEAPP_POPULAR')) || [];
-  renderHomeMovieRow('homePopularGrid', popularData);
+  renderHomeMovieRow('homePopularGrid', popularData.slice(0,12));
 
   const topRatedData = JSON.parse(localStorage.getItem('MOVIEAPP_TOP_RATED')) || [];
-  renderHomeMovieRow('homeTopRatedGrid', topRatedData);
+  renderHomeMovieRow('homeTopRatedGrid', topRatedData.slice(0,12));
 
   // 3. Clone existing genre cards into Home genres container
   const homeGenreContainer = document.getElementById('homeGenresGrid');
