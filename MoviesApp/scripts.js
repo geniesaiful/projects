@@ -488,7 +488,7 @@ function renderHomePage() {
     homeGenreContainer.innerHTML = '';
     // Reuses rendered genre cards from localStorage
     const cards = mainGenreHolder.querySelectorAll('.genreCard');
-    cards.forEach(card => {
+    Array.from(cards).slice(0, 15).forEach(card => {
       homeGenreContainer.appendChild(card.cloneNode(true));
     });
   }
