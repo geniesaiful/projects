@@ -104,3 +104,7 @@ body.dark{
             .lpCategoryList nav ul li { padding: 0.5rem 1rem; border-radius: 0.25rem; cursor: pointer; transition: background-color 0.2s ease;}
             .lpCategoryList nav ul li:hover { background-color: var(--genText2Lt); color: var(--genBg2);}
             .lpCategoryList nav ul li.active { background-color: var(--selectorBg); color: var(--selectorText);}
+        
+        .itemArea{padding: 1.5rem; width: 100%; margin: 0 auto; overflow-y: auto; }
+            .itemContainer{display: none; width: 100%; height: 100%; overflow: hidden;}
+            .itemContainer.active { display: flex; }
