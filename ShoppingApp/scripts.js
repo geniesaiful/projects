@@ -122,6 +122,7 @@ function renderItemGrid(items, containerId) {
     let cardsHTML = '';
 
     items.forEach(item => {
+        console.log(item);
         cardsHTML += `
             <article class="itemCard" data-id="${item.id}">
                 <div class="cardMedia">
@@ -148,5 +149,25 @@ function populateAllItems() {
 
 document.addEventListener('DOMContentLoaded', () => {
     populateAllItems();
+    loadCategories();
 });
-loadCategories();
+
+function editAItem() {
+    
+    const items = JSON.parse(localStorage.getItem('SHOPPING_APP_Items')) || [];
+    const targetItem = items.find(item => item.id === '20260912113619847');
+
+    // 3. Update properties directly if found
+    if (targetItem) {
+        targetItem.title = 'Leather belt';
+        targetItem.category = 'Accessories';
+        targetItem.description = 'Original buffalo leather belt.';
+        targetItem.price = 55.75;
+        targetItem.photo = 'resources/belt1.jpg';
+        targetItem.extraInfo = 'New Arrival';
+
+        // 4. Save updated array back to local storage
+        localStorage.setItem('SHOPPING_APP_Items', JSON.stringify(items));
+    }
+}
+//editAItem();
