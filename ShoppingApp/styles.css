@@ -10,7 +10,7 @@
     
     --selectorBg: #124739; /* B21F24 9f1e1e C92A2A*/
     --selectorText: #79fad8;
-    --leftPanelBg: #70fed8;
+    --leftPanelBg: #b7e6da;
     
     --font-modern: system-ui, -apple-system, Ubuntu, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 }
@@ -70,16 +70,18 @@ body.dark{
 
 
 
-.siteHeader{display: flex; align-items: center; justify-content: space-between; padding: 1rem 2rem;}
+.siteHeader{display: flex; align-items: center; justify-content: space-between; padding: .2rem .2rem; background-color: var(--leftPanelBg); 
+        border-radius: .8rem;}
 .siteHeader nav ul { display: flex; list-style: none; gap:1.5rem; margin:0; padding: 0;}
-    a.siteLogo{display:flex; text-decoration: none;}
+    a.siteLogo{display:flex; text-decoration: none; border:1px none #00000020; border-radius: .8rem; 
+        border: 1px solid #ffffff40; box-shadow: 0 8px 32px 0 #1f268712; background-color: var(--genBg1);}
         .appNameTxt{align-content: center;padding: 0rem .8rem;flex-direction: column;}
     .searchForm{ display: flex; align-items: center; gap:0.5rem}
 .siteHeader nav ul li { padding: 0.5rem 1rem; border-radius: 0.25rem; cursor: pointer; transition: background-color 0.2s ease;}
 .siteHeader nav ul li:hover { background-color: var(--genText2Lt); color: var(--genBg2);}
 .siteHeader nav ul li.active { background-color: var(--selectorBg); color: var(--selectorText);}
 
-.contents {flex: 1; display: flex; width: 100%; height: 100%;overflow: hidden; }
+.contents {flex: 1; display: flex; width: 100%; height: 100%;overflow: hidden;}
     .content { display: none; width: 100%; height: 100%; overflow: hidden;}
     .content.active { display: flex; }
     .content > * { overflow-y: auto; }/* Enables vertical scrolling on child containers when content exceeds height */
@@ -96,15 +98,17 @@ body.dark{
 
         .buttonGroup { display: flex; gap: 0.5rem; }
 
-    .homeArea{ display: flex; padding: 0.7rem; width: 100%; height: 100%;overflow: hidden;}
+    .homeArea{ display: flex; padding: 0.7rem; width: 100%; height: 100%;overflow: hidden; gap: .5rem}
 
-        .leftPanel{display: flex; justify-content: space-between; padding: 1rem 2rem;}
+        .leftPanel{display: flex; justify-content: space-between; padding: 1rem 2rem; background-color: var(--leftPanelBg);
+            border-radius: .5rem; box-shadow: 0 1px 3px #0000000d, 0 4px 12px #0000000d;}
 
-            .lpCategoryList nav ul{display: flex; flex-direction: column; list-style: none; gap:1.5rem; margin:0; padding: 0;}
+            .lpCategoryList nav ul{display: flex; flex-direction: column; list-style: none; gap:.8rem; margin:0; padding: 0;}
             .lpCategoryList nav ul li { padding: 0.5rem 1rem; border-radius: 0.25rem; cursor: pointer; transition: background-color 0.2s ease;}
             .lpCategoryList nav ul li:hover { background-color: var(--genText2Lt); color: var(--genBg2);}
             .lpCategoryList nav ul li.active { background-color: var(--selectorBg); color: var(--selectorText);}
         
-        .itemArea{padding: 1.5rem; width: 100%; margin: 0 auto; overflow-y: auto; }
+        .itemArea{padding: 1.5rem; width: 100%; margin: 0 auto; overflow-y: auto; box-shadow: 0 4px 6px -1px #0000001a, 0 2px 4px -1px #0000000f; 
+            border-radius: .5rem; }
             .itemContainer{display: none; width: 100%; height: 100%; overflow: hidden;}
             .itemContainer.active { display: flex; }
