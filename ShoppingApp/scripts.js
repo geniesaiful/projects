@@ -1,6 +1,8 @@
 const siteNavItems = document.querySelectorAll('.siteHeader nav ul li');
-const leftPanelNavItems = document.querySelectorAll('.leftPanel nav ul li');
 const sections = document.querySelectorAll('.content');
+
+const leftPanelNavItems = document.querySelectorAll('.leftPanel nav ul li');
+const itemAreas = document.querySelectorAll('.itemContainer');
 // for admin section
 const categoryForm = document.getElementById('addCategoryForm');
 const itemForm = document.getElementById('addItemForm');
@@ -26,8 +28,12 @@ siteNavItems.forEach(item => {
 leftPanelNavItems.forEach(item => {
     item.addEventListener('click', () => {
         const selectedCategory = item.innerText.trim();
+        const targetId = item.getAttribute('data-target');
 
+        itemAreas.forEach(itemCat => itemCat.classList.remove('active'));
         leftPanelNavItems.forEach(nav => nav.classList.remove('active'));
+
+        document.getElementById(targetId).classList.add('active');
         item.classList.add('active');
 
         // Execute your category filter logic here
