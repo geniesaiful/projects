@@ -1,4 +1,5 @@
-const navItems = document.querySelectorAll('nav ul li');
+const siteNavItems = document.querySelectorAll('.siteHeader nav ul li');
+const leftPanelNavItems = document.querySelectorAll('.leftPanel nav ul li');
 const sections = document.querySelectorAll('.content');
 // for admin section
 const categoryForm = document.getElementById('addCategoryForm');
@@ -7,12 +8,12 @@ const categorySelect = document.getElementById('itemCategory');
 
 document.getElementById('contentHomeId').classList.add('active');
 
-navItems.forEach(item => {
+siteNavItems.forEach(item => {
     item.addEventListener('click', () => {
         const targetId = item.getAttribute('data-target');
 
         sections.forEach(sec => sec.classList.remove('active'));
-        navItems.forEach(nav => nav.classList.remove('active'));
+        siteNavItems.forEach(nav => nav.classList.remove('active'));
 
         document.getElementById(targetId).classList.add('active');
         item.classList.add('active');
@@ -21,6 +22,23 @@ navItems.forEach(item => {
         }
     });
 });
+
+leftPanelNavItems.forEach(item => {
+    item.addEventListener('click', () => {
+        const selectedCategory = item.innerText.trim();
+
+        leftPanelNavItems.forEach(nav => nav.classList.remove('active'));
+        item.classList.add('active');
+
+        // Execute your category filter logic here
+        filterItemsByCategory(selectedCategory);
+    });
+});
+
+function filterItemsByCategory(category) {
+    console.log(`Filtering home contents by: ${category}`);
+    // Add your logic to render/filter items based on the clicked category
+}
 
 function loadCategories() {
     const categories = JSON.parse(localStorage.getItem('SHOPPING_APP_Category')) || [];
