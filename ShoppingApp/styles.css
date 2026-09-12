@@ -110,5 +110,11 @@ body.dark{
         
         .itemArea{padding: 1.5rem; width: 100%; margin: 0 auto; overflow-y: auto; box-shadow: 0 4px 6px -1px #0000001a, 0 2px 4px -1px #0000000f; 
             border-radius: .5rem; }
-            .itemContainer{display: none; width: 100%; height: 100%; overflow: hidden;}
-            .itemContainer.active { display: flex; }
+            .itemContainer{display: none; width: 100%; height: 100%; overflow: hidden;overflow-y: auto;gap: 1.25rem;padding: 0.5rem;}
+            .itemContainer.active { display: flex; flex-wrap: wrap;align-content: flex-start;}
+
+                .itemCard { background-color: var(--genBg2); border: 1px solid rgba(0, 0, 0, 0.08); border-radius: 0.6rem;
+                    width: 180px; display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+                    transition: transform 0.2s ease, box-shadow 0.2s ease;}
+
+           

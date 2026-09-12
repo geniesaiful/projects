@@ -103,7 +103,50 @@ itemForm.addEventListener('submit', (e) => {
     itemForm.reset();
     alert('Item added successfully!');
     //console.log(newItem);
+    populateAllItems();
 });
 
 
+function renderItemGrid(items, containerId) {
+    const container = document.getElementById(containerId);
+
+    if (!container) return;
+
+    container.innerHTML = '';
+
+    if (!items || items.length === 0) {
+        container.innerHTML = '<p class="normalTxt">No items found.</p>';
+        return;
+    }
+
+    let cardsHTML = '';
+
+    items.forEach(item => {
+        cardsHTML += `
+            <article class="itemCard" data-id="${item.id}">
+                <div class="cardMedia">
+                    <img src="${item.photo}" alt="${item.title}">
+                </div>
+                <div class="cardBody">
+                    <h3 class="itemTitle">${item.title}</h3>
+                    <span class="itemPrice">$${Number(item.price).toFixed(2)}</span>
+                    <button class="addToCartBtn" type="button" data-id="${item.id}">
+                        Add to Cart
+                    </button>
+                </div>
+            </article>
+        `;
+    });
+
+    // 3. Inject all HTML at once
+    container.innerHTML = cardsHTML;
+}
+function populateAllItems() {
+    const items = JSON.parse(localStorage.getItem('SHOPPING_APP_Items')) || [];
+    renderItemGrid(items, 'itemAllId');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    populateAllItems();
+});
 loadCategories();
