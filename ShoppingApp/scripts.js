@@ -36,15 +36,24 @@ leftPanelNavItems.forEach(item => {
         document.getElementById(targetId).classList.add('active');
         item.classList.add('active');
 
-        // Execute your category filter logic here
-        filterItemsByCategory(selectedCategory);
+        filterItemsByCategory(selectedCategory, targetId);
     });
 });
 
-function filterItemsByCategory(category) {
-    console.log(`Filtering home contents by: ${category}`);
-    // Add your logic to render/filter items based on the clicked category
+
+function filterItemsByCategory(categoryName, targetContainerId) {
+    const items = JSON.parse(localStorage.getItem('SHOPPING_APP_Items')) || [];
+
+    let filteredItems;
+
+    if (categoryName === 'All') {
+        filteredItems = items;
+    } else {
+        filteredItems = items.filter(item => item.category === categoryName);
+    }
+    renderItemGrid(filteredItems, targetContainerId);
 }
+
 
 function loadCategories() {
     const categories = JSON.parse(localStorage.getItem('SHOPPING_APP_Category')) || [];
@@ -148,7 +157,8 @@ function populateAllItems() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    populateAllItems();
+    filterItemsByCategory('All', 'itemAllId');
+    //populateAllItems();
     loadCategories();
 });
 
