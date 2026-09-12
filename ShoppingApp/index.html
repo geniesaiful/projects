@@ -7,13 +7,47 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 
+
 <body>
-    <main>
-        
+    <header class="siteHeader">
+        <a href="/" class="siteLogo">
+            <img src="resources/cart.svg" alt="App Logo" style="width: 3.75rem; height: 3.75rem;">
+            <span class="appNameTxt btrh1">Shopping app</span>
+        </a>
+        <nav>
+            <ul>
+                <li data-target="contentHomeId" class="active">Home</li>
+                <li data-target="contentAdminId">Admin</li>
+                <li data-target="contentAboutId">About</li>
+            </ul>
+        </nav>
+        <form class="searchForm">
+            <input type="search" placeholder="Search item...">
+        </form>
+
+    </header>
+
+    <main class="contents">
+        <section class="content active" id="contentHomeId" style="background-color: brown;">
+            Home
+        </section>
+        <section class="content" id="contentAdminId" style="background-color:blue;">
+            Admin   
+        </section>
+        <section class="content" id="contentAboutId" style="background-color:chocolate;">
+            About
+        </section>
     </main>
 
 
 
 
-<script src="scripts.js"></script>
+
+
+
+
+
+
+
+    <script src="scripts.js"></script>
 </body>
