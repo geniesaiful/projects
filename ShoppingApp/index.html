@@ -12,7 +12,8 @@
     <header class="siteHeader">
         <a href="/" class="siteLogo">
             <img src="resources/cart.svg" alt="App Logo" style="width: 3.75rem; height: 3.75rem;">
-            <span class="appNameTxt btrh1">Shopping app</span>
+            <span class="appNameTxt btrh1">ShopCart<span class="btrh2Lt">Shop with ease</span></span>
+
         </a>
         <nav>
             <ul>
@@ -28,11 +29,80 @@
     </header>
 
     <main class="contents">
-        <section class="content active" id="contentHomeId" style="background-color: brown;">
-            Home
+        <section class="content active" id="contentHomeId">
+            <div class="homeArea" id="homeAreaId">
+                <aside class="leftPanel" id="leftPanelId">
+                    <div class="lpCategoryList" id="lpCategoryListId">
+                        <p class="normalTxtBold">Categories</p>
+                        <nav>
+                            <ul>
+                                <li data-target="categoryAllId" class="active">All</li>
+                                <li data-target="categoryElectronicsId">Electronics</li>
+                                <li data-target="categoryLifestyleId">Lifestyle</li>
+                                <li data-target="categorySportsId">Sports</li>
+                                <li data-target="categoryAccessoriesId">Accessories</li>
+                            </ul>
+                        </nav>
+                    </div>
+
+                </aside>
+
+            </div>
         </section>
-        <section class="content" id="contentAdminId" style="background-color:blue;">
-            Admin   
+        <section class="content" id="contentAdminId">
+            <div class="adminContainer">
+                <form id="addCategoryForm" class="adminForm">
+                    <h2 class="btrh2">Add Category</h2>
+                    <div class="formGroup">
+                        <label for="catName">Category Name:</label>
+                        <input type="text" id="catName" required>
+                    </div>
+                    <button class="univSubmitBtn" type="submit">Add Category</button>
+                </form>
+
+                <hr>
+
+                <!-- Form 2: Add Item -->
+                <form id="addItemForm" class="adminForm">
+                    <h2 class="btrh2">Add Item</h2>
+                    <div class="formGroup">
+                        <label for="itemTitle">Item Title:</label>
+                        <input type="text" id="itemTitle" required>
+                    </div>
+                    
+                    <div class="formGroup">
+                        <label for="itemCategory">Item Category:</label>
+                        <select id="itemCategory" required>
+                            <option value="">Select Category</option>
+                        </select>
+                    </div>
+
+                    <div class="formGroup">
+                        <label for="itemDesc">Short Description (max 80 chars):</label>
+                        <textarea id="itemDesc" rows="2" maxlength="80" required></textarea>
+                    </div>
+
+                    <div class="formGroup">
+                        <label for="itemPrice">Item Price:</label>
+                        <input type="number" id="itemPrice" step="0.01" required>
+                    </div>
+
+                    <div class="formGroup">
+                        <label for="itemPhoto">Item Photo Path:</label>
+                        <input type="text" id="itemPhoto" placeholder="resources/item.jpg" required>
+                    </div>
+
+                    <div class="formGroup">
+                        <label for="itemExtra">Extra Info (max 20 chars):</label>
+                        <input type="text" id="itemExtra" maxlength="20" required>
+                    </div>
+
+                    <div class="buttonGroup">
+                        <button class="univSubmitBtn" type="submit">Submit</button>
+                        <button class="univCancelBtn" type="reset">Clear</button>
+                    </div>
+                </form>
+            </div>  
         </section>
         <section class="content" id="contentAboutId" style="background-color:chocolate;">
             About
