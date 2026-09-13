@@ -1,6 +1,9 @@
 const siteNavItems = document.querySelectorAll('.siteHeader nav ul li');
 const sections = document.querySelectorAll('.content');
+const cartBtn = document.querySelector('.cartButtonArea img');
+const cartContainer = document.getElementById('cartContainerId');
 
+let cart = JSON.parse(localStorage.getItem('SHOPPING_APP_Cart')) || [];
 const leftPanelNavItems = document.querySelectorAll('.leftPanel nav ul li');
 const itemAreas = document.querySelectorAll('.itemContainer');
 // for admin section
@@ -23,6 +26,16 @@ siteNavItems.forEach(item => {
             loadCategories();
         }
     });
+});
+
+cartBtn.addEventListener('click', () => {
+    const targetId = cartBtn.getAttribute('data-target');
+
+    sections.forEach(sec => sec.classList.remove('active'));
+    siteNavItems.forEach(nav => nav.classList.remove('active'));
+
+    document.getElementById(targetId).classList.add('active');
+    renderCart();
 });
 
 leftPanelNavItems.forEach(item => {
@@ -131,7 +144,7 @@ function renderItemGrid(items, containerId) {
     let cardsHTML = '';
 
     items.forEach(item => {
-        console.log(item);
+       //console.log(item);
         cardsHTML += `
             <article class="itemCard" data-id="${item.id}">
                 <div class="cardMedia">
@@ -160,8 +173,14 @@ document.addEventListener('DOMContentLoaded', () => {
     filterItemsByCategory('All', 'itemAllId');
     //populateAllItems();
     loadCategories();
+    updateCartCount();
 });
-
+document.getElementById('itemAreaId').addEventListener('click', (e) => {
+    if (e.target.classList.contains('addToCartBtn')) {
+        const itemId = e.target.getAttribute('data-id');
+        addToCart(itemId);
+    }
+});
 function editAItem() {
     
     const items = JSON.parse(localStorage.getItem('SHOPPING_APP_Items')) || [];
@@ -181,3 +200,164 @@ function editAItem() {
     }
 }
 //editAItem();
+
+function updateCartCount(newCount) {
+  const badge = document.getElementById('cartCount');
+  badge.textContent = newCount > 0 ? newCount : '';
+}
+//updateCartCount(5);
+
+function renderCart() {
+    if (cart.length === 0) {
+        cartContainer.innerHTML = '<p class="normalTxtBold">There is nothing in the cart.</p>';
+        return;
+    }
+
+    const allItems = JSON.parse(localStorage.getItem('SHOPPING_APP_Items')) || [];
+
+    let cartHTML = '<div class="cartLayout">';
+    
+    cartHTML += '<div class="cartMainSection"><div class="cartList">';
+    
+    let subtotal = 0;
+    let totalItemCount = 0;
+
+    cart.forEach(cartItem => {
+        const itemDetails = allItems.find(item => item.id === cartItem.id);
+
+        const itemTotal = itemDetails.price * cartItem.quantity;
+        subtotal += itemTotal;
+        totalItemCount += cartItem.quantity;
+
+        cartHTML += `
+            <div class="cartRow" data-id="${cartItem.id}">
+                <div class="cartRowMedia">
+                    <img src="${itemDetails.photo}" alt="${itemDetails.title}">
+                </div>
+                
+                <div class="cartRowDetails">
+                    <span class="cartRowTitle">${itemDetails.title}</span>
+                    <span class="cartRowMeta">ID: ${cartItem.id}</span>
+                    <span class="cartRowMeta">Cat: ${itemDetails.category}</span>
+                    <span class="cartRowPrice">$${Number(itemDetails.price).toFixed(2)}</span>
+                </div>
+
+                <div class="cartQtyControls">
+                    <button type="button" class="qtyBtn minusBtn">-</button>
+                    <span class="normalTxt boldQty">${cartItem.quantity}</span>
+                    <button type="button" class="qtyBtn plusBtn">+</button>
+                </div>
+
+                <div class="cartItemTotal">
+                    $${itemTotal.toFixed(2)}
+                </div>
+
+                <button type="button" class="deleteItemBtn">Delete</button>
+            </div>
+        `;
+    });
+    
+    cartHTML += '</div>';
+
+    cartHTML += `
+        <div class="cartLeftActions">
+            <button id="clearCartBtn" class="univCancelBtn" type="button">Clear Cart</button>
+        </div>
+    </div>`;
+
+    const shippingCharge = 10.00;
+    const grandTotal = subtotal + shippingCharge;
+
+    cartHTML += `
+        <aside class="orderSummaryPanel">
+            <h2 class="btrh2">Order Summary</h2>
+            <hr>
+            <div class="summaryRow">
+                <span class="normalTxt">Subtotal (${totalItemCount} ${totalItemCount === 1 ? 'item' : 'items'}):</span>
+                <span class="normalTxtBold">$${subtotal.toFixed(2)}</span>
+            </div>
+            <div class="summaryRow">
+                <span class="normalTxt">Shipping Charge:</span>
+                <span class="normalTxtBold">$${shippingCharge.toFixed(2)}</span>
+            </div>
+            <hr>
+            <div class="summaryRow totalRow">
+                <span class="btrh2">Total:</span>
+                <span class="btrh2">$${grandTotal.toFixed(2)}</span>
+            </div>
+            <button id="checkoutBtn" class="univSubmitBtn checkoutFullBtn" type="button">Proceed to Checkout</button>
+        </aside>
+    </div>`; 
+
+    cartContainer.innerHTML = cartHTML;
+
+    document.getElementById('clearCartBtn').addEventListener('click', () => {
+        const isConfirmed = confirm('Are you sure you want to clear your cart?');
+        if (isConfirmed) {
+            cart = [];
+            saveAndRefreshCart();
+        }
+    });
+}
+
+function updateCartCount() {
+    const badge = document.getElementById('cartCount');
+    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+    badge.textContent = totalItems > 0 ? totalItems : '';
+}
+function addToCart(itemId) {
+    const existingItem = cart.find(item => item.id === itemId);
+
+    if (existingItem) {
+        existingItem.quantity += 1;
+    } else {
+        cart.push({ id: itemId, quantity: 1 });
+    }
+
+    localStorage.setItem('SHOPPING_APP_Cart', JSON.stringify(cart));
+
+    updateCartCount();
+}
+
+function updateItemQuantity(itemId, change) {
+    const item = cart.find(i => i.id === itemId);
+    if (!item) return;
+
+    if (item.quantity + change <= 0) {
+        const isConfirmed = confirm('Are you sure you want to remove this item?');
+        if (isConfirmed) {
+            //removeItemFromCart(itemId);
+            cart = cart.filter(i => i.id !== itemId);
+            saveAndRefreshCart();
+        }
+    } else {
+        item.quantity += change;
+        saveAndRefreshCart();
+    }
+}
+function removeItemFromCart(itemId) {
+    const isConfirmed = confirm('Are you sure you want to remove this item?');
+    if (isConfirmed) {
+        cart = cart.filter(i => i.id !== itemId);
+        saveAndRefreshCart();
+    }
+}
+function saveAndRefreshCart() {
+    localStorage.setItem('SHOPPING_APP_Cart', JSON.stringify(cart));
+    updateCartCount();
+    renderCart();
+}
+cartContainer.addEventListener('click', (e) => {
+    const row = e.target.closest('.cartRow');
+    if (!row) return;
+
+    const itemId = row.getAttribute('data-id');
+
+    if (e.target.classList.contains('plusBtn')) {
+        updateItemQuantity(itemId, 1);
+    } else if (e.target.classList.contains('minusBtn')) {
+        updateItemQuantity(itemId, -1);
+    } else if (e.target.classList.contains('deleteItemBtn')) {
+        removeItemFromCart(itemId);
+    }
+});

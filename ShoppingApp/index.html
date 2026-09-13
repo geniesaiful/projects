@@ -7,10 +7,9 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 
-
 <body class = "normalTxt">
     <header class="siteHeader">
-        <a href="/" class="siteLogo">
+        <a href="" class="siteLogo">
             <img src="resources/cart.svg" alt="App Logo" style="width: 3.5rem; height: 3.5rem;padding:0.3rem">
             <span class="appNameTxt btrh1">ShopCart<span class="btrh2Lt">Shop with ease</span></span>
 
@@ -22,9 +21,10 @@
                 <li data-target="contentAboutId">About</li>
             </ul>
         </nav>
-        <form class="searchForm">
-            <input type="search" placeholder="Search item...">
-        </form>
+        <div class="cartButtonArea">
+            <img src="resources/shopping-basket.svg"  data-target="contentCartId" >
+            <span class="cart-badge normalTxtBold" id="cartCount"></span>
+        </div>
 
     </header>
 
@@ -127,6 +127,11 @@
         </section>
         <section class="content" id="contentAboutId" style="background-color:chocolate;">
             About
+        </section>
+        <section class="content" id="contentCartId">
+            <div class="cartContainer" id="cartContainerId">
+                <!-- Cart contents or empty state will be rendered here -->
+            </div>
         </section>
     </main>
 
