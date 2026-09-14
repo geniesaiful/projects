@@ -310,6 +310,13 @@ function renderItemGrid(items, containerId) {
                         Add to Cart
                     </button>
                 </div>
+
+                <div class="itemTooltip">
+                    <p class="normalTxtBold" style="margin: 0 0 0.25rem 0;">${item.title}</p>
+                    <p class="smallTxt" style="margin: 0 0 0.5rem 0;">Category: ${item.category}</p>
+                    <p class="normalTxt" style="margin: 0 0 0.5rem 0;">${item.description || 'No description available.'}</p>
+                    <span class="rcntTxt" style="display: inline-block; font-size: 0.75rem;">${item.extraInfo || 'Standard'}</span>
+                </div>
             </article>
         `;
     });
