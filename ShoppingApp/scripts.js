@@ -6,6 +6,8 @@ const cartContainer = document.getElementById('cartContainerId');
 let cart = JSON.parse(localStorage.getItem('SHOPPING_APP_Cart')) || [];
 const leftPanelNavItems = document.querySelectorAll('.leftPanel nav ul li');
 const itemAreas = document.querySelectorAll('.itemContainer');
+
+let selectedPaymentMethod = 'Credit/Debit Card';
 // for admin section
 const categoryForm = document.getElementById('addCategoryForm');
 const itemForm = document.getElementById('addItemForm');
@@ -290,7 +292,14 @@ function renderCart() {
     </div>`; 
 
     cartContainer.innerHTML = cartHTML;
-
+    const checkoutBtn = document.getElementById('checkoutBtn');
+    if (checkoutBtn) {
+        checkoutBtn.addEventListener('click', () => {
+            sections.forEach(sec => sec.classList.remove('active'));
+            document.getElementById('contentCheckoutId').classList.add('active');
+            renderCheckout();
+        });
+    }
     document.getElementById('clearCartBtn').addEventListener('click', () => {
         const isConfirmed = confirm('Are you sure you want to clear your cart?');
         if (isConfirmed) {
@@ -347,6 +356,159 @@ function saveAndRefreshCart() {
     updateCartCount();
     renderCart();
 }
+
+function renderCheckout() {
+    const checkoutContainer = document.getElementById('checkoutContainerId');
+    if (cart.length === 0) {
+        checkoutContainer.innerHTML = '<p class="normalTxtBold">Your cart is empty.</p>';
+        return;
+    }
+
+    const allItems = JSON.parse(localStorage.getItem('SHOPPING_APP_Items')) || [];
+    let subtotal = 0;
+    let itemsHTML = '';
+
+    cart.forEach(cartItem => {
+        const itemDetails = allItems.find(i => i.id === cartItem.id);
+        if (itemDetails) {
+            const itemTotal = itemDetails.price * cartItem.quantity;
+            subtotal += itemTotal;
+            itemsHTML += `
+                <div class="checkoutItemRow">
+                    <span>${itemDetails.title}</span>
+                    <span>$${Number(itemDetails.price).toFixed(2)} x ${cartItem.quantity}</span>
+                </div>
+            `;
+        }
+    });
+
+    const shipping = 10.00;
+    const total = subtotal + shipping;
+
+    checkoutContainer.innerHTML = `
+        <div class="checkoutLayout">
+            <!-- Left Side: Shipping & Payment Form -->
+            <form id="checkoutForm" class="checkoutLeftSection">
+                <div class="checkoutFormGroup">
+                    <h2 class="btrh2">1. Shipping Information</h2>
+                    <input type="text" id="custName" placeholder="Full Name" required>
+                    <input type="email" id="custEmail" placeholder="Email Address" required>
+                    <input type="text" id="custAddress" placeholder="Apartment number, House number, Street..." required>
+                    <input type="text" id="custCity" placeholder="City" required>
+                    <input type="text" id="custPostcode" placeholder="Postcode" required>
+                </div>
+
+                <div class="checkoutFormGroup">
+                    <h2 class="btrh2">2. Payment Method</h2>
+                    <div class="paymentOptions">
+                        <button type="button" class="paymentOptionBtn selected" data-method="Credit/Debit Card">Credit/Debit Card</button>
+                        <button type="button" class="paymentOptionBtn" data-method="PayPal">PayPal</button>
+                        <button type="button" class="paymentOptionBtn" data-method="Cash on Delivery">Cash on Delivery</button>
+                    </div>
+                </div>
+
+                <button type="submit" class="univSubmitBtn" style="width: 100%; padding: 0.8rem;">Place Order</button>
+            </form>
+
+            <!-- Right Side: Order Summary -->
+            <aside class="orderSummaryPanel">
+                <h2 class="btrh2">Order Summary</h2>
+                <hr>
+                <div class="checkoutItemsList">
+                    ${itemsHTML}
+                </div>
+                <hr>
+                <div class="summaryRow">
+                    <span class="normalTxt">Subtotal:</span>
+                    <span class="normalTxtBold">$${subtotal.toFixed(2)}</span>
+                </div>
+                <div class="summaryRow">
+                    <span class="normalTxt">Shipping:</span>
+                    <span class="normalTxtBold">$${shipping.toFixed(2)}</span>
+                </div>
+                <hr>
+                <div class="summaryRow totalRow">
+                    <span class="btrh2">Total:</span>
+                    <span class="btrh2">$${total.toFixed(2)}</span>
+                </div>
+            </aside>
+        </div>
+    `;
+
+    const paymentBtns = checkoutContainer.querySelectorAll('.paymentOptionBtn');
+    paymentBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            paymentBtns.forEach(b => b.classList.remove('selected'));
+            btn.classList.add('selected');
+            selectedPaymentMethod = btn.getAttribute('data-method');
+        });
+    });
+
+    document.getElementById('checkoutForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        placeOrder(subtotal, shipping, total);
+    });
+}
+function placeOrder(subtotal, shipping, total) {
+    const now = new Date();
+    const dateTimeStr = now.getFullYear().toString() +
+        String(now.getMonth() + 1).padStart(2, '0') +
+        String(now.getDate()).padStart(2, '0') +
+        String(now.getHours()).padStart(2, '0') +
+        String(now.getMinutes()).padStart(2, '0') +
+        String(now.getSeconds()).padStart(2, '0');
+    
+    const randomThree = Math.floor(100 + Math.random() * 900);
+    const orderId = `order${dateTimeStr}${randomThree}`;
+
+    const allItems = JSON.parse(localStorage.getItem('SHOPPING_APP_Items')) || [];
+    const orderItems = cart.map(cartItem => {
+        const itemDetails = allItems.find(i => i.id === cartItem.id) || {};
+        return {
+            title: itemDetails.title || '',
+            category: itemDetails.category || '',
+            description: itemDetails.description || '',
+            price: itemDetails.price || 0,
+            quantity: cartItem.quantity,
+            photo: itemDetails.photo || '',
+            extraInfo: itemDetails.extraInfo || ''
+        };
+    });
+
+    const newOrder = {
+        Order_Id: orderId,
+        Items: orderItems,
+        Subtotal: subtotal,
+        Shipping: shipping,
+        Total: total,
+        Customer: {
+            Name: document.getElementById('custName').value.trim(),
+            Email: document.getElementById('custEmail').value.trim(),
+            Address: document.getElementById('custAddress').value.trim(),
+            City: document.getElementById('custCity').value.trim(),
+            Postcode: document.getElementById('custPostcode').value.trim()
+        },
+        Payment: selectedPaymentMethod
+    };
+
+    const existingOrders = JSON.parse(localStorage.getItem('SHOPAPP_ORDERS')) || [];
+    existingOrders.push(newOrder);
+    localStorage.setItem('SHOPAPP_ORDERS', JSON.stringify(existingOrders));
+
+    // Reset Cart & Redirect
+    cart = [];
+    localStorage.setItem('SHOPPING_APP_Cart', JSON.stringify(cart));
+    updateCartCount();
+
+    alert(`Order placed successfully!\nOrder ID: ${orderId}`);
+
+    // Navigate back to Home
+    sections.forEach(sec => sec.classList.remove('active'));
+    siteNavItems.forEach(nav => nav.classList.remove('active'));
+    document.getElementById('contentHomeId').classList.add('active');
+    document.querySelector('.siteHeader nav ul li[data-target="contentHomeId"]').classList.add('active');
+}
+
 cartContainer.addEventListener('click', (e) => {
     const row = e.target.closest('.cartRow');
     if (!row) return;
