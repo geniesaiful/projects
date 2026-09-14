@@ -26,6 +26,7 @@ siteNavItems.forEach(item => {
         item.classList.add('active');
         if (targetId === 'contentAdminId') {
             loadCategories();
+            renderAdminOrdersList();
         }
     });
 });
@@ -55,6 +56,103 @@ leftPanelNavItems.forEach(item => {
     });
 });
 
+function renderAdminOrdersList() {
+    const ordersContainer = document.getElementById('adminOrdersSection');
+    const orders = JSON.parse(localStorage.getItem('SHOPAPP_ORDERS')) || [];
+
+    if (orders.length === 0) {
+        ordersContainer.innerHTML = `
+            <h2 class="btrh2">Orders</h2>
+            <p class="normalTxt">No orders placed yet.</p>
+        `;
+        return;
+    }
+
+    let ordersHTML = `<h2 class="btrh2">Orders (${orders.length})</h2><div class="adminOrdersList">`;
+
+    orders.forEach(order => {
+        const totalQty = order.Items.reduce((sum, item) => sum + item.quantity, 0);
+        ordersHTML += `
+            <div class="adminOrderCard" data-order-id="${order.Order_Id}">
+                <div>
+                    <span class="normalTxtBold" style="display:block;">${order.Order_Id}</span>
+                    <span class="smallTxt">Items: ${totalQty}</span>
+                </div>
+                <span class="btrh2">$${Number(order.Total).toFixed(2)}</span>
+            </div>
+        `;
+    });
+
+    ordersHTML += '</div>';
+    ordersContainer.innerHTML = ordersHTML;
+
+    // Attach click listener for order details
+    ordersContainer.querySelectorAll('.adminOrderCard').forEach(card => {
+        card.addEventListener('click', () => {
+            const orderId = card.getAttribute('data-order-id');
+            renderAdminOrderDetails(orderId);
+        });
+    });
+}
+
+function renderAdminOrderDetails(orderId) {
+    const ordersContainer = document.getElementById('adminOrdersSection');
+    const orders = JSON.parse(localStorage.getItem('SHOPAPP_ORDERS')) || [];
+    const order = orders.find(o => o.Order_Id === orderId);
+
+    if (!order) return;
+
+    let itemsHTML = '';
+    order.Items.forEach(item => {
+        const itemTotal = item.price * item.quantity;
+        itemsHTML += `
+            <div class="adminOrderItemRow">
+                <div class="adminOrderItemMedia">
+                    <img src="${item.photo}" alt="${item.title}">
+                </div>
+                <div style="flex: 1;">
+                    <span class="normalTxtBold" style="display:block;">${item.title}</span>
+                    <span class="smallTxt">ID: ${item.id || 'N/A'} | Cat: ${item.category}</span>
+                </div>
+                <span class="normalTxt">$${Number(item.price).toFixed(2)} x ${item.quantity}</span>
+                <span class="normalTxtBold" style="min-width: 4rem; text-align: right;">$${itemTotal.toFixed(2)}</span>
+            </div>
+        `;
+    });
+
+    ordersContainer.innerHTML = `
+        <div class="orderDetailsHeader">
+            <span class="btrh2Lt" style="font-size: 1.2rem; font-weight: 700;">Order ID: ${order.Order_Id}</span>
+            <button type="button" class="closeDetailsBtn" id="closeOrderDetailsBtn">&times;</button>
+        </div>
+        <hr>
+        <div style="flex: 1; overflow-y: auto; margin-bottom: 1rem;">
+            ${itemsHTML}
+        </div>
+        <hr>
+        <div class="summaryRow">
+            <span class="normalTxt">Subtotal:</span>
+            <span class="normalTxtBold">$${Number(order.Subtotal).toFixed(2)}</span>
+        </div>
+        <div class="summaryRow">
+            <span class="normalTxt">Shipping:</span>
+            <span class="normalTxtBold">$${Number(order.Shipping).toFixed(2)}</span>
+        </div>
+        <div class="summaryRow totalRow">
+            <span class="btrh2">Total Paid:</span>
+            <span class="btrh2">$${Number(order.Total).toFixed(2)}</span>
+        </div>
+        <div class="summaryRow" style="margin-top: 0.5rem;">
+            <span class="normalTxt">Payment Method:</span>
+            <span class="normalTxtBold">${order.Payment}</span>
+        </div>
+    `;
+
+    // Close button returns to order list
+    document.getElementById('closeOrderDetailsBtn').addEventListener('click', () => {
+        renderAdminOrdersList();
+    });
+}
 
 function filterItemsByCategory(categoryName, targetContainerId) {
     const items = JSON.parse(localStorage.getItem('SHOPPING_APP_Items')) || [];
@@ -80,6 +178,7 @@ function loadCategories() {
         categorySelect.appendChild(option);
     });
 }
+
 categoryForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const catInput = document.getElementById('catName');
@@ -465,6 +564,7 @@ function placeOrder(subtotal, shipping, total) {
     const orderItems = cart.map(cartItem => {
         const itemDetails = allItems.find(i => i.id === cartItem.id) || {};
         return {
+            id: itemDetails.id || '',
             title: itemDetails.title || '',
             category: itemDetails.category || '',
             description: itemDetails.description || '',
