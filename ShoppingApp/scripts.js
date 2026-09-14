@@ -10,6 +10,7 @@ const itemAreas = document.querySelectorAll('.itemContainer');
 let currentCategory = 'All';
 let currentTargetContainer = 'itemAllId';
 let maxPriceCeiling = 100;
+let searchQuery = '';
 
 let selectedPaymentMethod = 'Credit/Debit Card';
 // for admin section
@@ -59,6 +60,15 @@ leftPanelNavItems.forEach(item => {
         filterItemsByCategory(selectedCategory, targetId);
     });
 });
+function setupSearchInput() {
+    const searchInput = document.getElementById('searchInput');
+    if (!searchInput) return;
+
+    searchInput.addEventListener('input', (e) => {
+        searchQuery = e.target.value.trim().toLowerCase();
+        applyFilters();
+    });
+}
 
 function setupPriceSlider() {
     const items = JSON.parse(localStorage.getItem('SHOPPING_APP_Items')) || [];
@@ -189,15 +199,24 @@ function applyFilters() {
     const slider = document.getElementById('priceSlider');
     const selectedMaxPrice = slider ? parseFloat(slider.value) : maxPriceCeiling;
 
-    // Stage 1: Filter by category
-    let categoryFiltered = currentCategory === 'All' 
+    // Filter 1: Category
+    let filtered = currentCategory === 'All' 
         ? items 
         : items.filter(item => item.category === currentCategory);
 
-    // Stage 2: Filter by price range (0 to slider value)
-    const finalFilteredItems = categoryFiltered.filter(item => Number(item.price) <= selectedMaxPrice);
+    // Filter 2: Price Range
+    filtered = filtered.filter(item => Number(item.price) <= selectedMaxPrice);
 
-    renderItemGrid(finalFilteredItems, currentTargetContainer);
+    // Filter 3: Search Query (Title or Description match)
+    if (searchQuery !== '') {
+        filtered = filtered.filter(item => {
+            const titleMatch = item.title ? item.title.toLowerCase().includes(searchQuery) : false;
+            const descMatch = item.description ? item.description.toLowerCase().includes(searchQuery) : false;
+            return titleMatch || descMatch;
+        });
+    }
+
+    renderItemGrid(filtered, currentTargetContainer);
 }
 
 
@@ -278,7 +297,7 @@ function renderItemGrid(items, containerId) {
     let cardsHTML = '';
 
     items.forEach(item => {
-       //console.log(item);
+       console.log(item);
         cardsHTML += `
             <article class="itemCard" data-id="${item.id}">
                 <div class="cardMedia">
@@ -305,6 +324,7 @@ function populateAllItems() {
 
 document.addEventListener('DOMContentLoaded', () => {
     setupPriceSlider();
+    setupSearchInput();
     filterItemsByCategory('All', 'itemAllId');
     loadCategories();
     updateCartCount();
