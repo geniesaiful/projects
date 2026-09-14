@@ -124,10 +124,10 @@ body.dark{
             
             .adminOrderItemMedia { width: 3rem; height: 3rem; background: #ffffff; border-radius: 0.3rem; flex-shrink: 0;}
             .adminOrderItemMedia img { width: 100%; height: 100%; object-fit: contain;}
-            
+
     .homeArea{ display: flex; padding: 0.7rem; width: 100%; height: 100%;overflow: hidden; gap: .5rem}
 
-        .leftPanel{display: flex; justify-content: space-between; padding: 1rem 2rem; background-color: var(--leftPanelBg);
+        .leftPanel{display: flex; flex-direction: column; justify-content: space-evenly; padding: 1rem 2rem; background-color: var(--leftPanelBg);
             border-radius: .5rem; box-shadow: 0 1px 3px #0000000d, 0 4px 12px #0000000d;}
 
             .lpCategoryList nav ul{display: flex; flex-direction: column; list-style: none; gap:.8rem; margin:0; padding: 0;}

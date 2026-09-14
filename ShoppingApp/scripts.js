@@ -1,11 +1,15 @@
 const siteNavItems = document.querySelectorAll('.siteHeader nav ul li');
 const sections = document.querySelectorAll('.content');
+
 const cartBtn = document.querySelector('.cartButtonArea img');
 const cartContainer = document.getElementById('cartContainerId');
-
 let cart = JSON.parse(localStorage.getItem('SHOPPING_APP_Cart')) || [];
+
 const leftPanelNavItems = document.querySelectorAll('.leftPanel nav ul li');
 const itemAreas = document.querySelectorAll('.itemContainer');
+let currentCategory = 'All';
+let currentTargetContainer = 'itemAllId';
+let maxPriceCeiling = 100;
 
 let selectedPaymentMethod = 'Credit/Debit Card';
 // for admin section
@@ -56,6 +60,27 @@ leftPanelNavItems.forEach(item => {
     });
 });
 
+function setupPriceSlider() {
+    const items = JSON.parse(localStorage.getItem('SHOPPING_APP_Items')) || [];
+    const slider = document.getElementById('priceSlider');
+    const label = document.getElementById('priceValueText');
+    
+    if (!slider || items.length === 0) return;
+
+    const highestPrice = Math.max(...items.map(item => Number(item.price) || 0));
+    maxPriceCeiling = Math.ceil(highestPrice / 100) * 100 || 100;
+
+    slider.min = 0;
+    slider.max = maxPriceCeiling;
+    slider.value = maxPriceCeiling;
+    label.textContent = `$0 - $${maxPriceCeiling}`;
+
+    slider.oninput = function() {
+        label.textContent = `$0 - $${this.value}`;
+        applyFilters();
+    };
+}
+
 function renderAdminOrdersList() {
     const ordersContainer = document.getElementById('adminOrdersSection');
     const orders = JSON.parse(localStorage.getItem('SHOPAPP_ORDERS')) || [];
@@ -86,7 +111,6 @@ function renderAdminOrdersList() {
     ordersHTML += '</div>';
     ordersContainer.innerHTML = ordersHTML;
 
-    // Attach click listener for order details
     ordersContainer.querySelectorAll('.adminOrderCard').forEach(card => {
         card.addEventListener('click', () => {
             const orderId = card.getAttribute('data-order-id');
@@ -155,16 +179,25 @@ function renderAdminOrderDetails(orderId) {
 }
 
 function filterItemsByCategory(categoryName, targetContainerId) {
+    currentCategory = categoryName;
+    currentTargetContainer = targetContainerId;
+    applyFilters();
+}
+
+function applyFilters() {
     const items = JSON.parse(localStorage.getItem('SHOPPING_APP_Items')) || [];
+    const slider = document.getElementById('priceSlider');
+    const selectedMaxPrice = slider ? parseFloat(slider.value) : maxPriceCeiling;
 
-    let filteredItems;
+    // Stage 1: Filter by category
+    let categoryFiltered = currentCategory === 'All' 
+        ? items 
+        : items.filter(item => item.category === currentCategory);
 
-    if (categoryName === 'All') {
-        filteredItems = items;
-    } else {
-        filteredItems = items.filter(item => item.category === categoryName);
-    }
-    renderItemGrid(filteredItems, targetContainerId);
+    // Stage 2: Filter by price range (0 to slider value)
+    const finalFilteredItems = categoryFiltered.filter(item => Number(item.price) <= selectedMaxPrice);
+
+    renderItemGrid(finalFilteredItems, currentTargetContainer);
 }
 
 
@@ -271,8 +304,8 @@ function populateAllItems() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+    setupPriceSlider();
     filterItemsByCategory('All', 'itemAllId');
-    //populateAllItems();
     loadCategories();
     updateCartCount();
 });
