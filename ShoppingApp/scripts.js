@@ -711,6 +711,7 @@ function placeOrder(subtotal, shipping, total) {
     cart = [];
     localStorage.setItem('SHOPPING_APP_Cart', JSON.stringify(cart));
     updateCartCount();
+    updateAboutStat();
 
     renderOrderSuccess(orderId);
 }
