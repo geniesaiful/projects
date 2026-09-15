@@ -279,6 +279,7 @@ itemForm.addEventListener('submit', (e) => {
     alert('Item added successfully!');
     //console.log(newItem);
     populateAllItems();
+    updateCategoryCounts();
 });
 
 
@@ -335,6 +336,7 @@ document.addEventListener('DOMContentLoaded', () => {
     filterItemsByCategory('All', 'itemAllId');
     loadCategories();
     updateCartCount();
+    updateCategoryCounts();
 });
 document.getElementById('itemAreaId').addEventListener('click', (e) => {
     if (e.target.classList.contains('addToCartBtn')) {
@@ -655,19 +657,16 @@ function placeOrder(subtotal, shipping, total) {
     existingOrders.push(newOrder);
     localStorage.setItem('SHOPAPP_ORDERS', JSON.stringify(existingOrders));
 
-    // Reset Cart & Update Badge
     cart = [];
     localStorage.setItem('SHOPPING_APP_Cart', JSON.stringify(cart));
     updateCartCount();
 
-    // Render Order Success UI inside the Checkout Container
     renderOrderSuccess(orderId);
 }
 function renderOrderSuccess(orderId) {
     const checkoutContainer = document.getElementById('checkoutContainerId');
     const colors = ['#f44336', '#e91e63', '#9c27b0', '#673ab7', '#3f51b5', '#2196f3', '#4caf50', '#ffeb3b', '#ff9800'];
     
-    // Generate randomized confetti elements
     let confettiHTML = '<div class="confettiWrapper">';
     for (let i = 0; i < 40; i++) {
         const left = Math.random() * 100;
@@ -677,7 +676,6 @@ function renderOrderSuccess(orderId) {
     }
     confettiHTML += '</div>';
 
-    // Replace Checkout view contents with the congratulations display
     checkoutContainer.innerHTML = `
         <div class="orderSuccessContainer">
             ${confettiHTML}
@@ -711,3 +709,27 @@ cartContainer.addEventListener('click', (e) => {
         removeItemFromCart(itemId);
     }
 });
+
+function updateCategoryCounts() {
+    const items = JSON.parse(localStorage.getItem('SHOPPING_APP_Items')) || [];
+    const categoryMap = {
+        'mlicAllId': 'All',
+        'mlicClothingId': 'Clothing',
+        'mlicElectronicsId': 'Electronics',
+        'mlicLifestyleId': 'Lifestyle',
+        'mlicSportsId': 'Sports',
+        'mlicAccessoriesId': 'Accessories'
+    };
+
+    for (const [elementId, categoryName] of Object.entries(categoryMap)) {
+        const badge = document.getElementById(elementId);
+        if (badge) {
+            if (categoryName === 'All') {
+                badge.textContent = items.length;
+            } else {
+                const count = items.filter(item => item.category === categoryName).length;
+                badge.textContent = count;
+            }
+        }
+    }
+}

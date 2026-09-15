@@ -131,9 +131,11 @@ body.dark{
             border-radius: .5rem; box-shadow: 0 1px 3px #0000000d, 0 4px 12px #0000000d;}
 
             .lpCategoryList nav ul{display: flex; flex-direction: column; list-style: none; gap:.8rem; margin:0; padding: 0;}
-            .lpCategoryList nav ul li { padding: 0.5rem 1rem; border-radius: 0.25rem; cursor: pointer; transition: background-color 0.2s ease;}
+            .lpCategoryList nav ul li { display:flex; padding: 0.5rem 1rem; border-radius: 0.25rem; cursor: pointer; 
+                justify-content: space-between; transition: background-color 0.2s ease;}
             .lpCategoryList nav ul li:hover { background-color: var(--genText2Lt); color: var(--genBg2);}
             .lpCategoryList nav ul li.active { background-color: var(--selectorBg); color: var(--selectorText);}
+            .mlItemCount{ display: flex; padding: .2rem;font-size: .85rem; font-weight: 800;background-color: #002c1f1a;border-radius: 25%;}
         
         .itemArea{padding: 1.5rem; width: 100%; margin: 0 auto; overflow-y: auto; box-shadow: 0 4px 6px -1px #0000001a, 0 2px 4px -1px #0000000f; 
             border-radius: .5rem; }
