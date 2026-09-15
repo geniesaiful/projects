@@ -241,7 +241,11 @@ categoryForm.addEventListener('submit', (e) => {
         if (!categories.includes(newCategory)) {
             categories.push(newCategory);
             localStorage.setItem('SHOPPING_APP_Category', JSON.stringify(categories));
+
             loadCategories();
+            renderDynamicCategories();
+            updateCategoryCounts();
+
             catInput.value = '';
             alert('Category added successfully!');
         } else {
@@ -281,7 +285,55 @@ itemForm.addEventListener('submit', (e) => {
     populateAllItems();
     updateCategoryCounts();
 });
+function renderDynamicCategories() {
+    const categories = JSON.parse(localStorage.getItem('SHOPPING_APP_Category')) || [];
+    const ul = document.querySelector('.lpCategoryList nav ul');
+    const itemArea = document.getElementById('itemAreaId');
 
+    ul.innerHTML = `<li data-target="itemAllId" class="menuListItem active">All<span class="mlItemCount" id="mlicAllId">0</span></li>`;
+    itemArea.innerHTML = `<section class="itemContainer active" id="itemAllId"></section>`;
+
+    categories.forEach(cat => {
+
+        const safeId = cat.replace(/\s+/g, '');
+        const containerId = `item${safeId}Id`;
+        const countId = `mlic${safeId}Id`;
+
+        const li = document.createElement('li');
+        li.className = 'menuListItem';
+        li.setAttribute('data-target', containerId);
+        li.innerHTML = `${cat}<span class="mlItemCount" id="${countId}">0</span>`;
+        ul.appendChild(li);
+
+        const section = document.createElement('section');
+        section.className = 'itemContainer';
+        section.id = containerId;
+        itemArea.appendChild(section);
+    });
+
+    bindCategoryClickEvents();
+}
+function bindCategoryClickEvents() {
+    const navItems = document.querySelectorAll('.leftPanel nav ul li');
+    const itemAreas = document.querySelectorAll('.itemContainer');
+
+    navItems.forEach(item => {
+        item.addEventListener('click', () => {
+
+            const selectedCategory = item.childNodes[0].textContent.trim();
+            const targetId = item.getAttribute('data-target');
+
+            itemAreas.forEach(area => area.classList.remove('active'));
+            navItems.forEach(nav => nav.classList.remove('active'));
+
+            const targetContainer = document.getElementById(targetId);
+            if (targetContainer) targetContainer.classList.add('active');
+            item.classList.add('active');
+
+            filterItemsByCategory(selectedCategory, targetId);
+        });
+    });
+}
 
 function renderItemGrid(items, containerId) {
     const container = document.getElementById(containerId);
@@ -331,6 +383,7 @@ function populateAllItems() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+    renderDynamicCategories();
     setupPriceSlider();
     setupSearchInput();
     filterItemsByCategory('All', 'itemAllId');
@@ -712,24 +765,17 @@ cartContainer.addEventListener('click', (e) => {
 
 function updateCategoryCounts() {
     const items = JSON.parse(localStorage.getItem('SHOPPING_APP_Items')) || [];
-    const categoryMap = {
-        'mlicAllId': 'All',
-        'mlicClothingId': 'Clothing',
-        'mlicElectronicsId': 'Electronics',
-        'mlicLifestyleId': 'Lifestyle',
-        'mlicSportsId': 'Sports',
-        'mlicAccessoriesId': 'Accessories'
-    };
+    const categories = JSON.parse(localStorage.getItem('SHOPPING_APP_Category')) || [];
 
-    for (const [elementId, categoryName] of Object.entries(categoryMap)) {
-        const badge = document.getElementById(elementId);
+    const allBadge = document.getElementById('mlicAllId');
+    if (allBadge) allBadge.textContent = items.length;
+
+    categories.forEach(cat => {
+        const safeId = cat.replace(/\s+/g, '');
+        const badge = document.getElementById(`mlic${safeId}Id`);
         if (badge) {
-            if (categoryName === 'All') {
-                badge.textContent = items.length;
-            } else {
-                const count = items.filter(item => item.category === categoryName).length;
-                badge.textContent = count;
-            }
+            const count = items.filter(item => item.category === cat).length;
+            badge.textContent = count;
         }
-    }
+    });
 }
