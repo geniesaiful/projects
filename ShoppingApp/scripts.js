@@ -655,18 +655,46 @@ function placeOrder(subtotal, shipping, total) {
     existingOrders.push(newOrder);
     localStorage.setItem('SHOPAPP_ORDERS', JSON.stringify(existingOrders));
 
-    // Reset Cart & Redirect
+    // Reset Cart & Update Badge
     cart = [];
     localStorage.setItem('SHOPPING_APP_Cart', JSON.stringify(cart));
     updateCartCount();
 
-    alert(`Order placed successfully!\nOrder ID: ${orderId}`);
+    // Render Order Success UI inside the Checkout Container
+    renderOrderSuccess(orderId);
+}
+function renderOrderSuccess(orderId) {
+    const checkoutContainer = document.getElementById('checkoutContainerId');
+    const colors = ['#f44336', '#e91e63', '#9c27b0', '#673ab7', '#3f51b5', '#2196f3', '#4caf50', '#ffeb3b', '#ff9800'];
+    
+    // Generate randomized confetti elements
+    let confettiHTML = '<div class="confettiWrapper">';
+    for (let i = 0; i < 40; i++) {
+        const left = Math.random() * 100;
+        const delay = Math.random() * 3;
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        confettiHTML += `<div class="confettiPiece" style="left: ${left}%; animation-delay: ${delay}s; background-color: ${color};"></div>`;
+    }
+    confettiHTML += '</div>';
 
-    // Navigate back to Home
-    sections.forEach(sec => sec.classList.remove('active'));
-    siteNavItems.forEach(nav => nav.classList.remove('active'));
-    document.getElementById('contentHomeId').classList.add('active');
-    document.querySelector('.siteHeader nav ul li[data-target="contentHomeId"]').classList.add('active');
+    // Replace Checkout view contents with the congratulations display
+    checkoutContainer.innerHTML = `
+        <div class="orderSuccessContainer">
+            ${confettiHTML}
+            <h1 class="btrh1" style="font-size: 2.2rem; margin-bottom: 1rem;">Congratulations!</h1>
+            <p class="btrh2" style="margin-bottom: 0.5rem;">Order placed!</p>
+            <p class="btrh2Lt" style="font-size: 1.1rem; margin-bottom: 0.5rem;">Order number is <strong>${orderId}</strong>.</p>
+            <p class="normalTxtBold" style="font-size: 1rem; color: var(--genText1Lt); margin-bottom: 2rem;">Your item is on the way to you!!!</p>
+            <button id="backToHomeBtn" class="univSubmitBtn" type="button">Continue Shopping</button>
+        </div>
+    `;
+
+    document.getElementById('backToHomeBtn').addEventListener('click', () => {
+        sections.forEach(sec => sec.classList.remove('active'));
+        siteNavItems.forEach(nav => nav.classList.remove('active'));
+        document.getElementById('contentHomeId').classList.add('active');
+        document.querySelector('.siteHeader nav ul li[data-target="contentHomeId"]').classList.add('active');
+    });
 }
 
 cartContainer.addEventListener('click', (e) => {
