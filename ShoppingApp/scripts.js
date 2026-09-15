@@ -113,13 +113,34 @@ function renderAdminOrdersList() {
         });
     });
 }
-
 function renderAdminOrderDetails(orderId) {
     const ordersContainer = document.getElementById('adminOrdersSection');
     const orders = JSON.parse(localStorage.getItem('SHOPAPP_ORDERS')) || [];
     const order = orders.find(o => o.Order_Id === orderId);
 
     if (!order) return;
+
+    // Extract creation date from Order_Id timestamp format (e.g., "order20260917...")
+    const rawDateStr = order.Order_Id.replace(/\D/g, ''); 
+    let orderDate = new Date();
+    
+    if (rawDateStr.length >= 8) {
+        const year = parseInt(rawDateStr.substring(0, 4), 10);
+        const month = parseInt(rawDateStr.substring(4, 6), 10) - 1; // 0-indexed month
+        const day = parseInt(rawDateStr.substring(6, 8), 10);
+        orderDate = new Date(year, month, day);
+    }
+
+    // Add 2 days for estimated delivery
+    const deliveryDate = new Date(orderDate);
+    deliveryDate.setDate(deliveryDate.getDate() + 2);
+
+    // Format to "17 September, 2026"
+    const formattedDeliveryDate = deliveryDate.toLocaleDateString('en-GB', {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric'
+    });
 
     let itemsHTML = '';
     order.Items.forEach(item => {
@@ -139,16 +160,33 @@ function renderAdminOrderDetails(orderId) {
         `;
     });
 
+    const cust = order.Customer || {};
+
     ordersContainer.innerHTML = `
         <div class="orderDetailsHeader">
             <span class="btrh2Lt" style="font-size: 1.2rem; font-weight: 700;">Order ID: ${order.Order_Id}</span>
             <button type="button" class="closeDetailsBtn" id="closeOrderDetailsBtn">&times;</button>
         </div>
         <hr>
-        <div style="flex: 1; overflow-y: auto; margin-bottom: 1rem;">
+        
+        <!-- Customer Details Section -->
+        <div class="adminCustomerDetails" style="margin-bottom: 0.75rem;">
+            <p class="normalTxtBold" style="margin: 0 0 0.25rem 0;">Customer Details:</p>
+            <p class="normalTxt" style="margin: 0;"><strong>Name:</strong> ${cust.Name || 'N/A'}</p>
+            <p class="normalTxt" style="margin: 0;"><strong>Address:</strong> ${cust.Address || 'N/A'}</p>
+            <p class="normalTxt" style="margin: 0;">${cust.City || ''}${cust.City && cust.Postcode ? ', ' : ''}${cust.Postcode || ''}</p>
+            <p class="normalTxt" style="margin: 0.25rem 0 0 0; color: var(--genText1Lt);">
+                <strong>Estimated delivery:</strong> ${formattedDeliveryDate}
+            </p>
+        </div>
+        <hr>
+
+        <!-- Only the items list is scrollable -->
+        <div class="adminOrderItemsContainer">
             ${itemsHTML}
         </div>
         <hr>
+
         <div class="summaryRow">
             <span class="normalTxt">Subtotal:</span>
             <span class="normalTxtBold">$${Number(order.Subtotal).toFixed(2)}</span>
@@ -167,12 +205,10 @@ function renderAdminOrderDetails(orderId) {
         </div>
     `;
 
-    // Close button returns to order list
     document.getElementById('closeOrderDetailsBtn').addEventListener('click', () => {
         renderAdminOrdersList();
     });
 }
-
 function filterItemsByCategory(categoryName, targetContainerId) {
     currentCategory = categoryName;
     currentTargetContainer = targetContainerId;

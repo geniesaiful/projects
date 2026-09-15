@@ -1,6 +1,6 @@
 :root{
     --genBg1: #c6f9ec;
-    --genBg2: #67fcd7; /*#FAF6F6 dbdbdb */
+    --genBg2: #97ffe5; /*#FAF6F6 dbdbdb */
     
     --genText1: #021510; 
     --genText2: #042c21; /*2B1A1C 271818*/
@@ -89,45 +89,36 @@ body.dark{
     .content > * { overflow-y: auto; }/* Enables vertical scrolling on child containers when content exceeds height */
     
 
-        .adminForm { display: flex; flex-direction: column; gap: 0.75rem; }
+    .adminLayout {display: flex; gap: 1.5rem; width: 100%; margin: 0 auto; padding: 1.5rem; height: 100%; justify-content: space-around;}
+        
+        .adminLeftSection {flex: 1; max-width: 32rem; overflow-y: auto; padding-right: 0.5rem;}
+            .adminForm { display: flex; flex-direction: column; gap: 0.75rem; }
 
-        .formGroup { display: flex; flex-direction: column; gap: 0.25rem; }
+                .formGroup { display: flex; flex-direction: column; gap: 0.25rem; }
+                .formGroup input, 
+                .formGroup select, 
+                .formGroup textarea { padding: 0.4rem; font-family: inherit; }
 
-        .formGroup input, 
-        .formGroup select, 
-        .formGroup textarea { padding: 0.4rem; font-family: inherit; }
+                .buttonGroup { display: flex; gap: 0.5rem; }
 
-        .buttonGroup { display: flex; gap: 0.5rem; }
-    .adminLayout {display: flex; gap: 1.5rem; width: 100%; max-width: 80rem; margin: 0 auto;
-        padding: 1.5rem; height: 100%;}
+        .adminRightSection {flex: 1; max-width: 48rem; background-color: var(--genBg2); border: 1px solid #00000014; 
+                border-radius: 0.6rem; padding: 1.25rem; overflow-y: auto; display: flex; flex-direction: column;}
 
-        .adminForm { display: flex; flex-direction: column; gap: 0.75rem; }
+                .adminOrdersList { display: flex; flex-direction: column; gap: 0.75rem; margin-top: 1rem;}
+                .adminOrderCard { background-color: var(--leftPanelBg); border: 1px solid #00000014; border-radius: 0.5rem;
+                    padding: 1rem; display: flex; justify-content: space-between; align-items: center; cursor: pointer;
+                    transition: transform 0.1s ease;}
+                .adminOrderCard:hover {transform: translateY(-2px);}
 
-        .formGroup { display: flex; flex-direction: column; gap: 0.25rem; }
-
-        .formGroup input, 
-        .formGroup select, 
-        .formGroup textarea { padding: 0.4rem; font-family: inherit; }
-
-        .buttonGroup { display: flex; gap: 0.5rem; }
-        .adminLeftSection {flex: 1; max-width: 28rem; overflow-y: auto; padding-right: 0.5rem;}
-        .adminRightSection {flex: 1.5; background-color: var(--genBg2); border: 1px solid #00000014; 
-            border-radius: 0.6rem; padding: 1.25rem; overflow-y: auto; display: flex; flex-direction: column;}
-
-            .adminOrdersList { display: flex; flex-direction: column; gap: 0.75rem; margin-top: 1rem;}
-            .adminOrderCard { background-color: var(--leftPanelBg); border: 1px solid #00000014; border-radius: 0.5rem;
-                padding: 1rem; display: flex; justify-content: space-between; align-items: center; cursor: pointer;
-                transition: transform 0.1s ease;}
-            .adminOrderCard:hover {transform: translateY(-2px);}
-
-            .orderDetailsHeader { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;}
-            .closeDetailsBtn {background: transparent;border: none; font-size: 1.5rem; font-weight: bold;
-                color: var(--genText1); cursor: pointer;}
-            .adminOrderItemRow { display: flex; align-items: center; gap: 1rem; padding: 0.5rem 0;
-                border-bottom: 1px dashed #00000020;}
-            
-            .adminOrderItemMedia { width: 3rem; height: 3rem; background: #ffffff; border-radius: 0.3rem; flex-shrink: 0;}
-            .adminOrderItemMedia img { width: 100%; height: 100%; object-fit: contain;}
+                .orderDetailsHeader { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;}
+                .closeDetailsBtn {background: transparent;border: none; font-size: 1.5rem; font-weight: bold;
+                    color: var(--genText1); cursor: pointer;}
+                .adminOrderItemsContainer { flex: 1; overflow-y: auto; margin-bottom: 1rem; max-height: 22rem; padding:1rem}
+                .adminOrderItemRow { display: flex; align-items: center; gap: 1rem; padding: 0.5rem 0;
+                    border-bottom: 1px dashed #00000020;}
+                
+                .adminOrderItemMedia { width: 3rem; height: 3rem; background: #ffffff; border-radius: 0.3rem; flex-shrink: 0;}
+                .adminOrderItemMedia img { width: 100%; height: 100%; object-fit: contain;}
 
     .homeArea{ display: flex; padding: 0.7rem; width: 100%; height: 100%;overflow: hidden; gap: .5rem}
 
@@ -231,14 +222,14 @@ body.dark{
         .confettiWrapper { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; overflow: hidden;}
 
             .confettiPiece { position: absolute; width: 10px; height: 16px; top: -20px; opacity: 0.9; animation: confettiFall 3.5s linear;}
-
-@keyframes confettiFall {
-    0% {
-        transform: translateY(0) rotate(0deg);
-        opacity: 1;
-    }
-    100% {
-        transform: translateY(100vh) rotate(720deg);
-        opacity: 0;
-    }
-}
+            @keyframes confettiFall {
+                0% {
+                    transform: translateY(0) rotate(0deg);
+                    opacity: 1;
+                }
+                100% {
+                    transform: translateY(100vh) rotate(720deg);
+                    opacity: 0;
+                }
+            }
+    .aboutContainer{display: flex; flex-direction: column; gap: 1.5rem; width: 80%; margin: 0 auto; padding: 1.5rem; height: 100%; justify-content: space-around;}
