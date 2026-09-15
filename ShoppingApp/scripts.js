@@ -78,7 +78,7 @@ function setupPriceSlider() {
 
 function renderAdminOrdersList() {
     const ordersContainer = document.getElementById('adminOrdersSection');
-    const orders = JSON.parse(localStorage.getItem('SHOPAPP_ORDERS')) || [];
+    const orders = JSON.parse(localStorage.getItem('SHOPPING_APP_Orders')) || [];
 
     if (orders.length === 0) {
         ordersContainer.innerHTML = `
@@ -115,7 +115,7 @@ function renderAdminOrdersList() {
 }
 function renderAdminOrderDetails(orderId) {
     const ordersContainer = document.getElementById('adminOrdersSection');
-    const orders = JSON.parse(localStorage.getItem('SHOPAPP_ORDERS')) || [];
+    const orders = JSON.parse(localStorage.getItem('SHOPPING_APP_Orders')) || [];
     const order = orders.find(o => o.Order_Id === orderId);
 
     if (!order) return;
@@ -411,6 +411,7 @@ document.addEventListener('DOMContentLoaded', () => {
     loadCategories();
     updateCartCount();
     updateCategoryCounts();
+    updateAboutStat();
 });
 document.getElementById('itemAreaId').addEventListener('click', (e) => {
     if (e.target.classList.contains('addToCartBtn')) {
@@ -703,9 +704,9 @@ function placeOrder(subtotal, shipping, total) {
         Payment: selectedPaymentMethod
     };
 
-    const existingOrders = JSON.parse(localStorage.getItem('SHOPAPP_ORDERS')) || [];
+    const existingOrders = JSON.parse(localStorage.getItem('SHOPPING_APP_Orders')) || [];
     existingOrders.push(newOrder);
-    localStorage.setItem('SHOPAPP_ORDERS', JSON.stringify(existingOrders));
+    localStorage.setItem('SHOPPING_APP_Orders', JSON.stringify(existingOrders));
 
     cart = [];
     localStorage.setItem('SHOPPING_APP_Cart', JSON.stringify(cart));
@@ -775,4 +776,14 @@ function updateCategoryCounts() {
             badge.textContent = count;
         }
     });
+}
+
+function updateAboutStat(){
+    const items = JSON.parse(localStorage.getItem('SHOPPING_APP_Items')) || [];
+    const categories = JSON.parse(localStorage.getItem('SHOPPING_APP_Category')) || [];
+    const orders = JSON.parse(localStorage.getItem('SHOPPING_APP_Orders')) || [];
+
+    document.getElementById('aboutCatCount').textContent = categories.length;
+    document.getElementById('aboutItemCount').textContent = items.length;
+    document.getElementById('aboutOrderCount').textContent = orders.length;
 }
