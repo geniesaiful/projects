@@ -297,7 +297,7 @@ function renderItemGrid(items, containerId) {
     let cardsHTML = '';
 
     items.forEach(item => {
-       console.log(item);
+       //console.log(item);
         cardsHTML += `
             <article class="itemCard" data-id="${item.id}">
                 <div class="cardMedia">
