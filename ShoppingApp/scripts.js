@@ -5,7 +5,6 @@ const cartBtn = document.querySelector('.cartButtonArea img');
 const cartContainer = document.getElementById('cartContainerId');
 let cart = JSON.parse(localStorage.getItem('SHOPPING_APP_Cart')) || [];
 
-const leftPanelNavItems = document.querySelectorAll('.leftPanel nav ul li');
 const itemAreas = document.querySelectorAll('.itemContainer');
 let currentCategory = 'All';
 let currentTargetContainer = 'itemAllId';
@@ -46,20 +45,6 @@ cartBtn.addEventListener('click', () => {
     renderCart();
 });
 
-leftPanelNavItems.forEach(item => {
-    item.addEventListener('click', () => {
-        const selectedCategory = item.innerText.trim();
-        const targetId = item.getAttribute('data-target');
-
-        itemAreas.forEach(itemCat => itemCat.classList.remove('active'));
-        leftPanelNavItems.forEach(nav => nav.classList.remove('active'));
-
-        document.getElementById(targetId).classList.add('active');
-        item.classList.add('active');
-
-        filterItemsByCategory(selectedCategory, targetId);
-    });
-});
 function setupSearchInput() {
     const searchInput = document.getElementById('searchInput');
     if (!searchInput) return;
@@ -397,31 +382,7 @@ document.getElementById('itemAreaId').addEventListener('click', (e) => {
         addToCart(itemId);
     }
 });
-function editAItem() {
-    
-    const items = JSON.parse(localStorage.getItem('SHOPPING_APP_Items')) || [];
-    const targetItem = items.find(item => item.id === '20260912113619847');
 
-    // 3. Update properties directly if found
-    if (targetItem) {
-        targetItem.title = 'Leather belt';
-        targetItem.category = 'Accessories';
-        targetItem.description = 'Original buffalo leather belt.';
-        targetItem.price = 55.75;
-        targetItem.photo = 'resources/belt1.jpg';
-        targetItem.extraInfo = 'New Arrival';
-
-        // 4. Save updated array back to local storage
-        localStorage.setItem('SHOPPING_APP_Items', JSON.stringify(items));
-    }
-}
-//editAItem();
-
-function updateCartCount(newCount) {
-  const badge = document.getElementById('cartCount');
-  badge.textContent = newCount > 0 ? newCount : '';
-}
-//updateCartCount(5);
 
 function renderCart() {
     if (cart.length === 0) {
