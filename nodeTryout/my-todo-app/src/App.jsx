@@ -39,6 +39,20 @@ function App() {
     localStorage.setItem('RctTodoApp_Tasks',JSON.stringify(updatedTasks));
   };
 
+  const handleClearDone = () => {
+    if (doneTasks == 0){
+      alert("No completed Task!");
+      return;
+    }
+
+    const confirmClear = window.confirm("Are you sure you want to delete completed tasks?");
+
+    if(confirmClear){
+      const updatedTasks = tasks.filter((task) => !task.checked);
+      setTasks(updatedTasks);
+      localStorage.setItem('RctTodoApp_Tasks',JSON.stringify(updatedTasks));
+    }
+  };
 
   const totalTasks = tasks.length;
   const doneTasks = tasks.filter((task)=> task.checked).length;
@@ -106,6 +120,11 @@ function App() {
           ))}
 
         </ul>
+      </div>
+      <div className="clearBar">
+        <button className="clear-btn" onClick={handleClearDone}>
+          Clear Done Tasks
+        </button>
       </div>
     </div>
     
