@@ -93,3 +93,6 @@
 }
 
 
+.taskItem{
+  display: flex; justify-items: space-between; width: 60%; justify-content:space-between; gap: 1.5rem;
+}

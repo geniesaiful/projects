@@ -64,6 +64,22 @@ function App() {
       return true;
   });
 
+  const handleDeleteTask = (taskIdtoDelete) => {
+
+    const confirmDelete = window.confirm("Do you want to delete this todo item?");
+
+    if(confirmDelete){
+      const updatedTasks = tasks.filter((task) => task.id !== taskIdtoDelete);
+      
+      setTasks(updatedTasks);
+      localStorage.setItem('RctTodoApp_Tasks',JSON.stringify(updatedTasks));
+    }
+    else return;
+  };
+
+
+
+
   return(
     <div className="mainContainer" style={{padding: '2rem', fontFamily: 'arial' }}>
       <h3>TO-DO List</h3>
@@ -104,7 +120,7 @@ function App() {
       <div className="tasksContainer">
         <ul className="taksList">
           {filteredTasks.map((task)=> (
-            <li key={task.id}>
+            <li className="taskItem" key={task.id}>
               <input 
                 type="checkbox"
                 checked={task.checked}
@@ -116,6 +132,11 @@ function App() {
               }}>
                 {task.text}
               </span>
+
+              <button className="delete-button"
+              onClick={()=> handleDeleteTask(task.id)}>
+                Delete
+              </button>
             </li>
           ))}
 
