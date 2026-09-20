@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState('categories');
+  const [activeTab, setActiveTab] = useState('add');
 
-  // 1. CATEGORIES STATE (Local Storage)
+  // 1. CATEGORIES STATE
   const [categories, setCategories] = useState(() => {
     const saved = localStorage.getItem('expense_tracker_categories');
     return saved ? JSON.parse(saved) : [
@@ -14,17 +14,16 @@ export default function App() {
     ];
   });
 
-  // 2. TRANSACTIONS STATE (Local Storage)
+  // 2. TRANSACTIONS STATE
   const [transactions, setTransactions] = useState(() => {
     const saved = localStorage.getItem('expense_tracker_transactions');
     return saved ? JSON.parse(saved) : [];
   });
 
-  // 3. CATEGORY FORM STATE
+  // FORM STATES
   const [categoryName, setCategoryName] = useState('');
   const [categoryType, setCategoryType] = useState('expense');
 
-  // 4. TRANSACTION FORM STATE
   const [txDescription, setTxDescription] = useState('');
   const [txAmount, setTxAmount] = useState('');
   const [txType, setTxType] = useState('expense');
@@ -32,7 +31,7 @@ export default function App() {
   const [txDate, setTxDate] = useState(new Date().toISOString().split('T')[0]);
   const [successMsg, setSuccessMsg] = useState('');
 
-  // 5. LOCALSTORAGE PERSISTENCE EFFECTS
+  // LOCAL STORAGE EFFECTS
   useEffect(() => {
     localStorage.setItem('expense_tracker_categories', JSON.stringify(categories));
   }, [categories]);
@@ -41,7 +40,6 @@ export default function App() {
     localStorage.setItem('expense_tracker_transactions', JSON.stringify(transactions));
   }, [transactions]);
 
-  // Set default category whenever transaction type or categories change
   useEffect(() => {
     const available = categories.filter(cat => cat.type === txType);
     if (available.length > 0) {
@@ -51,7 +49,31 @@ export default function App() {
     }
   }, [txType, categories]);
 
-  // HANDLERS FOR CATEGORIES
+  // ====================================================
+  // DYNAMIC HEADER CALCULATIONS
+  // ====================================================
+  const totalIncome = transactions
+    .filter(t => t.type === 'income')
+    .reduce((sum, t) => sum + Number(t.amount), 0);
+
+  const totalExpense = transactions
+    .filter(t => t.type === 'expense')
+    .reduce((sum, t) => sum + Number(t.amount), 0);
+
+  const netBalance = totalIncome - totalExpense;
+
+  const savingsRate = totalIncome > 0 
+    ? Math.round((netBalance / totalIncome) * 100) 
+    : 0;
+
+  const formatCurrency = (amount) => {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+    }).format(amount);
+  };
+
+  // HANDLERS
   const handleAddCategory = (e) => {
     e.preventDefault();
     if (!categoryName.trim()) return;
@@ -70,7 +92,6 @@ export default function App() {
     setCategories(categories.filter(cat => cat.id !== id));
   };
 
-  // HANDLER FOR ADD TRANSACTION
   const handleAddTransaction = (e) => {
     e.preventDefault();
     if (!txDescription.trim() || !txAmount || Number(txAmount) <= 0) return;
@@ -84,44 +105,42 @@ export default function App() {
       date: txDate,
     };
 
-    setTransactions([newTransaction, ...transactions]); // Prepend newest transaction
+    setTransactions([newTransaction, ...transactions]);
     setTxDescription('');
     setTxAmount('');
     
-    // Show temporary success feedback
     setSuccessMsg('Transaction added successfully!');
     setTimeout(() => setSuccessMsg(''), 3000);
   };
 
-  // Filter categories to only show ones that match selected type (income/expense)
   const filteredCategories = categories.filter(cat => cat.type === txType);
 
   return (
     <div className="app-container">
       
-      {/* HEADER */}
+      {/* HEADER WITH DYNAMIC STATS */}
       <header className="header">
         <h2 className="logo">ExpenseTracker</h2>
         
         <div className="stats-row">
           <div className="stat-card">
             <span className="stat-label">Total Income</span>
-            <strong className="income-text">$5,000.00</strong>
+            <strong className="income-text">{formatCurrency(totalIncome)}</strong>
           </div>
           
           <div className="stat-card">
             <span className="stat-label">Total Expense</span>
-            <strong className="expense-text">$1,250.00</strong>
+            <strong className="expense-text">{formatCurrency(totalExpense)}</strong>
           </div>
           
           <div className="stat-card">
             <span className="stat-label">Net Balance</span>
-            <strong className="balance-text">$3,750.00</strong>
+            <strong className="balance-text">{formatCurrency(netBalance)}</strong>
           </div>
 
           <div className="stat-card">
             <span className="stat-label">Savings Rate</span>
-            <strong className="savings-text">75%</strong>
+            <strong className="savings-text">{savingsRate}%</strong>
           </div>
         </div>
       </header>
@@ -168,7 +187,6 @@ export default function App() {
             </div>
           )}
 
-          {/* ADD TRANSACTION TAB */}
           {activeTab === 'add' && (
             <div className="transaction-container">
               <h3 className="category-title">Record New Transaction</h3>
@@ -176,8 +194,6 @@ export default function App() {
               {successMsg && <div className="success-banner">{successMsg}</div>}
 
               <form onSubmit={handleAddTransaction} className="transaction-card">
-                
-                {/* Description */}
                 <div className="form-group">
                   <label>Description</label>
                   <input 
@@ -189,7 +205,6 @@ export default function App() {
                   />
                 </div>
 
-                {/* Amount & Type */}
                 <div className="form-row">
                   <div className="form-group">
                     <label>Amount ($)</label>
@@ -215,7 +230,6 @@ export default function App() {
                   </div>
                 </div>
 
-                {/* Category & Date */}
                 <div className="form-row">
                   <div className="form-group">
                     <label>Category</label>
@@ -249,12 +263,10 @@ export default function App() {
                 <button type="submit" className="add-btn" style={{ width: '100%', marginTop: '12px' }}>
                   Save Transaction
                 </button>
-
               </form>
             </div>
           )}
 
-          {/* CATEGORIES TAB */}
           {activeTab === 'categories' && (
             <div className="category-container">
               <h3 className="category-title">Manage Categories</h3>
@@ -262,7 +274,7 @@ export default function App() {
               <form onSubmit={handleAddCategory} className="category-form">
                 <input 
                   type="text"
-                  placeholder="Category Name (e.g. Dining, Freelance)"
+                  placeholder="Category Name"
                   value={categoryName}
                   onChange={(e) => setCategoryName(e.target.value)}
                   className="category-input"
