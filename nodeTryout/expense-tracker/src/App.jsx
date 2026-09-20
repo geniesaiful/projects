@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState('add');
+  const [activeTab, setActiveTab] = useState('overview');
 
   const [categories, setCategories] = useState(() => {
     const saved = localStorage.getItem('expense_tracker_categories');
@@ -104,13 +104,14 @@ export default function App() {
     setSuccessMsg('Transaction added successfully!');
     setTimeout(() => setSuccessMsg(''), 3000);
   };
-
+  const handleDeleteTransaction = (id) => {
+    setTransactions(transactions.filter(t => t.id !== id));
+  };
   const filteredCategories = categories.filter(cat => cat.type === txType);
 
   return (
     <div className="app-container">
       
-      {/* HEADER WITH DYNAMIC STATS */}
       <header className="header">
         <h2 className="logo">ExpenseTracker</h2>
         
@@ -137,10 +138,8 @@ export default function App() {
         </div>
       </header>
 
-      {/* MAIN BODY */}
       <div className="body-container">
         
-        {/* SIDEBAR */}
         <aside className="sidebar">
           <nav className="nav-menu">
             <button 
@@ -170,12 +169,55 @@ export default function App() {
           </nav>
         </aside>
 
-        {/* MAIN VIEW AREA */}
         <main className="main-content">
           {activeTab === 'overview' && (
-            <div>
-              <h3>Overview Tab</h3>
-              <p>This is where your transactions list will appear.</p>
+            <div className="overview-container">
+              <h3 className="category-title">Recent Transactions</h3>
+
+              {transactions.length === 0 ? (
+                <p className="empty-state">No transactions recorded yet. Go to "Add Transaction" to create one!</p>
+              ) : (
+                <div className="table-card">
+                  <table className="transactions-table">
+                    <thead>
+                      <tr>
+                        <th>Date</th>
+                        <th>Description</th>
+                        <th>Category</th>
+                        <th>Type</th>
+                        <th>Amount</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {transactions.map((tx) => (
+                        <tr key={tx.id}>
+                          <td>{tx.date}</td>
+                          <td><strong>{tx.description}</strong></td>
+                          <td>{tx.category}</td>
+                          <td>
+                            <span className={`badge ${tx.type}`}>
+                              {tx.type}
+                            </span>
+                          </td>
+                          <td className={tx.type === 'income' ? 'amount-income' : 'amount-expense'}>
+                            {tx.type === 'income' ? '+' : '-'}{formatCurrency(tx.amount)}
+                          </td>
+                          <td>
+                            <button 
+                              onClick={() => handleDeleteTransaction(tx.id)}
+                              className="delete-btn"
+                              title="Delete Transaction"
+                            >
+                              ✕
+                            </button>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
             </div>
           )}
 
