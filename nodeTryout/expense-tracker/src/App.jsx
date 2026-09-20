@@ -4,7 +4,6 @@ import './App.css';
 export default function App() {
   const [activeTab, setActiveTab] = useState('add');
 
-  // 1. CATEGORIES STATE
   const [categories, setCategories] = useState(() => {
     const saved = localStorage.getItem('expense_tracker_categories');
     return saved ? JSON.parse(saved) : [
@@ -14,13 +13,11 @@ export default function App() {
     ];
   });
 
-  // 2. TRANSACTIONS STATE
   const [transactions, setTransactions] = useState(() => {
     const saved = localStorage.getItem('expense_tracker_transactions');
     return saved ? JSON.parse(saved) : [];
   });
 
-  // FORM STATES
   const [categoryName, setCategoryName] = useState('');
   const [categoryType, setCategoryType] = useState('expense');
 
@@ -31,7 +28,6 @@ export default function App() {
   const [txDate, setTxDate] = useState(new Date().toISOString().split('T')[0]);
   const [successMsg, setSuccessMsg] = useState('');
 
-  // LOCAL STORAGE EFFECTS
   useEffect(() => {
     localStorage.setItem('expense_tracker_categories', JSON.stringify(categories));
   }, [categories]);
@@ -49,9 +45,6 @@ export default function App() {
     }
   }, [txType, categories]);
 
-  // ====================================================
-  // DYNAMIC HEADER CALCULATIONS
-  // ====================================================
   const totalIncome = transactions
     .filter(t => t.type === 'income')
     .reduce((sum, t) => sum + Number(t.amount), 0);
@@ -73,7 +66,6 @@ export default function App() {
     }).format(amount);
   };
 
-  // HANDLERS
   const handleAddCategory = (e) => {
     e.preventDefault();
     if (!categoryName.trim()) return;
