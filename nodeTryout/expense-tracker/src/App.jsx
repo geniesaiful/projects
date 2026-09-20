@@ -1,9 +1,43 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './App.css';
 
 export default function App() {
 
   const [activeTab, setActiveTab] = useState('overview');
+
+  const [categories, setCategories] = useState(() => {
+    const saved = localStorage.getItem('expense_tracker_categories');
+    return saved ? JSON.parse(saved) : [
+      { id: 1, name: 'Salary', type: 'income' },
+      { id: 2, name: 'Groceries', type: 'expense' },
+      { id: 3, name: 'Rent', type: 'expense' }
+    ];
+  });
+  useEffect(() => {
+    localStorage.setItem('expense_tracker_categories', JSON.stringify(categories));
+  }, [categories]);
+
+  const [categoryName, setCategoryName] = useState('');
+  const [categoryType, setCategoryType] = useState('expense');
+
+  const handleAddCategory = (e) => {
+    e.preventDefault();
+    
+    if (!categoryName.trim()) return; 
+    const newCategory = {
+      id: Date.now(),
+      name: categoryName.trim(),
+      type: categoryType,
+    };
+
+    setCategories([...categories, newCategory]);
+    setCategoryName('');
+  };
+
+  const handleDeleteCategory = (id) => {
+    setCategories(categories.filter(cat => cat.id !== id));
+  };
+
   return (
     <div className='app-container'>
       <header className='app-header'>
@@ -74,8 +108,54 @@ export default function App() {
             </div>
           )}
           {activeTab==='categories' && (
-            <div>
-              <h3>categories</h3>
+            <div className="category-container">
+              <h3 className="category-title">Manage Categories</h3>
+
+              {/* ADD CATEGORY FORM */}
+              <form onSubmit={handleAddCategory} className="category-form">
+                <input 
+                  type="text"
+                  placeholder="Category Name (e.g. Dining, Freelance)"
+                  value={categoryName}
+                  onChange={(e) => setCategoryName(e.target.value)}
+                  className="category-input"
+                />
+
+                <select 
+                  value={categoryType} 
+                  onChange={(e) => setCategoryType(e.target.value)}
+                  className="category-select"
+                >
+                  <option value="expense">Expense</option>
+                  <option value="income">Income</option>
+                </select>
+
+                <button type="submit" className="add-btn">
+                  Add Category
+                </button>
+              </form>
+
+              {categories.length === 0 ? (
+                <p className="empty-state">No categories added yet.</p>
+              ) : (
+                <div className="category-grid">
+                  {categories.map((cat) => (
+                    <div key={cat.id} className={`category-card ${cat.type}`}>
+                      <div className="category-info">
+                        <span className="category-name">{cat.name}</span>
+                        <span className="category-type">{cat.type}</span>
+                      </div>
+                      <button 
+                        onClick={() => handleDeleteCategory(cat.id)} 
+                        className="delete-btn"
+                        title="Delete Category"
+                      >
+                        ✕
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           )}
           {activeTab==='settings' && (
