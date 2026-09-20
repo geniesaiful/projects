@@ -94,5 +94,75 @@
 
 
 .taskItem{
-  display: flex; justify-items: space-between; width: 60%; justify-content:space-between; gap: 1.5rem;
+  display: flex; flex-direction: column; justify-items: space-between; width: 60%; justify-content:space-between; gap: 1.5rem;
+}
+.normalTask{
+  display: flex; max-width: 80%; justify-content: space-between;
+}
+.taskActionArea{
+ display: flex; gap: .3rem;
+}
+
+.editContainer{
+  display: flex; justify-content: space-between; max-width: 80%;
+}
+
+.delete-btn, .edit-btn, .save-btn, .cancel-btn {
+  padding: 4px 8px;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 4px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.delete-btn {
+  color: #dc3545;
+  border-color: #dc3545;
+  background-color: transparent;
+}
+
+.delete-btn:hover {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+.edit-btn {
+  color: #ffc107;
+  border-color: #ffc107;
+  background-color: transparent;
+}
+
+.edit-btn:hover {
+  background-color: #ffc107;
+  color: #000;
+}
+
+.save-btn {
+  color: #fff;
+  background-color: #28a745;
+}
+
+.save-btn:hover {
+  background-color: #218838;
+}
+
+.cancel-btn {
+  color: #6c757d;
+  border-color: #6c757d;
+  background-color: transparent;
+}
+
+.cancel-btn:hover {
+  background-color: #6c757d;
+  color: #fff;
+}
+
+.edit-input {
+  padding: 4px 8px;
+  font-size: 14px;
+  border: 1px solid #007bff;
+  border-radius: 4px;
+  outline: none;
 }

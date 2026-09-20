@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 
 function App() {
@@ -8,7 +8,15 @@ function App() {
     const savedTasks = localStorage.getItem('RctTodoApp_Tasks');
     return savedTasks ? JSON.parse(savedTasks) : [];
   });
+  useEffect(()=>{
+    localStorage.setItem('RctTodoApp_Tasks', JSON.stringify(tasks));
+    console.log("local storage updated");
+  }, [tasks]);
+
   const [filter, setFilter] = useState('all');
+
+  const [editTaskId, setEditTaskId] = useState(null);
+  const [editText, setEditText] = useState('');
 
   const handleAddTask = () => {
     if(taskInput.trim() === ''){
@@ -24,7 +32,7 @@ function App() {
     const updatedTasks = [...tasks, newTask];
     setTasks(updatedTasks);  
 
-    localStorage.setItem('RctTodoApp_Tasks',JSON.stringify(updatedTasks));
+    //localStorage.setItem('RctTodoApp_Tasks',JSON.stringify(updatedTasks));
     setTaskInput(''); 
   }
   const handleToggleTask = (taskIdtoToggle) => {
@@ -36,7 +44,7 @@ function App() {
       });
 
     setTasks(updatedTasks);     
-    localStorage.setItem('RctTodoApp_Tasks',JSON.stringify(updatedTasks));
+    //localStorage.setItem('RctTodoApp_Tasks',JSON.stringify(updatedTasks));
   };
 
   const handleClearDone = () => {
@@ -50,7 +58,7 @@ function App() {
     if(confirmClear){
       const updatedTasks = tasks.filter((task) => !task.checked);
       setTasks(updatedTasks);
-      localStorage.setItem('RctTodoApp_Tasks',JSON.stringify(updatedTasks));
+      //localStorage.setItem('RctTodoApp_Tasks',JSON.stringify(updatedTasks));
     }
   };
 
@@ -64,6 +72,41 @@ function App() {
       return true;
   });
 
+  
+  
+  const handleEditStart = (task)=>{
+      //console.log("handle edit start");
+      setEditTaskId(task.id);
+      setEditText(task.text);
+  };
+
+  const handleEditSave = (taskId) =>{
+    //console.log("handle edit save");
+    if (editText.trim() === ''){
+      alert("Edit text can not be empty!!");
+      return;
+    }
+
+    const updatedTasks = tasks.map((task)=>{
+      if(task.id === taskId){
+        return{...task, text: editText};
+      }
+      return task;
+    });
+
+    setTasks(updatedTasks);
+    //localStorage.setItem('RctTodoApp_Tasks',JSON.stringify(updatedTasks));
+
+    setEditTaskId(null);
+    setEditText('');
+
+  };
+
+  const handleEditCancel = () =>{
+    setEditTaskId(null);
+    setEditText('');
+  };
+  
   const handleDeleteTask = (taskIdtoDelete) => {
 
     const confirmDelete = window.confirm("Do you want to delete this todo item?");
@@ -72,7 +115,7 @@ function App() {
       const updatedTasks = tasks.filter((task) => task.id !== taskIdtoDelete);
       
       setTasks(updatedTasks);
-      localStorage.setItem('RctTodoApp_Tasks',JSON.stringify(updatedTasks));
+      //localStorage.setItem('RctTodoApp_Tasks',JSON.stringify(updatedTasks));
     }
     else return;
   };
@@ -121,22 +164,49 @@ function App() {
         <ul className="taksList">
           {filteredTasks.map((task)=> (
             <li className="taskItem" key={task.id}>
-              <input 
-                type="checkbox"
-                checked={task.checked}
-                onChange={()=> handleToggleTask(task.id)}
-              />
-              <span style={{ 
-                marginLeft: '.5rem', 
-                textDecoration: task.checked ? 'line-through' : 'none',
-              }}>
-                {task.text}
-              </span>
+               {editTaskId===task.id ? (
+                  <div className="editContainer">
+                    <input 
+                      type="text"
+                      value={editText}
+                      className="edit-input"
+                      onChange={(e) => setEditText(e.target.value)}
+                      onKeyDown={(e) => e.key === "Enter" && handleEditSave(task.id)}
+                    />
+                    <div className="taskActionArea">
+                      <button className="save-btn" onClick={()=>handleEditSave(task.id)}>Save</button>
+                      <button className="cancel-btn" onClick={handleEditCancel}>Cancel</button>
+                    </div>
+                  </div>
 
-              <button className="delete-button"
-              onClick={()=> handleDeleteTask(task.id)}>
-                Delete
-              </button>
+                ) : (
+
+                <div className="normalTask">
+                  <div className="taskText">
+                    <input 
+                      type="checkbox"
+                      checked={task.checked}
+                      onChange={()=> handleToggleTask(task.id)}
+                    />
+                    <span style={{ 
+                      marginLeft: '.5rem', 
+                      marginRight: '.5rem',
+                      textDecoration: task.checked ? 'line-through' : 'none',
+                    }}>
+                      {task.text}
+                    </span>
+                  </div>
+
+                  <div className="taskActionArea">
+                    <button className="edit-btn" onClick={() => handleEditStart(task)}>
+                      Edit
+                    </button>
+                    <button className="delete-btn" onClick={()=> handleDeleteTask(task.id)}>
+                      Delete
+                    </button>
+                  </div>
+                </div>
+              )}
             </li>
           ))}
 
